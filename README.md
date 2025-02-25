@@ -1,1 +1,0 @@
-# BIGFOOT-Esports-Site

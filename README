@@ -8,7 +8,7 @@ Este é um site dinâmico desenvolvido em **Next.js** para apresentar notícias,
 ## 🚀 Tecnologias Utilizadas
 - **Next.js** - Framework React para aplicações modernas
 - **Tailwind CSS** - Estilização eficiente e responsiva
-- **Vercel/Netlify** - Hospedagem estática para desempenho otimizado
+- **Netlify** - Hospedagem estática para desempenho otimizado
 - **GitHub** - Controle de versão e colaboração
 
 ## 📂 Estrutura do Projeto

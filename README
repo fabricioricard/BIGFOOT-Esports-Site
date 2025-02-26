@@ -5,49 +5,6 @@ Bem-vindo ao repositório do site oficial do BIGFOOT Esports! 🚀
 🔥 Sobre o Projeto
 Este é um site dinâmico desenvolvido em Next.js para apresentar notícias, perfis dos jogadores, loja de produtos, informações sobre o time e integração com redes sociais como X e Twitch.
 
-🚀 Tecnologias Utilizadas
-- Next.js - Framework React para aplicações modernas
-- Tailwind CSS - Estilização eficiente e responsiva
-- Netlify - Hospedagem estática para desempenho otimizado
-- GitHub - Controle de versão e colaboração
-
-📂 Estrutura do Projeto
-BIGFOOT-Esports-Site/
-│── public/          # Arquivos estáticos
-│── src/             # Código-fonte principal
-│── pages/           # Rotas e páginas do site
-│── components/      # Componentes reutilizáveis
-│── styles/          # Estilos globais
-│── next.config.js   # Configuração do Next.js
-│── package.json     # Dependências e scripts
-│── README           # Documentação do projeto
-│── LICENSE          # Licensa do projeto
-
-
-💻 Como Rodar Localmente
-1. Clone o repositório
-   bash
-   git clone https://github.com/fabricioricard/BIGFOOT-Esports-Site.git
-   
-2. Acesse a pasta do projeto
-   bash
-   cd BIGFOOT-Esports-Site
-   
-3. Instale as dependências
-   bash
-   npm install  # ou yarn install
-   
-4. Inicie o servidor de desenvolvimento
-   bash
-   npm run dev  # ou yarn dev
-   
-5. Acesse no navegador
-   http://localhost:3000
-   
-
-🌐 Implantação
-Para hospedar o site, recomendamos utilizar o Netlify. Siga os passos na plataforma escolhida para conectar o repositório e implantar automaticamente.
-
 📢 Contribuições
 Se deseja contribuir, fique à vontade para abrir um Pull Request ou relatar um problema em Issues.
 

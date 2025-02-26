@@ -21,7 +21,8 @@ BIGFOOT-Esports-Site/
 │── styles/          # Estilos globais
 │── next.config.js   # Configuração do Next.js
 │── package.json     # Dependências e scripts
-│── README.md        # Documentação do projeto
+│── README           # Documentação do projeto
+│── LICENSE          # Licensa do projeto
 ```
 
 ## 💻 Como Rodar Localmente

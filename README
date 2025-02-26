@@ -29,11 +29,11 @@ BIGFOOT-Esports-Site/
    bash
    git clone https://github.com/fabricioricard/BIGFOOT-Esports-Site.git
    
-2. **Acesse a pasta do projeto
+2. Acesse a pasta do projeto
    bash
    cd BIGFOOT-Esports-Site
    
-3. **Instale as dependências
+3. Instale as dependências
    bash
    npm install  # ou yarn install
    
@@ -52,8 +52,8 @@ Para hospedar o site, recomendamos utilizar o Netlify. Siga os passos na platafo
 Se deseja contribuir, fique à vontade para abrir um Pull Request ou relatar um problema em Issues.
 
 📞 Contato
-- X: [@BIGFOOT_Esports](https://x.com/BIGFOOT_Esports)
-- Twitch: [BIGFOOT Esports](https://twitch.tv/BIGFOOT_Esports)
+- X: [@BFTesports](https://x.com/BFTesports)
+- Twitch: [BIGFOOT Esports](https://twitch.tv/bigfootesports)
 
 
 🎮 BIGFOOT Esports - Rumo ao topo!

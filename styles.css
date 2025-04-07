@@ -451,6 +451,10 @@ nav {
     color: #1a73e8;
 }
 
+.shop-button-container {
+    margin-top: 40px; /* Aumenta o espaço entre os itens e o botão */
+}
+
 /* Seção Sobre o Time */
 .team-section {
     padding: 80px 20px;

@@ -755,14 +755,28 @@ footer {
 
     .donation-content {
         max-width: 100%;
-        padding: 20px; /* Ajusta o padding para telas menores */
+        padding: 20px;
     }
 
     .donation-content h1 {
-        font-size: 24px; /* Ajusta o tamanho do título */
+        font-size: 24px;
     }
 
     .donation-content p {
-        font-size: 14px; /* Ajusta o tamanho do texto */
+        font-size: 14px;
+    }
+
+    .players-content {
+        flex-wrap: wrap; /* Permite quebra de linha em telas menores */
+        justify-content: center;
+    }
+
+    .player {
+        width: 100%;
+        max-width: 220px; /* Mantém a largura do player, mas permite ajuste */
+    }
+
+    .player img {
+        height: 80px; /* Reduz ainda mais a altura das imagens em telas menores */
     }
 }

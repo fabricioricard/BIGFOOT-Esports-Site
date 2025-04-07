@@ -49,6 +49,17 @@ header {
 }
 
 .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espaço entre o logotipo e o texto */
+}
+
+.logo-svg {
+    width: 40px; /* Ajuste o tamanho do SVG conforme necessário */
+    height: 40px;
+}
+
+.logo span {
     font-size: 24px;
     font-weight: bold;
     color: #1a73e8;

@@ -535,7 +535,7 @@ nav {
     display: flex;
     justify-content: center;
     gap: 30px;
-    flex-wrap: nowrap; /* Garante que os jogadores fiquem lado a lado */
+    flex-wrap: nowrap;
 }
 
 .player {
@@ -550,8 +550,8 @@ nav {
 
 .player img {
     width: 100%;
-    height: 100px; /* Reduz a altura das imagens */
-    object-fit: cover;
+    max-height: 150px; /* Define uma altura máxima para evitar que a imagem fique muito grande */
+    object-fit: contain; /* Exibe a imagem inteira, sem cortes */
     border-radius: 8px;
     margin-bottom: 15px;
 }
@@ -767,16 +767,16 @@ footer {
     }
 
     .players-content {
-        flex-wrap: wrap; /* Permite quebra de linha em telas menores */
+        flex-wrap: wrap;
         justify-content: center;
     }
 
     .player {
         width: 100%;
-        max-width: 220px; /* Mantém a largura do player, mas permite ajuste */
+        max-width: 220px;
     }
 
     .player img {
-        height: 80px; /* Reduz ainda mais a altura das imagens em telas menores */
+        max-height: 120px; /* Reduz a altura máxima em telas menores */
     }
 }

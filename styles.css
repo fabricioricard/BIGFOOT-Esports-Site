@@ -384,7 +384,7 @@ nav {
 .events-section {
     padding: 80px 20px;
     text-align: center;
-    background: #fff;
+    background: linear-gradient(135deg, #ffffff, #f8f9fa);
     border-radius: 12px;
     margin: 20px;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
@@ -471,7 +471,7 @@ nav {
 .team-section {
     padding: 80px 20px;
     text-align: center;
-    background: #fff;
+    background: linear-gradient(135deg, #ffffff, #f8f9fa);
     border-radius: 12px;
     margin: 20px;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
@@ -565,7 +565,7 @@ nav {
 .contact-section {
     padding: 80px 20px;
     text-align: center;
-    background: #fff;
+    background: linear-gradient(135deg, #ffffff, #f8f9fa);
     border-radius: 12px;
     margin: 20px;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
@@ -640,10 +640,7 @@ footer {
     padding: 40px 20px;
     color: #fff;
     border-top: 1px solid #ddd;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
+    text-align: center;
 }
 
 .footer-content {
@@ -653,6 +650,8 @@ footer {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
 .footer-left p {
@@ -669,11 +668,12 @@ footer {
 .social-icon img {
     width: 35px;
     height: 35px;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, filter 0.3s ease;
 }
 
 .social-icon:hover img {
-    transform: rotate(360deg);
+    transform: scale(1.2);
+    filter: brightness(1.2);
 }
 
 /* Botão Voltar ao Topo */

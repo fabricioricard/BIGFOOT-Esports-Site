@@ -312,8 +312,9 @@ nav {
 /* Seção de Doação */
 .donation-section {
     position: absolute;
-    bottom: 20px;
-    right: 20px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centraliza horizontal e verticalmente */
     text-align: center;
     color: #fff;
     z-index: 10;
@@ -322,7 +323,7 @@ nav {
 .donation-content {
     background: rgba(0, 0, 0, 0.85);
     padding: 30px;
-    max-width: 350px;
+    max-width: 400px; /* Ajusta a largura para melhor legibilidade */
     border-radius: 12px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     position: relative;

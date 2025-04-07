@@ -755,33 +755,14 @@ footer {
 
     .donation-content {
         max-width: 100%;
-        padding: 25px; /* Reduz o padding para telas menores */
+        padding: 20px; /* Ajusta o padding para telas menores */
     }
 
     .donation-content h1 {
-        font-size: 28px; /* Reduz o tamanho do título */
+        font-size: 24px; /* Ajusta o tamanho do título */
     }
 
     .donation-content p {
-        font-size: 16px; /* Reduz o tamanho do texto */
-    }
-
-    .donation-content label {
-        font-size: 12px; /* Reduz o tamanho do label */
-    }
-
-    .donation-content input,
-    .donation-content textarea {
-        padding: 10px; /* Reduz o padding dos campos */
-        font-size: 14px; /* Reduz o tamanho da fonte */
-    }
-
-    .donation-content textarea {
-        height: 80px; /* Reduz a altura do textarea */
-    }
-
-    .donation-content button {
-        padding: 12px; /* Reduz o padding do botão */
-        font-size: 14px; /* Reduz o tamanho da fonte do botão */
+        font-size: 14px; /* Ajusta o tamanho do texto */
     }
 }

@@ -299,28 +299,29 @@ nav {
 
 /* Seção de Doação */
 .donation-section {
-    background: url('https://via.placeholder.com/1200x400') no-repeat center center/cover;
-    padding: 80px 20px;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
     text-align: center;
     color: #fff;
-    position: relative;
+    z-index: 10;
 }
 
 .donation-content {
-    background: rgba(0, 0, 0, 0.8);
-    padding: 40px;
-    max-width: 450px;
-    margin: 0 auto;
+    background: rgba(0, 0, 0, 0.85);
+    padding: 30px;
+    max-width: 350px;
     border-radius: 12px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 #close-donation {
     position: absolute;
-    top: 15px;
-    right: 25px;
-    font-size: 28px;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
     cursor: pointer;
     color: #fff;
     transition: color 0.3s ease;
@@ -332,14 +333,14 @@ nav {
 
 .donation-content h1 {
     font-family: 'Montserrat', sans-serif;
-    font-size: 40px;
-    margin-bottom: 15px;
+    font-size: 28px;
+    margin-bottom: 10px;
     font-weight: 800;
 }
 
 .donation-content p {
-    font-size: 18px;
-    margin-bottom: 25px;
+    font-size: 16px;
+    margin-bottom: 20px;
 }
 
 .donation-content form {
@@ -349,22 +350,22 @@ nav {
 
 .donation-content label {
     text-align: left;
-    margin-bottom: 8px;
-    font-size: 14px;
+    margin-bottom: 6px;
+    font-size: 12px;
     font-weight: 600;
 }
 
 .donation-content input,
 .donation-content textarea {
-    padding: 12px;
-    margin-bottom: 20px;
+    padding: 10px;
+    margin-bottom: 15px;
     border: none;
     border-radius: 8px;
     font-size: 14px;
 }
 
 .donation-content textarea {
-    height: 100px;
+    height: 80px;
 }
 
 /* Seção de Eventos Futuros */

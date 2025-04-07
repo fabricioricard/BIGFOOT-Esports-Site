@@ -802,6 +802,22 @@ footer {
     }
 
     .player img {
-        max-height: 120px; /* Reduz a altura máxima em telas menores */
+        max-height: 120px;
+    }
+
+    .events-content {
+        padding: 20px;
+    }
+
+    .event-image {
+        max-width: 100%; /* Garante que a imagem se ajuste à largura da tela */
+    }
+
+    .events-content h3 {
+        font-size: 20px; /* Reduz o tamanho do título em telas menores */
+    }
+
+    .events-content p {
+        font-size: 16px; /* Reduz o tamanho do texto em telas menores */
     }
 }

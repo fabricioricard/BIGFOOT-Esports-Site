@@ -13,11 +13,11 @@
         <div class="logo">BIGFOOT Esports</div>
         <nav>
             <ul class="nav-menu">
-                <li><a href="#home">🏠 Home</a></li>
-                <li><a href="#eventos">📅 Eventos</a></li>
-                <li><a href="#loja">🛒 Loja</a></li>
-                <li><a href="#equipe">👥 Equipe</a></li>
-                <li><a href="#contato">📧 Contato</a></li>
+                <li><a href="index.html">🏠 Home</a></li>
+                <li><a href="eventos.html">📅 Eventos</a></li>
+                <li><a href="loja.html">🛒 Loja</a></li>
+                <li><a href="equipe.html">👥 Equipe</a></li>
+                <li><a href="contato.html">📧 Contato</a></li>
             </ul>
             <div class="login-bar">
                 <button id="login-btn">Login</button>
@@ -44,7 +44,7 @@
         </div>
     </div>
 
-    <!-- Seção Inicial (Hero Section) -->
+    <!-- Hero Section -->
     <section id="home" class="hero-section">
         <div class="hero-content">
             <h1>Bem-vindo ao BIGFOOT Esports</h1>
@@ -52,35 +52,16 @@
         </div>
     </section>
 
-    <!-- Seção de Doação -->
-    <section class="donation-section fade-in">
-        <div id="donation-box" class="donation-content">
-            <span id="close-donation" class="close">×</span>
-            <h1>Doação</h1>
-            <p>Ajude-nos se puder</p>
-            <form>
-                <label for="nome">Nome</label>
-                <input type="text" id="nome" name="nome" placeholder="Nome">
-                <label for="sobrenome">Sobrenome</label>
-                <input type="text" id="sobrenome" name="sobrenome" placeholder="Sobrenome">
-                <label for="email">Email *</label>
-                <input type="email" id="email" name="email" placeholder="Email" required>
-                <label for="mensagem-doacao">Deixe sua mensagem</label>
-                <textarea id="mensagem-doacao" name="mensagem-doacao" placeholder="Deixe sua mensagem"></textarea>
-                <button type="submit">Enviar</button>
-            </form>
-        </div>
-    </section>
-
-    <!-- Seção de Eventos Futuros -->
+    <!-- Vitrine Eventos -->
     <section id="eventos" class="events-section fade-in">
         <h2>Eventos Futuros</h2>
         <div class="events-content">
-            <p>Não há eventos no momento</p>
+            <p>Nenhum evento disponível no momento.</p>
+            <a href="eventos.html" class="hover-effect">Ver Todos os Eventos</a>
         </div>
     </section>
 
-    <!-- Seção da Loja -->
+    <!-- Vitrine Loja -->
     <section id="loja" class="shop-section fade-in">
         <h2>Nossa Loja</h2>
         <div class="shop-items">
@@ -91,29 +72,20 @@
             </div>
             <div class="shop-item hover-effect">
                 <img src="https://via.placeholder.com/200" alt="Mouse">
-                <p>Mouse Gamer Ergonômico</p>
-                <p>R$ 120,00</p>
-            </div>
-            <div class="shop-item hover-effect">
-                <img src="https://via.placeholder.com/200" alt="Meias">
-                <p>Meias Estilosas BIGFOOT</p>
-                <p>R$ 20,00</p>
-            </div>
-            <div class="shop-item hover-effect">
-                <img src="https://via.placeholder.com/200" alt="Jaqueta">
-                <p>Jaqueta Leve BIGFOOT</p>
+                <p>Mouse Gamer</p>
                 <p>R$ 120,00</p>
             </div>
         </div>
+        <a href="loja.html" class="hover-effect">Ver Loja Completa</a>
     </section>
 
-    <!-- Seção Sobre o Time -->
+    <!-- Vitrine Equipe -->
     <section id="equipe" class="team-section fade-in">
         <h2>Conheça nossa Equipe</h2>
         <div class="team-content">
             <div class="team-text">
-                <p>O BIGFOOT Esports também possui uma equipe dedicada e focada na evolução contínua, entusiasmo e desempenho tático. Nosso objetivo é nos destacar como uma equipe de referência.</p>
-                <button class="hover-effect">Saiba Mais</button>
+                <p>Equipe dedicada com entusiasmo e desempenho tático.</p>
+                <a href="equipe.html" class="hover-effect">Saiba Mais</a>
             </div>
             <div class="team-image">
                 <img src="https://via.placeholder.com/400" alt="Equipe">
@@ -121,48 +93,11 @@
         </div>
     </section>
 
-    <!-- Seção do Time -->
-    <section class="players-section fade-in">
-        <h2>Nosso Time</h2>
-        <div class="players-content">
-            <div class="player hover-effect">
-                <img src="https://via.placeholder.com/200" alt="Audi">
-                <p>Audi</p>
-                <p>TOP</p>
-            </div>
-            <div class="player hover-effect">
-                <img src="https://via.placeholder.com/200" alt="Galo">
-                <p>Galo</p>
-                <p>JUNGLE</p>
-            </div>
-            <div class="player hover-effect">
-                <img src="https://via.placeholder.com/200" alt="Rica">
-                <p>Rica</p>
-                <p>MID</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Seção de Contato -->
+    <!-- Vitrine Contato -->
     <section id="contato" class="contact-section fade-in">
         <h2>Entre em contato</h2>
-        <p>Entre em contato com o BIGFOOT Esports! Estamos sempre prontos para ouvir você e responder suas perguntas sobre nossa comunidade.</p>
-        <div class="contact-content">
-            <div class="contact-image">
-                <img src="https://via.placeholder.com/400" alt="Contato">
-            </div>
-            <form>
-                <label for="nome-contato">Nome</label>
-                <input type="text" id="nome-contato" name="nome-contato" placeholder="Nome">
-                <label for="sobrenome-contato">Sobrenome</label>
-                <input type="text" id="sobrenome-contato" name="sobrenome-contato" placeholder="Sobrenome">
-                <label for="email-contato">Email *</label>
-                <input type="email" id="email-contato" name="email-contato" placeholder="Email" required>
-                <label for="mensagem">Mensagem</label>
-                <textarea id="mensagem" name="mensagem" placeholder="Mensagem"></textarea>
-                <button type="submit" class="hover-effect">Enviar</button>
-            </form>
-        </div>
+        <p>Estamos sempre prontos para ouvir você.</p>
+        <a href="contato.html" class="hover-effect">Ir para Contato</a>
     </section>
 
     <!-- Rodapé -->

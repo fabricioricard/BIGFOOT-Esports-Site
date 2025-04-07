@@ -50,12 +50,15 @@ body {
     border-radius: 50px;
     text-decoration: none;
     font-weight: 600;
-    transition: background 0.3s ease, transform 0.3s ease;
+    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
 }
 
 .btn-primary:hover {
     background: linear-gradient(45deg, #1557b0, #2a9fd6);
     transform: translateY(-3px);
+    box-shadow: 0 0 15px rgba(26, 115, 232, 0.5); /* Efeito de brilho */
 }
 
 /* Cabeçalho */

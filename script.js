@@ -23,6 +23,14 @@ document.getElementById('login-form').addEventListener('submit', (e) => {
     loginModal.style.display = 'none';
 });
 
+// Fechar a Caixa de Doação
+const closeDonation = document.getElementById('close-donation');
+const donationBox = document.getElementById('donation-box');
+
+closeDonation.addEventListener('click', () => {
+    donationBox.style.display = 'none';
+});
+
 // Roloagem Suave para os Links do Menu
 document.querySelectorAll('.nav-menu a').forEach(anchor => {
     anchor.addEventListener('click', function (e) {

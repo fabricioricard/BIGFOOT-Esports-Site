@@ -12,6 +12,15 @@ body {
 }
 
 /* Animações */
+.reveal {
+    opacity: 0; /* Começa invisível */
+}
+
+.reveal.visible {
+    opacity: 1; /* Garante que fique visível após a animação */
+    animation: fadeIn 1s ease-in-out forwards;
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -21,47 +30,6 @@ body {
         opacity: 1;
         transform: translateY(0);
     }
-}
-
-@keyframes slideIn {
-    from {
-        opacity: 0;
-        transform: translateX(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.05);
-    }
-    100% {
-        transform: scale(1);
-    }
-}
-
-.reveal {
-    opacity: 0;
-    animation: fadeIn 1s ease-in-out forwards;
-}
-
-.fade-in {
-    animation: fadeIn 1s ease-in-out;
-}
-
-.hover-effect {
-    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
-}
-
-.hover-effect:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 /* Botões */

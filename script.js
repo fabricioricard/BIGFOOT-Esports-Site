@@ -51,8 +51,9 @@ const revealOnScroll = () => {
         const elementTop = element.getBoundingClientRect().top;
         const revealPoint = 100;
 
-        if (elementTop < windowHeight - revealPoint) {
-            element.classList.add('fade-in');
+        // Se a seção entrar na tela e ainda não tiver a classe 'visible', adiciona
+        if (elementTop < windowHeight - revealPoint && !element.classList.contains('visible')) {
+            element.classList.add('visible');
         }
     });
 };

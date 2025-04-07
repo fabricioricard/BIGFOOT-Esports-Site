@@ -32,6 +32,15 @@ body {
     }
 }
 
+/* Efeito de Zoom nas Imagens */
+.hover-zoom {
+    transition: transform 0.3s ease;
+}
+
+.hover-zoom:hover {
+    transform: scale(1.05);
+}
+
 /* Botões */
 .btn-primary {
     display: inline-block;

@@ -311,10 +311,10 @@ nav {
 
 /* Seção de Doação */
 .donation-section {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    position: fixed; /* Mudado de absolute para fixed para acompanhar o scroll */
+    top: 20px; /* Posição fixa no topo */
+    right: 20px; /* Posição fixa à direita */
+    transform: none; /* Remove o translate, pois não é mais necessário com position: fixed */
     text-align: center;
     color: #fff;
     z-index: 10;
@@ -322,9 +322,10 @@ nav {
 
 .donation-content {
     background: rgba(0, 0, 0, 0.85);
-    padding: 30px; /* Volta ao padding original */
-    max-width: 600px; /* Aumenta a largura da caixa */
-    border-radius: 12px; /* Volta ao border-radius original */
+    padding: 30px;
+    max-width: 800px; /* Aumentado de 600px para 800px para mais espaço horizontal */
+    width: 100%; /* Garante que use todo o espaço disponível até o max-width */
+    border-radius: 12px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     position: relative;
     border: 1px solid rgba(255, 255, 255, 0.2);
@@ -332,9 +333,9 @@ nav {
 
 #close-donation {
     position: absolute;
-    top: 10px; /* Volta à posição original */
-    right: 15px; /* Volta à posição original */
-    font-size: 24px; /* Volta ao tamanho original */
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
     cursor: pointer;
     color: #fff;
     transition: color 0.3s ease;
@@ -346,14 +347,14 @@ nav {
 
 .donation-content h1 {
     font-family: 'Montserrat', sans-serif;
-    font-size: 28px; /* Volta ao tamanho original */
-    margin-bottom: 10px; /* Volta ao espaçamento original */
+    font-size: 28px;
+    margin-bottom: 10px;
     font-weight: 800;
 }
 
 .donation-content p {
-    font-size: 16px; /* Volta ao tamanho original */
-    margin-bottom: 20px; /* Volta ao espaçamento original */
+    font-size: 16px;
+    margin-bottom: 20px;
 }
 
 .donation-content form {
@@ -363,27 +364,27 @@ nav {
 
 .donation-content label {
     text-align: left;
-    margin-bottom: 6px; /* Volta ao espaçamento original */
-    font-size: 12px; /* Volta ao tamanho original */
+    margin-bottom: 6px;
+    font-size: 12px;
     font-weight: 600;
 }
 
 .donation-content input,
 .donation-content textarea {
-    padding: 10px; /* Volta ao padding original */
-    margin-bottom: 15px; /* Volta ao espaçamento original */
+    padding: 10px;
+    margin-bottom: 15px;
     border: none;
     border-radius: 8px;
-    font-size: 14px; /* Volta ao tamanho original */
+    font-size: 14px;
 }
 
 .donation-content textarea {
-    height: 80px; /* Volta à altura original */
+    height: 80px;
 }
 
 .donation-content button {
-    padding: 12px; /* Volta ao padding original (definido em .btn-primary) */
-    font-size: 14px; /* Volta ao tamanho original (definido em .btn-primary) */
+    padding: 12px;
+    font-size: 14px;
 }
 
 /* Seção de Eventos Futuros */

@@ -310,17 +310,17 @@ nav {
 }
 
 /* Seção de Doação */
-.donation-section {
-    position: fixed !important; /* Força o fixed */
-    top: 50% !important; /* Centraliza verticalmente */
-    left: 50% !important; /* Centraliza horizontalmente */
-    transform: translate(-50%, -50%) !important; /* Ajusta ao centro */
+html body .donation-section { /* Aumenta especificidade */
+    position: fixed !important; /* Força o fixed em todas as resoluções */
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
     text-align: center;
     color: #fff;
-    z-index: 10000 !important; /* Aumentado ainda mais para evitar sobreposição */
+    z-index: 10000 !important;
     width: auto;
-    margin: 0; /* Remove margens que possam interferir */
-    padding: 0; /* Remove padding externo */
+    margin: 0;
+    padding: 0;
 }
 
 /* Caixa de conteúdo da doação */
@@ -777,17 +777,15 @@ footer {
         max-width: 100%;
     }
 
+    /* Ajuste da seção de doação para responsividade */
     .donation-section {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 90%;
+        width: 90%; /* Mantém largura responsiva */
     }
 
     .donation-content {
         max-width: 100%;
         padding: 20px;
+        min-width: 0; /* Permite que encolha em telas menores */
     }
 
     .donation-content h1 {

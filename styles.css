@@ -396,4 +396,361 @@ nav {
 }
 
 .donation-content textarea {
-    height: 100px
+    height: 100px;
+}
+
+/* Seção de Eventos Futuros */
+.events-section {
+    padding: 80px 20px;
+    text-align: center;
+    background: #fff;
+    border-radius: 12px;
+    margin: 20px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+.events-section h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 40px;
+    color: #1a73e8;
+    margin-bottom: 25px;
+    font-weight: 800;
+}
+
+.events-content {
+    padding: 30px;
+    max-width: 700px;
+    margin: 0 auto;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.events-content p {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #666;
+}
+
+/* Seção da Loja */
+.shop-section {
+    padding: 80px 20px;
+    text-align: center;
+    background: linear-gradient(135deg, #f1f5f9, #ffffff);
+}
+
+.shop-section h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 40px;
+    color: #1a73e8;
+    margin-bottom: 40px;
+    font-weight: 800;
+}
+
+.shop-items {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.shop-item {
+    background: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    width: 220px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.shop-item img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.shop-item p {
+    margin: 10px 0;
+    font-size: 16px;
+    color: #444;
+}
+
+.shop-item p:last-child {
+    font-weight: 600;
+    color: #1a73e8;
+}
+
+/* Seção Sobre o Time */
+.team-section {
+    padding: 80px 20px;
+    text-align: center;
+    background: #fff;
+    border-radius: 12px;
+    margin: 20px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+.team-section h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 40px;
+    color: #1a73e8;
+    margin-bottom: 40px;
+    font-weight: 800;
+}
+
+.team-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.team-text {
+    max-width: 450px;
+}
+
+.team-text p {
+    font-size: 18px;
+    margin-bottom: 25px;
+    color: #666;
+}
+
+.team-image img {
+    width: 100%;
+    max-width: 450px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Seção do Time */
+.players-section {
+    padding: 80px 20px;
+    text-align: center;
+    background: linear-gradient(135deg, #f1f5f9, #ffffff);
+}
+
+.players-section h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 40px;
+    color: #1a73e8;
+    margin-bottom: 40px;
+    font-weight: 800;
+}
+
+.players-content {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.player {
+    background: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    width: 220px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.player img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.player p {
+    margin: 10px 0;
+    font-size: 16px;
+    color: #444;
+}
+
+.player p:last-child {
+    font-weight: 600;
+    color: #1a73e8;
+}
+
+/* Seção de Contato */
+.contact-section {
+    padding: 80px 20px;
+    text-align: center;
+    background: #fff;
+    border-radius: 12px;
+    margin: 20px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+.contact-section h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 40px;
+    color: #1a73e8;
+    margin-bottom: 25px;
+    font-weight: 800;
+}
+
+.contact-section p {
+    font-size: 18px;
+    margin-bottom: 30px;
+    color: #666;
+}
+
+.contact-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.contact-image img {
+    width: 100%;
+    max-width: 450px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.contact-content form {
+    max-width: 450px;
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-content label {
+    text-align: left;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #444;
+}
+
+.contact-content input,
+.contact-content textarea {
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    transition: border 0.3s ease;
+}
+
+.contact-content input:focus,
+.contact-content textarea:focus {
+    border-color: #1a73e8;
+}
+
+.contact-content textarea {
+    height: 120px;
+}
+
+/* Rodapé */
+footer {
+    background: linear-gradient(90deg, #1a73e8, #34c0eb);
+    padding: 40px 20px;
+    color: #fff;
+    border-top: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-left p {
+    margin: 8px 0;
+    font-size: 16px;
+    opacity: 0.9;
+}
+
+.footer-right {
+    display: flex;
+    gap: 15px;
+}
+
+.social-icon img {
+    width: 35px;
+    height: 35px;
+    transition: transform 0.3s ease;
+}
+
+.social-icon:hover img {
+    transform: rotate(360deg);
+}
+
+/* Botão Voltar ao Topo */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: linear-gradient(45deg, #1a73e8, #34c0eb);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    cursor: pointer;
+    display: none;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.back-to-top:hover {
+    background: linear-gradient(45deg, #1557b0, #2a9fd6);
+    transform: scale(1.1);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .hero-section {
+        height: 70vh;
+        background-attachment: scroll;
+    }
+
+    .hero-content h1 {
+        font-size: 36px;
+    }
+
+    .hero-content p {
+        font-size: 18px;
+    }
+
+    .nav-menu {
+        gap: 15px;
+    }
+
+    .nav-menu li a {
+        font-size: 14px;
+    }
+
+    .shop-item,
+    .player {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .team-content,
+    .contact-content {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .team-image img,
+    .contact-image img {
+        max-width: 100%;
+    }
+}

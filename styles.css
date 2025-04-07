@@ -739,4 +739,25 @@ footer {
     .contact-image img {
         max-width: 100%;
     }
+
+    .donation-section {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 90%; /* Garante que a caixa ocupe a maior parte da tela */
+    }
+
+    .donation-content {
+        max-width: 100%; /* Ajusta a largura para telas menores */
+        padding: 20px;
+    }
+
+    .donation-content h1 {
+        font-size: 24px;
+    }
+
+    .donation-content p {
+        font-size: 14px;
+    }
 }

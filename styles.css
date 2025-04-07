@@ -311,23 +311,25 @@ nav {
 
 /* Seção de Doação */
 .donation-section {
-    position: fixed !important; /* Garante que acompanhe o scroll */
-    top: 50%; /* Centraliza verticalmente */
-    left: 50%; /* Centraliza horizontalmente */
-    transform: translate(-50%, -50%); /* Ajusta para o centro exato */
+    position: fixed !important; /* Força o fixed */
+    top: 50% !important; /* Centraliza verticalmente */
+    left: 50% !important; /* Centraliza horizontalmente */
+    transform: translate(-50%, -50%) !important; /* Ajusta ao centro */
     text-align: center;
     color: #fff;
-    z-index: 1000; /* Fica acima de outros elementos */
-    width: auto; /* Evita restrições externas */
+    z-index: 10000 !important; /* Aumentado ainda mais para evitar sobreposição */
+    width: auto;
+    margin: 0; /* Remove margens que possam interferir */
+    padding: 0; /* Remove padding externo */
 }
 
 /* Caixa de conteúdo da doação */
 .donation-content {
     background: rgba(0, 0, 0, 0.85);
     padding: 30px;
-    max-width: 800px; /* Largura aumentada */
-    width: 100%; /* Usa o espaço disponível até o max-width */
-    min-width: 400px; /* Tamanho mínimo para evitar colapso */
+    max-width: 800px;
+    width: 100%;
+    min-width: 400px;
     border-radius: 12px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     position: relative;
@@ -379,7 +381,7 @@ nav {
     border: none;
     border-radius: 8px;
     font-size: 14px;
-    width: 100%; /* Garante que os inputs ocupem toda a largura */
+    width: 100%;
 }
 
 .donation-content textarea {

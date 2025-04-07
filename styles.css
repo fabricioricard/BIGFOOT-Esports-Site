@@ -750,19 +750,38 @@ footer {
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        width: 90%; /* Garante que a caixa ocupe a maior parte da tela */
+        width: 90%;
     }
 
     .donation-content {
-        max-width: 100%; /* Ajusta a largura para telas menores */
-        padding: 20px;
+        max-width: 100%;
+        padding: 25px; /* Reduz o padding para telas menores */
     }
 
     .donation-content h1 {
-        font-size: 24px;
+        font-size: 28px; /* Reduz o tamanho do título */
     }
 
     .donation-content p {
-        font-size: 14px;
+        font-size: 16px; /* Reduz o tamanho do texto */
+    }
+
+    .donation-content label {
+        font-size: 12px; /* Reduz o tamanho do label */
+    }
+
+    .donation-content input,
+    .donation-content textarea {
+        padding: 10px; /* Reduz o padding dos campos */
+        font-size: 14px; /* Reduz o tamanho da fonte */
+    }
+
+    .donation-content textarea {
+        height: 80px; /* Reduz a altura do textarea */
+    }
+
+    .donation-content button {
+        padding: 12px; /* Reduz o padding do botão */
+        font-size: 14px; /* Reduz o tamanho da fonte do botão */
     }
 }

@@ -322,9 +322,9 @@ nav {
 
 .donation-content {
     background: rgba(0, 0, 0, 0.85);
-    padding: 40px; /* Aumenta o padding para dar mais espaço interno */
-    max-width: 500px; /* Aumenta a largura da caixa */
-    border-radius: 15px; /* Aumenta o border-radius para um visual mais suave */
+    padding: 30px; /* Volta ao padding original */
+    max-width: 600px; /* Aumenta a largura da caixa */
+    border-radius: 12px; /* Volta ao border-radius original */
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     position: relative;
     border: 1px solid rgba(255, 255, 255, 0.2);
@@ -332,9 +332,9 @@ nav {
 
 #close-donation {
     position: absolute;
-    top: 15px; /* Ajusta a posição do botão de fechar */
-    right: 20px; /* Ajusta a posição do botão de fechar */
-    font-size: 28px; /* Aumenta o tamanho do botão de fechar */
+    top: 10px; /* Volta à posição original */
+    right: 15px; /* Volta à posição original */
+    font-size: 24px; /* Volta ao tamanho original */
     cursor: pointer;
     color: #fff;
     transition: color 0.3s ease;
@@ -346,14 +346,14 @@ nav {
 
 .donation-content h1 {
     font-family: 'Montserrat', sans-serif;
-    font-size: 34px; /* Aumenta o tamanho do título */
-    margin-bottom: 15px; /* Aumenta o espaçamento abaixo do título */
+    font-size: 28px; /* Volta ao tamanho original */
+    margin-bottom: 10px; /* Volta ao espaçamento original */
     font-weight: 800;
 }
 
 .donation-content p {
-    font-size: 18px; /* Aumenta o tamanho do texto */
-    margin-bottom: 25px; /* Aumenta o espaçamento abaixo do texto */
+    font-size: 16px; /* Volta ao tamanho original */
+    margin-bottom: 20px; /* Volta ao espaçamento original */
 }
 
 .donation-content form {
@@ -363,27 +363,27 @@ nav {
 
 .donation-content label {
     text-align: left;
-    margin-bottom: 8px; /* Aumenta o espaçamento abaixo do label */
-    font-size: 14px; /* Aumenta o tamanho do label */
+    margin-bottom: 6px; /* Volta ao espaçamento original */
+    font-size: 12px; /* Volta ao tamanho original */
     font-weight: 600;
 }
 
 .donation-content input,
 .donation-content textarea {
-    padding: 12px; /* Aumenta o padding dos campos de entrada */
-    margin-bottom: 20px; /* Aumenta o espaçamento entre os campos */
+    padding: 10px; /* Volta ao padding original */
+    margin-bottom: 15px; /* Volta ao espaçamento original */
     border: none;
     border-radius: 8px;
-    font-size: 16px; /* Aumenta o tamanho da fonte dos campos */
+    font-size: 14px; /* Volta ao tamanho original */
 }
 
 .donation-content textarea {
-    height: 100px; /* Aumenta a altura do textarea */
+    height: 80px; /* Volta à altura original */
 }
 
 .donation-content button {
-    padding: 14px; /* Aumenta o padding do botão */
-    font-size: 16px; /* Aumenta o tamanho da fonte do botão */
+    padding: 12px; /* Volta ao padding original (definido em .btn-primary) */
+    font-size: 14px; /* Volta ao tamanho original (definido em .btn-primary) */
 }
 
 /* Seção de Eventos Futuros */

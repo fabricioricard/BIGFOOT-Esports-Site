@@ -1,3 +1,13 @@
+// Função para copiar a chave PIX
+function copyPixKey() {
+    const key = document.getElementById('pix-key').textContent;
+    navigator.clipboard.writeText(key).then(() => {
+        alert('Chave PIX copiada com sucesso!');
+    }).catch(() => {
+        alert('Erro ao copiar chave PIX.');
+    });
+}
+
 // Modal de Login
 const loginBtn = document.getElementById('login-btn');
 const loginModal = document.getElementById('login-modal');
@@ -109,7 +119,7 @@ document.getElementById('prev-event').addEventListener('click', () => {
     eventsCarousel.style.transform = `translateX(-${currentEvent * 100}%)`;
 });
 
-// Scroll Reveal com Animações Variadas
+// Scroll Reveal
 const revealElements = document.querySelectorAll('.reveal');
 const revealOnScroll = () => {
     revealElements.forEach(element => {

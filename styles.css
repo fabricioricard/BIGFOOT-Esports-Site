@@ -720,7 +720,7 @@ html body .donation-section {
 
 .team-image img {
     width: 100%;
-    max-width: 200px; /* Reduzido para 200px */
+    max-width: 300px; /* Ajustado para 300px (tamanho médio) */
     height: auto; /* Garante proporção */
     border-radius: 15px;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
@@ -826,7 +826,7 @@ html body .donation-section {
 
 .contact-image img {
     width: 100%;
-    max-width: 200px; /* Reduzido para 200px */
+    max-width: 300px; /* Ajustado para 300px (tamanho médio) */
     height: auto; /* Garante proporção */
     border-radius: 15px;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
@@ -981,7 +981,7 @@ footer {
 
     .team-image img,
     .contact-image img {
-        max-width: 150px; /* Reduzido para 150px em telas menores */
+        max-width: 250px; /* Ajustado para 250px em telas menores (tamanho médio) */
     }
 
     .donation-section {

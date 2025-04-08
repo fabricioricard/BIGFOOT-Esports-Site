@@ -8,24 +8,17 @@ function copyPixKey() {
     });
 }
 
-// Inicializar Partículas na Hero Section
-particlesJS('particles-js', {
-    particles: {
-        number: { value: 80, density: { enable: true, value_area: 800 } },
-        color: { value: '#1a73e8' },
-        shape: { type: 'circle' },
-        opacity: { value: 0.5, random: false },
-        size: { value: 3, random: true },
-        line_linked: { enable: true, distance: 150, color: '#1a73e8', opacity: 0.4, width: 1 },
-        move: { enable: true, speed: 6, direction: 'none', random: false, straight: false, out_mode: 'out', bounce: false }
-    },
-    interactivity: {
-        detect_on: 'canvas',
-        events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' }, resize: true },
-        modes: { repulse: { distance: 100, duration: 0.4 }, push: { particles_nb: 4 } }
-    },
-    retina_detect: true
-});
+// Inicializar Snowstorm na Hero Section
+snowstorm.targetElement = document.querySelector('.hero-section'); // Aplica o efeito apenas na seção hero
+snowstorm.flakesMaxActive = 60; // Máximo de flocos ativos
+snowstorm.flakeColor = '#ffffff'; // Cor dos flocos (branco)
+snowstorm.snowCharacter = '❄'; // Caractere do floco (emoji de neve)
+snowstorm.animationInterval = 35; // Intervalo de animação (ms)
+snowstorm.useTwinkleEffect = true; // Efeito de brilho nos flocos
+snowstorm.followMouse = false; // Flocos não seguem o mouse
+snowstorm.snowStick = false; // Flocos não "grudam" na base
+snowstorm.vMaxX = 2; // Velocidade horizontal máxima
+snowstorm.vMaxY = 4; // Velocidade vertical máxima
 
 // Modal de Login
 const loginBtn = document.getElementById('login-btn');

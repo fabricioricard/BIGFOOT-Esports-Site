@@ -446,6 +446,13 @@ nav {
     justify-content: center;
 }
 
+/* Suporte para WebP */
+@supports (background-image: url('https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/fundo.webp')) {
+    .hero-section {
+        background: url('https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/fundo.webp') no-repeat center center/cover;
+    }
+}
+
 /* Seção de Doação */
 html body .donation-section {
     position: fixed !important;

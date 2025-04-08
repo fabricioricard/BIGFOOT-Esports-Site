@@ -575,7 +575,7 @@ html body .donation-section {
 
 .event-image {
     width: 100%;
-    max-width: 600px;
+    max-width: 400px; /* Reduzido de 600px para 400px */
     height: auto;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
@@ -616,6 +616,11 @@ html body .donation-section {
 .carousel-controls button:hover {
     background: #1557b0;
     transform: scale(1.1);
+}
+
+.subscribe-button-container {
+    margin-top: 30px;
+    text-align: center;
 }
 
 /* Seção da Loja */
@@ -720,7 +725,7 @@ html body .donation-section {
 
 .team-image img {
     width: 100%;
-    max-width: 300px; /* Ajustado para 300px (tamanho médio) */
+    max-width: 350px; /* Aumentado de 300px para 350px */
     height: auto; /* Garante proporção */
     border-radius: 15px;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
@@ -736,7 +741,7 @@ html body .donation-section {
 .players-section h2 {
     font-family: 'Montserrat', sans-serif;
     font-size: 40px;
-    color: #1a73e8;
+    color: "1a73e8;
     margin-bottom: 40px;
     font-weight: 800;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
@@ -826,14 +831,14 @@ html body .donation-section {
 
 .contact-image img {
     width: 100%;
-    max-width: 300px; /* Ajustado para 300px (tamanho médio) */
+    max-width: 350px; /* Aumentado de 300px para 350px */
     height: auto; /* Garante proporção */
     border-radius: 15px;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
 }
 
 .contact-content form {
-    max-width: 450px;
+    max-width: 500px; /* Aumentado de 450px para 500px para acomodar campos maiores */
     display: flex;
     flex-direction: column;
 }
@@ -849,13 +854,14 @@ html body .donation-section {
 
 .contact-content input,
 .contact-content textarea {
-    padding: 12px;
+    padding: 15px; /* Aumentado de 12px para 15px */
     margin-bottom: 20px;
     border: 1px solid #ddd;
     border-radius: 8px;
-    font-size: 14px;
+    font-size: 16px; /* Aumentado de 14px para 16px */
     outline: none;
     transition: border 0.3s ease, box-shadow 0.3s ease;
+    width: 100%; /* Garante que os campos ocupem toda a largura disponível */
 }
 
 .contact-content input:focus,
@@ -865,7 +871,7 @@ html body .donation-section {
 }
 
 .contact-content textarea {
-    height: 120px;
+    height: 150px; /* Aumentado de 120px para 150px */
 }
 
 /* Rodapé */
@@ -981,7 +987,7 @@ footer {
 
     .team-image img,
     .contact-image img {
-        max-width: 250px; /* Ajustado para 250px em telas menores (tamanho médio) */
+        max-width: 300px; /* Ajustado para 300px em telas menores */
     }
 
     .donation-section {
@@ -1019,7 +1025,7 @@ footer {
     }
 
     .event-image {
-        max-width: 100%;
+        max-width: 300px; /* Reduzido para 300px em telas menores */
     }
 
     .events-content h3 {

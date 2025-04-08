@@ -352,7 +352,7 @@ nav {
 
 /* Seção Inicial (Hero Section) */
 .hero-section {
-    background: url('https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/fundo.jpg') no-repeat center center/cover;
+    background: url('https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/fundo.jpg') no-repeat center top/cover;
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -399,6 +399,7 @@ nav {
     letter-spacing: 2px;
     text-transform: uppercase;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    white-space: nowrap; /* Garante que o texto não quebre em várias linhas */
 }
 
 .hero-content h1 span {
@@ -935,6 +936,7 @@ footer {
     .hero-section {
         height: 70vh;
         background-attachment: scroll;
+        background-position: center top; /* Mantém o ajuste para telas menores */
     }
 
     .hero-content {
@@ -943,6 +945,7 @@ footer {
 
     .hero-content h1 {
         font-size: 36px;
+        white-space: normal; /* Permite quebra de linha em telas muito pequenas, mas ajustaremos o tamanho para evitar isso */
     }
 
     .hero-content p {
@@ -953,6 +956,7 @@ footer {
         flex-direction: column;
         gap: 15px;
     }
+}
 
     .nav-menu {
         gap: 15px;

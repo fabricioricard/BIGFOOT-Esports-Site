@@ -1,25 +1,77 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Eventos | BIGFOOT Esports</title>
-  <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventos - BIGFOOT Esports</title>
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@600;800&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header>
-    <nav>
-      <a href="index.html">🏠 Home</a>
-      <a href="eventos.html">📅 Eventos</a>
-      <a href="loja.html">🛒 Loja</a>
-      <a href="equipe.html">👥 Equipe</a>
-      <a href="contato.html">📧 Contato</a>
-    </nav>
-  </header>
-  <main>
-    <h1>Eventos BIGFOOT</h1>
-    <p>Acompanhe os próximos campeonatos, torneios e lives especiais da BIGFOOT Esports.</p>
-  </main>
-  <script src="script.js"></script>
-</body>
-</html>
+    <!-- Cabeçalho -->
+    <header>
+        <div class="logo">
+            <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/logo.svg" alt="Logo BIGFOOT Esports" class="logo-svg">
+            <span>BIGFOOT Esports</span>
+        </div>
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="index.html">🏠 Home</a></li>
+                <li><a href="eventos.html">📅 Eventos</a></li>
+                <li><a href="loja.html">🛒 Loja</a></li>
+                <li><a href="equipe.html">👥 Equipe</a></li>
+                <li><a href="contato.html">📧 Contato</a></li>
+            </ul>
+            <div class="login-bar">
+                <button id="login-btn">Login</button>
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search">
+                <button>🔍</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Modal de Login -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span id="close-modal" class="close">×</span>
+            <h2>Login</h2>
+            <form id="login-form">
+                <label for="username">Usuário</label>
+                <input type="text" id="username" name="username" placeholder="Usuário" required>
+                <label for="password">Senha</label>
+                <input type="password" id="password" name="password" placeholder="Senha" required>
+                <button type="submit">Entrar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Seção de Eventos -->
+    <section class="events-section reveal">
+        <h2>Eventos Futuros</h2>
+        <div class="events-content">
+            <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/camp.jpg" alt="BIG Cup - Torneio de League of Legends" class="event-image hover-zoom">
+            <h3>BIG Cup - Torneio de League of Legends</h3>
+            <p>Venha jogar com a nossa comunidade o melhor torneio amador de League of Legends. Experiência emocionante!</p>
+        </div>
+        <!-- Evento Adicional (Exemplo) -->
+        <div class="events-content">
+            <img src="https://via.placeholder.com/700x300?text=Campeonato+CS2" alt="Campeonato CS2" class="event-image hover-zoom">
+            <h3>Campeonato CS2</h3>
+            <p>Participe do nosso campeonato de Counter-Strike 2 e mostre suas habilidades! Premiação especial para os vencedores.</p>
+        </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer class="reveal">
+        <div class="footer-content">
+            <div class="footer-left">
+                <p>BIGFOOT Esports</p>
+                <p>bigftesports@gmail.com</p>
+                <p>Brasil</p>
+            </div>
+            <div class="footer-right">
+                <a href="#" class="social-icon hover-effect"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/dc.svg" alt="Discord"></a>
+                <a href="#" class="

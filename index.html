@@ -56,15 +56,29 @@
         </div>
     </section>
 
-    <!-- Seção de Doação com QR Code -->
-    <div class="donation-section floating">
-        <div id="donation-box" class="donation-content">
-            <span id="close-donation" class="close">×</span>
-            <h1>Doação</h1>
-            <p>Apoie o BIGFOOT Esports via <strong>PIX</strong>, escaneando o QR Code abaixo:</p>
-            <img src="images/qrcode.png" alt="QR Code para doação" class="qr-code">
-        </div>
+<!-- Seção de Doação com QR Code -->
+<div class="donation-section floating">
+    <div id="donation-box" class="donation-content">
+        <span id="close-donation" class="close">×</span>
+        <h1>Doação</h1>
+        <p>Contribua com o <strong>BIGFOOT Esports</strong> via <strong>PIX</strong>! Escaneie o QR Code abaixo e fortaleça nossa jornada.</p>
+        <img src="images/qrcode.png" alt="QR Code para doação" class="qr-code">
+        <p style="margin-top: 10px; word-break: break-all; font-size: 14px; color: #555;">Chave PIX: <span id="pix-key">contato@bigfootesports.com</span></p>
+        <button onclick="copyPixKey()" class="btn-primary" style="margin-top: 10px; font-size: 14px; padding: 8px 16px;">Copiar chave PIX</button>
+        <a href="doacao.html" class="btn-primary hover-effect" style="display: block; margin-top: 12px; font-size: 14px; padding: 8px 16px; text-align: center;">Outras formas de doar</a>
     </div>
+</div>
+
+<script>
+function copyPixKey() {
+  const key = document.getElementById('pix-key').textContent;
+  navigator.clipboard.writeText(key).then(() => {
+    alert('Chave PIX copiada com sucesso!');
+  }).catch(() => {
+    alert('Erro ao copiar chave PIX.');
+  });
+}
+</script>
 
     <!-- Eventos -->
     <section class="events-section reveal">

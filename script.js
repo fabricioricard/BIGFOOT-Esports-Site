@@ -31,16 +31,20 @@ closeDonation.addEventListener('click', () => {
     donationBox.style.display = 'none';
 });
 
-// Roloagem Suave para os Links do Menu
-document.querySelectorAll('.nav-menu a').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const targetId = this.getAttribute('href').substring(1);
-        const targetElement = document.getElementById(targetId);
-        if (targetElement) {
-            targetElement.scrollIntoView({ behavior: 'smooth' });
-        }
-    });
+// Roloagem Suave para Links com # apenas
+const menuLinks = document.querySelectorAll('.nav-menu a');
+menuLinks.forEach(anchor => {
+    const href = anchor.getAttribute('href');
+    if (href && href.startsWith('#')) {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = href.substring(1);
+            const targetElement = document.getElementById(targetId);
+            if (targetElement) {
+                targetElement.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    }
 });
 
 // Scroll Reveal
@@ -51,7 +55,6 @@ const revealOnScroll = () => {
         const elementTop = element.getBoundingClientRect().top;
         const revealPoint = 100;
 
-        // Se a seção entrar na tela e ainda não tiver a classe 'visible', adiciona
         if (elementTop < windowHeight - revealPoint && !element.classList.contains('visible')) {
             element.classList.add('visible');
         }

@@ -12,10 +12,7 @@
     <!-- Cabeçalho -->
     <header id="header">
         <div class="logo">
-            <picture>
-                <source srcset="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/logo.webp" type="image/webp">
-                <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/logo.svg" alt="Logo BIGFOOT Esports" class="logo-svg">
-            </picture>
+            <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/logo.svg" alt="Logo BIGFOOT Esports" class="logo-svg">
             <span>BIGFOOT Esports</span>
         </div>
         <nav>
@@ -71,10 +68,7 @@
             <span id="close-donation" class="close">×</span>
             <h1>Doação</h1>
             <p>Contribua com o <strong>BIGFOOT Esports</strong> via <strong>PIX</strong>! Escaneie o QR Code abaixo e fortaleça nossa jornada.</p>
-            <picture>
-                <source srcset="images/qrcode-pix.webp" type="image/webp">
-                <img src="images/qrcode-pix.jpg" alt="QR Code para doação" class="qr-code" loading="lazy">
-            </picture>
+            <img src="images/qrcode-pix.jpg" alt="QR Code para doação" class="qr-code">
             <p style="margin-top: 10px; word-break: break-all; font-size: 14px; color: #ccc;">Chave PIX: <span id="pix-key">773f51bf-d4d9-48bc-9b26-812ed63618a8</span></p>
             <button onclick="copyPixKey()" class="btn-primary" style="margin-top: 10px; font-size: 14px; padding: 8px 16px;">Copiar chave PIX</button>
             <a href="doacao.html" class="btn-primary hover-effect" style="display: block; margin-top: 12px; font-size: 14px; padding: 8px 16px; text-align: center;">Outras formas de doar</a>
@@ -103,8 +97,17 @@
     <!-- Eventos -->
     <section class="events-section reveal">
         <h2>Eventos Futuros</h2>
-        <div class="events-carousel" id="events-carousel">
-            <!-- Eventos serão carregados dinamicamente via API -->
+        <div class="events-carousel">
+            <div class="events-content">
+                <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/camp.jpg" alt="BIG Cup - Torneio de League of Legends" class="event-image hover-zoom">
+                <h3>BIG Cup - Torneio de League of Legends</h3>
+                <p>Venha jogar com a nossa comunidade o melhor torneio amador de League of Legends. Experiência emocionante!</p>
+            </div>
+            <div class="events-content">
+                <img src="https://via.placeholder.com/700x300?text=Campeonato+CS2" alt="Campeonato CS2" class="event-image hover-zoom">
+                <h3>Campeonato CS2</h3>
+                <p>Participe do nosso campeonato de Counter-Strike 2 e mostre suas habilidades! Premiação especial para os vencedores.</p>
+            </div>
         </div>
         <div class="carousel-controls">
             <button id="prev-event">◄</button>
@@ -115,8 +118,27 @@
     <!-- Loja -->
     <section id="loja" class="shop-section reveal">
         <h2>Nossa Loja</h2>
-        <div class="shop-items" id="shop-items">
-            <!-- Produtos serão carregados dinamicamente via API -->
+        <div class="shop-items">
+            <div class="shop-item hover-effect">
+                <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/image3.jpg" alt="Moletom" class="hover-zoom">
+                <p>Moletom Confortável</p>
+                <p>R$ 120,00</p>
+            </div>
+            <div class="shop-item hover-effect">
+                <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/image10.jpg" alt="Mouse" class="hover-zoom">
+                <p>Mouse Gamer Ergonômico</p>
+                <p>R$ 120,00</p>
+            </div>
+            <div class="shop-item hover-effect">
+                <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/image6.jpg" alt="Meias" class="hover-zoom">
+                <p>Meias Estilosas BIGFOOT</p>
+                <p>R$ 20,00</p>
+            </div>
+            <div class="shop-item hover-effect">
+                <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/image4.jpg" alt="Jaqueta" class="hover-zoom">
+                <p>Jaqueta Leve BIGFOOT</p>
+                <p>R$ 120,00</p>
+            </div>
         </div>
         <div class="shop-button-container">
             <a href="loja.html" class="btn-primary hover-effect">Ver Loja Completa</a>
@@ -132,10 +154,7 @@
                 <p>Junte-se a nós e faça parte da nossa história!</p>
             </div>
             <div class="team-image hover-effect">
-                <picture>
-                    <source srcset="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/equipe.webp" type="image/webp">
-                    <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/equipe.jpg" alt="Time BIGFOOT" class="hover-zoom" loading="lazy">
-                </picture>
+                <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/equipe.jpg" alt="Time BIGFOOT" class="hover-zoom">
             </div>
         </div>
     </section>
@@ -145,18 +164,12 @@
         <h2>Nosso Time</h2>
         <div class="players-content">
             <div class="player hover-effect">
-                <picture>
-                    <source srcset="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/ghibli1.webp" type="image/webp">
-                    <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/ghibli1.jpg" alt="Fabrício Ricard" class="hover-zoom" loading="lazy">
-                </picture>
+                <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/ghibli1.jpg" alt="Fabrício Ricard" class="hover-zoom">
                 <p>Fabrício Ricard</p>
                 <p>Fundador</p>
             </div>
             <div class="player hover-effect">
-                <picture>
-                    <source srcset="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/ghibli2.webp" type="image/webp">
-                    <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/ghibli2.jpg" alt="Yan Renat" class="hover-zoom" loading="lazy">
-                </picture>
+                <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/ghibli2.jpg" alt="Yan Renat" class="hover-zoom">
                 <p>Yan Renat</p>
                 <p>Fundador</p>
             </div>
@@ -169,10 +182,7 @@
         <p>Entre em contato com o BIGFOOT Esports! Estamos sempre prontos para ouvir você e responder suas perguntas sobre nossa comunidade.</p>
         <div class="contact-content">
             <div class="contact-image">
-                <picture>
-                    <source srcset="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/foto1.webp" type="image/webp">
-                    <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/foto1.jpg" alt="Contato" class="hover-zoom" loading="lazy">
-                </picture>
+                <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/foto1.jpg" alt="Contato" class="hover-zoom">
             </div>
             <form>
                 <label for="nome-contato">Nome</label>
@@ -197,36 +207,11 @@
                 <p>Brasil</p>
             </div>
             <div class="footer-right">
-                <a href="#" class="social-icon hover-effect">
-                    <picture>
-                        <source srcset="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/dc.webp" type="image/webp">
-                        <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/dc.svg" alt="Discord" loading="lazy">
-                    </picture>
-                </a>
-                <a href="#" class="social-icon hover-effect">
-                    <picture>
-                        <source srcset="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/x.webp" type="image/webp">
-                        <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/x.svg" alt="X" loading="lazy">
-                    </picture>
-                </a>
-                <a href="#" class="social-icon hover-effect">
-                    <picture>
-                        <source srcset="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/yt.webp" type="image/webp">
-                        <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/yt.svg" alt="YouTube" loading="lazy">
-                    </picture>
-                </a>
-                <a href="#" class="social-icon hover-effect">
-                    <picture>
-                        <source srcset="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/tw.webp" type="image/webp">
-                        <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/tw.svg" alt="Twitch" loading="lazy">
-                    </picture>
-                </a>
-                <a href="#" class="social-icon hover-effect">
-                    <picture>
-                        <source srcset="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/fb.webp" type="image/webp">
-                        <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/fb.svg" alt="Facebook" loading="lazy">
-                    </picture>
-                </a>
+                <a href="#" class="social-icon hover-effect"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/dc.svg" alt="Discord"></a>
+                <a href="#" class="social-icon hover-effect"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/x.svg" alt="X"></a>
+                <a href="#" class="social-icon hover-effect"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/yt.svg" alt="YouTube"></a>
+                <a href="#" class="social-icon hover-effect"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/tw.svg" alt="Twitch"></a>
+                <a href="#" class="social-icon hover-effect"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/fb.svg" alt="Facebook"></a>
             </div>
         </div>
     </footer>

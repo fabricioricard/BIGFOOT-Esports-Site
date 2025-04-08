@@ -366,9 +366,10 @@ nav {
     position: relative;
     background-attachment: fixed;
     background-size: cover;
+    overflow: hidden; /* Garante que os flocos de neve não transbordem */
 }
 
-/* Removido o #particles-js e adicionado efeito de nevasca */
+/* Efeito de nevasca */
 .snowflake {
     position: absolute;
     color: #fff;
@@ -594,7 +595,7 @@ html body .donation-section {
 
 .event-image {
     width: 100%;
-    max-width: 400px; /* Já ajustado anteriormente */
+    max-width: 400px;
     height: auto;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
@@ -606,7 +607,7 @@ html body .donation-section {
     color: #1a73e8;
     margin-bottom: 10px;
     font-weight: 700;
-    margin-top: 30px; /* Aumentado para mover o texto para baixo */
+    margin-top: 30px;
 }
 
 .events-content p {
@@ -639,7 +640,7 @@ html body .donation-section {
 }
 
 .subscribe-button-container {
-    margin-bottom: 20px; /* Ajustado para dar espaço entre o botão e as setas */
+    margin-bottom: 20px;
     text-align: center;
 }
 
@@ -745,8 +746,8 @@ html body .donation-section {
 
 .team-image img {
     width: 100%;
-    max-width: 400px; /* Aumentado de 350px para 400px */
-    height: auto; /* Garante proporção */
+    max-width: 400px;
+    height: auto;
     border-radius: 15px;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
 }
@@ -762,7 +763,7 @@ html body .donation-section {
     font-family: 'Montserrat', sans-serif;
     font-size: 40px;
     color: #1a73e8;
-    margin-bottom: 60px; /* Aumentado de 40px para 60px para subir o texto */
+    margin-bottom: 60px;
     font-weight: 800;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
@@ -851,14 +852,14 @@ html body .donation-section {
 
 .contact-image img {
     width: 100%;
-    max-width: 400px; /* Aumentado de 350px para 400px */
-    height: auto; /* Garante proporção */
+    max-width: 400px;
+    height: auto;
     border-radius: 15px;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
 }
 
 .contact-content form {
-    max-width: 500px; /* Mantido para acomodar campos mais largos */
+    max-width: 500px;
     display: flex;
     flex-direction: column;
 }
@@ -874,14 +875,14 @@ html body .donation-section {
 
 .contact-content input,
 .contact-content textarea {
-    padding: 12px 20px; /* Aumentado o padding lateral para tornar a caixa mais larga */
+    padding: 12px 20px;
     margin-bottom: 20px;
     border: 1px solid #ddd;
     border-radius: 8px;
-    font-size: 14px; /* Mantido o tamanho original da fonte */
+    font-size: 14px;
     outline: none;
     transition: border 0.3s ease, box-shadow 0.3s ease;
-    width: 100%; /* Garante que os campos ocupem toda a largura disponível */
+    width: 100%;
 }
 
 .contact-content input:focus,
@@ -891,7 +892,7 @@ html body .donation-section {
 }
 
 .contact-content textarea {
-    height: 150px; /* Mantido o ajuste anterior */
+    height: 150px;
 }
 
 /* Rodapé */
@@ -964,7 +965,7 @@ footer {
     .hero-section {
         height: 70vh;
         background-attachment: scroll;
-        background-position: center top; /* Mantém o ajuste para telas menores */
+        background-position: center top;
     }
 
     .hero-content {
@@ -973,7 +974,7 @@ footer {
 
     .hero-content h1 {
         font-size: 36px;
-        white-space: normal; /* Permite quebra de linha em telas muito pequenas */
+        white-space: normal;
     }
 
     .hero-content p {
@@ -1007,7 +1008,7 @@ footer {
 
     .team-image img,
     .contact-image img {
-        max-width: 350px; /* Ajustado para 350px em telas menores */
+        max-width: 350px;
     }
 
     .donation-section {
@@ -1045,12 +1046,12 @@ footer {
     }
 
     .event-image {
-        max-width: 300px; /* Já ajustado anteriormente */
+        max-width: 300px;
     }
 
     .events-content h3 {
         font-size: 20px;
-        margin-top: 20px; /* Ajustado para telas menores */
+        margin-top: 20px;
     }
 
     .events-content p {

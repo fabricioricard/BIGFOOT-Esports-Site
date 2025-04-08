@@ -19,7 +19,6 @@
         </div>
         <nav>
             <ul class="nav-menu">
-                <!-- Item "Home" removido -->
                 <li><a href="noticias.html">📰 Notícias</a></li>
                 <li><a href="eventos.html">📅 Eventos</a></li>
                 <li><a href="loja.html">🛒 Loja</a></li>
@@ -52,7 +51,6 @@
 
     <!-- Hero Section -->
     <section id="home" class="hero-section">
-        <div id="particles-js"></div>
         <div class="hero-overlay"></div>
         <div class="hero-content">
             <h1 class="typewriter">Bem-vindo ao BIGFOOT Esports</h1>
@@ -111,12 +109,12 @@
                 <p>Participe do nosso campeonato de Counter-Strike 2 e mostre suas habilidades! Premiação especial para os vencedores.</p>
             </div>
         </div>
+        <div class="subscribe-button-container">
+            <a href="inscricao.html" class="btn-primary hover-effect">Inscreva-se</a>
+        </div>
         <div class="carousel-controls">
             <button id="prev-event">◄</button>
             <button id="next-event">►</button>
-        </div>
-        <div class="subscribe-button-container">
-            <a href="inscricao.html" class="btn-primary hover-effect">Inscreva-se</a>
         </div>
     </section>
 
@@ -190,14 +188,14 @@
                 <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/foto1.jpg" alt="Contato" class="hover-zoom">
             </div>
             <form>
-                <label for="nome-contato">Nome</label>
-                <input type="text" id="nome-contato" name="nome-contato" placeholder="Nome">
-                <label for="sobrenome-contato">Sobrenome</label>
-                <input type="text" id="sobrenome-contato" name="sobrenome-contato" placeholder="Sobrenome">
+                <label for="nome-contato">Nome *</label>
+                <input type="text" id="nome-contato" name="nome-contato" placeholder="Nome" required>
+                <label for="sobrenome-contato">Sobrenome *</label>
+                <input type="text" id="sobrenome-contato" name="sobrenome-contato" placeholder="Sobrenome" required>
                 <label for="email-contato">Email *</label>
                 <input type="email" id="email-contato" name="email-contato" placeholder="Email" required>
-                <label for="mensagem">Mensagem</label>
-                <textarea id="mensagem" name="mensagem" placeholder="Mensagem"></textarea>
+                <label for="mensagem">Mensagem *</label>
+                <textarea id="mensagem" name="mensagem" placeholder="Mensagem" required></textarea>
                 <button type="submit" class="btn-primary hover-effect">Enviar</button>
             </form>
         </div>
@@ -225,7 +223,27 @@
     <button id="back-to-top" class="back-to-top">⬆</button>
 
     <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // Script para criar o efeito de nevasca
+        function createSnowflake() {
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+            snowflake.innerHTML = '❄';
+            snowflake.style.left = Math.random() * 100 + 'vw';
+            snowflake.style.animationDuration = Math.random() * 5 + 5 + 's'; // Entre 5s e 10s
+            snowflake.style.opacity = Math.random();
+            snowflake.style.fontSize = Math.random() * 10 + 10 + 'px'; // Tamanho entre 10px e 20px
+            document.querySelector('.hero-section').appendChild(snowflake);
+
+            // Remove o floco após a animação
+            setTimeout(() => {
+                snowflake.remove();
+            }, 10000);
+        }
+
+        // Cria flocos de neve a cada 100ms
+        setInterval(createSnowflake, 100);
+    </script>
     <script src="script.js"></script>
 </body>
 </html>

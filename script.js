@@ -8,6 +8,25 @@ function copyPixKey() {
     });
 }
 
+// Inicializar Partículas na Hero Section
+particlesJS('particles-js', {
+    particles: {
+        number: { value: 80, density: { enable: true, value_area: 800 } },
+        color: { value: '#1a73e8' },
+        shape: { type: 'circle' },
+        opacity: { value: 0.5, random: false },
+        size: { value: 3, random: true },
+        line_linked: { enable: true, distance: 150, color: '#1a73e8', opacity: 0.4, width: 1 },
+        move: { enable: true, speed: 6, direction: 'none', random: false, straight: false, out_mode: 'out', bounce: false }
+    },
+    interactivity: {
+        detect_on: 'canvas',
+        events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' }, resize: true },
+        modes: { repulse: { distance: 100, duration: 0.4 }, push: { particles_nb: 4 } }
+    },
+    retina_detect: true
+});
+
 // Modal de Login
 const loginBtn = document.getElementById('login-btn');
 const loginModal = document.getElementById('login-modal');
@@ -104,20 +123,68 @@ const statsObserver = new IntersectionObserver((entries) => {
 
 statsObserver.observe(statsSection);
 
-// Carrossel de Eventos
-const eventsCarousel = document.querySelector('.events-carousel');
-const events = document.querySelectorAll('.events-content');
+// Carregar Eventos Dinamicamente via API
+const eventsCarousel = document.getElementById('events-carousel');
+let eventsData = [];
 let currentEvent = 0;
 
-document.getElementById('next-event').addEventListener('click', () => {
-    currentEvent = (currentEvent + 1) % events.length;
-    eventsCarousel.style.transform = `translateX(-${currentEvent * 100}%)`;
-});
+fetch('https://jsonplaceholder.typicode.com/posts?_limit=5')
+    .then(response => response.json())
+    .then(data => {
+        eventsData = data.map((post, index) => ({
+            title: post.title,
+            description: post.body,
+            image: `https://via.placeholder.com/700x300?text=Evento+${index + 1}`
+        }));
 
-document.getElementById('prev-event').addEventListener('click', () => {
-    currentEvent = (currentEvent - 1 + events.length) % events.length;
-    eventsCarousel.style.transform = `translateX(-${currentEvent * 100}%)`;
-});
+        eventsData.forEach(event => {
+            const eventDiv = document.createElement('div');
+            eventDiv.classList.add('events-content');
+            eventDiv.innerHTML = `
+                <img src="${event.image}" alt="${event.title}" class="event-image hover-zoom" loading="lazy">
+                <h3>${event.title}</h3>
+                <p>${event.description}</p>
+            `;
+            eventsCarousel.appendChild(eventDiv);
+        });
+
+        // Inicializar controles do carrossel
+        document.getElementById('next-event').addEventListener('click', () => {
+            currentEvent = (currentEvent + 1) % eventsData.length;
+            eventsCarousel.style.transform = `translateX(-${currentEvent * 100}%)`;
+        });
+
+        document.getElementById('prev-event').addEventListener('click', () => {
+            currentEvent = (currentEvent - 1 + eventsData.length) % eventsData.length;
+            eventsCarousel.style.transform = `translateX(-${currentEvent * 100}%)`;
+        });
+    })
+    .catch(error => {
+        console.error('Erro ao carregar eventos:', error);
+        eventsCarousel.innerHTML = '<p>Erro ao carregar eventos. Tente novamente mais tarde.</p>';
+    });
+
+// Carregar Produtos Dinamicamente via API
+const shopItems = document.getElementById('shop-items');
+
+fetch('https://jsonplaceholder.typicode.com/photos?_limit=4')
+    .then(response => response.json())
+    .then(data => {
+        data.forEach((product, index) => {
+            const productDiv = document.createElement('div');
+            productDiv.classList.add('shop-item', 'hover-effect');
+            productDiv.innerHTML = `
+                <img src="${product.thumbnailUrl}" alt="${product.title}" class="hover-zoom" loading="lazy">
+                <p>${product.title}</p>
+                <p>R$ ${(index + 1) * 30},00</p>
+            `;
+            shopItems.appendChild(productDiv);
+        });
+    })
+    .catch(error => {
+        console.error('Erro ao carregar produtos:', error);
+        shopItems.innerHTML = '<p>Erro ao carregar produtos. Tente novamente mais tarde.</p>';
+    });
 
 // Scroll Reveal
 const revealElements = document.querySelectorAll('.reveal');

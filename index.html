@@ -51,6 +51,7 @@
 
     <!-- Hero Section -->
     <section id="home" class="hero-section">
+        <div id="particles-js"></div> <!-- Restaurado o particles.js -->
         <div class="hero-overlay"></div>
         <div class="hero-content">
             <h1 class="typewriter">Bem-vindo ao BIGFOOT Esports</h1>
@@ -60,7 +61,6 @@
                 <a href="eventos.html" class="btn-secondary hover-effect">Ver Eventos</a>
             </div>
         </div>
-        <!-- Flocos de neve serão adicionados via JavaScript -->
     </section>
 
     <!-- Seção de Doação com QR Code -->
@@ -224,29 +224,7 @@
     <button id="back-to-top" class="back-to-top">⬆</button>
 
     <!-- Scripts -->
-    <script>
-        // Script para criar o efeito de nevasca (simplificado)
-        function createSnowflake() {
-            const snowflake = document.createElement('div');
-            snowflake.classList.add('snowflake');
-            snowflake.innerHTML = '❄';
-            snowflake.style.left = Math.random() * 100 + 'vw';
-            snowflake.style.animationDuration = Math.random() * 5 + 5 + 's'; // Entre 5s e 10s
-            snowflake.style.opacity = Math.random();
-            snowflake.style.fontSize = Math.random() * 10 + 10 + 'px'; // Tamanho entre 10px e 20px
-            document.querySelector('.hero-section').appendChild(snowflake);
-
-            // Remove o floco após a animação
-            setTimeout(() => {
-                snowflake.remove();
-            }, 10000);
-        }
-
-        // Cria um número limitado de flocos de neve (50 flocos no total)
-        for (let i = 0; i < 50; i++) {
-            setTimeout(createSnowflake, i * 200); // Adiciona flocos com um pequeno intervalo
-        }
-    </script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script> <!-- Restaurado o particles.js -->
     <script src="script.js"></script>
 </body>
 </html>

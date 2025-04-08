@@ -47,7 +47,69 @@ menuLinks.forEach(anchor => {
     }
 });
 
-// Scroll Reveal
+// Efeito de Digitação na Hero Section
+const typewriterText = document.querySelector('.typewriter');
+const text = typewriterText.textContent;
+typewriterText.textContent = '';
+let i = 0;
+
+function typeWriter() {
+    if (i < text.length) {
+        typewriterText.textContent += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, 100);
+    }
+}
+setTimeout(typeWriter, 500);
+
+// Animação de Contagem para Estatísticas
+const statsNumbers = document.querySelectorAll('.stat-number');
+const statsSection = document.querySelector('.stats-section');
+
+const animateStats = () => {
+    statsNumbers.forEach(number => {
+        const target = +number.getAttribute('data-target');
+        let count = 0;
+        const increment = target / 100;
+
+        const updateCount = () => {
+            if (count < target) {
+                count += increment;
+                number.textContent = Math.ceil(count);
+                setTimeout(updateCount, 20);
+            } else {
+                number.textContent = target;
+            }
+        };
+        updateCount();
+    });
+};
+
+const statsObserver = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+        animateStats();
+        statsObserver.disconnect();
+    }
+}, { threshold: 0.5 });
+
+statsObserver.observe(statsSection);
+
+// Carrossel de Eventos
+const eventsCarousel = document.querySelector('.events-carousel');
+const events = document.querySelectorAll('.events-content');
+let currentEvent = 0;
+
+document.getElementById('next-event').addEventListener('click', () => {
+    currentEvent = (currentEvent + 1) % events.length;
+    eventsCarousel.style.transform = `translateX(-${currentEvent * 100}%)`;
+});
+
+document.getElementById('prev-event').addEventListener('click', () => {
+    currentEvent = (currentEvent - 1 + events.length) % events.length;
+    eventsCarousel.style.transform = `translateX(-${currentEvent * 100}%)`;
+});
+
+// Scroll Reveal com Animações Variadas
 const revealElements = document.querySelectorAll('.reveal');
 const revealOnScroll = () => {
     revealElements.forEach(element => {
@@ -62,6 +124,16 @@ const revealOnScroll = () => {
 };
 
 window.addEventListener('scroll', revealOnScroll);
+
+// Efeito de Transparência no Cabeçalho ao Rolar
+const header = document.getElementById('header');
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+    } else {
+        header.classList.remove('scrolled');
+    }
+});
 
 // Botão Voltar ao Topo
 const backToTopBtn = document.getElementById('back-to-top');

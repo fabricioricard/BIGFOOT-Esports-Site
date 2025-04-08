@@ -825,7 +825,7 @@ html body .donation-section {
 
 .contact-image img {
     width: 100%;
-    max-width: 300px; /* Reduzido de 450px para 300px */
+    max-width: 200px; /* Reduzido para 200px */
     border-radius: 15px;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
 }

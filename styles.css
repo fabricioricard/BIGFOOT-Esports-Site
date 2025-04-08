@@ -9,10 +9,10 @@ body {
     background-color: #f8f9fa;
     color: #333;
     line-height: 1.6;
-    overflow-x: hidden; /* Evita rolagem horizontal indesejada */
+    overflow-x: hidden;
 }
 
-/* Animações Avançadas */
+/* Animações */
 .reveal {
     opacity: 0;
     transform: translateY(50px);
@@ -22,31 +22,6 @@ body {
 .reveal.visible {
     opacity: 1;
     transform: translateY(0);
-}
-
-/* Animações Específicas para Diferentes Seções */
-.reveal.fade-left {
-    transform: translateX(-50px);
-}
-
-.reveal.fade-left.visible {
-    transform: translateX(0);
-}
-
-.reveal.fade-right {
-    transform: translateX(50px);
-}
-
-.reveal.fade-right.visible {
-    transform: translateX(0);
-}
-
-.reveal.scale {
-    transform: scale(0.9);
-}
-
-.reveal.scale.visible {
-    transform: scale(1);
 }
 
 @keyframes fadeIn {

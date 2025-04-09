@@ -1,17 +1,12 @@
 // Configuração do Snowstorm
 snowStorm.targetElement = document.querySelector('.hero-section');
 snowStorm.snowColor = '#fff';
-snowStorm.flakesMaxActive = 50; // Reduzido para melhor desempenho
+snowStorm.flakesMaxActive = 50;
 snowStorm.useTwinkleEffect = true;
-snowStorm.animationInterval = 50; // Menos atualizações por segundo
+snowStorm.animationInterval = 50;
 snowStorm.snowCharacter = '❄';
 snowStorm.vMaxY = 5;
 snowStorm.vMaxX = 2;
-
-// Desativa Snowstorm em dispositivos móveis
-if (/Mobi|Android/i.test(navigator.userAgent)) {
-    snowStorm.stop();
-}
 
 // Botão para ativar/desativar Snowstorm
 const toggleSnowBtn = document.createElement('button');
@@ -65,17 +60,17 @@ const loginModal = document.getElementById('login-modal');
 const closeModal = document.getElementById('close-modal');
 
 loginBtn.addEventListener('click', () => {
-    loginModal.style.display = 'block';
+    loginModal.classList.add('active');
     document.getElementById('username').focus();
 });
 
 closeModal.addEventListener('click', () => {
-    loginModal.style.display = 'none';
+    loginModal.classList.remove('active');
 });
 
 window.addEventListener('click', (e) => {
     if (e.target === loginModal) {
-        loginModal.style.display = 'none';
+        loginModal.classList.remove('active');
     }
 });
 
@@ -89,12 +84,12 @@ document.getElementById('login-form').addEventListener('submit', (e) => {
         return;
     }
     alert('Login realizado com sucesso! (Funcionalidade de exemplo)');
-    loginModal.style.display = 'none';
+    loginModal.classList.remove('active');
 });
 
 // Modal de Doação
 const donationToggle = document.querySelector('.donation-toggle');
-const donationSection = document.querySelector('.donation-section');
+const donationSection = document.getElementById('donation-section');
 const closeDonation = document.getElementById('close-donation');
 
 donationToggle.addEventListener('click', () => {
@@ -133,17 +128,12 @@ const typewriterText = document.querySelector('.typewriter');
 const text = typewriterText.textContent;
 typewriterText.textContent = '';
 let i = 0;
-let isTyping = false;
 
 function typeWriter() {
-    if (isTyping) return;
-    isTyping = true;
     if (i < text.length) {
         typewriterText.textContent += text.charAt(i);
         i++;
         setTimeout(typeWriter, 100);
-    } else {
-        isTyping = false;
     }
 }
 setTimeout(typeWriter, 500);
@@ -156,7 +146,7 @@ const animateStats = () => {
     statsNumbers.forEach(number => {
         const target = +number.getAttribute('data-target');
         let count = 0;
-        const duration = 2000; // 2 segundos
+        const duration = 2000;
         const startTime = performance.now();
 
         const updateCount = (currentTime) => {
@@ -201,10 +191,7 @@ document.getElementById('prev-event').addEventListener('click', () => {
 });
 
 // Indicadores (dots) para o carrossel
-const dotsContainer = document.createElement('div');
-dotsContainer.className = 'carousel-dots';
-document.querySelector('.events-section').appendChild(dotsContainer);
-
+const dotsContainer = document.querySelector('.carousel-dots');
 events.forEach((_, index) => {
     const dot = document.createElement('span');
     dot.className = 'carousel-dot';
@@ -222,22 +209,6 @@ function updateDots() {
     });
 }
 updateDots();
-
-/* Integração opcional com Swiper.js
-const swiper = new Swiper('.events-carousel', {
-    slidesPerView: 1,
-    spaceBetween: 20,
-    loop: true,
-    autoplay: {
-        delay: 5000,
-        disableOnInteraction: false,
-    },
-    navigation: {
-        nextEl: '#next-event',
-        prevEl: '#prev-event',
-    },
-});
-*/
 
 // Scroll Reveal
 const revealElements = document.querySelectorAll('.reveal');
@@ -278,7 +249,7 @@ backToTopBtn.addEventListener('click', () => {
 });
 
 // Validação do Formulário de Contato
-document.querySelector('.contact-section form').addEventListener('submit', (e) => {
+document.getElementById('contact-form').addEventListener('submit', (e) => {
     e.preventDefault();
     const email = document.getElementById('email-contato').value;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -299,28 +270,4 @@ document.getElementById('newsletter-form').addEventListener('submit', (e) => {
         return;
     }
     alert(`Obrigado por se inscrever, ${email}! Você receberá nossas novidades em breve.`);
-    // Integre com Mailchimp ou outro serviço aqui
 });
-
-/* Autenticação real opcional com Firebase
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js';
-import { getAuth, signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js';
-
-const firebaseConfig = { // Suas credenciais };
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-
-document.getElementById('login-form').addEventListener('submit', (e) => {
-    e.preventDefault();
-    const email = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-    signInWithEmailAndPassword(auth, email, password)
-        .then(() => {
-            alert('Login bem-sucedido!');
-            loginModal.style.display = 'none';
-        })
-        .catch((error) => {
-            alert('Erro: ' + error.message);
-        });
-});
-*/

@@ -1,1 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="no-js">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notícias de Tibia - BIGFOOT Esports</title>
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@600;800&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <script>
+        document.documentElement.classList.remove('no-js');
+    </script>
 
+    <!-- Cabeçalho (mesmo do noticias-lol.html e noticias-hots.html) -->
+    <header id="header">
+        <div class="logo">
+            <a href="index.html">
+                <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/logo.svg" alt="Logo BIGFOOT Esports" class="logo-svg">
+                <span>BIGFOOT Esports</span>
+            </a>
+        </div>
+        <nav>
+            <ul class="nav-menu">
+                <li class="dropdown">
+                    <a href="noticias.html">📰 Notícias</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="noticias-lol.html">Notícias de League of Legends</a></li>
+                        <li><a href="noticias-hots.html">Notícias de Heroes of the Storm</a></li>
+                        <li><a href="noticias-tibia.html">Notícias de Tibia</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="campeonatos.html">🏆 Campeonatos</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="campeonatos-lol.html">LTA Sul 2025</a></li>
+                        <li><a href="campeonatos-hots.html">BIG Cup 2025</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="equipes.html">👥 Equipes</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="equipe-lol.html">Equipe de League of Legends</a></li>
+                        <li><a href="equipe-hots.html">Equipe de Heroes of the Storm</a></li>
+                    </ul>
+                </li>
+                <li><a href="eventos.html">📅 Eventos</a></li>
+                <li><a href="loja.html">🛒 Loja</a></li>
+                <li><a href="lanhouse.html">🖥️ Lan House</a></li>
+            </ul>
+            <div class="login-bar">
+                <button id="login-btn">Login</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Modal de Login (mesmo do noticias-lol.html e noticias-hots.html) -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span id="close-modal" class="close">×</span>
+            <h2>Login</h2>
+            <form id="login-form">
+                <label for="username">Usuário</label>
+                <input type="text" id="username" name="username" placeholder="Usuário" required>
+                <label for="password">Senha</label>
+                <input type="password" id="password" name="password" placeholder="Senha" required>
+                <button type="submit">Entrar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Seção de Notícias de Tibia -->
+    <main>
+        <section class="news-section reveal visible">
+            <h2>Notícias de Tibia</h2>
+            <div class="news-items">
+                <!-- Notícia 1 -->
+                <div class="news-item hover-effect">
+                    <img src="https://via.placeholder.com/300x200?text=Notícia+Tibia+1" alt="Notícia 1" class="hover-zoom">
+                    <h3>Atualização de Verão 2025 no Tibia</h3>
+                    <p>CipSoft lança a atualização de verão com novas quests em Edron e um evento especial de caça ao tesouro!</p>
+                    <a href="#" class="btn-primary hover-effect">Leia Mais</a>
+                </div>
+                <!-- Notícia 2 -->
+                <div class="news-item hover-effect">
+                    <img src="https://via.placeholder.com/300x200?text=Notícia+Tibia+2" alt="Notícia 2" class="hover-zoom">
+                    <h3>BIGFOOT Esports no Torneio de PvP</h3>
+                    <p>Nossa guilda de Tibia alcançou o top 3 no torneio de PvP em Antica. Veja os melhores momentos!</p>
+                    <a href="#" class="btn-primary hover-effect">Leia Mais</a>
+                </div>
+                <!-- Notícia 3 -->
+                <div class="news-item hover-effect">
+                    <img src="https://via.placeholder.com/300x200?text=Notícia+Tibia+3" alt="Notícia 3" class="hover-zoom">
+                    <h3>Novo Sistema de BattlEye em Tibia</h3>
+                    <p>CipSoft implementa melhorias no BattlEye para combater bots, impactando servidores como Calva e Calvera.</p>
+                    <a href="#" class="btn-primary hover-effect">Leia Mais</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Rodapé (mesmo do noticias-lol.html e noticias-hots.html) -->
+    <footer class="reveal">
+        <div class="footer-content">
+            <div class="footer-left">
+                <p>BIGFOOT Esports</p>
+                <p>bigftesports@gmail.com</p>
+                <p>Brasil</p>
+            </div>
+            <div class="footer-right">
+                <a href="#" class="social-icon hover-effect"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/dc.svg" alt="Discord"></a>
+                <a href="#" class="social-icon hover-effect"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/x.svg" alt="X"></a>
+                <a href="#" class="social-icon hover-effect"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/yt.svg" alt="YouTube"></a>
+                <a href="#" class="social-icon hover-effect"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/tw.svg" alt="Twitch"></a>
+                <a href="#" class="social-icon hover-effect"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/fb.svg" alt="Facebook"></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botão Voltar ao Topo -->
+    <button id="back-to-top" class="back-to-top">⬆</button>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Snowstorm/20131208/snowstorm-min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -712,25 +712,28 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    flex-wrap: nowrap;
     gap: 40px;
-    text-align: left;
+    flex-wrap: wrap;
+    flex-direction: row-reverse;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .team-text {
-    max-width: 50%;
-    font-family: 'Roboto', sans-serif;
+    max-width: 500px;
+    flex: 1;
 }
 
 .team-text p {
+    font-family: 'Roboto', sans-serif;
     font-size: 18px;
     margin-bottom: 25px;
     color: #666;
 }
 
 .team-image {
-    max-width: 50%;
-    flex-shrink: 0;
+    flex: 1;
+    max-width: 500px;
 }
 
 .team-image img {

@@ -6,7 +6,6 @@
     <meta name="description" content="BIGFOOT Esports - Participe da nossa comunidade de esportes eletrônicos, eventos, campeonatos e loja oficial!">
     <meta name="keywords" content="esports, BIGFOOT, League of Legends, Heroes of the Storm, torneios, comunidade">
     <meta name="author" content="BIGFOOT Esports">
-    <!-- Open Graph para redes sociais -->
     <meta property="og:title" content="BIGFOOT Esports">
     <meta property="og:description" content="Junte-se à comunidade BIGFOOT Esports e viva a emoção dos jogos competitivos!">
     <meta property="og:image" content="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/logo.svg">
@@ -15,8 +14,6 @@
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@800&family=Poppins:wght@600&display=swap" rel="stylesheet">
-    <!-- Adicione isso se optar pelo Swiper.js -->
-    <!-- <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" /> -->
 </head>
 <body>
     
@@ -86,7 +83,7 @@
     <button class="donation-toggle" aria-label="Abrir doação">💸 Apoie-nos</button>
 
     <!-- Seção de Doação com QR Code -->
-    <div class="donation-section">
+    <div id="donation-section" class="donation-section">
         <div id="donation-box" class="donation-content">
             <span id="close-donation" class="close" aria-label="Fechar doação">×</span>
             <h1>Doação</h1>
@@ -148,8 +145,7 @@
             <button id="prev-event" aria-label="Evento anterior">◄</button>
             <button id="next-event" aria-label="Próximo evento">►</button>
         </div>
-        <!-- Adicione isso se optar pelos indicadores de carrossel -->
-        <!-- <div class="carousel-dots"></div> -->
+        <div class="carousel-dots"></div>
     </section>
 
     <!-- Loja -->
@@ -246,7 +242,7 @@
                 </picture>
             </div>
             <div class="contact-form">
-                <form>
+                <form id="contact-form">
                     <label for="nome-contato">Nome *</label>
                     <input type="text" id="nome-contato" name="nome-contato" placeholder="Nome" required>
                     <label for="sobrenome-contato">Sobrenome *</label>
@@ -299,8 +295,6 @@
 
     <!-- Scripts -->
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/Snowstorm/20131208/snowstorm-min.js"></script>
-    <!-- Adicione isso se optar pelo Swiper.js -->
-    <!-- <script defer src="https://unpkg.com/swiper/swiper-bundle.min.js"></script> -->
     <script defer src="script.js"></script>
 </body>
 </html>

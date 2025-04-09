@@ -5,12 +5,12 @@
     font-family: 'Roboto', sans-serif;
 }
 
-html, body {
-    height: 100%;
+body {
     background-color: #f8f9fa;
     color: #333;
     line-height: 1.6;
-    overflow-x: hidden;
+    min-height: 100vh;
+    overflow: auto;
 }
 
 /* Animações */
@@ -26,36 +26,18 @@ html, body {
 }
 
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes slideInLeft {
-    from {
-        opacity: 0;
-        transform: translateX(-50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
+    from { opacity: 0; transform: translateX(-50px); }
+    to { opacity: 1; transform: translateX(0); }
 }
 
 @keyframes slideInRight {
-    from {
-        opacity: 0;
-        transform: translateX(50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
+    from { opacity: 0; transform: translateX(50px); }
+    to { opacity: 1; transform: translateX(0); }
 }
 
 /* Efeito de Zoom nas Imagens */
@@ -131,7 +113,8 @@ header.scrolled {
 .logo {
     display: flex;
     align-items: center;
-    gap: 15px; /* Ajustado para manter o texto e ícone próximos */
+    justify-content: center;
+    gap: 20px;
 }
 
 .logo a {
@@ -201,7 +184,6 @@ nav {
     transform: translateY(-2px);
 }
 
-/* Estilização do Dropdown */
 .dropdown {
     position: relative;
 }
@@ -217,7 +199,6 @@ nav {
     list-style: none;
     padding: 10px 0;
     z-index: 1000;
-    min-width: 200px;
 }
 
 .dropdown:hover .dropdown-menu {
@@ -284,14 +265,8 @@ nav {
 }
 
 @keyframes slideInTop {
-    from {
-        opacity: 0;
-        transform: translateY(-50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(-50px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .close {
@@ -375,7 +350,6 @@ nav {
     color: #fff;
     position: relative;
     background-attachment: fixed;
-    background-size: cover;
 }
 
 .hero-overlay {
@@ -428,7 +402,7 @@ nav {
 }
 
 /* Seção de Doação */
-.donation-section {
+html body .donation-section {
     position: fixed;
     top: 50%;
     left: 50%;
@@ -436,10 +410,9 @@ nav {
     text-align: center;
     color: #fff;
     z-index: 10000;
-    width: auto;
 }
 
-.donation-content {
+html body .donation-section .donation-content {
     background: rgba(0, 0, 0, 0.9);
     padding: 40px;
     max-width: 800px;
@@ -602,7 +575,7 @@ nav {
 }
 
 .carousel-controls {
-    margin-top: 60px;
+    margin-top: 40px;
     display: flex;
     justify-content: center;
     gap: 20px;
@@ -692,6 +665,7 @@ nav {
 /* Seção Sobre o Time */
 .team-section {
     padding: 80px 20px;
+    text-align: center;
     background: linear-gradient(135deg, #ffffff, #f8f9fa);
     border-radius: 15px;
     margin: 20px;
@@ -705,39 +679,31 @@ nav {
     margin-bottom: 40px;
     font-weight: 800;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-    text-align: center;
 }
 
 .team-content {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+    justify-content: center;
+    align-items: center;
     gap: 40px;
     flex-wrap: wrap;
     flex-direction: row-reverse;
-    max-width: 1200px;
-    margin: 0 auto;
 }
 
 .team-text {
-    max-width: 500px;
-    flex: 1;
+    max-width: 450px;
 }
 
 .team-text p {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-size: 18px;
     margin-bottom: 25px;
     color: #666;
 }
 
-.team-image {
-    flex: 1;
-    max-width: 500px;
-}
-
 .team-image img {
     width: 100%;
+    max-width: 500px;
     height: auto;
     border-radius: 15px;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
@@ -866,14 +832,13 @@ nav {
 
 .contact-content input,
 .contact-content textarea {
-    padding: 16px 24px;
+    padding: 12px;
     margin-bottom: 20px;
     border: 1px solid #ddd;
     border-radius: 8px;
     font-size: 14px;
     outline: none;
     transition: border 0.3s ease, box-shadow 0.3s ease;
-    width: 100%;
 }
 
 .contact-content input:focus,
@@ -979,8 +944,6 @@ footer {
 
     .nav-menu {
         gap: 15px;
-        flex-wrap: wrap;
-        justify-content: center;
     }
 
     .nav-menu li a {

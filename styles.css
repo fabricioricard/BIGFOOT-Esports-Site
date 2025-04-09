@@ -206,6 +206,7 @@ nav {
     list-style: none;
     display: flex;
     gap: 20px;
+    flex-grow: 1; /* Faz a lista de navegação ocupar o espaço disponível */
 }
 
 .nav-menu li a {
@@ -239,7 +240,7 @@ nav {
 }
 
 .login-bar {
-    margin-left: auto; /* Empurra o container do botão para a direita */
+    order: 1; /* Coloca o botão de login depois da lista */
 }
 
 .login-bar button {

@@ -231,6 +231,10 @@ nav {
     transform: translateY(-2px);
 }
 
+.login-bar {
+    margin-left: auto; /* Empurra o container do botão para a direita */
+}
+
 .login-bar button {
     background: linear-gradient(45deg, #1a73e8, #34c0eb);
     color: #fff;
@@ -241,7 +245,6 @@ nav {
     font-family: 'Poppins', sans-serif;
     cursor: pointer;
     transition: all 0.3s ease;
-    margin-left: auto; /* Adiciona margem à esquerda para empurrar para a direita */
 }
 
 .login-bar button:hover {

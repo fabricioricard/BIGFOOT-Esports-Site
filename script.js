@@ -8,6 +8,15 @@ snowStorm.snowCharacter = '❄'; // Caractere de floco (emoji de neve)
 snowStorm.vMaxY = 5; // Velocidade vertical máxima
 snowStorm.vMaxX = 2; // Velocidade horizontal máxima
 
+// Garante que os flocos de neve não afetem a altura do body
+document.addEventListener('DOMContentLoaded', () => {
+    const heroSection = document.querySelector('.hero-section');
+    if (heroSection) {
+        heroSection.style.position = 'relative'; // Garante que os flocos fiquem contidos
+        heroSection.style.overflow = 'hidden'; // Evita que os flocos saiam da seção
+    }
+});
+
 // Função para copiar a chave PIX
 function copyPixKey() {
     const key = document.getElementById('pix-key').textContent;

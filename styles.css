@@ -7,8 +7,6 @@
 
 html, body {
     height: 100%;
-    margin: 0;
-    padding: 0;
 }
 
 body {
@@ -16,7 +14,7 @@ body {
     color: #333;
     line-height: 1.6;
     overflow-x: hidden;
-    overflow-y: auto; /* Adicionado para controlar a rolagem vertical */
+    overflow-y: auto; /* Controla rolagem vertical */
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -27,20 +25,44 @@ body > *:not(footer) {
     flex: 1 0 auto;
 }
 
-/* Garante que o rodapé não cresça desnecessariamente */
+/* Classe base para seções comuns */
+.section-base {
+    padding: 80px 20px;
+    text-align: center;
+    background: linear-gradient(135deg, #ffffff, #f8f9fa);
+    border-radius: 15px;
+    margin: 20px 20px 0 20px; /* Sem margin-bottom para evitar espaço extra */
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* Estilo comum para h2 */
+.section-base h2,
+.stats-section h2,
+.shop-section h2,
+.players-section h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 40px;
+    color: #1a73e8;
+    margin-bottom: 40px;
+    font-weight: 800;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Rodapé */
 footer {
     flex-shrink: 0;
     background: linear-gradient(90deg, #1a73e8, #34c0eb);
-    padding: 50px 20px;
+    padding: 50px 20px 20px 20px;
     color: #fff;
     text-align: center;
+    margin: 0;
 }
 
 /* Animações */
 .reveal {
     opacity: 0;
     transform: translateY(50px);
-    transition: all 0.8s ease-out;
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out; /* Especificado para melhor desempenho */
 }
 
 .reveal.visible {
@@ -49,36 +71,23 @@ footer {
 }
 
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes slideInLeft {
-    from {
-        opacity: 0;
-        transform: translateX(-50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
+    from { opacity: 0; transform: translateX(-50px); }
+    to { opacity: 1; transform: translateX(0); }
 }
 
 @keyframes slideInRight {
-    from {
-        opacity: 0;
-        transform: translateX(50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
+    from { opacity: 0; transform: translateX(50px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInTop {
+    from { opacity: 0; transform: translateY(-50px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 /* Efeito de Zoom nas Imagens */
@@ -101,7 +110,7 @@ footer {
     text-decoration: none;
     font-weight: 600;
     font-family: 'Poppins', sans-serif;
-    transition: all 0.3s ease;
+    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
     position: relative;
     overflow: hidden;
     box-shadow: 0 5px 15px rgba(26, 115, 232, 0.3);
@@ -123,7 +132,7 @@ footer {
     text-decoration: none;
     font-weight: 600;
     font-family: 'Poppins', sans-serif;
-    transition: all 0.3s ease;
+    transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .btn-secondary:hover {
@@ -158,7 +167,7 @@ header.scrolled {
 }
 
 .logo a {
-    text-decoration: none; /* Remove o sublinhado do link */
+    text-decoration: none;
 }
 
 .logo-svg {
@@ -231,7 +240,7 @@ nav {
     font-weight: 600;
     font-family: 'Poppins', sans-serif;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .login-bar button:hover {
@@ -297,17 +306,6 @@ nav {
     animation: slideInTop 0.5s ease;
 }
 
-@keyframes slideInTop {
-    from {
-        opacity: 0;
-        transform: translateY(-50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
 .close {
     position: absolute;
     top: 15px;
@@ -369,7 +367,7 @@ nav {
     border-radius: 50px;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .modal-content button:hover {
@@ -388,7 +386,6 @@ nav {
     text-align: center;
     color: #fff;
     position: relative;
-    background-attachment: fixed;
     background-size: cover;
 }
 
@@ -399,12 +396,12 @@ nav {
     width: 100%;
     height: 100%;
     background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(26, 115, 232, 0.3));
-    z-index: 1; /* Flocos ficam acima da overlay */
+    z-index: 1;
 }
 
 .hero-content {
     position: relative;
-    z-index: 2; /* Conteúdo fica acima dos flocos */
+    z-index: 2;
     background: rgba(0, 0, 0, 0.6);
     padding: 60px;
     border-radius: 15px;
@@ -420,7 +417,7 @@ nav {
     letter-spacing: 2px;
     text-transform: uppercase;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-    white-space: nowrap; /* Garante que o texto não quebre em várias linhas */
+    white-space: nowrap;
 }
 
 .hero-content h1 span {
@@ -442,14 +439,14 @@ nav {
 }
 
 /* Seção de Doação */
-html body .donation-section {
-    position: fixed !important;
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) !important;
+.donation-section {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     text-align: center;
     color: #fff;
-    z-index: 10000 !important;
+    z-index: 10000;
     width: auto;
     margin: 0;
     padding: 0;
@@ -512,14 +509,6 @@ html body .donation-section {
     color: #fff;
 }
 
-.stats-section h2 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 40px;
-    margin-bottom: 40px;
-    font-weight: 800;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-}
-
 .stats-content {
     display: flex;
     justify-content: center;
@@ -555,23 +544,10 @@ html body .donation-section {
 
 /* Seção de Eventos Futuros */
 .events-section {
-    padding: 80px 20px;
-    text-align: center;
-    background: linear-gradient(135deg, #ffffff, #f8f9fa);
-    border-radius: 15px;
-    margin: 20px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    /* Usando a classe base */
 }
 
-.events-section h2 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 40px;
-    color: #1a73e8;
-    margin-bottom: 40px;
-    font-weight: 800;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-}
-
+/* Ajustes específicos para events-section */
 .events-carousel {
     display: flex;
     overflow: hidden;
@@ -608,7 +584,7 @@ html body .donation-section {
     color: #1a73e8;
     margin-bottom: 10px;
     font-weight: 700;
-    margin-top: 30px; /* Mantido para mover o texto para baixo */
+    margin-top: 30px;
 }
 
 .events-content p {
@@ -641,7 +617,7 @@ html body .donation-section {
 }
 
 .subscribe-button-container {
-    margin-bottom: 20px; /* Mantido para dar espaço entre o botão e as setas */
+    margin-bottom: 20px;
     text-align: center;
 }
 
@@ -650,15 +626,6 @@ html body .donation-section {
     padding: 80px 20px;
     text-align: center;
     background: linear-gradient(135deg, #f1f5f9, #ffffff);
-}
-
-.shop-section h2 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 40px;
-    color: #1a73e8;
-    margin-bottom: 40px;
-    font-weight: 800;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .shop-items {
@@ -675,7 +642,7 @@ html body .donation-section {
     width: 220px;
     text-align: center;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .shop-item:hover {
@@ -709,23 +676,10 @@ html body .donation-section {
 
 /* Seção Sobre o Time */
 .team-section {
-    padding: 80px 20px;
-    text-align: center;
-    background: linear-gradient(135deg, #ffffff, #f8f9fa);
-    border-radius: 15px;
-    margin: 20px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    /* Usando a classe base */
 }
 
-.team-section h2 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 40px;
-    color: #1a73e8;
-    margin-bottom: 40px;
-    font-weight: 800;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-}
-
+/* Ajustes específicos para team-section */
 .team-content {
     display: flex;
     justify-content: center;
@@ -745,9 +699,10 @@ html body .donation-section {
     color: #666;
 }
 
-.team-image img {
+.team-image img,
+.contact-image img {
     width: 100%;
-    max-width: 400px; /* Mantido o aumento */
+    max-width: 400px;
     height: auto;
     border-radius: 15px;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
@@ -761,12 +716,7 @@ html body .donation-section {
 }
 
 .players-section h2 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 40px;
-    color: #1a73e8;
-    margin-bottom: 60px; /* Mantido o aumento para subir o texto */
-    font-weight: 800;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    margin-bottom: 60px; /* Ajuste específico */
 }
 
 .players-content {
@@ -783,7 +733,7 @@ html body .donation-section {
     width: 220px;
     text-align: center;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .player:hover {
@@ -819,21 +769,12 @@ html body .donation-section {
 
 /* Seção de Contato */
 .contact-section {
-    padding: 80px 20px;
-    text-align: center;
-    background: linear-gradient(135deg, #ffffff, #f8f9fa);
-    border-radius: 15px;
-    margin: 20px 20px 0 20px; /* Removido margin-bottom */
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    /* Usando a classe base */
 }
 
+/* Ajustes específicos para contact-section */
 .contact-section h2 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 40px;
-    color: #1a73e8;
-    margin-bottom: 25px;
-    font-weight: 800;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    margin-bottom: 25px; /* Ajuste específico */
 }
 
 .contact-section p {
@@ -849,14 +790,6 @@ html body .donation-section {
     align-items: center;
     gap: 40px;
     flex-wrap: wrap;
-}
-
-.contact-image img {
-    width: 100%;
-    max-width: 400px; /* Mantido o aumento */
-    height: auto;
-    border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
 }
 
 .contact-content form {
@@ -876,14 +809,13 @@ html body .donation-section {
 
 .contact-content input,
 .contact-content textarea {
-    padding: 12px 20px; /* Mantido para caixas mais largas */
+    padding: 12px 20px;
     margin-bottom: 20px;
     border: 1px solid #ddd;
     border-radius: 8px;
-    font-size: 14px; /* Mantido o tamanho original da fonte */
+    font-size: 14px;
     outline: none;
     transition: border 0.3s ease, box-shadow 0.3s ease;
-    width: 100%;
 }
 
 .contact-content input:focus,
@@ -897,15 +829,6 @@ html body .donation-section {
 }
 
 /* Rodapé */
-footer {
-    flex-shrink: 0;
-    background: linear-gradient(90deg, #1a73e8, #34c0eb);
-    padding: 50px 20px 0 20px; /* Removido padding-bottom para teste */
-    color: #fff;
-    text-align: center;
-    margin: 0; /* Adicionado para garantir que não haja margens */
-}
-
 .footer-content {
     display: flex;
     justify-content: space-between;
@@ -955,7 +878,7 @@ footer {
     cursor: pointer;
     display: none;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    transition: all 0.3s ease;
+    transition: background 0.3s ease, transform 0.3s ease;
 }
 
 .back-to-top:hover {
@@ -1006,7 +929,7 @@ footer {
 @media (max-width: 768px) {
     .hero-section {
         height: 70vh;
-        background-attachment: scroll;
+        background-attachment: scroll; /* Melhor desempenho em dispositivos móveis */
         background-position: center top;
     }
 

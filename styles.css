@@ -5,13 +5,12 @@
     font-family: 'Roboto', sans-serif;
 }
 
-body {
+html, body {
+    height: 100%;
     background-color: #f8f9fa;
     color: #333;
     line-height: 1.6;
     overflow-x: hidden;
-    min-height: 100vh;
-    overflow: auto;
 }
 
 /* Animações */
@@ -133,11 +132,13 @@ header.scrolled {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 20px;
+    gap: 30px;
 }
 
 .logo a {
     text-decoration: none;
+    display: flex;
+    align-items: center;
 }
 
 .logo-svg {
@@ -157,6 +158,7 @@ header.scrolled {
     color: #1a73e8;
     letter-spacing: 1px;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    text-align: center;
 }
 
 nav {
@@ -217,6 +219,7 @@ nav {
     list-style: none;
     padding: 10px 0;
     z-index: 1000;
+    min-width: 200px;
 }
 
 .dropdown:hover .dropdown-menu {
@@ -231,10 +234,12 @@ nav {
     font-size: 14px;
     color: #444;
     text-decoration: none;
+    display: block;
 }
 
 .dropdown-menu li a:hover {
     color: #1a73e8;
+    background: #f8f9fa;
 }
 
 .login-bar button {
@@ -425,17 +430,15 @@ nav {
 }
 
 /* Seção de Doação */
-html body .donation-section {
-    position: fixed !important;
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) !important;
+.donation-section {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     text-align: center;
     color: #fff;
-    z-index: 10000 !important;
+    z-index: 10000;
     width: auto;
-    margin: 0;
-    padding: 0;
 }
 
 .donation-content {
@@ -591,7 +594,6 @@ html body .donation-section {
     color: #1a73e8;
     margin-bottom: 10px;
     font-weight: 700;
-    margin-top: 30px;
 }
 
 .events-content p {
@@ -602,7 +604,7 @@ html body .donation-section {
 }
 
 .carousel-controls {
-    margin-top: 40px;
+    margin-top: 60px;
     display: flex;
     justify-content: center;
     gap: 20px;
@@ -859,7 +861,7 @@ html body .donation-section {
 
 .contact-content input,
 .contact-content textarea {
-    padding: 14px 20px;
+    padding: 16px 24px;
     margin-bottom: 20px;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -1057,6 +1059,8 @@ footer {
 
     .nav-menu {
         gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
     }
 
     .nav-menu li a {
@@ -1126,11 +1130,14 @@ footer {
 
     .events-content h3 {
         font-size: 20px;
-        margin-top: 20px;
     }
 
     .events-content p {
         font-size: 16px;
+    }
+
+    .carousel-controls {
+        margin-top: 40px;
     }
 
     .carousel-controls button {

@@ -14,20 +14,48 @@
             <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/logo.svg" alt="Logo BIGFOOT Esports" class="logo-svg">
             <span>BIGFOOT Esports</span>
         </a>
+        <button class="menu-toggle" aria-label="Abrir menu">☰</button>
         <nav>
             <ul class="nav-menu">
                 <li><a href="lanhouse.html">Lan House</a></li>
-                <li><a href="noticias.html">Notícias</a></li>
+                <li class="dropdown">
+                    <a href="noticias.html">Notícias</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="noticias-lol.html">Notícias de LoL</a></li>
+                        <li><a href="noticias-hots.html">Notícias de Heroes</a></li>
+                    </ul>
+                </li>
                 <li><a href="eventos.html">Eventos</a></li>
                 <li><a href="loja.html">Loja</a></li>
                 <li><a href="equipes.html">Equipes</a></li>
-                <li><a href="campeonatos.html">Campeonatos</a></li>
+                <li class="dropdown">
+                    <a href="campeonatos.html">Campeonatos</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="campeonato-lol.html">Campeonato de LoL</a></li>
+                        <li><a href="campeonato-hots.html">Campeonato de Heroes</a></li>
+                    </ul>
+                </li>
             </ul>
             <div class="login-bar">
                 <button id="login-btn">Login</button>
             </div>
         </nav>
     </header>
+
+    <!-- Modal de Login -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span id="close-modal" class="close" aria-label="Fechar modal">×</span>
+            <h2>Login</h2>
+            <form id="login-form">
+                <label for="username">Usuário</label>
+                <input type="text" id="username" name="username" placeholder="Usuário" required>
+                <label for="password">Senha</label>
+                <input type="password" id="password" name="password" placeholder="Senha" required>
+                <button type="submit" class="btn-primary">Entrar</button>
+            </form>
+        </div>
+    </div>
 
     <!-- Hero Section -->
     <section id="home" class="hero-section">
@@ -40,6 +68,21 @@
             </div>
         </div>
     </section>
+
+    <!-- Botão Flutuante para Doação -->
+    <button class="donation-toggle" aria-label="Abrir doação">💸 Apoie-nos</button>
+
+    <!-- Modal de Doação -->
+    <div id="donation-section" class="modal">
+        <div class="donation-content">
+            <span id="close-donation" class="close" aria-label="Fechar doação">×</span>
+            <h1>Doação</h1>
+            <p>Contribua com o <strong>BIGFOOT Esports</strong> via PIX!</p>
+            <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/qrcode-pix.jpg" alt="QR Code para doação via PIX" class="qr-code">
+            <p>Chave PIX: <span id="pix-key">773f51bf-d4d9-48bc-9b26-812ed63618a8</span></p>
+            <button onclick="copyPixKey()" class="btn-primary">Copiar chave PIX</button>
+        </div>
+    </div>
 
     <!-- Seção de Estatísticas -->
     <section class="stats-section">
@@ -75,6 +118,10 @@
                 <p>Participe do nosso campeonato de Counter-Strike 2 e mostre suas habilidades!</p>
             </article>
         </div>
+        <div class="carousel-controls">
+            <button id="prev-event" aria-label="Evento anterior">◄</button>
+            <button id="next-event" aria-label="Próximo evento">►</button>
+        </div>
     </section>
 
     <!-- Loja -->
@@ -91,6 +138,69 @@
                 <p>Mouse Gamer Ergonômico</p>
                 <p>R$ 120,00</p>
             </article>
+            <article class="shop-item">
+                <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/image6.jpg" alt="Meias estilosas da BIGFOOT Esports">
+                <p>Meias Estilosas BIGFOOT</p>
+                <p>R$ 20,00</p>
+            </article>
+        </div>
+    </section>
+
+    <!-- Sobre o Time -->
+    <section class="team-section">
+        <h2>Sobre o Time</h2>
+        <div class="team-content">
+            <div class="team-text">
+                <p>Somos o BIGFOOT Esports, uma equipe apaixonada por jogos competitivos. Desde 2020, competimos em torneios de alto nível.</p>
+                <p>Junte-se a nós e faça parte da nossa história!</p>
+            </div>
+            <div class="team-image">
+                <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/equipe.jpg" alt="Membros do time BIGFOOT Esports">
+            </div>
+        </div>
+    </section>
+
+    <!-- Nosso Time -->
+    <section class="players-section">
+        <h2>Nosso Time</h2>
+        <div class="players-content">
+            <div class="player">
+                <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/ghibli1.jpg" alt="Fabrício Ricard">
+                <p>Fabrício Ricard</p>
+                <p>Fundador</p>
+            </div>
+            <div class="player">
+                <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/ghibli2.jpg" alt="Yan Renat">
+                <p>Yan Renat</p>
+                <p>Fundador</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contato -->
+    <section id="contato" class="contact-section">
+        <h2>Entre em Contato</h2>
+        <p>Entre em contato com o BIGFOOT Esports! Estamos prontos para ouvir você.</p>
+        <div class="contact-content">
+            <div class="contact-image">
+                <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/foto1.jpg" alt="Equipe BIGFOOT Esports">
+            </div>
+            <div class="contact-form">
+                <form id="contact-form">
+                    <label for="nome-contato">Nome</label>
+                    <input type="text" id="nome-contato" name="nome-contato" placeholder="Nome" required>
+                    <label for="email-contato">Email</label>
+                    <input type="email" id="email-contato" name="email-contato" placeholder="Email" required>
+                    <label for="mensagem">Mensagem</label>
+                    <textarea id="mensagem" name="mensagem" placeholder="Mensagem" required></textarea>
+                    <button type="submit" class="btn-primary">Enviar</button>
+                </form>
+                <form id="newsletter-form">
+                    <label for="email-newsletter">Assine nossa newsletter</label>
+                    <input type="email" id="email-newsletter" name="email-newsletter" placeholder="Seu email" required>
+                    <button type="submit" class="btn-primary">Inscrever</button>
+                </form>
+            </div>
         </div>
     </section>
 
@@ -106,10 +216,17 @@
                 <a href="https://discord.gg/seu-discord" class="social-icon">
                     <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/dc.svg" alt="Ícone do Discord">
                 </a>
+                <a href="https://x.com/seu-perfil" class="social-icon">
+                    <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/x.svg" alt="Ícone do X">
+                </a>
             </div>
         </div>
     </footer>
 
+    <!-- Botão Voltar ao Topo -->
+    <button id="back-to-top" class="back-to-top" aria-label="Voltar ao topo">⬆</button>
+
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/Snowstorm/20131208/snowstorm-min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

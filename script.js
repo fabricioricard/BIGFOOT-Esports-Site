@@ -1,12 +1,12 @@
 // Configuração do Snowstorm
-snowStorm.targetElement = document.querySelector('.hero-section'); // Limita o efeito à seção hero
-snowStorm.snowColor = '#fff'; // Cor dos flocos (branco)
-snowStorm.flakesMaxActive = 96; // Máximo de flocos ativos
-snowStorm.useTwinkleEffect = true; // Flocos piscam
-snowStorm.animationInterval = 35; // Velocidade da animação (ms)
-snowStorm.snowCharacter = '❄'; // Caractere de floco (emoji de neve)
-snowStorm.vMaxY = 5; // Velocidade vertical máxima
-snowStorm.vMaxX = 2; // Velocidade horizontal máxima
+snowStorm.targetElement = document.querySelector('.hero-section');
+snowStorm.snowColor = '#fff';
+snowStorm.flakesMaxActive = 96;
+snowStorm.useTwinkleEffect = true;
+snowStorm.animationInterval = 35;
+snowStorm.snowCharacter = '❄';
+snowStorm.vMaxY = 5;
+snowStorm.vMaxX = 2;
 
 // Função para copiar a chave PIX
 function copyPixKey() {
@@ -51,7 +51,7 @@ closeDonation.addEventListener('click', () => {
     donationBox.style.display = 'none';
 });
 
-// Roloagem Suave para Links com # apenas
+// Roloagem Suave para Links com #
 const menuLinks = document.querySelectorAll('.nav-menu a');
 menuLinks.forEach(anchor => {
     const href = anchor.getAttribute('href');

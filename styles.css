@@ -937,6 +937,45 @@ footer {
     transform: scale(1.2);
 }
 
+/* Estilização do Menu Dropdown */
+.nav-menu .dropdown {
+    position: relative;
+}
+
+.nav-menu .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: rgba(255, 255, 255, 0.95);
+    list-style: none;
+    padding: 10px 0;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    min-width: 200px;
+}
+
+.nav-menu .dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.nav-menu .dropdown-menu li {
+    padding: 8px 20px;
+}
+
+.nav-menu .dropdown-menu li a {
+    color: #444;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.nav-menu .dropdown-menu li a:hover {
+    color: #1a73e8;
+}
+
 /* Responsividade */
 @media (max-width: 768px) {
     .hero-section {

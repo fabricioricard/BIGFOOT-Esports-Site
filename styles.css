@@ -232,6 +232,10 @@ nav {
     transform: translateY(-2px);
 }
 
+.login-bar {
+    margin-left: auto; /* Empurra o container do botão para a direita */
+}
+
 .login-bar button {
     background: linear-gradient(45deg, #1a73e8, #34c0eb);
     color: #fff;

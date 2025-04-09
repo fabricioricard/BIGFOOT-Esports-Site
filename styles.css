@@ -145,6 +145,8 @@ header {
     top: 0;
     z-index: 1000;
     transition: background 0.3s ease, box-shadow 0.3s ease;
+    max-width: 1200px; /* Limita a largura do header */
+    margin: 0 auto; /* Centraliza o header */
 }
 
 header.scrolled {

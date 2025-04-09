@@ -156,6 +156,7 @@ header.scrolled {
     display: flex;
     align-items: center;
     gap: 12px;
+    margin-right: 20px; /* Move o nome "BIGFOOT Esports" um pouco para a direita */
 }
 
 .logo a {
@@ -188,13 +189,13 @@ header.scrolled {
 nav {
     display: flex;
     align-items: center;
-    gap: 30px;
+    gap: 20px; /* Reduz o espaço entre os elementos dentro do nav */
 }
 
 .nav-menu {
     list-style: none;
     display: flex;
-    gap: 25px;
+    gap: 20px; /* Reduz o espaço entre os links de navegação */
 }
 
 .nav-menu li a {

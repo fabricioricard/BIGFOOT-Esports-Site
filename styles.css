@@ -232,8 +232,8 @@ nav {
     transform: translateY(-2px);
 }
 
-.login-bar {
-    margin-left: auto; /* Empurra o container do botão para a direita */
+nav #login-btn { /* Se o botão tem o ID "login-btn" */
+    margin-left: auto;
 }
 
 .login-bar button {
@@ -246,6 +246,7 @@ nav {
     font-family: 'Poppins', sans-serif;
     cursor: pointer;
     transition: all 0.3s ease;
+    margin-left: auto; /* Adiciona margem à esquerda para empurrar para a direita */
 }
 
 .login-bar button:hover {

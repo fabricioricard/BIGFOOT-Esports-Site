@@ -157,6 +157,7 @@ header.scrolled {
     align-items: center;
     gap: 12px;
     margin-right: 30px; /* Controla o espaço entre o logo e os botões de navegação */
+    margin-left: 20px; /* Adiciona margem à esquerda para mover para a direita */
 }
 
 .logo a {

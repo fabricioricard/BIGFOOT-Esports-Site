@@ -78,6 +78,22 @@ menuLinks.forEach(anchor => {
     }
 });
 
+// Dropdown funcional por clique
+document.querySelectorAll('.dropdown > a').forEach(button => {
+    button.addEventListener('click', function (e) {
+        e.preventDefault();
+        const parent = this.parentElement;
+
+        // Fecha todos os outros dropdowns
+        document.querySelectorAll('.dropdown.open').forEach(drop => {
+            if (drop !== parent) drop.classList.remove('open');
+        });
+
+        // Alterna o dropdown atual
+        parent.classList.toggle('open');
+    });
+});
+
 // Efeito de Digitação na Hero Section
 const typewriterText = document.querySelector('.typewriter');
 if (typewriterText) {

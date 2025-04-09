@@ -49,6 +49,12 @@ footer {
     transform: translateY(0);
 }
 
+/* Fallback para garantir visibilidade se o JavaScript não carregar */
+.no-js .reveal {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0;

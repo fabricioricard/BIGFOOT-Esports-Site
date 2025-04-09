@@ -10,9 +10,12 @@ snowStorm.vMaxX = 2;
 
 // Função para copiar a chave PIX
 function copyPixKey() {
-    const key = document.getElementById('pix-key');
-    navigator.clipboard.writeText(key.textContent);
-    alert('Chave PIX copiada com sucesso!');
+    const key = document.getElementById('pix-key').textContent;
+    navigator.clipboard.writeText(key).then(() => {
+        alert('Chave PIX copiada com sucesso!');
+    }).catch(() => {
+        alert('Erro ao copiar chave PIX.');
+    });
 }
 
 // Modal de Login
@@ -34,8 +37,7 @@ window.addEventListener('click', (e) => {
     }
 });
 
-const loginForm = document.getElementById('login-form');
-loginForm.addEventListener('submit', (e) => {
+document.getElementById('login-form').addEventListener('submit', (e) => {
     e.preventDefault();
     alert('Login realizado com sucesso! (Funcionalidade de exemplo)');
     loginModal.style.display = 'none';
@@ -49,15 +51,20 @@ closeDonation.addEventListener('click', () => {
     donationBox.style.display = 'none';
 });
 
-// Rolagem Suave para Links com #
-document.querySelectorAll('.nav-menu a').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        const href = this.getAttribute('href');
-        if (href.startsWith('#')) {
+// Roloagem Suave para Links com #
+const menuLinks = document.querySelectorAll('.nav-menu a');
+menuLinks.forEach(anchor => {
+    const href = anchor.getAttribute('href');
+    if (href && href.startsWith('#')) {
+        anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            document.querySelector(href).scrollIntoView({ behavior: 'smooth' });
-        }
-    });
+            const targetId = href.substring(1);
+            const targetElement = document.getElementById(targetId);
+            if (targetElement) {
+                targetElement.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    }
 });
 
 // Efeito de Digitação na Hero Section
@@ -79,7 +86,7 @@ setTimeout(typeWriter, 500);
 const statsNumbers = document.querySelectorAll('.stat-number');
 const statsSection = document.querySelector('.stats-section');
 
-function animateStats() {
+const animateStats = () => {
     statsNumbers.forEach(number => {
         const target = +number.getAttribute('data-target');
         let count = 0;
@@ -96,7 +103,7 @@ function animateStats() {
         };
         updateCount();
     });
-}
+};
 
 const statsObserver = new IntersectionObserver((entries) => {
     if (entries[0].isIntersecting) {
@@ -110,16 +117,14 @@ statsObserver.observe(statsSection);
 // Carrossel de Eventos
 const eventsCarousel = document.querySelector('.events-carousel');
 const events = document.querySelectorAll('.events-content');
-const prevEventBtn = document.getElementById('prev-event');
-const nextEventBtn = document.getElementById('next-event');
 let currentEvent = 0;
 
-nextEventBtn.addEventListener('click', () => {
+document.getElementById('next-event').addEventListener('click', () => {
     currentEvent = (currentEvent + 1) % events.length;
     eventsCarousel.style.transform = `translateX(-${currentEvent * 100}%)`;
 });
 
-prevEventBtn.addEventListener('click', () => {
+document.getElementById('prev-event').addEventListener('click', () => {
     currentEvent = (currentEvent - 1 + events.length) % events.length;
     eventsCarousel.style.transform = `translateX(-${currentEvent * 100}%)`;
 });
@@ -132,7 +137,7 @@ const revealOnScroll = () => {
         const elementTop = element.getBoundingClientRect().top;
         const revealPoint = 100;
 
-        if (elementTop < windowHeight - revealPoint) {
+        if (elementTop < windowHeight - revealPoint && !element.classList.contains('visible')) {
             element.classList.add('visible');
         }
     });

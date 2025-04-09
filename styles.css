@@ -10,6 +10,8 @@ body {
     color: #333;
     line-height: 1.6;
     overflow-x: hidden;
+    min-height: 100vh;
+    overflow: auto;
 }
 
 /* Animações */
@@ -130,11 +132,12 @@ header.scrolled {
 .logo {
     display: flex;
     align-items: center;
-    gap: 12px;
+    justify-content: center;
+    gap: 20px;
 }
 
 .logo a {
-    text-decoration: none; /* Remove o sublinhado do link */
+    text-decoration: none;
 }
 
 .logo-svg {
@@ -198,6 +201,42 @@ nav {
     transform: translateY(-2px);
 }
 
+/* Estilização do Dropdown */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    list-style: none;
+    padding: 10px 0;
+    z-index: 1000;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu li {
+    padding: 10px 20px;
+}
+
+.dropdown-menu li a {
+    font-size: 14px;
+    color: #444;
+    text-decoration: none;
+}
+
+.dropdown-menu li a:hover {
+    color: #1a73e8;
+}
+
 .login-bar button {
     background: linear-gradient(45deg, #1a73e8, #34c0eb);
     color: #fff;
@@ -214,38 +253,6 @@ nav {
     background: linear-gradient(45deg, #1557b0, #2a9fd6);
     transform: translateY(-3px);
     box-shadow: 0 5px 15px rgba(26, 115, 232, 0.3);
-}
-
-.search-bar {
-    display: flex;
-    align-items: center;
-}
-
-.search-bar input {
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 50px 0 0 50px;
-    outline: none;
-    font-size: 14px;
-    transition: border 0.3s ease;
-}
-
-.search-bar input:focus {
-    border-color: #1a73e8;
-}
-
-.search-bar button {
-    background: #1a73e8;
-    color: #fff;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 0 50px 50px 0;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-.search-bar button:hover {
-    background: #1557b0;
 }
 
 /* Modal de Login */
@@ -375,12 +382,12 @@ nav {
     width: 100%;
     height: 100%;
     background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(26, 115, 232, 0.3));
-    z-index: 1; /* Flocos ficam acima da overlay */
+    z-index: 1;
 }
 
 .hero-content {
     position: relative;
-    z-index: 2; /* Conteúdo fica acima dos flocos */
+    z-index: 2;
     background: rgba(0, 0, 0, 0.6);
     padding: 60px;
     border-radius: 15px;
@@ -396,7 +403,7 @@ nav {
     letter-spacing: 2px;
     text-transform: uppercase;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-    white-space: nowrap; /* Garante que o texto não quebre em várias linhas */
+    white-space: nowrap;
 }
 
 .hero-content h1 span {
@@ -572,7 +579,7 @@ html body .donation-section {
 
 .event-image {
     width: 100%;
-    max-width: 400px;
+    max-width: 500px;
     height: auto;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
@@ -584,7 +591,7 @@ html body .donation-section {
     color: #1a73e8;
     margin-bottom: 10px;
     font-weight: 700;
-    margin-top: 30px; /* Mantido para mover o texto para baixo */
+    margin-top: 30px;
 }
 
 .events-content p {
@@ -595,7 +602,7 @@ html body .donation-section {
 }
 
 .carousel-controls {
-    margin-top: 20px;
+    margin-top: 40px;
     display: flex;
     justify-content: center;
     gap: 20px;
@@ -617,8 +624,7 @@ html body .donation-section {
 }
 
 .subscribe-button-container {
-    margin-bottom: 20px; /* Mantido para dar espaço entre o botão e as setas */
-    text-align: center;
+    margin-bottom: 20px;
 }
 
 /* Seção da Loja */
@@ -708,6 +714,7 @@ html body .donation-section {
     align-items: center;
     gap: 40px;
     flex-wrap: wrap;
+    flex-direction: row-reverse;
 }
 
 .team-text {
@@ -723,7 +730,7 @@ html body .donation-section {
 
 .team-image img {
     width: 100%;
-    max-width: 400px; /* Mantido o aumento */
+    max-width: 500px;
     height: auto;
     border-radius: 15px;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
@@ -740,7 +747,7 @@ html body .donation-section {
     font-family: 'Montserrat', sans-serif;
     font-size: 40px;
     color: #1a73e8;
-    margin-bottom: 60px; /* Mantido o aumento para subir o texto */
+    margin-bottom: 60px;
     font-weight: 800;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
@@ -829,14 +836,14 @@ html body .donation-section {
 
 .contact-image img {
     width: 100%;
-    max-width: 400px; /* Mantido o aumento */
+    max-width: 500px;
     height: auto;
     border-radius: 15px;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
 }
 
 .contact-content form {
-    max-width: 500px;
+    max-width: 600px;
     display: flex;
     flex-direction: column;
 }
@@ -852,11 +859,11 @@ html body .donation-section {
 
 .contact-content input,
 .contact-content textarea {
-    padding: 12px 20px; /* Mantido para caixas mais largas */
+    padding: 14px 20px;
     margin-bottom: 20px;
     border: 1px solid #ddd;
     border-radius: 8px;
-    font-size: 14px; /* Mantido o tamanho original da fonte */
+    font-size: 14px;
     outline: none;
     transition: border 0.3s ease, box-shadow 0.3s ease;
     width: 100%;
@@ -1054,6 +1061,12 @@ footer {
 
     .nav-menu li a {
         font-size: 14px;
+    }
+
+    .dropdown-menu {
+        position: static;
+        box-shadow: none;
+        background: #f8f9fa;
     }
 
     .shop-item,

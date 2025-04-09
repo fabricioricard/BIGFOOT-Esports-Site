@@ -692,7 +692,7 @@ nav {
 /* Seção Sobre o Time */
 .team-section {
     padding: 80px 20px;
-    text-align: center;
+    text-align: left;
     background: linear-gradient(135deg, #ffffff, #f8f9fa);
     border-radius: 15px;
     margin: 20px;
@@ -710,11 +710,12 @@ nav {
 
 .team-content {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     gap: 40px;
     flex-wrap: wrap;
     flex-direction: row-reverse;
+    text-align: left;
 }
 
 .team-text {
@@ -734,6 +735,13 @@ nav {
     height: auto;
     border-radius: 15px;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+    .team-content {
+        flex-direction: column;
+        text-align: center;
+    }
 }
 
 /* Seção do Time */

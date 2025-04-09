@@ -3,209 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notícias - BIGFOOT Esports</title>
+    <title>Notícias de League of Legends - BIGFOOT Esports</title>
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@600;800&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Roboto', sans-serif;
-        }
-
-        body {
-            background-color: #f8f9fa;
-            color: #333;
-            line-height: 1.6;
-        }
-
-        /* Cabeçalho */
-        header {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 20px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .logo a {
-            text-decoration: none;
-        }
-
-        .logo-svg {
-            width: 50px;
-            height: 50px;
-        }
-
-        .logo span {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 30px;
-            font-weight: 800;
-            color: #1a73e8;
-        }
-
-        nav {
-            display: flex;
-            align-items: center;
-            gap: 30px;
-        }
-
-        .nav-menu {
-            list-style: none;
-            display: flex;
-            gap: 25px;
-        }
-
-        .nav-menu li a {
-            text-decoration: none;
-            color: #444;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 600;
-            font-size: 16px;
-        }
-
-        .nav-menu li a:hover {
-            color: #1a73e8;
-        }
-
-        /* Seção de Notícias */
-        .news-section {
-            padding: 80px 20px;
-            text-align: center;
-            background: linear-gradient(135deg, #ffffff, #f8f9fa);
-            min-height: 100vh;
-        }
-
-        .news-content {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .news-content h1 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 40px;
-            color: #1a73e8;
-            margin-bottom: 20px;
-            font-weight: 800;
-        }
-
-        .news-content p {
-            font-family: 'Poppins', sans-serif;
-            font-size: 18px;
-            color: #666;
-            margin-bottom: 40px;
-        }
-
-        .news-list {
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-            align-items: center;
-        }
-
-        .news-item {
-            background: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            width: 100%;
-            max-width: 700px;
-            text-align: left;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .news-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-        }
-
-        .news-item h2 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 24px;
-            font-weight: 700;
-            color: #1a73e8;
-            margin-bottom: 10px;
-        }
-
-        .news-item p {
-            font-family: 'Poppins', sans-serif;
-            font-size: 16px;
-            color: #444;
-            margin: 5px 0;
-        }
-
-        .news-date {
-            font-size: 14px;
-            color: #888;
-            margin-top: 10px;
-        }
-
-        .btn-secondary {
-            display: inline-block;
-            background: transparent;
-            border: 2px solid #1a73e8;
-            color: #1a73e8;
-            padding: 12px 26px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .btn-secondary:hover {
-            background: #1a73e8;
-            color: #fff;
-        }
-
-        /* Rodapé */
-        footer {
-            background: linear-gradient(90deg, #1a73e8, #34c0eb);
-            padding: 50px 20px;
-            color: #fff;
-            text-align: center;
-        }
-
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-            flex-wrap: wrap;
-            gap: 30px;
-        }
-
-        .footer-left p {
-            margin: 10px 0;
-            font-family: 'Poppins', sans-serif;
-            font-size: 16px;
-            opacity: 0.9;
-        }
-
-        .footer-right {
-            display: flex;
-            gap: 20px;
-        }
-
-        .social-icon img {
-            width: 40px;
-            height: 40px;
-        }
-    </style>
 </head>
 <body>
-    <!-- Cabeçalho -->
+    <!-- Cabeçalho (mesmo do index.html) -->
     <header id="header">
         <div class="logo">
             <a href="index.html">
@@ -215,45 +19,85 @@
         </div>
         <nav>
             <ul class="nav-menu">
-                <li><a href="noticias.html">📰 Notícias</a></li>
+                <li class="dropdown">
+                    <a href="noticias.html">📰 Notícias</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="noticias-lol.html">Notícias de League of Legends</a></li>
+                        <li><a href="noticias-hots.html">Notícias de Heroes of the Storm</a></li>
+                        <li><a href="noticias-tibia.html">Notícias de Tibia</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="campeonatos.html">🏆 Campeonatos</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="campeonatos-lol.html">LTA Sul 2025</a></li>
+                        <li><a href="campeonatos-hots.html">BIG Cup 2025</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="equipes.html">👥 Equipes</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="equipe-lol.html">Equipe de League of Legends</a></li>
+                        <li><a href="equipe-hots.html">Equipe de Heroes of the Storm</a></li>
+                    </ul>
+                </li>
                 <li><a href="eventos.html">📅 Eventos</a></li>
                 <li><a href="loja.html">🛒 Loja</a></li>
-                <li><a href="equipes.html">👥 Equipes</a></li>
+                <li><a href="lanhouse.html">🖥️ Lan House</a></li>
             </ul>
+            <div class="login-bar">
+                <button id="login-btn">Login</button>
+            </div>
         </nav>
     </header>
 
-    <!-- Seção de Notícias -->
-    <section id="news" class="news-section">
-        <div class="news-content">
-            <h1>Notícias do BIGFOOT Esports</h1>
-            <p>Fique por dentro das últimas novidades da nossa comunidade e equipes!</p>
-            <div class="news-list">
+    <!-- Modal de Login (mesmo do index.html) -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span id="close-modal" class="close">×</span>
+            <h2>Login</h2>
+            <form id="login-form">
+                <label for="username">Usuário</label>
+                <input type="text" id="username" name="username" placeholder="Usuário" required>
+                <label for="password">Senha</label>
+                <input type="password" id="password" name="password" placeholder="Senha" required>
+                <button type="submit">Entrar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Seção de Notícias de League of Legends -->
+    <main>
+        <section class="news-section reveal">
+            <h2>Notícias de League of Legends</h2>
+            <div class="news-items">
                 <!-- Notícia 1 -->
-                <div class="news-item">
-                    <h2>Equipe de Heroes of the Storm Vence Torneio Regional</h2>
-                    <p>Nossa equipe de Heroes of the Storm conquistou o primeiro lugar no Torneio Nexus Sul-Americano, mostrando domínio total no campo de batalha. Parabéns aos jogadores pelo desempenho incrível!</p>
-                    <p class="news-date">08 de Abril de 2025</p>
+                <div class="news-item hover-effect">
+                    <img src="https://via.placeholder.com/300x200?text=Notícia+LoL+1" alt="Notícia 1" class="hover-zoom">
+                    <h3>Nova Atualização do LoL: Patch 14.8</h3>
+                    <p>Confira as mudanças no meta com o novo patch de League of Legends, incluindo buffs para campeões como Ashe e nerfs para Zed.</p>
+                    <a href="#" class="btn-primary hover-effect">Leia Mais</a>
                 </div>
                 <!-- Notícia 2 -->
-                <div class="news-item">
-                    <h2>Novo Uniforme da Equipe Revelado</h2>
-                    <p>Apresentamos o novo uniforme do BIGFOOT Esports, que será usado pela equipe de Heroes of the Storm na próxima temporada. Disponível em breve na nossa loja!</p>
-                    <p class="news-date">05 de Abril de 2025</p>
+                <div class="news-item hover-effect">
+                    <img src="https://via.placeholder.com/300x200?text=Notícia+LoL+2" alt="Notícia 2" class="hover-zoom">
+                    <h3>BIGFOOT Esports no Mundial 2025</h3>
+                    <p>Nossa equipe de LoL se classificou para o Mundial 2025! Veja como foi a jornada até a classificação.</p>
+                    <a href="#" class="btn-primary hover-effect">Leia Mais</a>
                 </div>
                 <!-- Notícia 3 -->
-                <div class="news-item">
-                    <h2>Planejamento para Reativar a Equipe de LoL</h2>
-                    <p>Estamos em busca de novos talentos para reativar nossa equipe de League of Legends. Fique atento para mais informações sobre seletivas!</p>
-                    <p class="news-date">01 de Abril de 2025</p>
+                <div class="news-item hover-effect">
+                    <img src="https://via.placeholder.com/300x200?text=Notícia+LoL+3" alt="Notícia 3" class="hover-zoom">
+                    <h3>Evento de Skins de Arcane Chega ao LoL</h3>
+                    <p>Novas skins inspiradas na série Arcane estão disponíveis! Saiba como adquirir as skins de Vi e Jinx.</p>
+                    <a href="#" class="btn-primary hover-effect">Leia Mais</a>
                 </div>
             </div>
-            <a href="index.html" class="btn-secondary" style="margin-top: 30px;">Voltar ao Início</a>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <!-- Rodapé -->
-    <footer>
+    <!-- Rodapé (mesmo do index.html) -->
+    <footer class="reveal">
         <div class="footer-content">
             <div class="footer-left">
                 <p>BIGFOOT Esports</p>
@@ -261,14 +105,20 @@
                 <p>Brasil</p>
             </div>
             <div class="footer-right">
-                <a href="#" class="social-icon"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/dc.svg" alt="Discord"></a>
-                <a href="#" class="social-icon"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/x.svg" alt="X"></a>
-                <a href="#" class="social-icon"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/yt.svg" alt="YouTube"></a>
-                <a href="#" class="social-icon"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/tw.svg" alt="Twitch"></a>
-                <a href="#" class="social-icon"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/fb.svg" alt="Facebook"></a>
+                <a href="#" class="social-icon hover-effect"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/dc.svg" alt="Discord"></a>
+                <a href="#" class="social-icon hover-effect"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/x.svg" alt="X"></a>
+                <a href="#" class="social-icon hover-effect"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/yt.svg" alt="YouTube"></a>
+                <a href="#" class="social-icon hover-effect"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/tw.svg" alt="Twitch"></a>
+                <a href="#" class="social-icon hover-effect"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/fb.svg" alt="Facebook"></a>
             </div>
         </div>
     </footer>
+
+    <!-- Botão Voltar ao Topo -->
+    <button id="back-to-top" class="back-to-top">⬆</button>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Snowstorm/20131208/snowstorm-min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
-

@@ -1,44 +1,22 @@
 // Configuração do Snowstorm
-snowStorm.targetElement = document.querySelector('.hero-section');
-snowStorm.snowColor = '#fff';
-snowStorm.flakesMaxActive = 50;
-snowStorm.useTwinkleEffect = true;
-
-// Botão para desativar Snowstorm
-const toggleSnowBtn = document.createElement('button');
-toggleSnowBtn.className = 'btn-secondary';
-toggleSnowBtn.textContent = 'Desativar Neve';
-toggleSnowBtn.style.position = 'absolute';
-toggleSnowBtn.style.top = '10px';
-toggleSnowBtn.style.right = '10px';
-document.querySelector('.hero-section').appendChild(toggleSnowBtn);
-
-toggleSnowBtn.addEventListener('click', () => {
-    if (snowStorm.active) {
-        snowStorm.stop();
-        toggleSnowBtn.textContent = 'Ativar Neve';
-    } else {
-        snowStorm.start();
-        toggleSnowBtn.textContent = 'Desativar Neve';
-    }
-});
+snowStorm.targetElement = document.querySelector('.hero-section'); // Limita o efeito à seção hero
+snowStorm.snowColor = '#fff'; // Cor dos flocos (branco)
+snowStorm.flakesMaxActive = 96; // Máximo de flocos ativos
+snowStorm.useTwinkleEffect = true; // Flocos piscam
+snowStorm.animationInterval = 35; // Velocidade da animação (ms)
+snowStorm.snowCharacter = '❄'; // Caractere de floco (emoji de neve)
+snowStorm.vMaxY = 5; // Velocidade vertical máxima
+snowStorm.vMaxX = 2; // Velocidade horizontal máxima
 
 // Função para copiar a chave PIX
 function copyPixKey() {
     const key = document.getElementById('pix-key').textContent;
     navigator.clipboard.writeText(key).then(() => {
-        alert('Chave PIX copiada!');
+        alert('Chave PIX copiada com sucesso!');
     }).catch(() => {
-        alert('Erro ao copiar a chave PIX.');
+        alert('Erro ao copiar chave PIX.');
     });
 }
-
-// Menu Hambúrguer
-const menuToggle = document.querySelector('.menu-toggle');
-const navMenu = document.querySelector('.nav-menu');
-menuToggle.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
-});
 
 // Modal de Login
 const loginBtn = document.getElementById('login-btn');
@@ -46,43 +24,95 @@ const loginModal = document.getElementById('login-modal');
 const closeModal = document.getElementById('close-modal');
 
 loginBtn.addEventListener('click', () => {
-    loginModal.classList.add('active');
+    loginModal.style.display = 'block';
 });
 
 closeModal.addEventListener('click', () => {
-    loginModal.classList.remove('active');
+    loginModal.style.display = 'none';
 });
 
 window.addEventListener('click', (e) => {
     if (e.target === loginModal) {
-        loginModal.classList.remove('active');
+        loginModal.style.display = 'none';
     }
 });
 
 document.getElementById('login-form').addEventListener('submit', (e) => {
     e.preventDefault();
-    alert('Login enviado (exemplo)');
-    loginModal.classList.remove('active');
+    alert('Login realizado com sucesso! (Funcionalidade de exemplo)');
+    loginModal.style.display = 'none';
 });
 
-// Modal de Doação
-const donationToggle = document.querySelector('.donation-toggle');
-const donationSection = document.getElementById('donation-section');
+// Fechar a Caixa de Doação
 const closeDonation = document.getElementById('close-donation');
-
-donationToggle.addEventListener('click', () => {
-    donationSection.classList.add('active');
-});
+const donationBox = document.getElementById('donation-box');
 
 closeDonation.addEventListener('click', () => {
-    donationSection.classList.remove('active');
+    donationBox.style.display = 'none';
 });
 
-donationSection.addEventListener('click', (e) => {
-    if (e.target === donationSection) {
-        donationSection.classList.remove('active');
+// Roloagem Suave para Links com # apenas
+const menuLinks = document.querySelectorAll('.nav-menu a');
+menuLinks.forEach(anchor => {
+    const href = anchor.getAttribute('href');
+    if (href && href.startsWith('#')) {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = href.substring(1);
+            const targetElement = document.getElementById(targetId);
+            if (targetElement) {
+                targetElement.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
     }
 });
+
+// Efeito de Digitação na Hero Section
+const typewriterText = document.querySelector('.typewriter');
+const text = typewriterText.textContent;
+typewriterText.textContent = '';
+let i = 0;
+
+function typeWriter() {
+    if (i < text.length) {
+        typewriterText.textContent += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, 100);
+    }
+}
+setTimeout(typeWriter, 500);
+
+// Animação de Contagem para Estatísticas
+const statsNumbers = document.querySelectorAll('.stat-number');
+const statsSection = document.querySelector('.stats-section');
+
+const animateStats = () => {
+    statsNumbers.forEach(number => {
+        const target = +number.getAttribute('data-target');
+        let count = 0;
+        const increment = target / 100;
+
+        const updateCount = () => {
+            if (count < target) {
+                count += increment;
+                number.textContent = Math.ceil(count);
+                setTimeout(updateCount, 20);
+            } else {
+                number.textContent = target;
+            }
+        };
+        updateCount();
+    });
+};
+
+const statsObserver = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+        animateStats();
+        statsObserver.disconnect();
+    }
+}, { threshold: 0.5 });
+
+statsObserver.observe(statsSection);
 
 // Carrossel de Eventos
 const eventsCarousel = document.querySelector('.events-carousel');
@@ -99,6 +129,32 @@ document.getElementById('prev-event').addEventListener('click', () => {
     eventsCarousel.style.transform = `translateX(-${currentEvent * 100}%)`;
 });
 
+// Scroll Reveal
+const revealElements = document.querySelectorAll('.reveal');
+const revealOnScroll = () => {
+    revealElements.forEach(element => {
+        const windowHeight = window.innerHeight;
+        const elementTop = element.getBoundingClientRect().top;
+        const revealPoint = 100;
+
+        if (elementTop < windowHeight - revealPoint && !element.classList.contains('visible')) {
+            element.classList.add('visible');
+        }
+    });
+};
+
+window.addEventListener('scroll', revealOnScroll);
+
+// Efeito de Transparência no Cabeçalho ao Rolar
+const header = document.getElementById('header');
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+    } else {
+        header.classList.remove('scrolled');
+    }
+});
+
 // Botão Voltar ao Topo
 const backToTopBtn = document.getElementById('back-to-top');
 window.addEventListener('scroll', () => {
@@ -113,24 +169,10 @@ backToTopBtn.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
-// Formulário de Contato
-document.getElementById('contact-form').addEventListener('submit', (e) => {
-    e.preventDefault();
-    const email = document.getElementById('email-contato').value;
-    if (!email.includes('@')) {
-        alert('Por favor, insira um email válido.');
-        return;
-    }
-    alert('Mensagem enviada!');
-});
-
-// Formulário de Newsletter
-document.getElementById('newsletter-form').addEventListener('submit', (e) => {
-    e.preventDefault();
-    const email = document.getElementById('email-newsletter').value;
-    if (!email.includes('@')) {
-        alert('Por favor, insira um email válido.');
-        return;
-    }
-    alert('Inscrito na newsletter!');
+// Formulários
+document.querySelectorAll('form').forEach(form => {
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert('Formulário enviado com sucesso!');
+    });
 });

@@ -1,3 +1,4 @@
+
 * {
     margin: 0;
     padding: 0;
@@ -7,6 +8,8 @@
 
 html, body {
     height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 body {
@@ -14,7 +17,7 @@ body {
     color: #333;
     line-height: 1.6;
     overflow-x: hidden;
-    overflow-y: auto; /* Controla rolagem vertical */
+    overflow-y: auto; /* Adicionado para controlar a rolagem vertical */
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -25,44 +28,20 @@ body > *:not(footer) {
     flex: 1 0 auto;
 }
 
-/* Classe base para seções comuns */
-.section-base {
-    padding: 80px 20px;
-    text-align: center;
-    background: linear-gradient(135deg, #ffffff, #f8f9fa);
-    border-radius: 15px;
-    margin: 20px 20px 0 20px; /* Sem margin-bottom para evitar espaço extra */
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-}
-
-/* Estilo comum para h2 */
-.section-base h2,
-.stats-section h2,
-.shop-section h2,
-.players-section h2 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 40px;
-    color: #1a73e8;
-    margin-bottom: 40px;
-    font-weight: 800;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-}
-
-/* Rodapé */
+/* Garante que o rodapé não cresça desnecessariamente */
 footer {
     flex-shrink: 0;
     background: linear-gradient(90deg, #1a73e8, #34c0eb);
-    padding: 50px 20px 20px 20px;
+    padding: 50px 20px;
     color: #fff;
     text-align: center;
-    margin: 0;
 }
 
 /* Animações */
 .reveal {
     opacity: 0;
     transform: translateY(50px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out; /* Especificado para melhor desempenho */
+    transition: all 0.8s ease-out;
 }
 
 .reveal.visible {
@@ -71,23 +50,36 @@ footer {
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 @keyframes slideInLeft {
-    from { opacity: 0; transform: translateX(-50px); }
-    to { opacity: 1; transform: translateX(0); }
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 @keyframes slideInRight {
-    from { opacity: 0; transform: translateX(50px); }
-    to { opacity: 1; transform: translateX(0); }
-}
-
-@keyframes slideInTop {
-    from { opacity: 0; transform: translateY(-50px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 /* Efeito de Zoom nas Imagens */
@@ -110,7 +102,7 @@ footer {
     text-decoration: none;
     font-weight: 600;
     font-family: 'Poppins', sans-serif;
-    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
     box-shadow: 0 5px 15px rgba(26, 115, 232, 0.3);
@@ -132,7 +124,7 @@ footer {
     text-decoration: none;
     font-weight: 600;
     font-family: 'Poppins', sans-serif;
-    transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .btn-secondary:hover {
@@ -167,7 +159,7 @@ header.scrolled {
 }
 
 .logo a {
-    text-decoration: none;
+    text-decoration: none; /* Remove o sublinhado do link */
 }
 
 .logo-svg {
@@ -240,7 +232,7 @@ nav {
     font-weight: 600;
     font-family: 'Poppins', sans-serif;
     cursor: pointer;
-    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .login-bar button:hover {
@@ -306,6 +298,17 @@ nav {
     animation: slideInTop 0.5s ease;
 }
 
+@keyframes slideInTop {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .close {
     position: absolute;
     top: 15px;
@@ -367,7 +370,7 @@ nav {
     border-radius: 50px;
     font-weight: 600;
     cursor: pointer;
-    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .modal-content button:hover {
@@ -386,6 +389,7 @@ nav {
     text-align: center;
     color: #fff;
     position: relative;
+    background-attachment: fixed;
     background-size: cover;
 }
 
@@ -396,12 +400,12 @@ nav {
     width: 100%;
     height: 100%;
     background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(26, 115, 232, 0.3));
-    z-index: 1;
+    z-index: 1; /* Flocos ficam acima da overlay */
 }
 
 .hero-content {
     position: relative;
-    z-index: 2;
+    z-index: 2; /* Conteúdo fica acima dos flocos */
     background: rgba(0, 0, 0, 0.6);
     padding: 60px;
     border-radius: 15px;
@@ -417,7 +421,7 @@ nav {
     letter-spacing: 2px;
     text-transform: uppercase;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-    white-space: nowrap;
+    white-space: nowrap; /* Garante que o texto não quebre em várias linhas */
 }
 
 .hero-content h1 span {
@@ -439,14 +443,14 @@ nav {
 }
 
 /* Seção de Doação */
-.donation-section {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+html body .donation-section {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
     text-align: center;
     color: #fff;
-    z-index: 10000;
+    z-index: 10000 !important;
     width: auto;
     margin: 0;
     padding: 0;
@@ -509,6 +513,14 @@ nav {
     color: #fff;
 }
 
+.stats-section h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 40px;
+    margin-bottom: 40px;
+    font-weight: 800;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
 .stats-content {
     display: flex;
     justify-content: center;
@@ -544,10 +556,23 @@ nav {
 
 /* Seção de Eventos Futuros */
 .events-section {
-    /* Usando a classe base */
+    padding: 80px 20px;
+    text-align: center;
+    background: linear-gradient(135deg, #ffffff, #f8f9fa);
+    border-radius: 15px;
+    margin: 20px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
 }
 
-/* Ajustes específicos para events-section */
+.events-section h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 40px;
+    color: #1a73e8;
+    margin-bottom: 40px;
+    font-weight: 800;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
 .events-carousel {
     display: flex;
     overflow: hidden;
@@ -584,7 +609,7 @@ nav {
     color: #1a73e8;
     margin-bottom: 10px;
     font-weight: 700;
-    margin-top: 30px;
+    margin-top: 30px; /* Mantido para mover o texto para baixo */
 }
 
 .events-content p {
@@ -617,7 +642,7 @@ nav {
 }
 
 .subscribe-button-container {
-    margin-bottom: 20px;
+    margin-bottom: 20px; /* Mantido para dar espaço entre o botão e as setas */
     text-align: center;
 }
 
@@ -626,6 +651,15 @@ nav {
     padding: 80px 20px;
     text-align: center;
     background: linear-gradient(135deg, #f1f5f9, #ffffff);
+}
+
+.shop-section h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 40px;
+    color: #1a73e8;
+    margin-bottom: 40px;
+    font-weight: 800;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .shop-items {
@@ -642,7 +676,7 @@ nav {
     width: 220px;
     text-align: center;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .shop-item:hover {
@@ -676,10 +710,23 @@ nav {
 
 /* Seção Sobre o Time */
 .team-section {
-    /* Usando a classe base */
+    padding: 80px 20px;
+    text-align: center;
+    background: linear-gradient(135deg, #ffffff, #f8f9fa);
+    border-radius: 15px;
+    margin: 20px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
 }
 
-/* Ajustes específicos para team-section */
+.team-section h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 40px;
+    color: #1a73e8;
+    margin-bottom: 40px;
+    font-weight: 800;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
 .team-content {
     display: flex;
     justify-content: center;
@@ -699,10 +746,9 @@ nav {
     color: #666;
 }
 
-.team-image img,
-.contact-image img {
+.team-image img {
     width: 100%;
-    max-width: 400px;
+    max-width: 400px; /* Mantido o aumento */
     height: auto;
     border-radius: 15px;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
@@ -716,7 +762,12 @@ nav {
 }
 
 .players-section h2 {
-    margin-bottom: 60px; /* Ajuste específico */
+    font-family: 'Montserrat', sans-serif;
+    font-size: 40px;
+    color: #1a73e8;
+    margin-bottom: 60px; /* Mantido o aumento para subir o texto */
+    font-weight: 800;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .players-content {
@@ -733,7 +784,7 @@ nav {
     width: 220px;
     text-align: center;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .player:hover {
@@ -769,12 +820,21 @@ nav {
 
 /* Seção de Contato */
 .contact-section {
-    /* Usando a classe base */
+    padding: 80px 20px;
+    text-align: center;
+    background: linear-gradient(135deg, #ffffff, #f8f9fa);
+    border-radius: 15px;
+    margin: 20px 20px 0 20px; /* Removido margin-bottom */
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
 }
 
-/* Ajustes específicos para contact-section */
 .contact-section h2 {
-    margin-bottom: 25px; /* Ajuste específico */
+    font-family: 'Montserrat', sans-serif;
+    font-size: 40px;
+    color: #1a73e8;
+    margin-bottom: 25px;
+    font-weight: 800;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .contact-section p {
@@ -790,6 +850,14 @@ nav {
     align-items: center;
     gap: 40px;
     flex-wrap: wrap;
+}
+
+.contact-image img {
+    width: 100%;
+    max-width: 400px; /* Mantido o aumento */
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
 }
 
 .contact-content form {
@@ -809,13 +877,14 @@ nav {
 
 .contact-content input,
 .contact-content textarea {
-    padding: 12px 20px;
+    padding: 12px 20px; /* Mantido para caixas mais largas */
     margin-bottom: 20px;
     border: 1px solid #ddd;
     border-radius: 8px;
-    font-size: 14px;
+    font-size: 14px; /* Mantido o tamanho original da fonte */
     outline: none;
     transition: border 0.3s ease, box-shadow 0.3s ease;
+    width: 100%;
 }
 
 .contact-content input:focus,
@@ -829,6 +898,15 @@ nav {
 }
 
 /* Rodapé */
+footer {
+    flex-shrink: 0;
+    background: linear-gradient(90deg, #1a73e8, #34c0eb);
+    padding: 50px 20px 0 20px; /* Removido padding-bottom para teste */
+    color: #fff;
+    text-align: center;
+    margin: 0; /* Adicionado para garantir que não haja margens */
+}
+
 .footer-content {
     display: flex;
     justify-content: space-between;
@@ -878,7 +956,7 @@ nav {
     cursor: pointer;
     display: none;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    transition: background 0.3s ease, transform 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .back-to-top:hover {
@@ -929,7 +1007,7 @@ nav {
 @media (max-width: 768px) {
     .hero-section {
         height: 70vh;
-        background-attachment: scroll; /* Melhor desempenho em dispositivos móveis */
+        background-attachment: scroll;
         background-position: center top;
     }
 

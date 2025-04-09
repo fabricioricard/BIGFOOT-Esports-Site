@@ -232,8 +232,8 @@ nav {
     transform: translateY(-2px);
 }
 
-.login-bar {
-    margin-left: auto; /* Empurra o container do botão para a direita */
+nav #login-btn { /* Se o botão tem o ID "login-btn" */
+    margin-left: auto;
 }
 
 .login-bar button {

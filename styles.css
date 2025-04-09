@@ -139,7 +139,7 @@ header {
     background: rgba(255, 255, 255, 0.95);
     padding: 20px 40px;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start; /* Alinha os itens à esquerda */
     align-items: center;
     position: sticky;
     top: 0;
@@ -156,7 +156,7 @@ header.scrolled {
     display: flex;
     align-items: center;
     gap: 12px;
-    margin-right: 40px; /* Aumentado para mover o nome "BIGFOOT Esports" mais para a direita */
+    margin-right: 30px; /* Controla o espaço entre o logo e os botões de navegação */
 }
 
 .logo a {
@@ -190,6 +190,7 @@ nav {
     display: flex;
     align-items: center;
     gap: 20px;
+    margin-left: auto; /* Empurra o nav para a direita */
 }
 
 .nav-menu {

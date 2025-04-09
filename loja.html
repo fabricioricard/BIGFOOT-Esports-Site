@@ -2,70 +2,283 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-Scale=1.0">
     <title>Loja - BIGFOOT Esports</title>
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@600;800&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Cabeçalho */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo a {
+            text-decoration: none;
+        }
+
+        .logo-svg {
+            width: 50px;
+            height: 50px;
+        }
+
+        .logo span {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 30px;
+            font-weight: 800;
+            color: #1a73e8;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-menu li a {
+            text-decoration: none;
+            color: #444;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .nav-menu li a:hover {
+            color: #1a73e8;
+        }
+
+        /* Seção de Loja */
+        .shop-section {
+            padding: 80px 20px;
+            text-align: center;
+            background: linear-gradient(135deg, #ffffff, #f8f9fa);
+            min-height: 100vh;
+        }
+
+        .shop-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .shop-content h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 40px;
+            color: #1a73e8;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .shop-content p {
+            font-family: 'Poppins', sans-serif;
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 40px;
+        }
+
+        .shop-list {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .shop-item {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .shop-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .shop-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .shop-item h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #1a73e8;
+            margin-bottom: 10px;
+        }
+
+        .shop-item p {
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            color: #444;
+            margin: 5px 0;
+        }
+
+        .shop-price {
+            font-size: 18px;
+            color: #34c0eb;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .btn-secondary {
+            display: inline-block;
+            background: transparent;
+            border: 2px solid #1a73e8;
+            color: #1a73e8;
+            padding: 12px 26px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .btn-secondary:hover {
+            background: #1a73e8;
+            color: #fff;
+        }
+
+        /* Rodapé */
+        footer {
+            background: linear-gradient(90deg, #1a73e8, #34c0eb);
+            padding: 50px 20px;
+            color: #fff;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .footer-left p {
+            margin: 10px 0;
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .footer-right {
+            display: flex;
+            gap: 20px;
+        }
+
+        .social-icon img {
+            width: 40px;
+            height: 40px;
+        }
+    </style>
 </head>
 <body>
     <!-- Cabeçalho -->
-    <header>
+    <header id="header">
         <div class="logo">
-            <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/logo.svg" alt="Logo BIGFOOT Esports" class="logo-svg">
-            <span>BIGFOOT Esports</span>
+            <a href="index.html">
+                <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/logo.svg" alt="Logo BIGFOOT Esports" class="logo-svg">
+                <span>BIGFOOT Esports</span>
+            </a>
         </div>
         <nav>
             <ul class="nav-menu">
-                <li><a href="index.html">🏠 Home</a></li>
+                <li><a href="noticias.html">📰 Notícias</a></li>
                 <li><a href="eventos.html">📅 Eventos</a></li>
                 <li><a href="loja.html">🛒 Loja</a></li>
-                <li><a href="equipe.html">👥 Equipe</a></li>
-                <li><a href="contato.html">📧 Contato</a></li>
+                <li><a href="equipes.html">👥 Equipes</a></li>
             </ul>
-            <div class="login-bar">
-                <button id="login-btn">Login</button>
-            </div>
-            <div class="search-bar">
-                <input type="text" placeholder="Search">
-                <button>🔍</button>
-            </div>
         </nav>
     </header>
 
-    <!-- Modal de Login -->
-    <div id="login-modal" class="modal">
-        <div class="modal-content">
-            <span id="close-modal" class="close">×</span>
-            <h2>Login</h2>
-            <form id="login-form">
-                <label for="username">Usuário</label>
-                <input type="text" id="username" name="username" placeholder="Usuário" required>
-                <label for="password">Senha</label>
-                <input type="password" id="password" name="password" placeholder="Senha" required>
-                <button type="submit">Entrar</button>
-            </form>
+    <!-- Seção de Loja -->
+    <section id="shop" class="shop-section">
+        <div class="shop-content">
+            <h1>Loja BIGFOOT Esports</h1>
+            <p>Adquira produtos exclusivos e apoie nossas equipes nos campos de batalha!</p>
+            <div class="shop-list">
+                <!-- Item 1 -->
+                <div class="shop-item">
+                    <img src="https://via.placeholder.com/300x200?text=Uniforme+2025" alt="Uniforme BIGFOOT 2025" class="shop-image">
+                    <h2>Uniforme Oficial 2025</h2>
+                    <p>O novo uniforme da equipe de Heroes of the Storm, perfeito para torcedores e jogadores!</p>
+                    <p class="shop-price">R$ 149,90</p>
+                </div>
+                <!-- Item 2 -->
+                <div class="shop-item">
+                    <img src="https://via.placeholder.com/300x200?text=Boné+BIGFOOT" alt="Boné BIGFOOT" class="shop-image">
+                    <h2>Boné BIGFOOT Esports</h2>
+                    <p>Boné estiloso com o logo do BIGFOOT, ideal para o dia a dia ou eventos.</p>
+                    <p class="shop-price">R$ 59,90</p>
+                </div>
+                <!-- Item 3 -->
+                <div class="shop-item">
+                    <img src="https://via.placeholder.com/300x200?text=Caneca+BIGFOOT" alt="Caneca BIGFOOT" class="shop-image">
+                    <h2>Caneca BIGFOOT Esports</h2>
+                    <p>Caneca personalizada para tomar seu café enquanto torce pelo BIGFOOT!</p>
+                    <p class="shop-price">R$ 39,90</p>
+                </div>
+            </div>
+            <a href="index.html" class="btn-secondary" style="margin-top: 30px;">Voltar ao Início</a>
         </div>
-    </div>
+    </section>
 
-    <!-- Seção da Loja -->
-    <section id="loja" class="shop-section reveal">
-        <h2>Nossa Loja</h2>
-        <div class="shop-items">
-            <div class="shop-item hover-effect">
-                <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/image3.jpg" alt="Moletom" class="hover-zoom">
-                <p>Moletom Confortável</p>
-                <p>R$ 120,00</p>
+    <!-- Rodapé -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-left">
+                <p>BIGFOOT Esports</p>
+                <p>bigftesports@gmail.com</p>
+                <p>Brasil</p>
             </div>
-            <div class="shop-item hover-effect">
-                <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/image10.jpg" alt="Mouse" class="hover-zoom">
-                <p>Mouse Gamer Ergonômico</p>
-                <p>R$ 120,00</p>
+            <div class="footer-right">
+                <a href="#" class="social-icon"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/dc.svg" alt="Discord"></a>
+                <a href="#" class="social-icon"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/x.svg" alt="X"></a>
+                <a href="#" class="social-icon"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/yt.svg" alt="YouTube"></a>
+                <a href="#" class="social-icon"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/tw.svg" alt="Twitch"></a>
+                <a href="#" class="social-icon"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/fb.svg" alt="Facebook"></a>
             </div>
-            <div class="shop-item hover-effect">
-                <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/image6.jpg" alt="Meias" class="hover-zoom">
-                <p>Meias Estilosas BIGFOOT</p>
-                <p>R$ 20,00</p>
-            </div>
-            <div class="shop-item hover-effect">
-                <img src="https
+        </div>
+    </footer>
+</body>
+</html>

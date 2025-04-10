@@ -142,7 +142,7 @@ footer {
 
 /* Cabeçalho */
 header {
-    background: #e6f0fa; /* Azul claro que combina com a logo */
+    background: #b3d4ff;
     padding: 20px 20px;
     display: flex;
     justify-content: flex-start; /* Alinha os itens à esquerda */
@@ -154,7 +154,7 @@ header {
 }
 
 header.scrolled {
-    background: #d1e4ff; /* Um azul um pouco mais escuro para o estado scrolled */
+    background: #a3c4f3; /* Um tom um pouco mais escuro para o estado scrolled */
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 

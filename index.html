@@ -13,7 +13,7 @@
     <header id="header">
         <div class="logo">
             <a href="index.html">
-                <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/logo.svg" alt="Logo BIGFOOT Esports" class="logo-svg">
+                <img src="images/logo.svg" alt="Logo BIGFOOT Esports" class="logo-svg">
                 <span>BIGFOOT Esports</span>
             </a>
         </div>
@@ -46,7 +46,7 @@
                 <li><a href="lan-house.html">🖥️ Lan House</a></li>
             </ul>
             <div class="login-bar">
-                <button id="login-btn">Login</button>
+                <button id="login-btn" type="button">Login</button>
             </div>
         </nav>
     </header>
@@ -56,7 +56,7 @@
         <div class="modal-content">
             <span id="close-modal" class="close">×</span>
             <h2>Login</h2>
-            <form id="login-form">
+            <form id="login-form" action="/login" method="POST">
                 <label for="username">Usuário</label>
                 <input type="text" id="username" name="username" placeholder="Usuário" required>
                 <label for="password">Senha</label>
@@ -69,7 +69,7 @@
     <!-- Conteúdo Principal -->
     <main>
         <!-- Hero Section -->
-        <section id="home" class="hero-section">
+        <section id="home" class="hero-section" aria-label="Seção inicial">
             <div class="hero-overlay"></div>
             <div class="hero-content">
                 <h1 class="typewriter">Bem-vindo ao BIGFOOT Esports</h1>
@@ -85,7 +85,7 @@
         <div class="donation-section floating">
             <div id="donation-box" class="donation-content">
                 <span id="close-donation" class="close">×</span>
-                <h1>Doação</h1>
+                <h2>Doação</h2> <!-- Alterado de <h1> para <h2> -->
                 <p>Contribua com o <strong>BIGFOOT Esports</strong> via <strong>PIX</strong>! Escaneie o QR Code abaixo e fortaleça nossa jornada.</p>
                 <img src="images/qrcode-pix.jpg" alt="QR Code para doação" class="qr-code">
                 <p style="margin-top: 10px; word-break: break-all; font-size: 14px; color: #ccc;">Chave PIX: <span id="pix-key">773f51bf-d4d9-48bc-9b26-812ed63618a8</span></p>
@@ -95,7 +95,7 @@
         </div>
 
         <!-- Seção de Estatísticas -->
-        <section class="stats-section reveal">
+        <section class="stats-section reveal" aria-label="Estatísticas">
             <h2>Nossos Números</h2>
             <div class="stats-content">
                 <div class="stat-item">
@@ -114,11 +114,11 @@
         </section>
 
         <!-- Eventos -->
-        <section class="events-section reveal">
+        <section class="events-section reveal" aria-label="Eventos futuros">
             <h2>Eventos Futuros</h2>
             <div class="events-carousel">
                 <div class="events-content">
-                    <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/camp.jpg" alt="BIG Cup - Torneio de League of Legends" class="event-image hover-zoom">
+                    <img src="images/camp.jpg" alt="BIG Cup - Torneio de League of Legends" class="event-image hover-zoom">
                     <h3>BIG Cup - Torneio de League of Legends</h3>
                     <p>Venha jogar com a nossa comunidade o melhor torneio amador de League of Legends. Experiência emocionante!</p>
                 </div>
@@ -132,32 +132,32 @@
                 <a href="inscricao.html" class="btn-primary hover-effect">Inscreva-se</a>
             </div>
             <div class="carousel-controls">
-                <button id="prev-event">◄</button>
-                <button id="next-event">►</button>
+                <button id="prev-event" type="button">◄</button>
+                <button id="next-event" type="button">►</button>
             </div>
         </section>
 
         <!-- Loja -->
-        <section id="loja" class="shop-section reveal">
+        <section id="loja" class="shop-section reveal" aria-label="Loja">
             <h2>Nossa Loja</h2>
             <div class="shop-items">
                 <div class="shop-item hover-effect">
-                    <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/image3.jpg" alt="Moletom" class="hover-zoom">
+                    <img src="images/image3.jpg" alt="Moletom" class="hover-zoom">
                     <p>Moletom Confortável</p>
                     <p>R$ 120,00</p>
                 </div>
                 <div class="shop-item hover-effect">
-                    <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/image10.jpg" alt="Mouse" class="hover-zoom">
+                    <img src="images/image10.jpg" alt="Mouse" class="hover-zoom">
                     <p>Mouse Gamer Ergonômico</p>
                     <p>R$ 120,00</p>
                 </div>
                 <div class="shop-item hover-effect">
-                    <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/image6.jpg" alt="Meias" class="hover-zoom">
+                    <img src="images/image6.jpg" alt="Meias" class="hover-zoom">
                     <p>Meias Estilosas BIGFOOT</p>
                     <p>R$ 20,00</p>
                 </div>
                 <div class="shop-item hover-effect">
-                    <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/image4.jpg" alt="Jaqueta" class="hover-zoom">
+                    <img src="images/image4.jpg" alt="Jaqueta" class="hover-zoom">
                     <p>Jaqueta Leve BIGFOOT</p>
                     <p>R$ 120,00</p>
                 </div>
@@ -168,7 +168,7 @@
         </section>
 
         <!-- Sobre a gente -->
-        <section class="team-section reveal">
+        <section class="team-section reveal" aria-label="Sobre a gente">
             <h2>Sobre a gente</h2>
             <div class="team-content">
                 <div class="team-text">
@@ -177,22 +177,22 @@
                     <p>BIGFOOT Esports, o melhor ainda está por vir.</p>
                 </div>
                 <div class="team-image hover-effect">
-                    <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/equipe.jpg" alt="Time BIGFOOT" class="hover-zoom">
+                    <img src="images/equipe.jpg" alt="Time BIGFOOT" class="hover-zoom">
                 </div>
             </div>
         </section>
 
         <!-- Time -->
-        <section class="players-section reveal">
+        <section class="players-section reveal" aria-label="Nosso time">
             <h2>Nosso Time</h2>
             <div class="players-content">
                 <div class="player hover-effect">
-                    <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/ghibli1.jpg" alt="Fabrício Ricard" class="hover-zoom">
+                    <img src="images/ghibli1.jpg" alt="Fabrício Ricard" class="hover-zoom">
                     <p>Fabrício Ricard</p>
                     <p>Fundador</p>
                 </div>
                 <div class="player hover-effect">
-                    <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/ghibli2.jpg" alt="Yan Renat" class="hover-zoom">
+                    <img src="images/ghibli2.jpg" alt="Yan Renat" class="hover-zoom">
                     <p>Yan Renat</p>
                     <p>Fundador</p>
                 </div>
@@ -200,14 +200,14 @@
         </section>
 
         <!-- Contato -->
-        <section id="contato" class="contact-section reveal">
+        <section id="contato" class="contact-section reveal" aria-label="Contato">
             <h2>Entre em Contato</h2>
             <p>Entre em contato com a BIGFOOT Esports! Estamos sempre prontos para ouvir você e responder suas perguntas sobre nossa comunidade.</p>
             <div class="contact-content">
                 <div class="contact-image">
-                    <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/foto1.jpg" alt="Contato" class="hover-zoom">
+                    <img src="images/foto1.jpg" alt="Contato" class="hover-zoom">
                 </div>
-                <form>
+                <form action="/contato" method="POST">
                     <label for="nome-contato">Nome *</label>
                     <input type="text" id="nome-contato" name="nome-contato" placeholder="Nome" required>
                     <label for="sobrenome-contato">Sobrenome *</label>
@@ -231,20 +231,20 @@
                 <p>Brasil</p>
             </div>
             <div class="footer-right">
-                <a href="#" class="social-icon hover-effect"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/dc.svg" alt="Discord"></a>
-                <a href="#" class="social-icon hover-effect"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/x.svg" alt="X"></a>
-                <a href="#" class="social-icon hover-effect"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/yt.svg" alt="YouTube"></a>
-                <a href="#" class="social-icon hover-effect"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/tw.svg" alt="Twitch"></a>
-                <a href="#" class="social-icon hover-effect"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/fb.svg" alt="Facebook"></a>
+                <a href="#" class="social-icon hover-effect"><img src="images/dc.svg" alt="Ícone do Discord"></a>
+                <a href="#" class="social-icon hover-effect"><img src="images/x.svg" alt="Ícone do X"></a>
+                <a href="#" class="social-icon hover-effect"><img src="images/yt.svg" alt="Ícone do YouTube"></a>
+                <a href="#" class="social-icon hover-effect"><img src="images/tw.svg" alt="Ícone do Twitch"></a>
+                <a href="#" class="social-icon hover-effect"><img src="images/fb.svg" alt="Ícone do Facebook"></a>
             </div>
         </div>
     </footer>
 
     <!-- Botão Voltar ao Topo -->
-    <button id="back-to-top" class="back-to-top">⬆</button>
+    <button id="back-to-top" class="back-to-top" type="button">⬆</button>
 
     <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Snowstorm/20131208/snowstorm-min.js"></script>
+    <script src="scripts/snowstorm-min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

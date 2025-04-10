@@ -188,9 +188,11 @@ header.scrolled {
     font-weight: 800;
     color: #1a73e8;
     letter-spacing: 1px;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-    line-height: 1; /* Remove qualquer altura de linha extra que possa deslocar o texto */
-    margin: 0; /* Remove margens que possam causar desalinhamento */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    -webkit-text-stroke: 0.5px #000000; /* Contorno preto */
+    text-stroke: 0.5px #000000; /* Fallback */
+    line-height: 1;
+    margin: 0;
     margin-left: 15px; /* Adiciona margem à esquerda do nome */
 }
 

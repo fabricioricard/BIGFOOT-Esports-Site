@@ -1188,6 +1188,59 @@ footer {
     color: #1a73e8;
 }
 
+/* Seção de Membros da Equipe */
+.team-members {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-top: 40px;
+}
+
+.team-member {
+    background: #fff;
+    padding: 20px;
+    border-radius: 15px;
+    width: 200px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.team-member:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.team-member .player-photo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border: 3px solid #1a73e8;
+    transition: all 0.3s ease;
+}
+
+.team-member:hover .player-photo {
+    border-color: #34c0eb;
+}
+
+.team-member h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    color: #1a73e8;
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+
+.team-member p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    color: #666;
+    margin: 0;
+}
+
 /* Responsividade */
 @media (max-width: 768px) {
     .hero-section {

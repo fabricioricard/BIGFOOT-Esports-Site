@@ -2,171 +2,38 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
-}
-
-html, body {
-    height: 100%;
 }
 
 body {
     background-color: #f8f9fa;
     color: #333;
-    line-height: 1.6;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+    font-family: sans-serif;
 }
 
-body > *:not(footer) {
-    flex: 1 0 auto;
-}
-
-footer {
-    flex-shrink: 0;
-    background: #1a73e8;
-    padding: 20px;
-    color: #fff;
-    text-align: center;
-}
-
-/* Botões */
-.btn-primary {
-    display: inline-block;
-    background: #1a73e8;
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 25px;
-    text-decoration: none;
-    font-weight: 600;
-}
-
-.btn-primary:hover {
-    background: #1557b0;
-}
-
-.btn-secondary {
-    display: inline-block;
-    background: transparent;
-    border: 2px solid #1a73e8;
-    color: #1a73e8;
-    padding: 10px 20px;
-    border-radius: 25px;
-    text-decoration: none;
-    font-weight: 600;
-}
-
-.btn-secondary:hover {
-    background: #1a73e8;
-    color: #fff;
-}
-
-/* Cabeçalho */
 header {
     background: #c9d6df;
     padding: 20px;
-    display: flex;
-    align-items: center;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
 }
 
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.logo span {
-    font-size: 24px;
-    font-weight: 800;
-    color: #1a73e8;
-}
-
-nav {
-    display: flex;
-    gap: 20px;
-}
-
-.nav-menu {
-    list-style: none;
-    display: flex;
-    gap: 15px;
-}
-
-.nav-menu li a {
-    text-decoration: none;
-    color: #444;
-    font-weight: 600;
-}
-
-.nav-menu li a:hover {
-    color: #1a73e8;
-}
-
-/* Hero Section */
-.hero-section {
-    background: #333;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    color: #fff;
-}
-
-.hero-content h1 {
-    font-size: 48px;
-    font-weight: 800;
-}
-
-.hero-content p {
-    font-size: 20px;
-    margin: 20px 0;
-}
-
-/* Outras Seções */
-.stats-section, .events-section, .shop-section, .team-section, .players-section, .contact-section {
-    padding: 40px 20px;
-    text-align: center;
-}
-
-.stats-section {
+footer {
     background: #1a73e8;
     color: #fff;
+    padding: 20px;
+    text-align: center;
 }
 
-.events-section, .team-section, .contact-section {
-    background: #f8f9fa;
+.btn-primary {
+    background: #1a73e8;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
 }
 
-.shop-section, .players-section {
-    background: #f1f5f9;
+h1 {
+    font-size: 36px;
 }
 
 h2 {
-    font-size: 32px;
+    font-size: 28px;
     color: #1a73e8;
-    margin-bottom: 20px;
-}
-
-/* Responsividade */
-@media (max-width: 768px) {
-    .hero-section {
-        height: 70vh;
-    }
-
-    .hero-content h1 {
-        font-size: 32px;
-    }
-
-    .hero-content p {
-        font-size: 16px;
-    }
-
-    .nav-menu {
-        flex-direction: column;
-        gap: 10px;
-    }
 }

@@ -189,13 +189,13 @@ header.scrolled {
     color: #1a73e8;
     letter-spacing: 1px;
     text-shadow: 
-        -1px -1px 0 #000000,  
-         1px -1px 0 #000000,
-        -1px  1px 0 #000000,
-         1px  1px 0 #000000,
-         1px  1px 2px rgba(0, 0, 0, 0.2); /* Sombra adicional para profundidade */
+        -1px 0 0 #000000,  
+         1px 0 0 #000000,  
+         0 1px 0 #000000,  
+         0 -1px 0 #000000, /* Contorno preto simples */
+         1px 1px 2px rgba(0, 0, 0, 0.1); /* Sombra existente para profundidade */
     line-height: 1;
-    margin: 0 0 0 15px; /* Margem à esquerda de 15px */
+    margin: 0 0 0 15px; /* Combina margin: 0 e margin-left: 15px */
 }
 
 nav {

@@ -1,3 +1,4 @@
+
 // Configuração do Snowstorm
 snowStorm.targetElement = document.querySelector('.hero-section'); // Limita o efeito à seção hero
 snowStorm.snowColor = '#fff'; // Cor dos flocos (branco)

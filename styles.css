@@ -142,7 +142,7 @@ footer {
 
 /* Cabeçalho */
 header {
-    background: rgba(255, 255, 255, 0.95);
+    background: #c9d6df;
     padding: 20px 20px;
     display: flex;
     justify-content: flex-start; /* Alinha os itens à esquerda */
@@ -154,7 +154,7 @@ header {
 }
 
 header.scrolled {
-    background: rgba(255, 255, 255, 1);
+    background: #b8c8d2;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 

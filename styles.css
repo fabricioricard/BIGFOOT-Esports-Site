@@ -1090,6 +1090,104 @@ footer {
     margin-bottom: 20px;
 }
 
+/* Seção do Campeonato */
+.championship-section {
+    padding: 80px 20px;
+    text-align: center;
+    background: linear-gradient(135deg, #ffffff, #f8f9fa);
+    border-radius: 15px;
+    margin: 20px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+.championship-section h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 40px;
+    color: #1a73e8;
+    margin-bottom: 40px;
+    font-weight: 800;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.championship-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.standings-column, .matches-column {
+    flex: 1;
+    min-width: 300px;
+    max-width: 450px;
+    background: #fff;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.standings-column h3, .matches-column h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 24px;
+    color: #1a73e8;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+/* Tabela de Classificação */
+.standings-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Poppins', sans-serif;
+}
+
+.standings-table th, .standings-table td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.standings-table th {
+    background: linear-gradient(90deg, #1a73e8, #34c0eb);
+    color: #fff;
+    font-weight: 600;
+}
+
+.standings-table tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+.standings-table tr:hover {
+    background-color: #e8f0fe;
+}
+
+/* Próximos Jogos */
+.match-item {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    text-align: left;
+    transition: all 0.3s ease;
+}
+
+.match-item:hover {
+    background: #e8f0fe;
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.match-item p {
+    margin: 5px 0;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    color: #333;
+}
+
+.match-item p strong {
+    color: #1a73e8;
+}
+
 /* Responsividade */
 @media (max-width: 768px) {
     .hero-section {

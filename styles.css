@@ -175,11 +175,11 @@ header.scrolled {
 .logo-svg {
     width: 50px;
     height: 50px;
-    transition: transform 0.5s ease;
+    transition: transform 0.3s ease;
 }
 
 .logo-svg:hover {
-    transform: rotate(360deg);
+    transform: scale(1.2);
 }
 
 .logo span {

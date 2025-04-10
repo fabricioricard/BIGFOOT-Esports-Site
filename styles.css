@@ -254,6 +254,9 @@ nav {
     font-family: 'Poppins', sans-serif;
     cursor: pointer;
     transition: all 0.3s ease;
+    order: 1;
+    margin-left: auto;
+    margin-right: 30px;
 }
 
 .login-bar button:hover {

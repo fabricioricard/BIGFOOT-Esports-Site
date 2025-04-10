@@ -240,8 +240,7 @@ nav {
 }
 
 .login-bar {
-    order: 1; /* Coloca o botão de login depois da lista */
-    margin-left: auto; /* Adiciona margem à esquerda para empurrar para a direita */
+    margin-left: 60px; /* Aumenta o espaço entre os botões de navegação e o botão "Login" */
 }
 
 .login-bar button {

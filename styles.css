@@ -189,11 +189,9 @@ header.scrolled {
     color: #1a73e8;
     letter-spacing: 1px;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-    -webkit-text-stroke: 0.5px #000000; /* Contorno preto */
-    text-stroke: 0.5px #000000; /* Fallback */
+    -webkit-text-stroke: 0.5px #000000; /* Mantém o contorno preto */
     line-height: 1;
-    margin: 0;
-    margin-left: 15px; /* Adiciona margem à esquerda do nome */
+    margin: 0 0 0 15px; /* Combina margin: 0 e margin-left: 15px */
 }
 
 nav {

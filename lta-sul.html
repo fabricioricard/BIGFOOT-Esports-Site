@@ -13,7 +13,7 @@
         document.documentElement.classList.remove('no-js');
     </script>
 
-    <!-- Cabeçalho (mesmo das outras páginas) -->
+    <!-- Cabeçalho -->
     <header id="header">
         <div class="logo">
             <a href="index.html">
@@ -34,7 +34,7 @@
                 <li class="dropdown">
                     <a href="#">🏆 Campeonatos</a>
                     <ul class="dropdown-menu">
-                        <li><a href="lta-sul.html">LTA Sul 2025</a></li>
+                        <li><a href="lta-sul.html" class="active">LTA Sul 2025</a></li>
                         <li><a href="campeonatos-hots.html">BIG Cup 2025</a></li>
                     </ul>
                 </li>
@@ -50,12 +50,12 @@
                 <li><a href="lanhouse.html">🖥️ Lan House</a></li>
             </ul>
             <div class="login-bar">
-                <button id="login-btn">Login</button>
+                <button id="login-btn" class="btn-primary">Login</button>
             </div>
         </nav>
     </header>
 
-    <!-- Modal de Login (mesmo das outras páginas) -->
+    <!-- Modal de Login -->
     <div id="login-modal" class="modal">
         <div class="modal-content">
             <span id="close-modal" class="close">×</span>
@@ -65,7 +65,7 @@
                 <input type="text" id="username" name="username" placeholder="Usuário" required>
                 <label for="password">Senha</label>
                 <input type="password" id="password" name="password" placeholder="Senha" required>
-                <button type="submit">Entrar</button>
+                <button type="submit" class="btn-primary">Entrar</button>
             </form>
         </div>
     </div>
@@ -73,11 +73,11 @@
     <!-- Seção Principal: Tabela e Próximos Jogos -->
     <main>
         <section class="championship-section reveal visible">
-            <h2>LTA Sul 2025</h2>
+            <h1>LTA Sul 2025</h1>
             <div class="championship-container">
                 <!-- Coluna 1: Tabela de Classificação -->
                 <div class="standings-column">
-                    <h3>Classificação</h3>
+                    <h2>Classificação</h2>
                     <table class="standings-table">
                         <thead>
                             <tr>
@@ -130,7 +130,7 @@
 
                 <!-- Coluna 2: Próximos Jogos -->
                 <div class="matches-column">
-                    <h3>Próximos Jogos</h3>
+                    <h2>Próximos Jogos</h2>
                     <div class="match-item">
                         <p><strong>15/04/2025 - 19:00</strong></p>
                         <p>BIGFOOT Esports vs Thunder Lizards</p>
@@ -179,7 +179,7 @@
         </section>
     </main>
 
-    <!-- Rodapé (mesmo das outras páginas) -->
+    <!-- Rodapé -->
     <footer class="reveal">
         <div class="footer-content">
             <div class="footer-left">

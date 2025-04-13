@@ -562,7 +562,8 @@ form button:hover {
 }
 
 /* Seção de Doação */
-html body .donation-section {
+.donation-section {
+    display: none; /* Esconde a seção por padrão */
     color: #fff;
     left: 50%;
     margin: 0;
@@ -573,6 +574,10 @@ html body .donation-section {
     transform: translate(-50%, -50%);
     width: auto;
     z-index: 10000;
+}
+
+.donation-section.active {
+    display: block; /* Exibe a seção quando a classe 'active' é adicionada */
 }
 
 .donation-content {
@@ -615,6 +620,7 @@ html body .donation-section {
     font-family: 'Poppins', sans-serif;
     font-size: 16px;
     margin-bottom: 20px;
+    color: #ccc;
 }
 
 .donation-content .qr-code {
@@ -622,9 +628,26 @@ html body .donation-section {
     display: block;
     margin: 0 auto 20px;
     max-width: 200px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-/* Esconde completamente a caixa de doação */
+.donation-content .btn-primary {
+    display: inline-block;
+    padding: 10px 20px;
+    background: linear-gradient(45deg, #1a73e8, #34c0eb);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    transition: background 0.3s ease;
+}
+
+.donation-content .btn-primary:hover {
+    background: linear-gradient(45deg, #1557b0, #2a9fd6);
+}
+
+/* Esconde completamente a seção de doação */
 .hidden {
     display: none !important;
 }
@@ -944,6 +967,26 @@ html body .donation-section {
     margin-right: 20px;
 }
 
+.team-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: #1a73e8;
+}
+
+.team-description {
+    font-size: 18px;
+    margin-bottom: 30px;
+    color: #444;
+}
+
+.team-roster {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
 /* Seção do Time */
 .players-section {
     background: linear-gradient(135deg, #f1f5f9, #ffffff);
@@ -1007,6 +1050,34 @@ html body .donation-section {
     color: #1a73e8;
     font-size: 14px;
     font-weight: 600;
+}
+
+
+.player-card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    width: 250px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    text-align: center;
+}
+
+.player-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.player-card h2 {
+    font-size: 18px;
+    color: #1a73e8;
+    margin-bottom: 10px;
+}
+
+.player-card p {
+    font-size: 14px;
+    color: #444;
 }
 
 /* Seção de Contato */
@@ -1268,6 +1339,60 @@ footer {
     margin-bottom: 20px;
 }
 
+/* Seção da Lan House */
+.lanhouse-section {
+    padding: 80px 20px;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.lanhouse-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: #1a73e8;
+}
+
+.lanhouse-description {
+    font-size: 18px;
+    margin-bottom: 30px;
+    color: #444;
+}
+
+.lanhouse-features {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+.feature-item {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 600px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    text-align: left;
+}
+
+.feature-item h2 {
+    color: #1a73e8;
+    margin-bottom: 10px;
+}
+
+.feature-item p {
+    margin-bottom: 15px;
+    color: #444;
+}
+
+.lanhouse-location,
+.lanhouse-contact {
+    margin-top: 40px;
+    text-align: left;
+}
+
 /* Responsividade */
 @media (max-width: 768px) {
     .hero-section {
@@ -1321,6 +1446,54 @@ footer {
 
 .donation-section {
     width: 90%;
+    padding: 80px 20px;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.donation-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: #1a73e8;
+}
+
+.donation-description {
+    font-size: 18px;
+    margin-bottom: 30px;
+    color: #444;
+}
+
+.donation-options {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+.donation-option {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 600px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    text-align: left;
+}
+
+.donation-option h2 {
+    color: #1a73e8;
+    margin-bottom: 10px;
+}
+
+.donation-option p {
+    margin-bottom: 15px;
+    color: #444;
+}
+
+.donation-back {
+    margin-top: 40px;
 }
 
 .donation-content {
@@ -1335,6 +1508,10 @@ footer {
 
 .donation-content p {
     font-size: 14px;
+}
+
+.donation-content .qr-code {
+    max-width: 150px;
 }
 
 .stats-content {

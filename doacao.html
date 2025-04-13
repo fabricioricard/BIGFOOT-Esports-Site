@@ -6,56 +6,95 @@
   <title>Outras Formas de Doar - BIGFOOT Esports</title>
   <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
   <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@600;800&family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
 </head>
 <body>
-  <header>
-    <div class="logo">
-      <img src="images/logo.svg" alt="Logo BIGFOOT Esports" class="logo-svg" />
-      <span>BIGFOOT Esports</span>
-    </div>
-    <nav>
+<!-- Cabeçalho -->
+<header id="header">
+  <div class="logo">
+      <a href="index.html">
+          <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/logo.svg" alt="Logo BIGFOOT Esports" class="logo-svg">
+          <span>BIGFOOT Esports</span>
+      </a>
+  </div>
+  <nav>
       <ul class="nav-menu">
-        <li><a href="index.html">🏠 Home</a></li>
-        <li><a href="eventos.html">📅 Eventos</a></li>
-        <li><a href="loja.html">🛒 Loja</a></li>
-        <li><a href="equipe.html">👥 Equipe</a></li>
-        <li><a href="contato.html">📧 Contato</a></li>
+          <li class="dropdown">
+              <a href="#">📰 Notícias</a>
+              <ul class="dropdown-menu">
+                  <li><a href="noticias-lol.html">Notícias de League of Legends</a></li>
+                  <li><a href="noticias-hots.html" class="active">Notícias de Heroes of the Storm</a></li>
+                  <li><a href="noticias-tibia.html">Notícias de Tibia</a></li>
+              </ul>
+          </li>
+          <li class="dropdown">
+              <a href="#">🏆 Campeonatos</a>
+              <ul class="dropdown-menu">
+                  <li><a href="campeonatos-lol.html">LTA Sul 2025</a></li>
+                  <li><a href="campeonatos-hots.html">BIG Cup 2025</a></li>
+              </ul>
+          </li>
+          <li class="dropdown">
+              <a href="#">👥 Equipes</a>
+              <ul class="dropdown-menu">
+                  <li><a href="equipe-lol.html">Equipe de League of Legends</a></li>
+                  <li><a href="equipe-hots.html">Equipe de Heroes of the Storm</a></li>
+              </ul>
+          </li>
+          <li><a href="eventos.html">📅 Eventos</a></li>
+          <li><a href="loja.html">🛒 Loja</a></li>
+          <li><a href="lanhouse.html">🖥️ Lan House</a></li>
       </ul>
-    </nav>
-  </header>
+      <div class="login-bar">
+          <button id="login-btn" class="btn-primary">Login</button>
+      </div>
+  </nav>
+</header>
 
-  <main class="reveal" style="padding: 80px 20px; text-align: center; max-width: 800px; margin: 0 auto;">
-    <h1 style="font-family: 'Montserrat', sans-serif; font-size: 36px; margin-bottom: 20px; color: #1a73e8;">Outras formas de doar</h1>
-    <p style="font-size: 18px; margin-bottom: 30px; color: #444;">
-      Sua contribuição é essencial para fortalecer nossa comunidade de esports. Confira abaixo outras maneiras de doar além do PIX.
-    </p>
+  <!-- Conteúdo Principal -->
+  <main class="donation-section">
+    <section class="donation-content">
+      <h1 class="donation-title">Outras formas de doar</h1>
+      <p class="donation-description">
+        Sua contribuição é essencial para fortalecer nossa comunidade de esports. Confira abaixo outras maneiras de doar além do PIX.
+      </p>
 
-    <div style="display: flex; flex-direction: column; gap: 20px; align-items: center;">
-      <div style="background: #fff; padding: 20px; border-radius: 12px; width: 100%; max-width: 600px; box-shadow: 0 0 10px rgba(0,0,0,0.05);">
-        <h2 style="color: #1a73e8; margin-bottom: 10px;">Cartão de Crédito</h2>
-        <p style="margin-bottom: 15px;">Doe com seu cartão de crédito usando plataformas seguras como PagSeguro ou MercadoPago.</p>
-        <a href="#" class="btn-primary">Doar via Cartão</a>
+      <div class="donation-options">
+        <!-- Opção 1: Cartão de Crédito -->
+        <div class="donation-option">
+          <h2>Cartão de Crédito</h2>
+          <p>Doe com seu cartão de crédito usando plataformas seguras como PagSeguro ou MercadoPago.</p>
+          <a href="#" class="btn-primary">Doar via Cartão</a>
+        </div>
+
+        <!-- Opção 2: Boleto Bancário -->
+        <div class="donation-option">
+          <h2>Boleto Bancário</h2>
+          <p>Gere um boleto bancário com valor personalizado e pague em qualquer banco ou lotérica.</p>
+          <a href="#" class="btn-primary">Gerar Boleto</a>
+        </div>
+
+        <!-- Opção 3: Transferência Bancária -->
+        <div class="donation-option">
+          <h2>Transferência Bancária</h2>
+          <p>
+            Banco: 000 - Banco Fictício<br />
+            Agência: 0001<br />
+            Conta: 12345-6<br />
+            Nome: BIGFOOT Esports
+          </p>
+          <a href="#" class="btn-primary">Copiar dados bancários</a>
+        </div>
       </div>
 
-      <div style="background: #fff; padding: 20px; border-radius: 12px; width: 100%; max-width: 600px; box-shadow: 0 0 10px rgba(0,0,0,0.05);">
-        <h2 style="color: #1a73e8; margin-bottom: 10px;">Boleto Bancário</h2>
-        <p style="margin-bottom: 15px;">Gere um boleto bancário com valor personalizado e pague em qualquer banco ou lotérica.</p>
-        <a href="#" class="btn-primary">Gerar Boleto</a>
+      <div class="donation-back">
+        <a href="index.html" class="btn-primary">Voltar para o Início</a>
       </div>
-
-      <div style="background: #fff; padding: 20px; border-radius: 12px; width: 100%; max-width: 600px; box-shadow: 0 0 10px rgba(0,0,0,0.05);">
-        <h2 style="color: #1a73e8; margin-bottom: 10px;">Transferência Bancária</h2>
-        <p style="margin-bottom: 15px;">Banco: 000 - Banco Fictício<br>Agência: 0001<br>Conta: 12345-6<br>Nome: BIGFOOT Esports</p>
-        <a href="#" class="btn-primary">Copiar dados bancários</a>
-      </div>
-    </div>
-
-    <div style="margin-top: 40px;">
-      <a href="index.html" class="btn-primary">Voltar para o Início</a>
-    </div>
+    </section>
   </main>
 
-  <footer class="reveal" style="margin-top: 60px;">
+  <!-- Rodapé -->
+  <footer>
     <div class="footer-content">
       <div class="footer-left">
         <p>BIGFOOT Esports</p>

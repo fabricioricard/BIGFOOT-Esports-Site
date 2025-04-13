@@ -287,41 +287,6 @@ nav {
     transform: translateY(-3px);
 }
 
-/* Dropdown do botão de login */
-.dropdown-content {
-    display: none; /* Esconde o dropdown por padrão */
-    position: absolute;
-    background-color: #ffffff;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    padding: 10px;
-    top: 50px;
-    right: 0;
-    z-index: 1000;
-    min-width: 150px;
-}
-
-/* Links dentro do dropdown */
-.dropdown-content a {
-    display: block;
-    color: #444;
-    font-family: 'Poppins', sans-serif;
-    font-size: 14px;
-    padding: 8px 12px;
-    text-decoration: none;
-    transition: background 0.3s ease;
-}
-
-.dropdown-content a:hover {
-    background-color: #f0f0f0;
-    color: #1a73e8;
-}
-
-/* Exibir o dropdown quando ativo */
-.login-bar:hover .dropdown-content {
-    display: block;
-}
-
 .search-bar {
     align-items: center;
     display: flex;
@@ -462,6 +427,27 @@ to {
     background: linear-gradient(45deg, #1557b0, #2a9fd6);
     box-shadow: 0 5px 15px rgba(26, 115, 232, 0.3);
     transform: translateY(-3px);
+}
+
+/* Estilo para os links no modal */
+.modal-links {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.modal-link {
+    display: inline-block;
+    margin: 5px 10px;
+    color: #1a73e8;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.modal-link:hover {
+    color: #1557b0;
+    text-decoration: underline;
 }
 
 /* Seção Inicial (Hero Section) */
@@ -1097,6 +1083,7 @@ footer {
     font-weight: 500;
     text-decoration: none;
     transition: color 0.3s ease;
+    white-space: nowrap;
 }
 
 .nav-menu .dropdown-menu li a:hover {

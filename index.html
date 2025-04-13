@@ -47,11 +47,6 @@
             </ul>
             <div class="login-bar">
                 <button id="login-btn" class="btn-primary">Login</button>
-                <div id="login-dropdown" class="dropdown-content">
-                    <a href="/login">Fazer Login</a>
-                    <a href="/register">Registrar</a>
-                    <a href="/recover-password">Recuperar Senha</a>
-                </div>
             </div>
         </nav>
     </header>
@@ -66,8 +61,12 @@
                 <input type="text" id="username" name="username" placeholder="Usuário" required>
                 <label for="password">Senha</label>
                 <input type="password" id="password" name="password" placeholder="Senha" required>
-                <button type="submit">Entrar</button>
+                <button type="submit" class="btn-primary">Entrar</button>
             </form>
+            <div class="modal-links">
+                <a href="/register" class="modal-link">Registrar</a>
+                <a href="/recover-password" class="modal-link">Recuperar Senha</a>
+            </div>
         </div>
     </div>
 

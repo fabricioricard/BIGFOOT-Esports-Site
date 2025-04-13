@@ -225,6 +225,7 @@ nav {
 
 .nav-menu {
     display: flex;
+    align-items: center;
     list-style: none;
     margin-right: auto;
     margin-left: 20px;
@@ -261,6 +262,11 @@ nav {
     transform: translateY(-2px);
 }
 
+/* Botão de Doação */
+.nav-menu li:last-child {
+    margin-left: 20px; /* Ajuste o espaçamento do botão de doação */
+}
+
 .login-bar {
     margin-left: auto;
     order: 1;
@@ -276,7 +282,7 @@ nav {
     cursor: pointer;
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
-    margin-left: 60px;
+    margin-left: 40px;
     margin-right: 30px;
     order: 1;
     padding: 10px 20px;

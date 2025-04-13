@@ -29,11 +29,11 @@
       "destination": "/campeonato-hots.html"
     },
     {
-      "source": "/equipes-lol",
+      "source": "/equipe-lol",
       "destination": "/equipe-lol.html"
     },
     {
-      "source": "/equipes-hots",
+      "source": "/equipe-hots",
       "destination": "/equipe-hots.html"
     },
     {

@@ -266,11 +266,12 @@ nav {
 
 .login-bar {
     margin-left: auto;
-    order: 2;
     display: flex;
+    align-items: center;
     justify-content: flex-end;
-    flex: 1;
-    padding-right: 40px;
+    order: 1;
+    position: relative;
+    z-index: 1100;
 }
 
 .login-bar button {
@@ -281,10 +282,10 @@ nav {
     cursor: pointer;
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
-    margin-left: 0px;
+    margin-left: 20px;
     margin-right: 0px;
+    padding: 10px 20px;
     order: 2;
-    padding-right: 20px;
     transition: all 0.3s ease;
 }
 

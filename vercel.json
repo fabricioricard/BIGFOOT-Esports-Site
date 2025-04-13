@@ -1,0 +1,64 @@
+{
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/noticias",
+      "destination": "/noticias.html"
+    },
+    {
+      "source": "/noticias/lol",
+      "destination": "/noticias-lol.html"
+    },
+    {
+      "source": "/noticias/hots",
+      "destination": "/noticias-hots.html"
+    },
+    {
+      "source": "/noticias/tibia",
+      "destination": "/noticias-tibia.html"
+    },
+    {
+      "source": "/campeonatos",
+      "destination": "/campeonatos.html"
+    },
+    {
+      "source": "/campeonatos/lol",
+      "destination": "/campeonatos-lol.html"
+    },
+    {
+      "source": "/campeonatos/hots",
+      "destination": "/campeonatos-hots.html"
+    },
+    {
+      "source": "/equipes",
+      "destination": "/equipes.html"
+    },
+    {
+      "source": "/equipes/lol",
+      "destination": "/equipe-lol.html"
+    },
+    {
+      "source": "/equipes/hots",
+      "destination": "/equipe-hots.html"
+    },
+    {
+      "source": "/eventos",
+      "destination": "/eventos.html"
+    },
+    {
+      "source": "/loja",
+      "destination": "/loja.html"
+    },
+    {
+      "source": "/lanhouse",
+      "destination": "/lanhouse.html"
+    },
+    {
+      "source": "/doacao",
+      "destination": "/doacao.html"
+    }
+  ]
+}

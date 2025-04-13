@@ -67,14 +67,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Verifica se o usuário já viu a seção de doação
     if (localStorage.getItem("donationSeen") === "true") {
-        donationSection.style.display = "none"; // Esconde a seção
+        donationSection.remove(); // Remove a seção completamente
+    } else {
+        // Adiciona o evento de fechamento ao botão
+        closeDonationButton.addEventListener("click", () => {
+            donationSection.style.display = "none"; // Esconde a seção
+            localStorage.setItem("donationSeen", "true"); // Marca como vista
+        });
     }
-
-    // Fecha a seção de doação e salva no localStorage
-    closeDonationButton.addEventListener("click", () => {
-        donationSection.style.display = "none"; // Esconde a seção
-        localStorage.setItem("donationSeen", "true"); // Marca como vista
-    });
 });
 
 // Roloagem Suave para Links com # apenas

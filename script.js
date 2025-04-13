@@ -60,6 +60,23 @@ closeDonation.addEventListener('click', () => {
     donationBox.style.display = 'none';
 });
 
+// Controle de exibição da seção de doação
+document.addEventListener("DOMContentLoaded", () => {
+    const donationSection = document.querySelector(".donation-section");
+    const closeDonationButton = document.getElementById("close-donation");
+
+    // Verifica se o usuário já viu a seção de doação
+    if (localStorage.getItem("donationSeen") === "true") {
+        donationSection.style.display = "none"; // Esconde a seção
+    }
+
+    // Fecha a seção de doação e salva no localStorage
+    closeDonationButton.addEventListener("click", () => {
+        donationSection.style.display = "none"; // Esconde a seção
+        localStorage.setItem("donationSeen", "true"); // Marca como vista
+    });
+});
+
 // Roloagem Suave para Links com # apenas
 const menuLinks = document.querySelectorAll('.nav-menu a');
 menuLinks.forEach(anchor => {

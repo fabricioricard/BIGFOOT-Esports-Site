@@ -47,6 +47,14 @@
     {
       "source": "/doacao",
       "destination": "/doacao.html"
+    },
+    {
+      "source": "/registrar",
+      "destination": "/registrar.html"
+    },
+    {
+      "source": "/recuperar-senha",
+      "destination": "/recuperar-senha.html"
     }
   ]
 }

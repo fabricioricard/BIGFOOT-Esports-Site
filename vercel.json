@@ -17,12 +17,16 @@
       "destination": "/noticias-tibia.html"
     },
     {
-      "source": "/campeonatos-lol",
-      "destination": "/campeonatos-lol.html"
+      "source": "/lta-sul",
+      "destination": "/lta-sul.html"
     },
     {
-      "source": "/campeonatos-hots",
-      "destination": "/campeonatos-hots.html"
+      "source": "/big-cup",
+      "destination": "/big-cup.html"
+    },
+    {
+      "source": "/campeonato-hots",
+      "destination": "/campeonato-hots.html"
     },
     {
       "source": "/equipes-lol",

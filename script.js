@@ -67,12 +67,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Verifica se o usuário já viu a seção de doação
     if (localStorage.getItem("donationSeen") === "true") {
-        donationSection.remove(); // Remove a seção completamente
+        // Se já viu, não exibe a seção
+        if (donationSection) {
+            donationSection.style.display = "none";
+        }
     } else {
         // Adiciona o evento de fechamento ao botão
         closeDonationButton.addEventListener("click", () => {
-            donationSection.style.display = "none"; // Esconde a seção
-            localStorage.setItem("donationSeen", "true"); // Marca como vista
+            if (donationSection) {
+                donationSection.style.display = "none"; // Esconde a seção
+                localStorage.setItem("donationSeen", "true"); // Marca como vista
+            }
         });
     }
 });

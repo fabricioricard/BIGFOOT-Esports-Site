@@ -662,6 +662,91 @@ form button:hover {
     display: none !important;
 }
 
+/* Seção da Página de Doação */
+.donation-page-section {
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.donation-page-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 32px;
+    color: #1a73e8;
+    margin-bottom: 20px;
+}
+
+.donation-page-description {
+    font-size: 16px;
+    color: #444;
+    margin-bottom: 30px;
+}
+
+.donation-page-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.donation-page-option {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    width: 300px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.donation-page-option h2 {
+    font-size: 20px;
+    color: #1a73e8;
+    margin-bottom: 10px;
+}
+
+.donation-page-option p {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.donation-page-option .btn-primary {
+    display: inline-block;
+    padding: 10px 20px;
+    background: linear-gradient(45deg, #1a73e8, #34c0eb);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background 0.3s ease;
+}
+
+.donation-page-option .btn-primary:hover {
+    background: linear-gradient(45deg, #1557b0, #2a9fd6);
+}
+
+.donation-page-back {
+    margin-top: 30px;
+}
+
+.donation-page-back .btn-primary {
+    padding: 10px 20px;
+    background: linear-gradient(45deg, #1a73e8, #34c0eb);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background 0.3s ease;
+}
+
+.donation-page-back .btn-primary:hover {
+    background: linear-gradient(45deg, #1557b0, #2a9fd6);
+}
+
 /* Seção de Estatísticas */
 .stats-section {
     background: linear-gradient(135deg, #1a73e8, #34c0eb);
@@ -1402,6 +1487,96 @@ footer {
 .lanhouse-contact {
     margin-top: 40px;
     text-align: left;
+}
+
+/* Seção do Campeonato */
+.championship-section {
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.championship-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 36px;
+    color: #1a73e8;
+    margin-bottom: 20px;
+}
+
+.championship-description {
+    font-size: 16px;
+    color: #444;
+    margin-bottom: 30px;
+}
+
+.championship-details {
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+.championship-details h2 {
+    font-size: 24px;
+    color: #1a73e8;
+    margin-bottom: 10px;
+}
+
+.championship-details ul {
+    list-style: none;
+    padding: 0;
+}
+
+.championship-details li {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.championship-registration {
+    margin-bottom: 30px;
+}
+
+.championship-registration h2 {
+    font-size: 24px;
+    color: #1a73e8;
+    margin-bottom: 10px;
+}
+
+.championship-registration .btn-primary {
+    display: inline-block;
+    padding: 10px 20px;
+    background: linear-gradient(45deg, #1a73e8, #34c0eb);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background 0.3s ease;
+}
+
+.championship-registration .btn-primary:hover {
+    background: linear-gradient(45deg, #1557b0, #2a9fd6);
+}
+
+.championship-stream {
+    margin-bottom: 30px;
+}
+
+.championship-stream h2 {
+    font-size: 24px;
+    color: #1a73e8;
+    margin-bottom: 10px;
+}
+
+.championship-stream .stream-link {
+    color: #1a73e8;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+.championship-stream .stream-link:hover {
+    color: #1557b0;
 }
 
 /* Responsividade */

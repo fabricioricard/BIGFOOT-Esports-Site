@@ -264,6 +264,8 @@ nav {
 .login-bar {
     margin-left: auto;
     order: 1;
+    position: relative;
+    z-index: 1100;
 }
 
 .login-bar button {
@@ -622,6 +624,11 @@ html body .donation-section {
     max-width: 200px;
 }
 
+/* Esconde completamente a caixa de doação */
+.hidden {
+    display: none !important;
+}
+
 /* Seção de Estatísticas */
 .stats-section {
     background: linear-gradient(135deg, #1a73e8, #34c0eb);
@@ -679,6 +686,8 @@ html body .donation-section {
     margin: 20px;
     padding: 80px 20px;
     text-align: center;
+    position: relative;
+    z-index:1;
 }
 
 .events-section h2 {
@@ -824,6 +833,66 @@ html body .donation-section {
 
 .shop-button-container {
     margin-top: 40px;
+}
+
+.shop-list {
+    display: grid; /* Define um layout de grade */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Ajusta o número de colunas automaticamente */
+    gap: 20px; /* Espaçamento entre os itens */
+    margin: 20px auto; /* Centraliza a lista na página */
+    max-width: 1200px; /* Define uma largura máxima para a lista */
+    padding: 20px;
+}
+
+.shop-item {
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.shop-item:hover {
+    transform: translateY(-5px); /* Eleva o item ao passar o mouse */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.shop-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.shop-item h2 {
+    font-size: 18px;
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.shop-price {
+    font-size: 16px;
+    font-weight: bold;
+    color: #1a73e8;
+    margin-bottom: 15px;
+}
+
+.shop-item .btn-primary {
+    display: inline-block;
+    padding: 10px 20px;
+    background: linear-gradient(45deg, #1a73e8, #34c0eb);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    transition: background 0.3s ease;
+}
+
+.shop-item .btn-primary:hover {
+    background: linear-gradient(45deg, #1557b0, #2a9fd6);
 }
 
 /* Seção Sobre o Time */

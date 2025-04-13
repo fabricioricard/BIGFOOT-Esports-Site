@@ -12,7 +12,7 @@
     <script>
         document.documentElement.classList.remove('no-js');
     </script>
-    <!-- Cabeçalho (mesmo do index.html) -->
+    <!-- Cabeçalho -->
     <header id="header">
         <div class="logo">
             <a href="index.html">
@@ -25,7 +25,7 @@
                 <li class="dropdown">
                     <a href="#">📰 Notícias</a>
                     <ul class="dropdown-menu">
-                        <li><a href="noticias-lol.html">Notícias de League of Legends</a></li>
+                        <li><a href="noticias-lol.html" class="active">Notícias de League of Legends</a></li>
                         <li><a href="noticias-hots.html">Notícias de Heroes of the Storm</a></li>
                         <li><a href="noticias-tibia.html">Notícias de Tibia</a></li>
                     </ul>
@@ -49,12 +49,12 @@
                 <li><a href="lanhouse.html">🖥️ Lan House</a></li>
             </ul>
             <div class="login-bar">
-                <button id="login-btn">Login</button>
+                <button id="login-btn" class="btn-primary">Login</button>
             </div>
         </nav>
     </header>
 
-    <!-- Modal de Login (mesmo do index.html) -->
+    <!-- Modal de Login -->
     <div id="login-modal" class="modal">
         <div class="modal-content">
             <span id="close-modal" class="close">×</span>
@@ -64,43 +64,43 @@
                 <input type="text" id="username" name="username" placeholder="Usuário" required>
                 <label for="password">Senha</label>
                 <input type="password" id="password" name="password" placeholder="Senha" required>
-                <button type="submit">Entrar</button>
+                <button type="submit" class="btn-primary">Entrar</button>
             </form>
         </div>
     </div>
 
-    <!-- Seção de Notícias de League of Legends -->
+    <!-- Seção de Notícias -->
     <main>
-    <section class="news-section reveal visible">
-        <h2>Notícias de League of Legends</h2>
-        <div class="news-items">
-            <!-- Notícia 1 -->
-            <div class="news-item hover-effect">
-                <img src="https://via.placeholder.com/300x200?text=Notícia+LoL+1" alt="Notícia 1" class="hover-zoom">
-                <h3>Nova Atualização do LoL: Patch 14.8</h3>
-                <p>Confira as mudanças no meta com o novo patch de League of Legends, incluindo buffs para campeões como Ashe e nerfs para Zed.</p>
-                <a href="#" class="btn-primary hover-effect">Leia Mais</a>
+        <section class="news-section">
+            <h1>Notícias de League of Legends</h1>
+            <div class="news-items">
+                <!-- Notícia 1 -->
+                <div class="news-item">
+                    <img src="https://via.placeholder.com/300x200?text=Notícia+LoL+1" alt="Notícia 1" class="news-image">
+                    <h2>Nova Atualização do LoL: Patch 14.8</h2>
+                    <p>Confira as mudanças no meta com o novo patch de League of Legends, incluindo buffs para campeões como Ashe e nerfs para Zed.</p>
+                    <a href="#" class="btn-primary">Leia Mais</a>
+                </div>
+                <!-- Notícia 2 -->
+                <div class="news-item">
+                    <img src="https://via.placeholder.com/300x200?text=Notícia+LoL+2" alt="Notícia 2" class="news-image">
+                    <h2>BIGFOOT Esports no Mundial 2025</h2>
+                    <p>Nossa equipe de LoL se classificou para o Mundial 2025! Veja como foi a jornada até a classificação.</p>
+                    <a href="#" class="btn-primary">Leia Mais</a>
+                </div>
+                <!-- Notícia 3 -->
+                <div class="news-item">
+                    <img src="https://via.placeholder.com/300x200?text=Notícia+LoL+3" alt="Notícia 3" class="news-image">
+                    <h2>Evento de Skins de Arcane Chega ao LoL</h2>
+                    <p>Novas skins inspiradas na série Arcane estão disponíveis! Saiba como adquirir as skins de Vi e Jinx.</p>
+                    <a href="#" class="btn-primary">Leia Mais</a>
+                </div>
             </div>
-            <!-- Notícia 2 -->
-            <div class="news-item hover-effect">
-                <img src="https://via.placeholder.com/300x200?text=Notícia+LoL+2" alt="Notícia 2" class="hover-zoom">
-                <h3>BIGFOOT Esports no Mundial 2025</h3>
-                <p>Nossa equipe de LoL se classificou para o Mundial 2025! Veja como foi a jornada até a classificação.</p>
-                <a href="#" class="btn-primary hover-effect">Leia Mais</a>
-            </div>
-            <!-- Notícia 3 -->
-            <div class="news-item hover-effect">
-                <img src="https://via.placeholder.com/300x200?text=Notícia+LoL+3" alt="Notícia 3" class="hover-zoom">
-                <h3>Evento de Skins de Arcane Chega ao LoL</h3>
-                <p>Novas skins inspiradas na série Arcane estão disponíveis! Saiba como adquirir as skins de Vi e Jinx.</p>
-                <a href="#" class="btn-primary hover-effect">Leia Mais</a>
-            </div>
-        </div>
-    </section>
-</main>
+        </section>
+    </main>
 
-    <!-- Rodapé (mesmo do index.html) -->
-    <footer class="reveal">
+    <!-- Rodapé -->
+    <footer>
         <div class="footer-content">
             <div class="footer-left">
                 <p>BIGFOOT Esports</p>
@@ -108,11 +108,11 @@
                 <p>Brasil</p>
             </div>
             <div class="footer-right">
-                <a href="#" class="social-icon hover-effect"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/dc.svg" alt="Discord"></a>
-                <a href="#" class="social-icon hover-effect"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/x.svg" alt="X"></a>
-                <a href="#" class="social-icon hover-effect"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/yt.svg" alt="YouTube"></a>
-                <a href="#" class="social-icon hover-effect"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/tw.svg" alt="Twitch"></a>
-                <a href="#" class="social-icon hover-effect"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/fb.svg" alt="Facebook"></a>
+                <a href="#" class="social-icon"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/dc.svg" alt="Discord"></a>
+                <a href="#" class="social-icon"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/x.svg" alt="X"></a>
+                <a href="#" class="social-icon"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/yt.svg" alt="YouTube"></a>
+                <a href="#" class="social-icon"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/tw.svg" alt="Twitch"></a>
+                <a href="#" class="social-icon"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/fb.svg" alt="Facebook"></a>
             </div>
         </div>
     </footer>
@@ -122,6 +122,6 @@
 
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Snowstorm/20131208/snowstorm-min.js"></script>
-    <script src="/script.js"></script> <!-- Caminho absoluto relativo à raiz -->
+    <script src="script.js"></script>
 </body>
 </html>

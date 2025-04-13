@@ -5,31 +5,31 @@
       "destination": "/index.html"
     },
     {
-      "source": "/noticias/lol",
+      "source": "/noticias-lol",
       "destination": "/noticias-lol.html"
     },
     {
-      "source": "/noticias/hots",
+      "source": "/noticias-hots",
       "destination": "/noticias-hots.html"
     },
     {
-      "source": "/noticias/tibia",
+      "source": "/noticias-tibia",
       "destination": "/noticias-tibia.html"
     },
     {
-      "source": "/campeonatos/lol",
+      "source": "/campeonatos-lol",
       "destination": "/campeonatos-lol.html"
     },
     {
-      "source": "/campeonatos/hots",
+      "source": "/campeonatos-hots",
       "destination": "/campeonatos-hots.html"
     },
     {
-      "source": "/equipes/lol",
+      "source": "/equipes-lol",
       "destination": "/equipe-lol.html"
     },
     {
-      "source": "/equipes/hots",
+      "source": "/equipes-hots",
       "destination": "/equipe-hots.html"
     },
     {

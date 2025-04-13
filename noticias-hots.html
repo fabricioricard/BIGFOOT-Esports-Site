@@ -13,7 +13,7 @@
         document.documentElement.classList.remove('no-js');
     </script>
 
-    <!-- Cabeçalho (mesmo do noticias-lol.html) -->
+    <!-- Cabeçalho -->
     <header id="header">
         <div class="logo">
             <a href="index.html">
@@ -27,7 +27,7 @@
                     <a href="#">📰 Notícias</a>
                     <ul class="dropdown-menu">
                         <li><a href="noticias-lol.html">Notícias de League of Legends</a></li>
-                        <li><a href="noticias-hots.html">Notícias de Heroes of the Storm</a></li>
+                        <li><a href="noticias-hots.html" class="active">Notícias de Heroes of the Storm</a></li>
                         <li><a href="noticias-tibia.html">Notícias de Tibia</a></li>
                     </ul>
                 </li>
@@ -50,12 +50,12 @@
                 <li><a href="lanhouse.html">🖥️ Lan House</a></li>
             </ul>
             <div class="login-bar">
-                <button id="login-btn">Login</button>
+                <button id="login-btn" class="btn-primary">Login</button>
             </div>
         </nav>
     </header>
 
-    <!-- Modal de Login (mesmo do noticias-lol.html) -->
+    <!-- Modal de Login -->
     <div id="login-modal" class="modal">
         <div class="modal-content">
             <span id="close-modal" class="close">×</span>
@@ -65,43 +65,43 @@
                 <input type="text" id="username" name="username" placeholder="Usuário" required>
                 <label for="password">Senha</label>
                 <input type="password" id="password" name="password" placeholder="Senha" required>
-                <button type="submit">Entrar</button>
+                <button type="submit" class="btn-primary">Entrar</button>
             </form>
         </div>
     </div>
 
     <!-- Seção de Notícias de Heroes of the Storm -->
     <main>
-        <section class="news-section reveal visible">
-            <h2>Notícias de Heroes of the Storm</h2>
+        <section class="news-section">
+            <h1>Notícias de Heroes of the Storm</h1>
             <div class="news-items">
                 <!-- Notícia 1 -->
-                <div class="news-item hover-effect">
-                    <img src="https://via.placeholder.com/300x200?text=Notícia+HotS+1" alt="Notícia 1" class="hover-zoom">
-                    <h3>Atualização de Balanceamento HotS 2025</h3>
+                <div class="news-item">
+                    <img src="https://via.placeholder.com/300x200?text=Notícia+HotS+1" alt="Notícia 1" class="news-image">
+                    <h2>Atualização de Balanceamento HotS 2025</h2>
                     <p>Blizzard lança um novo patch para Heroes of the Storm com ajustes em heróis como Raynor e Sylvanas. Confira as mudanças!</p>
-                    <a href="#" class="btn-primary hover-effect">Leia Mais</a>
+                    <a href="#" class="btn-primary">Leia Mais</a>
                 </div>
                 <!-- Notícia 2 -->
-                <div class="news-item hover-effect">
-                    <img src="https://via.placeholder.com/300x200?text=Notícia+HotS+2" alt="Notícia 2" class="hover-zoom">
-                    <h3>BIGFOOT Esports na BIG Cup 2025</h3>
+                <div class="news-item">
+                    <img src="https://via.placeholder.com/300x200?text=Notícia+HotS+2" alt="Notícia 2" class="news-image">
+                    <h2>BIGFOOT Esports na BIG Cup 2025</h2>
                     <p>Nossa equipe de HotS brilhou na BIG Cup 2025, alcançando o pódio. Veja os destaques do torneio!</p>
-                    <a href="#" class="btn-primary hover-effect">Leia Mais</a>
+                    <a href="#" class="btn-primary">Leia Mais</a>
                 </div>
                 <!-- Notícia 3 -->
-                <div class="news-item hover-effect">
-                    <img src="https://via.placeholder.com/300x200?text=Notícia+HotS+3" alt="Notícia 3" class="hover-zoom">
-                    <h3>Mod Resurgence of the Storm Ganha Popularidade</h3>
+                <div class="news-item">
+                    <img src="https://via.placeholder.com/300x200?text=Notícia+HotS+3" alt="Notícia 3" class="news-image">
+                    <h2>Mod Resurgence of the Storm Ganha Popularidade</h2>
                     <p>Comunidade revive HotS com o mod Resurgence of the Storm, trazendo novos heróis como Selendis e Talandar.</p>
-                    <a href="#" class="btn-primary hover-effect">Leia Mais</a>
+                    <a href="#" class="btn-primary">Leia Mais</a>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- Rodapé (mesmo do noticias-lol.html) -->
-    <footer class="reveal">
+    <!-- Rodapé -->
+    <footer>
         <div class="footer-content">
             <div class="footer-left">
                 <p>BIGFOOT Esports</p>
@@ -109,11 +109,11 @@
                 <p>Brasil</p>
             </div>
             <div class="footer-right">
-                <a href="#" class="social-icon hover-effect"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/dc.svg" alt="Discord"></a>
-                <a href="#" class="social-icon hover-effect"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/x.svg" alt="X"></a>
-                <a href="#" class="social-icon hover-effect"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/yt.svg" alt="YouTube"></a>
-                <a href="#" class="social-icon hover-effect"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/tw.svg" alt="Twitch"></a>
-                <a href="#" class="social-icon hover-effect"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/fb.svg" alt="Facebook"></a>
+                <a href="#" class="social-icon"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/dc.svg" alt="Discord"></a>
+                <a href="#" class="social-icon"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/x.svg" alt="X"></a>
+                <a href="#" class="social-icon"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/yt.svg" alt="YouTube"></a>
+                <a href="#" class="social-icon"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/tw.svg" alt="Twitch"></a>
+                <a href="#" class="social-icon"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/fb.svg" alt="Facebook"></a>
             </div>
         </div>
     </footer>

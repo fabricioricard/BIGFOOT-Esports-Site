@@ -13,7 +13,7 @@
         document.documentElement.classList.remove('no-js');
     </script>
 
-    <!-- Cabeçalho (mesmo do noticias-lol.html e noticias-hots.html) -->
+    <!-- Cabeçalho -->
     <header id="header">
         <div class="logo">
             <a href="index.html">
@@ -28,7 +28,7 @@
                     <ul class="dropdown-menu">
                         <li><a href="noticias-lol.html">Notícias de League of Legends</a></li>
                         <li><a href="noticias-hots.html">Notícias de Heroes of the Storm</a></li>
-                        <li><a href="noticias-tibia.html">Notícias de Tibia</a></li>
+                        <li><a href="noticias-tibia.html" class="active">Notícias de Tibia</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -50,12 +50,12 @@
                 <li><a href="lanhouse.html">🖥️ Lan House</a></li>
             </ul>
             <div class="login-bar">
-                <button id="login-btn">Login</button>
+                <button id="login-btn" class="btn-primary">Login</button>
             </div>
         </nav>
     </header>
 
-    <!-- Modal de Login (mesmo do noticias-lol.html e noticias-hots.html) -->
+    <!-- Modal de Login -->
     <div id="login-modal" class="modal">
         <div class="modal-content">
             <span id="close-modal" class="close">×</span>
@@ -65,43 +65,43 @@
                 <input type="text" id="username" name="username" placeholder="Usuário" required>
                 <label for="password">Senha</label>
                 <input type="password" id="password" name="password" placeholder="Senha" required>
-                <button type="submit">Entrar</button>
+                <button type="submit" class="btn-primary">Entrar</button>
             </form>
         </div>
     </div>
 
     <!-- Seção de Notícias de Tibia -->
     <main>
-        <section class="news-section reveal visible">
-            <h2>Notícias de Tibia</h2>
+        <section class="news-section">
+            <h1>Notícias de Tibia</h1>
             <div class="news-items">
                 <!-- Notícia 1 -->
-                <div class="news-item hover-effect">
-                    <img src="https://via.placeholder.com/300x200?text=Notícia+Tibia+1" alt="Notícia 1" class="hover-zoom">
-                    <h3>Atualização de Verão 2025 no Tibia</h3>
+                <div class="news-item">
+                    <img src="https://via.placeholder.com/300x200?text=Notícia+Tibia+1" alt="Notícia 1" class="news-image">
+                    <h2>Atualização de Verão 2025 no Tibia</h2>
                     <p>CipSoft lança a atualização de verão com novas quests em Edron e um evento especial de caça ao tesouro!</p>
-                    <a href="#" class="btn-primary hover-effect">Leia Mais</a>
+                    <a href="#" class="btn-primary">Leia Mais</a>
                 </div>
                 <!-- Notícia 2 -->
-                <div class="news-item hover-effect">
-                    <img src="https://via.placeholder.com/300x200?text=Notícia+Tibia+2" alt="Notícia 2" class="hover-zoom">
-                    <h3>BIGFOOT Esports no Torneio de PvP</h3>
+                <div class="news-item">
+                    <img src="https://via.placeholder.com/300x200?text=Notícia+Tibia+2" alt="Notícia 2" class="news-image">
+                    <h2>BIGFOOT Esports no Torneio de PvP</h2>
                     <p>Nossa guilda de Tibia alcançou o top 3 no torneio de PvP em Antica. Veja os melhores momentos!</p>
-                    <a href="#" class="btn-primary hover-effect">Leia Mais</a>
+                    <a href="#" class="btn-primary">Leia Mais</a>
                 </div>
                 <!-- Notícia 3 -->
-                <div class="news-item hover-effect">
-                    <img src="https://via.placeholder.com/300x200?text=Notícia+Tibia+3" alt="Notícia 3" class="hover-zoom">
-                    <h3>Novo Sistema de BattlEye em Tibia</h3>
+                <div class="news-item">
+                    <img src="https://via.placeholder.com/300x200?text=Notícia+Tibia+3" alt="Notícia 3" class="news-image">
+                    <h2>Novo Sistema de BattlEye em Tibia</h2>
                     <p>CipSoft implementa melhorias no BattlEye para combater bots, impactando servidores como Calva e Calvera.</p>
-                    <a href="#" class="btn-primary hover-effect">Leia Mais</a>
+                    <a href="#" class="btn-primary">Leia Mais</a>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- Rodapé (mesmo do noticias-lol.html e noticias-hots.html) -->
-    <footer class="reveal">
+    <!-- Rodapé -->
+    <footer>
         <div class="footer-content">
             <div class="footer-left">
                 <p>BIGFOOT Esports</p>
@@ -109,11 +109,11 @@
                 <p>Brasil</p>
             </div>
             <div class="footer-right">
-                <a href="#" class="social-icon hover-effect"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/dc.svg" alt="Discord"></a>
-                <a href="#" class="social-icon hover-effect"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/x.svg" alt="X"></a>
-                <a href="#" class="social-icon hover-effect"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/yt.svg" alt="YouTube"></a>
-                <a href="#" class="social-icon hover-effect"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/tw.svg" alt="Twitch"></a>
-                <a href="#" class="social-icon hover-effect"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/fb.svg" alt="Facebook"></a>
+                <a href="#" class="social-icon"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/dc.svg" alt="Discord"></a>
+                <a href="#" class="social-icon"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/x.svg" alt="X"></a>
+                <a href="#" class="social-icon"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/yt.svg" alt="YouTube"></a>
+                <a href="#" class="social-icon"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/tw.svg" alt="Twitch"></a>
+                <a href="#" class="social-icon"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/fb.svg" alt="Facebook"></a>
             </div>
         </div>
     </footer>

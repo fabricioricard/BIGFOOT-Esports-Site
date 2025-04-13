@@ -161,8 +161,9 @@ header {
 }
 
 .scrolled {
-    background: linear-gradient(90deg, #ffffff, #f8f9fa); /* Gradiente claro */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Sombra mais forte */
+    background: linear-gradient(90deg, #d6e4f0, #e0e7ef); /* Gradiente mais escuro */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Sombra mais forte */
+    transition: background 0.3s ease, box-shadow 0.3s ease; /* Transição suave */
 }
 
 .scrolled .nav-menu li a {

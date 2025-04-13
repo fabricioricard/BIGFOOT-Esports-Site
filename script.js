@@ -67,9 +67,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Verifica se o usuário já viu a seção de doação
     if (localStorage.getItem("donationSeen") === "true") {
-        // Remove a seção do DOM para evitar que ela seja renderizada
+        // Se já viu, não exibe a seção
         if (donationSection) {
-            donationSection.remove();
+            donationSection.style.display = "none";
         }
     } else {
         // Adiciona o evento de fechamento ao botão

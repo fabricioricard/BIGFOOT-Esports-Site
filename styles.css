@@ -287,6 +287,41 @@ nav {
     transform: translateY(-3px);
 }
 
+/* Dropdown do botão de login */
+.dropdown-content {
+    display: none; /* Esconde o dropdown por padrão */
+    position: absolute;
+    background-color: #ffffff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 10px;
+    top: 50px;
+    right: 0;
+    z-index: 1000;
+    min-width: 150px;
+}
+
+/* Links dentro do dropdown */
+.dropdown-content a {
+    display: block;
+    color: #444;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    padding: 8px 12px;
+    text-decoration: none;
+    transition: background 0.3s ease;
+}
+
+.dropdown-content a:hover {
+    background-color: #f0f0f0;
+    color: #1a73e8;
+}
+
+/* Exibir o dropdown quando ativo */
+.login-bar:hover .dropdown-content {
+    display: block;
+}
+
 .search-bar {
     align-items: center;
     display: flex;

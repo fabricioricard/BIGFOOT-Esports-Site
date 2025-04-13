@@ -1228,6 +1228,7 @@ footer {
     right: 30px;
     transition: all 0.3s ease;
     width: 50px;
+    z-index: 1000;
 }
 
 .back-to-top:hover {

@@ -266,9 +266,11 @@ nav {
 
 .login-bar {
     margin-left: auto;
-    order: 1;
-    position: relative;
-    z-index: 1100;
+    order: 2;
+    display: flex;
+    justify-content: flex-end;
+    flex: 1;
+    padding-right: 40px;
 }
 
 .login-bar button {

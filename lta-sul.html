@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="no-js">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LTA Sul 2025 - BIGFOOT Esports</title>
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@600;800&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <script>
+        document.documentElement.classList.remove('no-js');
+    </script>
+
+    <!-- Cabeçalho (mesmo das outras páginas) -->
+    <header id="header">
+        <div class="logo">
+            <a href="index.html">
+                <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/logo.svg" alt="Logo BIGFOOT Esports" class="logo-svg">
+                <span>BIGFOOT Esports</span>
+            </a>
+        </div>
+        <nav>
+            <ul class="nav-menu">
+                <li class="dropdown">
+                    <a href="noticias.html">📰 Notícias</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="noticias-lol.html">Notícias de League of Legends</a></li>
+                        <li><a href="noticias-hots.html">Notícias de Heroes of the Storm</a></li>
+                        <li><a href="noticias-tibia.html">Notícias de Tibia</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="campeonatos.html">🏆 Campeonatos</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="lta-sul.html">LTA Sul 2025</a></li>
+                        <li><a href="campeonatos-hots.html">BIG Cup 2025</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="equipes.html">👥 Equipes</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="equipe-lol.html">Equipe de League of Legends</a></li>
+                        <li><a href="equipe-hots.html">Equipe de Heroes of the Storm</a></li>
+                    </ul>
+                </li>
+                <li><a href="eventos.html">📅 Eventos</a></li>
+                <li><a href="loja.html">🛒 Loja</a></li>
+                <li><a href="lanhouse.html">🖥️ Lan House</a></li>
+            </ul>
+            <div class="login-bar">
+                <button id="login-btn">Login</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Modal de Login (mesmo das outras páginas) -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span id="close-modal" class="close">×</span>
+            <h2>Login</h2>
+            <form id="login-form">
+                <label for="username">Usuário</label>
+                <input type="text" id="username" name="username" placeholder="Usuário" required>
+                <label for="password">Senha</label>
+                <input type="password" id="password" name="password" placeholder="Senha" required>
+                <button type="submit">Entrar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Seção Principal: Tabela e Próximos Jogos -->
+    <main>
+        <section class="championship-section reveal visible">
+            <h2>LTA Sul 2025</h2>
+            <div class="championship-container">
+                <!-- Coluna 1: Tabela de Classificação -->
+                <div class="standings-column">
+                    <h3>Classificação</h3>
+                    <table class="standings-table">
+                        <thead>
+                            <tr>
+                                <th>Posição</th>
+                                <th>Equipe</th>
+                                <th>Vitórias</th>
+                                <th>Derrotas</th>
+                                <th>Pontos</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>BIGFOOT Esports</td>
+                                <td>8</td>
+                                <td>2</td>
+                                <td>24</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Thunder Lizards</td>
+                                <td>7</td>
+                                <td>3</td>
+                                <td>21</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Shadow Ravens</td>
+                                <td>6</td>
+                                <td>4</td>
+                                <td>18</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>Ice Wolves</td>
+                                <td>5</td>
+                                <td>5</td>
+                                <td>15</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>Blaze Dragons</td>
+                                <td>4</td>
+                                <td>6</td>
+                                <td>12</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Coluna 2: Próximos Jogos -->
+                <div class="matches-column">
+                    <h3>Próximos Jogos</h3>
+                    <div class="match-item">
+                        <p><strong>15/04/2025 - 19:00</strong></p>
+                        <p>BIGFOOT Esports vs Thunder Lizards</p>
+                        <p>Arena Sul - São Paulo</p>
+                    </div>
+                    <div class="match-item">
+                        <p><strong>16/04/2025 - 18:30</strong></p>
+                        <p>Shadow Ravens vs Ice Wolves</p>
+                        <p>Arena Sul - São Paulo</p>
+                    </div>
+                    <div class="match-item">
+                        <p><strong>17/04/2025 - 20:00</strong></p>
+                        <p>Blaze Dragons vs BIGFOOT Esports</p>
+                        <p>Arena Sul - São Paulo</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Notícias do LTA Sul 2025 -->
+        <section class="news-section reveal visible">
+            <h2>Notícias do LTA Sul 2025</h2>
+            <div class="news-items">
+                <!-- Notícia 1 -->
+                <div class="news-item hover-effect">
+                    <img src="https://via.placeholder.com/300x200?text=Notícia+LTA+1" alt="Notícia 1" class="hover-zoom">
+                    <h3>BIGFOOT Esports Domina Primeira Fase</h3>
+                    <p>Nossa equipe de LoL garantiu a liderança na primeira fase do LTA Sul 2025 com uma vitória impressionante contra os Shadow Ravens.</p>
+                    <a href="#" class="btn-primary hover-effect">Leia Mais</a>
+                </div>
+                <!-- Notícia 2 -->
+                <div class="news-item hover-effect">
+                    <img src="https://via.placeholder.com/300x200?text=Notícia+LTA+2" alt="Notícia 2" class="hover-zoom">
+                    <h3>Thunder Lizards Surpreendem no LTA Sul</h3>
+                    <p>A equipe Thunder Lizards subiu para o segundo lugar após uma sequência de vitórias, desafiando os favoritos.</p>
+                    <a href="#" class="btn-primary hover-effect">Leia Mais</a>
+                </div>
+                <!-- Notícia 3 -->
+                <div class="news-item hover-effect">
+                    <img src="https://via.placeholder.com/300x200?text=Notícia+LTA+3" alt="Notícia 3" class="hover-zoom">
+                    <h3>Arena Sul Recebe Finais do LTA 2025</h3>
+                    <p>As finais do LTA Sul 2025 serão realizadas na Arena Sul em São Paulo, com presença de público confirmada!</p>
+                    <a href="#" class="btn-primary hover-effect">Leia Mais</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Rodapé (mesmo das outras páginas) -->
+    <footer class="reveal">
+        <div class="footer-content">
+            <div class="footer-left">
+                <p>BIGFOOT Esports</p>
+                <p>bigftesports@gmail.com</p>
+                <p>Brasil</p>
+            </div>
+            <div class="footer-right">
+                <a href="#" class="social-icon hover-effect"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/dc.svg" alt="Discord"></a>
+                <a href="#" class="social-icon hover-effect"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/x.svg" alt="X"></a>
+                <a href="#" class="social-icon hover-effect"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/yt.svg" alt="YouTube"></a>
+                <a href="#" class="social-icon hover-effect"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/tw.svg" alt="Twitch"></a>
+                <a href="#" class="social-icon hover-effect"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/fb.svg" alt="Facebook"></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botão Voltar ao Topo -->
+    <button id="back-to-top" class="back-to-top">⬆</button>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Snowstorm/20131208/snowstorm-min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campeonatos - BIGFOOT Esports</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header id="header">
+        <div class="logo">
+            <a href="index.html">
+                <img src="images/logo.svg" alt="Logo BIGFOOT Esports" class="logo-svg">
+                <span>BIGFOOT Esports</span>
+            </a>
+        </div>
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="index.html">🏠 Home</a></li>
+                <li><a href="noticias.html">📰 Notícias</a></li>
+                <li><a href="eventos.html">📅 Eventos</a></li>
+                <li><a href="loja.html">🛒 Loja</a></li>
+                <li><a href="equipes.html">👥 Equipes</a></li>
+                <li class="dropdown">
+                    <a href="campeonatos.html">🏆 Campeonatos</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="campeonato-lol.html">Campeonato de LoL</a></li>
+                        <li><a href="campeonato-hots.html">Campeonato de Heroes of the Storm</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="events-section reveal">
+        <h2>Campeonatos</h2>
+        <div class="events-carousel">
+            <div class="events-content">
+                <img src="images/camp.jpg" alt="Campeonato LoL" class="event-image hover-zoom">
+                <h3>Campeonato de League of Legends</h3>
+                <p>Inscreva sua equipe para a BIG Cup, o torneio amador mais aguardado do cenário nacional de LoL!</p>
+                <a href="campeonato-lol.html" class="btn-primary hover-effect">Ver Detalhes</a>
+            </div>
+            <div class="events-content">
+                <img src="images/hots.jpg" alt="Campeonato HoTS" class="event-image hover-zoom">
+                <h3>Campeonato de Heroes of the Storm</h3>
+                <p>Entre na batalha pelo Nexus com o torneio BIGFOOT HoTS e dispute prêmios incríveis!</p>
+                <a href="campeonato-hots.html" class="btn-primary hover-effect">Ver Detalhes</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="reveal">
+        <div class="footer-content">
+            <div class="footer-left">
+                <p>BIGFOOT Esports</p>
+                <p>bigftesports@gmail.com</p>
+                <p>Brasil</p>
+            </div>
+            <div class="footer-right">
+                <a href="#" class="social-icon hover-effect"><img src="images/dc.svg" alt="Discord"></a>
+                <a href="#" class="social-icon hover-effect"><img src="images/x.svg" alt="X"></a>
+                <a href="#" class="social-icon hover-effect"><img src="images/yt.svg" alt="YouTube"></a>
+                <a href="#" class="social-icon hover-effect"><img src="images/tw.svg" alt="Twitch"></a>
+                <a href="#" class="social-icon hover-effect"><img src="images/fb.svg" alt="Facebook"></a>
+            </div>
+        </div>
+    </footer>
+
+    <button id="back-to-top" class="back-to-top">⬆</button>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,19 +1,24 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BIGFOOT Esports</title>
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@600;800&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@600;800&family=Poppins:wght@400;600&display=swap"
+        rel="stylesheet">
 </head>
+
 <body>
     <!-- Cabeçalho -->
     <header id="header">
         <div class="logo">
             <a href="/">
-                <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/logo.svg" alt="Logo BIGFOOT Esports" class="logo-svg">
+                <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/logo.svg"
+                    alt="Logo BIGFOOT Esports" class="logo-svg">
                 <span>BIGFOOT Esports</span>
             </a>
         </div>
@@ -30,8 +35,8 @@
                 <li class="dropdown">
                     <a href="#">🏆 Campeonatos</a>
                     <ul class="dropdown-menu">
-                        <li><a href="/campeonatos-lol">LTA Sul 2025</a></li>
-                        <li><a href="/campeonatos-hots">BIG Cup 2025</a></li>
+                        <li><a href="/lta-sul">LTA Sul 2025</a></li>
+                        <li><a href="/big-cup">BIG Cup 2025</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -90,11 +95,16 @@
             <div id="donation-box" class="donation-content">
                 <span id="close-donation" class="close">×</span>
                 <h1>Doação</h1>
-                <p>Contribua com o <strong>BIGFOOT Esports</strong> via <strong>PIX</strong>! Escaneie o QR Code abaixo e fortaleça nossa jornada.</p>
+                <p>Contribua com o <strong>BIGFOOT Esports</strong> via <strong>PIX</strong>! Escaneie o QR Code abaixo
+                    e fortaleça nossa jornada.</p>
                 <img src="images/qrcode-pix.jpg" alt="QR Code para doação" class="qr-code">
-                <p style="margin-top: 10px; word-break: break-all; font-size: 14px; color: #ccc;">Chave PIX: <span id="pix-key">773f51bf-d4d9-48bc-9b26-812ed63618a8</span></p>
-                <button onclick="copyPixKey()" class="btn-primary" style="margin-top: 10px; font-size: 14px; padding: 8px 16px;">Copiar chave PIX</button>
-                <a href="/doacao" class="btn-primary hover-effect" style="display: block; margin-top: 12px; font-size: 14px; padding: 8px 16px; text-align: center;">Outras formas de doar</a>
+                <p style="margin-top: 10px; word-break: break-all; font-size: 14px; color: #ccc;">Chave PIX: <span
+                        id="pix-key">773f51bf-d4d9-48bc-9b26-812ed63618a8</span></p>
+                <button onclick="copyPixKey()" class="btn-primary"
+                    style="margin-top: 10px; font-size: 14px; padding: 8px 16px;">Copiar chave PIX</button>
+                <a href="/doacao" class="btn-primary hover-effect"
+                    style="display: block; margin-top: 12px; font-size: 14px; padding: 8px 16px; text-align: center;">Outras
+                    formas de doar</a>
             </div>
         </div>
 
@@ -122,14 +132,18 @@
             <h2>Eventos Futuros</h2>
             <div class="events-carousel">
                 <div class="events-content">
-                    <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/camp.jpg" alt="BIG Cup - Torneio de League of Legends" class="event-image hover-zoom">
+                    <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/camp.jpg"
+                        alt="BIG Cup - Torneio de League of Legends" class="event-image hover-zoom">
                     <h3>BIG Cup - Torneio de League of Legends</h3>
-                    <p>Venha jogar com a nossa comunidade o melhor torneio amador de League of Legends. Experiência emocionante!</p>
+                    <p>Venha jogar com a nossa comunidade o melhor torneio amador de League of Legends. Experiência
+                        emocionante!</p>
                 </div>
                 <div class="events-content">
-                    <img src="https://via.placeholder.com/700x300?text=Campeonato+CS2" alt="Campeonato CS2" class="event-image hover-zoom">
+                    <img src="https://via.placeholder.com/700x300?text=Campeonato+CS2" alt="Campeonato CS2"
+                        class="event-image hover-zoom">
                     <h3>Campeonato CS2</h3>
-                    <p>Participe do nosso campeonato de Counter-Strike 2 e mostre suas habilidades! Premiação especial para os vencedores.</p>
+                    <p>Participe do nosso campeonato de Counter-Strike 2 e mostre suas habilidades! Premiação especial
+                        para os vencedores.</p>
                 </div>
             </div>
             <div class="subscribe-button-container">
@@ -146,22 +160,26 @@
             <h2>Nossa Loja</h2>
             <div class="shop-items">
                 <div class="shop-item hover-effect">
-                    <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/image3.jpg" alt="Moletom" class="hover-zoom">
+                    <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/image3.jpg"
+                        alt="Moletom" class="hover-zoom">
                     <p>Moletom Confortável</p>
                     <p>R$ 120,00</p>
                 </div>
                 <div class="shop-item hover-effect">
-                    <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/image10.jpg" alt="Mouse" class="hover-zoom">
+                    <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/image10.jpg"
+                        alt="Mouse" class="hover-zoom">
                     <p>Mouse Gamer Ergonômico</p>
                     <p>R$ 120,00</p>
                 </div>
                 <div class="shop-item hover-effect">
-                    <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/image6.jpg" alt="Meias" class="hover-zoom">
+                    <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/image6.jpg"
+                        alt="Meias" class="hover-zoom">
                     <p>Meias Estilosas BIGFOOT</p>
                     <p>R$ 20,00</p>
                 </div>
                 <div class="shop-item hover-effect">
-                    <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/image4.jpg" alt="Jaqueta" class="hover-zoom">
+                    <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/image4.jpg"
+                        alt="Jaqueta" class="hover-zoom">
                     <p>Jaqueta Leve BIGFOOT</p>
                     <p>R$ 120,00</p>
                 </div>
@@ -176,12 +194,16 @@
             <h2>Sobre a gente</h2>
             <div class="team-content">
                 <div class="team-text">
-                    <p>A BIGFOOT Esports nasceu em 2019, quando montamos nosso primeiro time para disputar campeonatos amadores. O que começou como um projeto entre amigos rapidamente cresceu e se transformou em uma comunidade apaixonada por competição, superação e trabalho em equipe.</p>
-                    <p>Hoje, a BIGFOOT promove torneios como a BIG Cup, marca presença em campeonatos amadores, incentiva novos talentos e mantém seu compromisso com o crescimento do cenário dos Esports.</p>
+                    <p>A BIGFOOT Esports nasceu em 2019, quando montamos nosso primeiro time para disputar campeonatos
+                        amadores. O que começou como um projeto entre amigos rapidamente cresceu e se transformou em uma
+                        comunidade apaixonada por competição, superação e trabalho em equipe.</p>
+                    <p>Hoje, a BIGFOOT promove torneios como a BIG Cup, marca presença em campeonatos amadores,
+                        incentiva novos talentos e mantém seu compromisso com o crescimento do cenário dos Esports.</p>
                     <p>BIGFOOT Esports, o melhor ainda está por vir.</p>
                 </div>
                 <div class="team-image hover-effect">
-                    <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/equipe.jpg" alt="Time BIGFOOT" class="hover-zoom">
+                    <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/equipe.jpg"
+                        alt="Time BIGFOOT" class="hover-zoom">
                 </div>
             </div>
         </section>
@@ -191,12 +213,14 @@
             <h2>Nosso Time</h2>
             <div class="players-content">
                 <div class="player hover-effect">
-                    <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/ghibli1.jpg" alt="Fabrício Ricard" class="hover-zoom">
+                    <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/ghibli1.jpg"
+                        alt="Fabrício Ricard" class="hover-zoom">
                     <p>Fabrício Ricard</p>
                     <p>Fundador</p>
                 </div>
                 <div class="player hover-effect">
-                    <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/ghibli2.jpg" alt="Yan Renat" class="hover-zoom">
+                    <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/ghibli2.jpg"
+                        alt="Yan Renat" class="hover-zoom">
                     <p>Yan Renat</p>
                     <p>Fundador</p>
                 </div>
@@ -206,10 +230,12 @@
         <!-- Contato -->
         <section id="contato" class="contact-section reveal">
             <h2>Entre em Contato</h2>
-            <p>Entre em contato com a BIGFOOT Esports! Estamos sempre prontos para ouvir você e responder suas perguntas sobre nossa comunidade.</p>
+            <p>Entre em contato com a BIGFOOT Esports! Estamos sempre prontos para ouvir você e responder suas perguntas
+                sobre nossa comunidade.</p>
             <div class="contact-content">
                 <div class="contact-image">
-                    <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/foto1.jpg" alt="Contato" class="hover-zoom">
+                    <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/foto1.jpg"
+                        alt="Contato" class="hover-zoom">
                 </div>
                 <form>
                     <label for="nome-contato">Nome *</label>
@@ -235,11 +261,21 @@
                 <p>Brasil</p>
             </div>
             <div class="footer-right">
-                <a href="https://discord.gg/3aHhvgzGSz" class="social-icon hover-effect"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/dc.svg" alt="Discord"></a>
-                <a href="https://x.com/BFTesports" class="social-icon hover-effect"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/x.svg" alt="X"></a>
-                <a href="https://youtube.com/@BIGFOOTEsports" class="social-icon hover-effect"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/yt.svg" alt="YouTube"></a>
-                <a href="https://twitch.tv/bigfootesports" class="social-icon hover-effect"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/tw.svg" alt="Twitch"></a>
-                <a href="https://facebook.com/BIGFOOTEsports" class="social-icon hover-effect"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/fb.svg" alt="Facebook"></a>
+                <a href="https://discord.gg/3aHhvgzGSz" class="social-icon hover-effect"><img
+                        src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/dc.svg"
+                        alt="Discord"></a>
+                <a href="https://x.com/BFTesports" class="social-icon hover-effect"><img
+                        src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/x.svg"
+                        alt="X"></a>
+                <a href="https://youtube.com/@BIGFOOTEsports" class="social-icon hover-effect"><img
+                        src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/yt.svg"
+                        alt="YouTube"></a>
+                <a href="https://twitch.tv/bigfootesports" class="social-icon hover-effect"><img
+                        src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/tw.svg"
+                        alt="Twitch"></a>
+                <a href="https://facebook.com/BIGFOOTEsports" class="social-icon hover-effect"><img
+                        src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/fb.svg"
+                        alt="Facebook"></a>
             </div>
         </div>
     </footer>
@@ -251,4 +287,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Snowstorm/20131208/snowstorm-min.js"></script>
     <script src="script.js"></script>
 </body>
+
 </html>

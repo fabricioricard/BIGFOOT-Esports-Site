@@ -435,6 +435,9 @@ to {
 .modal-links {
     margin-top: 15px;
     text-align: center;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
 }
 
 .modal-link {
@@ -443,6 +446,7 @@ to {
     color: #1a73e8;
     font-family: 'Poppins', sans-serif;
     font-size: 14px;
+    text-align: center;
     text-decoration: none;
     transition: color 0.3s ease;
 }

@@ -5,10 +5,6 @@
       "destination": "/index.html"
     },
     {
-      "source": "/noticias",
-      "destination": "/noticias.html"
-    },
-    {
       "source": "/noticias/lol",
       "destination": "/noticias-lol.html"
     },
@@ -21,20 +17,12 @@
       "destination": "/noticias-tibia.html"
     },
     {
-      "source": "/campeonatos",
-      "destination": "/campeonatos.html"
-    },
-    {
       "source": "/campeonatos/lol",
       "destination": "/campeonatos-lol.html"
     },
     {
       "source": "/campeonatos/hots",
       "destination": "/campeonatos-hots.html"
-    },
-    {
-      "source": "/equipes",
-      "destination": "/equipes.html"
     },
     {
       "source": "/equipes/lol",

@@ -54,6 +54,25 @@
         </nav>
     </header>
 
+    <!-- Modal de Login -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span id="close-modal" class="close">×</span>
+            <h2>Login</h2>
+            <form id="login-form">
+                <label for="username">Usuário</label>
+                <input type="text" id="username" name="username" placeholder="Usuário" required>
+                <label for="password">Senha</label>
+                <input type="password" id="password" name="password" placeholder="Senha" required>
+                <button type="submit" class="btn-primary">Entrar</button>
+            </form>
+            <div class="modal-links">
+                <a href="registrar.html" class="modal-link">Registrar</a>
+                <a href="recuperar-senha.html" class="modal-link">Recuperar Senha</a>
+            </div>
+        </div>
+    </div>
+
     <!-- Conteúdo Principal -->
     <main class="team-section">
         <section class="team-content">
@@ -101,6 +120,11 @@
             </div>
         </section>
     </main>
+
+    <!-- Botão Voltar ao Início -->
+    <div style="text-align: center; margin-top: 40px;">
+        <a href="/" class="btn-secondary">⬅ Voltar ao Início</a>
+    </div>
 
     <!-- Rodapé -->
     <footer>

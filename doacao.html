@@ -16,9 +16,8 @@
   <!-- Cabeçalho -->
   <header id="header">
     <div class="logo">
-      <a href="/">
-        <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/logo.svg"
-          alt="Logo BIGFOOT Esports" class="logo-svg">
+      <a href="index.html">
+        <img src="images/logo.svg" alt="Logo BIGFOOT Esports" class="logo-svg">
         <span>BIGFOOT Esports</span>
       </a>
     </div>
@@ -52,46 +51,73 @@
         <li><a href="/lanhouse">🖥️ Lan House</a></li>
         <li><a href="/doacao">💰 Doação</a></li>
       </ul>
-      <div class="login-bar">
-        <button id="login-btn" class="btn-primary">Login</button>
-      </div>
     </nav>
   </header>
 
-  <!-- Conteúdo Principal -->
-  <main class="donation-section">
-    <div class="donation-content">
-      <h1>Outras Formas de Doar</h1>
-      <p>Contribua para fortalecer nossa comunidade de esports. Escolha uma das opções abaixo:</p>
-      <div class="donation-options">
-        <div class="donation-option">
-          <h2>Cartão de Crédito</h2>
-          <p>Doe com segurança usando seu cartão de crédito.</p>
-          <a href="#" class="btn-primary">Doar Agora</a>
-        </div>
-        <div class="donation-option">
-          <h2>Boleto Bancário</h2>
-          <p>Gere um boleto e contribua com facilidade.</p>
-          <a href="#" class="btn-primary">Gerar Boleto</a>
-        </div>
+  <!-- Modal de Login -->
+  <div id="login-modal" class="modal">
+    <div class="modal-content">
+      <span id="close-modal" class="close">×</span>
+      <h2>Login</h2>
+      <form id="login-form">
+        <label for="username">Usuário</label>
+        <input type="text" id="username" name="username" placeholder="Usuário" required>
+        <label for="password">Senha</label>
+        <input type="password" id="password" name="password" placeholder="Senha" required>
+        <button type="submit" class="btn-primary">Entrar</button>
+      </form>
+      <div class="modal-links">
+        <a href="registrar.html" class="modal-link">Registrar</a>
+        <a href="recuperar-senha.html" class="modal-link">Recuperar Senha</a>
       </div>
     </div>
+  </div>
+
+  <!-- Conteúdo Principal -->
+  <main class="donation-page">
+    <section class="donation-header">
+      <h1>Outras Formas de Doar</h1>
+      <p>Contribua para fortalecer nossa comunidade de esports. Escolha uma das opções abaixo:</p>
+    </section>
+
+    <section class="donation-options">
+      <div class="donation-option">
+        <h2>Cartão de Crédito</h2>
+        <p>Doe com segurança usando seu cartão de crédito.</p>
+        <a href="#" class="btn-primary">Doar Agora</a>
+      </div>
+      <div class="donation-option">
+        <h2>Boleto Bancário</h2>
+        <p>Gere um boleto e contribua com facilidade.</p>
+        <a href="#" class="btn-primary">Gerar Boleto</a>
+      </div>
+      <div class="donation-option">
+        <h2>Transferência Bancária</h2>
+        <p>Banco: 000 - Banco Fictício<br>Agência: 0001<br>Conta: 12345-6<br>Nome: BIGFOOT Esports</p>
+        <a href="#" class="btn-primary">Copiar Dados</a>
+      </div>
+    </section>
   </main>
+
+  <!-- Botão Voltar ao Início -->
+  <div style="text-align: center; margin-top: 40px;">
+    <a href="/" class="btn-secondary">⬅ Voltar ao Início</a>
+  </div>
 
   <!-- Rodapé -->
   <footer>
     <div class="footer-content">
       <div class="footer-left">
         <p>BIGFOOT Esports</p>
-        <p>bigftesports@gmail.com</p>
+        <p>Email: bigftesports@gmail.com</p>
         <p>Brasil</p>
       </div>
       <div class="footer-right">
-        <a href="#" class="social-icon hover-effect"><img src="images/dc.svg" alt="Discord" /></a>
-        <a href="#" class="social-icon hover-effect"><img src="images/x.svg" alt="X" /></a>
-        <a href="#" class="social-icon hover-effect"><img src="images/yt.svg" alt="YouTube" /></a>
-        <a href="#" class="social-icon hover-effect"><img src="images/tw.svg" alt="Twitch" /></a>
-        <a href="#" class="social-icon hover-effect"><img src="images/fb.svg" alt="Facebook" /></a>
+        <a href="#" class="social-icon hover-effect"><img src="images/dc.svg" alt="Discord"></a>
+        <a href="#" class="social-icon hover-effect"><img src="images/x.svg" alt="X"></a>
+        <a href="#" class="social-icon hover-effect"><img src="images/yt.svg" alt="YouTube"></a>
+        <a href="#" class="social-icon hover-effect"><img src="images/tw.svg" alt="Twitch"></a>
+        <a href="#" class="social-icon hover-effect"><img src="images/fb.svg" alt="Facebook"></a>
       </div>
     </div>
   </footer>

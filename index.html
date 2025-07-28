@@ -5,102 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BIGFOOT Esports</title>
-    <meta name="description" content="BIGFOOT Esports - Comunidade de esportes eletrônicos com loja, lan house e doações. Junte-se à nossa jornada!">
-    <meta name="keywords" content="esports, BIGFOOT Esports, League of Legends, comunidade gamer, lan house">
-    <meta name="author" content="BIGFOOT Esports">
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@600;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/swiper@9.4.1/swiper-bundle.min.css" />
-    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
-    <style>
-        /* Estilos para menu hambúrguer */
-        .hamburger {
-            display: none;
-            cursor: pointer;
-            padding: 10px;
-        }
-        .hamburger span {
-            display: block;
-            width: 25px;
-            height: 3px;
-            background: #fff;
-            margin: 5px 0;
-            transition: all 0.3s;
-        }
-        .hamburger.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
-        .hamburger.active span:nth-child(2) {
-            opacity: 0;
-        }
-        .hamburger.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -7px);
-        }
-        @media (max-width: 768px) {
-            .nav-menu {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 60px;
-                left: 0;
-                width: 100%;
-                background: #1a1a1a;
-                padding: 10px 0;
-            }
-            .nav-menu.active {
-                display: flex;
-            }
-            .hamburger {
-                display: block;
-            }
-        }
-        /* Estilos para hover suave */
-        .hover-effect {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .hover-effect:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-        /* Estilos para botão Voltar ao Topo */
-        .back-to-top {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #ff6b00;
-            color: #fff;
-            border: none;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            cursor: pointer;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        .back-to-top.visible {
-            opacity: 1;
-        }
-        /* Estilos para carrossel hero */
-        .swiper-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-        .swiper-slide {
-            background-size: cover;
-            background-position: center;
-        }
-        /* Estilo para mensagens de erro */
-        .error-message {
-            color: #ff4d4d;
-            font-size: 14px;
-            margin-top: 5px;
-            display: none;
-        }
-    </style>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@600;800&family=Poppins:wght@400;600&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
@@ -108,27 +17,40 @@
     <header id="header">
         <div class="logo">
             <a href="/">
-                <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/logo.svg" alt="Logo BIGFOOT Esports" class="logo-svg">
+                <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/logo.svg"
+                    alt="Logo BIGFOOT Esports" class="logo-svg">
                 <span>BIGFOOT Esports</span>
             </a>
         </div>
-        <div class="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
         <nav>
             <ul class="nav-menu">
-                <li class="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <a href="#" role="button">👥 Equipes</a>
-                    <ul class="dropdown-menu" aria-label="Submenu de equipes">
+                <li class="dropdown">
+                    <a href="#"> Notícias</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/noticias-lol">Notícias de League of Legends</a></li>
+                        <li><a href="/noticias-hots">Notícias de Heroes of the Storm</a></li>
+                        <li><a href="/noticias-tibia">Notícias de Tibia</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#"> Campeonatos</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/lta-sul">LTA Sul 2025</a></li>
+                        <li><a href="/big-cup">BIG Cup 2025</a></li>
+                        <li><a href="/campeonato-hots">Campeonato HotS 2025</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#"> Equipes</a>
+                    <ul class="dropdown-menu">
                         <li><a href="/equipe-lol">Equipe de League of Legends</a></li>
                         <li><a href="/equipe-hots">Equipe de Heroes of the Storm</a></li>
                     </ul>
                 </li>
-                <li><a href="/loja">🛒 Loja</a></li>
-                <li><a href="/lanhouse">🖥️ Lan House</a></li>
-                <li><a href="/doacao">💰 Doação</a></li>
+                <li><a href="/eventos"> Eventos</a></li>
+                <li><a href="/loja"> Loja</a></li>
+                <li><a href="/lanhouse"> Lan House</a></li>
+                <li><a href="/doacao"> Doação</a></li>
             </ul>
             <div class="login-bar">
                 <button id="login-btn" class="btn-primary">Login</button>
@@ -136,412 +58,235 @@
         </nav>
     </header>
 
-    <!-- Modal de Login -->
-    <div id="login-modal" class="modal">
-        <div class="modal-content">
-            <span id="close-modal" class="close" role="button" aria-label="Fechar modal">×</span>
-            <h2>Login</h2>
-            <form id="login-form">
-                <label for="username">Usuário</label>
-                <input type="text" id="username" name="username" placeholder="Usuário" required aria-required="true">
-                <p id="username-error" class="error-message">O usuário deve ter pelo menos 3 caracteres.</p>
-                <label for="password">Senha</label>
-                <input type="password" id="password" name="password" placeholder="Senha" required aria-required="true">
-                <p id="password-error" class="error-message">A senha deve ter pelo menos 6 caracteres.</p>
-                <button type="submit" class="btn-primary">Entrar</button>
-            </form>
-            <div class="modal-links">
-                <a href="/registrar" class="modal-link">Registrar</a>
-                <a href="/recuperar-senha" class="modal-link">Recuperar Senha</a>
+<!-- Modal de Login -->
+<div id="login-modal" class="modal">
+    <div class="modal-content">
+        <span id="close-modal" class="close">×</span>
+        <h2>Login</h2>
+        <form id="login-form">
+            <label for="username">Usuário</label>
+            <input type="text" id="username" name="username" placeholder="Usuário" required>
+            <label for="password">Senha</label>
+            <input type="password" id="password" name="password" placeholder="Senha" required>
+            <button type="submit" class="btn-primary">Entrar</button>
+        </form>
+        <div class="modal-links">
+            <a href="/registrar" class="modal-link">Registrar</a>
+            <a href="/recuperar-senha" class="modal-link">Recuperar Senha</a>
+        </div>
+    </div>
+</div>
+
+<!-- Conteúdo Principal -->
+<main>
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="typewriter">Bem-vindo ao BIGFOOT Esports</h1>
+            <p>Junte-se a nós e faça parte da evolução do esporte eletrônico!</p>
+            <div class="hero-buttons">
+                <a href="/lanhouse" class="btn-primary hover-effect">Conheça nossa Comunidade</a>
+                <a href="/eventos" class="btn-secondary hover-effect">Ver Eventos</a>
             </div>
+        </div>
+    </section>
+
+    <!-- Seção de Doação com QR Code -->
+    <div class="donation-section floating">
+        <div id="donation-box" class="donation-content">
+            <span id="close-donation" class="close">×</span>
+            <h1>Doação</h1>
+            <p>Contribua com o <strong>BIGFOOT Esports</strong> via <strong>PIX</strong>! Escaneie o QR Code abaixo
+                e fortaleça nossa jornada.</p>
+            <img src="images/qrcode-pix.jpg" alt="QR Code para doação" class="qr-code">
+            <p style="margin-top: 10px; word-break: break-all; font-size: 14px; color: #ccc;">Chave PIX: <span
+                    id="pix-key">773f51bf-d4d9-48bc-9b26-812ed63618a8</span></p>
+            <button onclick="copyPixKey()" class="btn-primary"
+                style="margin-top: 10px; font-size: 14px; padding: 8px 16px;">Copiar chave PIX</button>
+            <a href="/doacao" class="btn-primary hover-effect"
+                style="display: block; margin-top: 12px; font-size: 14px; padding: 8px 16px; text-align: center;">Outras
+                formas de doar</a>
         </div>
     </div>
 
-    <!-- Conteúdo Principal -->
-    <main>
-        <!-- Hero Section com Carrossel -->
-        <section id="home" class="hero-section">
-            <div class="swiper-container">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide" style="background-image: url('https://via.placeholder.com/1920x600?text=Hero+Image+1');"></div>
-                    <div class="swiper-slide" style="background-image: url('https://via.placeholder.com/1920x600?text=Hero+Image+2');"></div>
-                </div>
+    <!-- Seção de Estatísticas -->
+    <section class="stats-section reveal">
+        <h2>Nossos Números</h2>
+        <div class="stats-content">
+            <div class="stat-item">
+                <h3 class="stat-number" data-target="0">0</h3>
+                <p>Torneios Vencidos</p>
             </div>
-            <div class="hero-overlay"></div>
-            <div class="hero-content">
-                <h1 class="typewriter">Bem-vindo ao BIGFOOT Esports</h1>
-                <p>Junte-se a nós e faça parte da evolução do esporte eletrônico!</p>
-                <div class="hero-buttons">
-                    <a href="/lanhouse" class="btn-primary hover-effect">Conheça nossa Comunidade</a>
-                    <a href="/loja" class="btn-secondary hover-effect">Ver Loja</a>
-                </div>
+            <div class="stat-item">
+                <h3 class="stat-number" data-target="50">0</h3>
+                <p>Membros na Comunidade</p>
             </div>
-        </section>
-
-        <!-- Seção de Doação com QR Code -->
-        <div class="donation-section floating">
-            <div id="donation-box" class="donation-content">
-                <span id="close-donation" class="close" role="button" aria-label="Fechar doação">×</span>
-                <h1>Doação</h1>
-                <p>Contribua com o <strong>BIGFOOT Esports</strong> via <strong>PIX</strong>! Escaneie o QR Code abaixo e fortaleça nossa jornada.</p>
-                <picture>
-                    <source srcset="images/qrcode-pix.webp" type="image/webp">
-                    <img src="images/qrcode-pix.jpg" alt="QR Code para doações ao BIGFOOT Esports via PIX" class="qr-code" loading="lazy">
-                </picture>
-                <p style="margin-top: 10px; word-break: break-all; font-size: 14px; color: #ccc;">Chave PIX: <span id="pix-key">773f51bf-d4d9-48bc-9b26-812ed63618a8</span></p>
-                <button onclick="copyPixKey()" class="btn-primary" style="margin-top: 10px; font-size: 14px; padding: 8px 16px;">Copiar chave PIX</button>
-                <p id="pix-copy-message" class="error-message" style="color: #28a745;">Chave copiada!</p>
-                <a href="/doacao" class="btn-primary hover-effect" style="display: block; margin-top: 12px; font-size: 14px; padding: 8px 16px; text-align: center;">Outras formas de doar</a>
+            <div class="stat-item">
+                <h3 class="stat-number" data-target="5">0</h3>
+                <p>Anos de História</p>
             </div>
         </div>
+    </section>
 
-        <!-- Seção de Estatísticas -->
-        <section class="stats-section" data-aos="fade-up">
-            <h2>Nossos Números</h2>
-            <div class="stats-content">
-                <div class="stat-item">
-                    <h3 class="stat-number" data-target="0">0</h3>
-                    <p>Torneios Vencidos</p>
-                </div>
-                <div class="stat-item">
-                    <h3 class="stat-number" data-target="50">0</h3>
-                    <p>Membros na Comunidade</p>
-                </div>
-                <div class="stat-item">
-                    <h3 class="stat-number" data-target="5">0</h3>
-                    <p>Anos de História</p>
-                </div>
+    <!-- Eventos -->
+    <section class="events-section reveal">
+        <h2>Eventos Futuros</h2>
+        <div class="events-carousel">
+            <div class="events-content">
+                <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/camp.jpg"
+                    alt="BIG Cup - Torneio de League of Legends" class="event-image hover-zoom">
+                <h3>BIG Cup - Torneio de League of Legends</h3>
+                <p>Venha jogar com a nossa comunidade o melhor torneio amador de League of Legends. Experiência
+                    emocionante!</p>
             </div>
-        </section>
-
-        <!-- Loja -->
-        <section id="loja" class="shop-section" data-aos="fade-up">
-            <h2>Nossa Loja</h2>
-            <div class="shop-items">
-                <div class="shop-item hover-effect">
-                    <picture>
-                        <source srcset="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/image3.webp" type="image/webp">
-                        <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/image3.jpg" alt="Moletom Confortável BIGFOOT" class="hover-zoom" loading="lazy">
-                    </picture>
-                    <p>Moletom Confortável</p>
-                    <p>R$ 120,00</p>
-                </div>
-                <div class="shop-item hover-effect">
-                    <picture>
-                        <source srcset="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/image10.webp" type="image/webp">
-                        <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/image10.jpg" alt="Mouse Gamer Ergonômico BIGFOOT" class="hover-zoom" loading="lazy">
-                    </picture>
-                    <p>Mouse Gamer Ergonômico</p>
-                    <p>R$ 120,00</p>
-                </div>
-                <div class="shop-item hover-effect">
-                    <picture>
-                        <source srcset="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/image6.webp" type="image/webp">
-                        <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/image6.jpg" alt="Meias Estilosas BIGFOOT" class="hover-zoom" loading="lazy">
-                    </picture>
-                    <p>Meias Estilosas BIGFOOT</p>
-                    <p>R$ 20,00</p>
-                </div>
-                <div class="shop-item hover-effect">
-                    <picture>
-                        <source srcset="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/image4.webp" type="image/webp">
-                        <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/image4.jpg" alt="Jaqueta Leve BIGFOOT" class="hover-zoom" loading="lazy">
-                    </picture>
-                    <p>Jaqueta Leve BIGFOOT</p>
-                    <p>R$ 120,00</p>
-                </div>
-            </div>
-            <div class="shop-button-container">
-                <a href="/loja" class="btn-primary hover-effect">Ver Loja Completa</a>
-            </div>
-        </section>
-
-        <!-- Sobre a gente -->
-        <section class="team-section" data-aos="fade-up">
-            <h2>Sobre a gente</h2>
-            <article class="team-content">
-                <div class="team-text">
-                    <p>A BIGFOOT Esports nasceu em 2019, quando montamos nosso primeiro time para disputar campeonatos amadores. O que começou como um projeto entre amigos rapidamente cresceu e se transformou em uma comunidade apaixonada por competição, superação e trabalho em equipe.</p>
-                    <p>Hoje, a BIGFOOT promove torneios, marca presença no cenário amador, incentiva novos talentos e mantém seu compromisso com o crescimento do cenário dos Esports.</p>
-                    <p>BIGFOOT Esports, o melhor ainda está por vir.</p>
-                </div>
-                <div class="team-image hover-effect">
-                    <picture>
-                        <source srcset="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/equipe.webp" type="image/webp">
-                        <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/equipe.jpg" alt="Equipe da BIGFOOT Esports em ação" class="hover-zoom" loading="lazy">
-                    </picture>
-                </div>
-            </article>
-        </section>
-
-        <!-- Time -->
-        <section class="players-section" data-aos="fade-up">
-            <h2>Nosso Time</h2>
-            <div class="players-content">
-                <div class="player hover-effect">
-                    <picture>
-                        <source srcset="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/ghibli1.webp" type="image/webp">
-                        <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/ghibli1.jpg" alt="Fabrício Ricard, fundador da BIGFOOT Esports" class="hover-zoom" loading="lazy">
-                    </picture>
-                    <p>Fabrício Ricard</p>
-                    <p>Fundador</p>
-                </div>
-                <div class="player hover-effect">
-                    <picture>
-                        <source srcset="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/ghibli2.webp" type="image/webp">
-                        <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/ghibli2.jpg" alt="Yan Renat, fundador da BIGFOOT Esports" class="hover-zoom" loading="lazy">
-                    </picture>
-                    <p>Yan Renat</p>
-                    <p>Fundador</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contato -->
-        <section id="contato" class="contact-section" data-aos="fade-up">
-            <h2>Entre em Contato</h2>
-            <p>Entre em contato com a BIGFOOT Esports! Estamos sempre prontos para ouvir você e responder suas perguntas sobre nossa comunidade.</p>
-            <div class="contact-content">
-                <div class="contact-image">
-                    <picture>
-                        <source srcset="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/foto1.webp" type="image/webp">
-                        <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/foto1.jpg" alt="Imagem de contato da BIGFOOT Esports" class="hover-zoom" loading="lazy">
-                    </picture>
-                </div>
-                <form id="contact-form">
-                    <label for="nome-contato">Nome *</label>
-                    <input type="text" id="nome-contato" name="nome-contato" placeholder="Nome" required aria-required="true">
-                    <p id="nome-error" class="error-message">Nome deve ter pelo menos 2 caracteres.</p>
-                    <label for="sobrenome-contato">Sobrenome *</label>
-                    <input type="text" id="sobrenome-contato" name="sobrenome-contato" placeholder="Sobrenome" required aria-required="true">
-                    <p id="sobrenome-error" class="error-message">Sobrenome deve ter pelo menos 2 caracteres.</p>
-                    <label for="email-contato">Email *</label>
-                    <input type="email" id="email-contato" name="email-contato" placeholder="Email" required aria-required="true">
-                    <p id="email-error" class="error-message">Por favor, insira um email válido.</p>
-                    <label for="mensagem">Mensagem *</label>
-                    <textarea id="mensagem" name="mensagem" placeholder="Mensagem" required aria-required="true"></textarea>
-                    <p id="mensagem-error" class="error-message">A mensagem deve ter pelo menos 10 caracteres.</p>
-                    <button type="submit" class="btn-primary hover-effect">Enviar</button>
-                    <p id="contact-success" class="error-message" style="color: #28a745;">Mensagem enviada!</p>
-                </form>
-            </div>
-        </section>
-    </main>
-
-    <!-- Rodapé -->
-    <footer class="reveal" data-aos="fade-up">
-        <div class="footer-content">
-            <div class="footer-left">
-                <p>BIGFOOT Esports</p>
-                <p>bigftesports@gmail.com</p>
-                <p>Brasil</p>
-            </div>
-            <div class="footer-right">
-                <a href="https://discord.gg/3aHhvgzGSz" class="social-icon hover-effect" aria-label="Discord da BIGFOOT Esports">
-                    <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/dc.svg" alt="Ícone do Discord" loading="lazy">
-                </a>
-                <a href="https://x.com/BFTesports" class="social-icon hover-effect" aria-label="X da BIGFOOT Esports">
-                    <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/x.svg" alt="Ícone do X" loading="lazy">
-                </a>
-                <a href="https://youtube.com/@BIGFOOTEsports" class="social-icon hover-effect" aria-label="YouTube da BIGFOOT Esports">
-                    <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/yt.svg" alt="Ícone do YouTube" loading="lazy">
-                </a>
-                <a href="https://twitch.tv/bigfootesports" class="social-icon hover-effect" aria-label="Twitch da BIGFOOT Esports">
-                    <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/tw.svg" alt="Ícone do Twitch" loading="lazy">
-                </a>
-                <a href="https://facebook.com/BIGFOOTEsports" class="social-icon hover-effect" aria-label="Facebook da BIGFOOT Esports">
-                    <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/fb.svg" alt="Ícone do Facebook" loading="lazy">
-                </a>
+            <div class="events-content">
+                <img src="https://via.placeholder.com/700x300?text=Campeonato+CS2" alt="Campeonato CS2"
+                    class="event-image hover-zoom">
+                <h3>Campeonato CS2</h3>
+                <p>Participe do nosso campeonato de Counter-Strike 2 e mostre suas habilidades! Premiação especial
+                    para os vencedores.</p>
             </div>
         </div>
-    </footer>
+        <div class="subscribe-button-container">
+            <a href="/inscricao" class="btn-primary hover-effect">Inscreva-se</a>
+        </div>
+        <div class="carousel-controls">
+            <button id="prev-event">◄</button>
+            <button id="next-event">►</button>
+        </div>
+    </section>
 
-    <!-- Botão Voltar ao Topo -->
-    <button id="back-to-top" class="back-to-top" aria-label="Voltar ao topo">⬆</button>
+    <!-- Loja -->
+    <section id="loja" class="shop-section reveal">
+        <h2>Nossa Loja</h2>
+        <div class="shop-items">
+            <div class="shop-item hover-effect">
+                <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/image3.jpg"
+                    alt="Moletom" class="hover-zoom">
+                <p>Moletom Confortável</p>
+                <p>R$ 120,00</p>
+            </div>
+            <div class="shop-item hover-effect">
+                <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/image10.jpg"
+                    alt="Mouse" class="hover-zoom">
+                <p>Mouse Gamer Ergonômico</p>
+                <p>R$ 120,00</p>
+            </div>
+            <div class="shop-item hover-effect">
+                <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/image6.jpg"
+                    alt="Meias" class="hover-zoom">
+                <p>Meias Estilosas BIGFOOT</p>
+                <p>R$ 20,00</p>
+            </div>
+            <div class="shop-item hover-effect">
+                <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/image4.jpg"
+                    alt="Jaqueta" class="hover-zoom">
+                <p>Jaqueta Leve BIGFOOT</p>
+                <p>R$ 120,00</p>
+            </div>
+        </div>
+        <div class="shop-button-container">
+            <a href="/loja" class="btn-primary hover-effect">Ver Loja Completa</a>
+        </div>
+    </section>
 
-    <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Snowstorm/20131208/snowstorm-min.js"></script>
-    <script src="https://unpkg.com/swiper@9.4.1/swiper-bundle.min.js"></script>
-    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-    <script src="script.js"></script>
-    <script>
-        // Inicializar AOS
-        if (typeof AOS !== 'undefined') {
-            AOS.init({
-                duration: 800,
-                once: true,
-            });
-        }
+    <!-- Sobre a gente -->
+    <section class="team-section reveal">
+        <h2>Sobre a gente</h2>
+        <div class="team-content">
+            <div class="team-text">
+                <p>A BIGFOOT Esports nasceu em 2019, quando montamos nosso primeiro time para disputar campeonatos
+                    amadores. O que começou como um projeto entre amigos rapidamente cresceu e se transformou em uma
+                    comunidade apaixonada por competição, superação e trabalho em equipe.</p>
+                <p>Hoje, a BIGFOOT promove torneios como a BIG Cup, marca presença em campeonatos amadores,
+                    incentiva novos talentos e mantém seu compromisso com o crescimento do cenário dos Esports.</p>
+                <p>BIGFOOT Esports, o melhor ainda está por vir.</p>
+            </div>
+            <div class="team-image hover-effect">
+                <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/equipe.jpg"
+                    alt="Time BIGFOOT" class="hover-zoom">
+            </div>
+        </div>
+    </section>
 
-        // Menu hambúrguer
-        const hamburger = document.querySelector('.hamburger');
-        const navMenu = document.querySelector('.nav-menu');
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            navMenu.classList.toggle('active');
-        });
+    <!-- Time -->
+    <section class="players-section reveal">
+        <h2>Nosso Time</h2>
+        <div class="players-content">
+            <div class="player hover-effect">
+                <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/ghibli1.jpg"
+                    alt="Fabrício Ricard" class="hover-zoom">
+                <p>Fabrício Ricard</p>
+                <p>Fundador</p>
+            </div>
+            <div class="player hover-effect">
+                <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/ghibli2.jpg"
+                    alt="Yan Renat" class="hover-zoom">
+                <p>Yan Renat</p>
+                <p>Fundador</p>
+            </div>
+        </div>
+    </section>
 
-        // Carrossel Swiper
-        if (typeof Swiper !== 'undefined') {
-            const swiper = new Swiper('.swiper-container', {
-                loop: true,
-                autoplay: {
-                    delay: 5000,
-                },
-            });
-        }
+    <!-- Contato -->
+    <section id="contato" class="contact-section reveal">
+        <h2>Entre em Contato</h2>
+        <p>Entre em contato com a BIGFOOT Esports! Estamos sempre prontos para ouvir você e responder suas perguntas
+            sobre nossa comunidade.</p>
+        <div class="contact-content">
+            <div class="contact-image">
+                <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/foto1.jpg"
+                    alt="Contato" class="hover-zoom">
+            </div>
+            <form>
+                <label for="nome-contato">Nome *</label>
+                <input type="text" id="nome-contato" name="nome-contato" placeholder="Nome" required>
+                <label for="sobrenome-contato">Sobrenome *</label>
+                <input type="text" id="sobrenome-contato" name="sobrenome-contato" placeholder="Sobrenome" required>
+                <label for="email-contato">Email *</label>
+                <input type="email" id="email-contato" name="email-contato" placeholder="Email" required>
+                <label for="mensagem">Mensagem *</label>
+                <textarea id="mensagem" name="mensagem" placeholder="Mensagem" required></textarea>
+                <button type="submit" class="btn-primary hover-effect">Enviar</button>
+            </form>
+        </div>
+    </section>
+</main>
 
-        // Validação do formulário de login
-        document.getElementById('login-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            const usernameError = document.getElementById('username-error');
-            const passwordError = document.getElementById('password-error');
-            usernameError.style.display = 'none';
-            passwordError.style.display = 'none';
+<!-- Rodapé -->
+<footer class="reveal">
+    <div class="footer-content">
+        <div class="footer-left">
+            <p>BIGFOOT Esports</p>
+            <p>bigftesports@gmail.com</p>
+            <p>Brasil</p>
+        </div>
+        <div class="footer-right">
+            <a href="https://discord.gg/3aHhvgzGSz" class="social-icon hover-effect"><img
+                    src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/dc.svg"
+                    alt="Discord"></a>
+            <a href="https://x.com/BFTesports" class="social-icon hover-effect"><img
+                    src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/x.svg"
+                    alt="X"></a>
+            <a href="https://youtube.com/@BIGFOOTEsports" class="social-icon hover-effect"><img
+                    src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/yt.svg"
+                    alt="YouTube"></a>
+            <a href="https://twitch.tv/bigfootesports" class="social-icon hover-effect"><img
+                    src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/tw.svg"
+                    alt="Twitch"></a>
+            <a href="https://facebook.com/BIGFOOTEsports" class="social-icon hover-effect"><img
+                    src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/fb.svg"
+                    alt="Facebook"></a>
+        </div>
+    </div>
+</footer>
 
-            let valid = true;
-            if (username.length < 3) {
-                usernameError.style.display = 'block';
-                valid = false;
-            }
-            if (password.length < 6) {
-                passwordError.style.display = 'block';
-                valid = false;
-            }
-            if (valid) {
-                // Prosseguir com o envio (ex.: chamada à API)
-                console.log('Login enviado! (Implemente a integração com backend aqui)');
-            }
-        });
+<!-- Botão Voltar ao Topo -->
+<button id="back-to-top" class="back-to-top"></button>
 
-        // Validação do formulário de contato
-        document.getElementById('contact-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const nome = document.getElementById('nome-contato').value;
-            const sobrenome = document.getElementById('sobrenome-contato').value;
-            const email = document.getElementById('email-contato').value;
-            const mensagem = document.getElementById('mensagem').value;
-            const nomeError = document.getElementById('nome-error');
-            const sobrenomeError = document.getElementById('sobrenome-error');
-            const emailError = document.getElementById('email-error');
-            const mensagemError = document.getElementById('mensagem-error');
-            const successMessage = document.getElementById('contact-success');
-            nomeError.style.display = 'none';
-            sobrenomeError.style.display = 'none';
-            emailError.style.display = 'none';
-            mensagemError.style.display = 'none';
-            successMessage.style.display = 'none';
-
-            let valid = true;
-            if (nome.length < 2) {
-                nomeError.style.display = 'block';
-                valid = false;
-            }
-            if (sobrenome.length < 2) {
-                sobrenomeError.style.display = 'block';
-                valid = false;
-            }
-            if (!email.includes('@')) {
-                emailError.style.display = 'block';
-                valid = false;
-            }
-            if (mensagem.length < 10) {
-                mensagemError.style.display = 'block';
-                valid = false;
-            }
-            if (valid) {
-                successMessage.style.display = 'block';
-                // Prosseguir com o envio (ex.: chamada à API)
-                console.log('Mensagem enviada! (Implemente a integração com backend aqui)');
-            }
-        });
-
-        // Copiar chave PIX
-        function copyPixKey() {
-            const pixKey = document.getElementById('pix-key').textContent;
-            navigator.clipboard.writeText(pixKey).then(() => {
-                const button = document.querySelector('button[onclick="copyPixKey()"]');
-                const message = document.getElementById('pix-copy-message');
-                button.textContent = 'Copiado!';
-                message.style.display = 'block';
-                setTimeout(() => {
-                    button.textContent = 'Copiar chave PIX';
-                    message.style.display = 'none';
-                }, 2000);
-            }).catch(() => {
-                console.error('Falha ao copiar a chave PIX');
-            });
-        }
-
-        // Gerenciamento de foco no modal
-        const modal = document.getElementById('login-modal');
-        const firstInput = modal.querySelector('input');
-        const closeModal = document.getElementById('close-modal');
-        document.getElementById('login-btn').addEventListener('click', () => {
-            modal.style.display = 'block';
-            firstInput.focus();
-        });
-        closeModal.addEventListener('click', () => {
-            modal.style.display = 'none';
-            document.getElementById('login-btn').focus();
-        });
-        modal.addEventListener('keydown', (e) => {
-            if (e.key === 'Tab') {
-                const focusable = modal.querySelectorAll('input, button, a');
-                if (e.shiftKey && document.activeElement === firstInput) {
-                    e.preventDefault();
-                    focusable[focusable.length - 1].focus();
-                } else if (!e.shiftKey && document.activeElement === focusable[focusable.length - 1]) {
-                    e.preventDefault();
-                    firstInput.focus();
-                }
-            }
-        });
-
-        // Contador de estatísticas
-        function animateStats() {
-            const stats = document.querySelectorAll('.stat-number');
-            stats.forEach(stat => {
-                const target = +stat.getAttribute('data-target');
-                let count = 0;
-                const increment = target / 100;
-                const updateCount = () => {
-                    if (count < target) {
-                        count += increment;
-                        stat.textContent = Math.ceil(count);
-                        requestAnimationFrame(updateCount);
-                    } else {
-                        stat.textContent = target;
-                    }
-                };
-                updateCount();
-            });
-        }
-        window.addEventListener('scroll', () => {
-            const statsSection = document.querySelector('.stats-section');
-            if (statsSection.getBoundingClientRect().top < window.innerHeight) {
-                animateStats();
-            }
-        });
-
-        // Botão Voltar ao Topo
-        document.getElementById('back-to-top').addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-        window.addEventListener('scroll', () => {
-            const backToTop = document.getElementById('back-to-top');
-            if (window.scrollY > 300) {
-                backToTop.classList.add('visible');
-            } else {
-                backToTop.classList.remove('visible');
-            }
-        });
-    </script>
-</body>
+<!-- Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Snowstorm/20131208/snowstorm-min.js"></script>
+<script src="script.js"></script></body>
 
 </html>

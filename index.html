@@ -5,11 +5,83 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BIGFOOT Esports</title>
+    <meta name="description" content="BIGFOOT Esports - Comunidade de esportes eletrônicos com torneios, loja e eventos. Junte-se à nossa jornada!">
+    <meta name="keywords" content="esports, BIGFOOT Esports, League of Legends, torneios, comunidade gamer">
+    <meta name="author" content="BIGFOOT Esports">
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="styles.css">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@600;800&family=Poppins:wght@400;600&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        /* Estilos para menu hambúrguer e responsividade */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+        .hamburger span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background: #fff;
+            margin: 5px 0;
+        }
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background: #1a1a1a;
+            }
+            .nav-menu.active {
+                display: flex;
+            }
+            .hamburger {
+                display: block;
+            }
+        }
+        /* Estilos para hover suave */
+        .hover-effect {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .hover-effect:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        /* Estilos para botão Voltar ao Topo */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #ff6b00;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .back-to-top.visible {
+            opacity: 1;
+        }
+        /* Estilos para carrossel hero */
+        .swiper-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .swiper-slide {
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
 </head>
 
 <body>
@@ -17,16 +89,20 @@
     <header id="header">
         <div class="logo">
             <a href="/">
-                <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/logo.svg"
-                    alt="Logo BIGFOOT Esports" class="logo-svg">
+                <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/logo.svg" alt="Logo BIGFOOT Esports" class="logo-svg">
                 <span>BIGFOOT Esports</span>
             </a>
         </div>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
         <nav>
             <ul class="nav-menu">
-                <li class="dropdown">
-                    <a href="#">👥 Equipes</a>
-                    <ul class="dropdown-menu">
+                <li class="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a href="#" role="button">👥 Equipes</a>
+                    <ul class="dropdown-menu" aria-label="Submenu de equipes">
                         <li><a href="/equipe-lol">Equipe de League of Legends</a></li>
                     </ul>
                 </li>
@@ -44,13 +120,13 @@
     <!-- Modal de Login -->
     <div id="login-modal" class="modal">
         <div class="modal-content">
-            <span id="close-modal" class="close">×</span>
+            <span id="close-modal" class="close" role="button" aria-label="Fechar modal">×</span>
             <h2>Login</h2>
             <form id="login-form">
                 <label for="username">Usuário</label>
-                <input type="text" id="username" name="username" placeholder="Usuário" required>
+                <input type="text" id="username" name="username" placeholder="Usuário" required aria-required="true">
                 <label for="password">Senha</label>
-                <input type="password" id="password" name="password" placeholder="Senha" required>
+                <input type="password" id="password" name="password" placeholder="Senha" required aria-required="true">
                 <button type="submit" class="btn-primary">Entrar</button>
             </form>
             <div class="modal-links">
@@ -62,8 +138,14 @@
 
     <!-- Conteúdo Principal -->
     <main>
-        <!-- Hero Section -->
+        <!-- Hero Section com Carrossel -->
         <section id="home" class="hero-section">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide" style="background-image: url('https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/hero1.jpg');"></div>
+                    <div class="swiper-slide" style="background-image: url('https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/hero2.jpg');"></div>
+                </div>
+            </div>
             <div class="hero-overlay"></div>
             <div class="hero-content">
                 <h1 class="typewriter">Bem-vindo ao BIGFOOT Esports</h1>
@@ -78,23 +160,21 @@
         <!-- Seção de Doação com QR Code -->
         <div class="donation-section floating">
             <div id="donation-box" class="donation-content">
-                <span id="close-donation" class="close">×</span>
+                <span id="close-donation" class="close" role="button" aria-label="Fechar doação">×</span>
                 <h1>Doação</h1>
-                <p>Contribua com o <strong>BIGFOOT Esports</strong> via <strong>PIX</strong>! Escaneie o QR Code abaixo
-                    e fortaleça nossa jornada.</p>
-                <img src="images/qrcode-pix.jpg" alt="QR Code para doação" class="qr-code">
-                <p style="margin-top: 10px; word-break: break-all; font-size: 14px; color: #ccc;">Chave PIX: <span
-                        id="pix-key">773f51bf-d4d9-48bc-9b26-812ed63618a8</span></p>
-                <button onclick="copyPixKey()" class="btn-primary"
-                    style="margin-top: 10px; font-size: 14px; padding: 8px 16px;">Copiar chave PIX</button>
-                <a href="/doacao" class="btn-primary hover-effect"
-                    style="display: block; margin-top: 12px; font-size: 14px; padding: 8px 16px; text-align: center;">Outras
-                    formas de doar</a>
+                <p>Contribua com o <strong>BIGFOOT Esports</strong> via <strong>PIX</strong>! Escaneie o QR Code abaixo e fortaleça nossa jornada.</p>
+                <picture>
+                    <source srcset="images/qrcode-pix.webp" type="image/webp">
+                    <img src="images/qrcode-pix.jpg" alt="QR Code para doações ao BIGFOOT Esports via PIX" class="qr-code" loading="lazy">
+                </picture>
+                <p style="margin-top: 10px; word-break: break-all; font-size: 14px; color: #ccc;">Chave PIX: <span id="pix-key">773f51bf-d4d9-48bc-9b26-812ed63618a8</span></p>
+                <button onclick="copyPixKey()" class="btn-primary" style="margin-top: 10px; font-size: 14px; padding: 8px 16px;">Copiar chave PIX</button>
+                <a href="/doacao" class="btn-primary hover-effect" style="display: block; margin-top: 12px; font-size: 14px; padding: 8px 16px; text-align: center;">Outras formas de doar</a>
             </div>
         </div>
 
         <!-- Seção de Estatísticas -->
-        <section class="stats-section reveal">
+        <section class="stats-section" data-aos="fade-up">
             <h2>Nossos Números</h2>
             <div class="stats-content">
                 <div class="stat-item">
@@ -113,30 +193,85 @@
         </section>
 
         <!-- Loja -->
-        <section id="loja" class="shop-section reveal">
+        <section id="loja" class="shop-section" data-aos="fade-up">
             <h2>Nossa Loja</h2>
             <div class="shop-items">
                 <div class="shop-item hover-effect">
-                    <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/image3.jpg"
-                        alt="Moletom" class="hover-zoom">
+                    <picture>
+                        <source srcset="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/image3.webp" type="image/webp">
+                        <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/image3.jpg" alt="Moletom Confortável BIGFOOT" class="hover-zoom" loading="lazy">
+                    </picture>
                     <p>Moletom Confortável</p>
                     <p>R$ 120,00</p>
                 </div>
                 <div class="shop-item hover-effect">
-                    <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/image10.jpg"
-                        alt="Mouse" class="hover-zoom">
+                    <picture>
+                        <source srcset="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/image10.webp" type="image/webp">
+                        <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/image10.jpg" alt="Mouse Gamer Ergonômico BIGFOOT" class="hover-zoom" loading="lazy">
+                    </picture>
                     <p>Mouse Gamer Ergonômico</p>
                     <p>R$ 120,00</p>
                 </div>
                 <div class="shop-item hover-effect">
-                    <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/image6.jpg"
-                        alt="Meias" class="hover-zoom">
+                    <picture>
+                        <source srcset="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/image6.webp" type="image/webp">
+                        <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/image6.jpg" alt="Meias Estilosas BIGFOOT" class="hover-zoom" loading16px;">Copiar chave PIX</button>
+                <a href="/doacao" class="btn-primary hover-effect" style="display: block; margin-top: 12px; font-size: 14px; padding: 8px 16px; text-align: center;">Outras formas de doar</a>
+            </div>
+        </div>
+
+        <!-- Seção de Estatísticas -->
+        <section class="stats-section" data-aos="fade-up">
+            <h2>Nossos Números</h2>
+            <div class="stats-content">
+                <div class="stat-item">
+                    <h3 class="stat-number" data-target="0">0</h3>
+                    <p>Torneios Vencidos</p>
+                </div>
+                <div class="stat-item">
+                    <h3 class="stat-number" data-target="50">0</h3>
+                    <p>Membros na Comunidade</p>
+                </div>
+                <div class="stat-item">
+                    <h3 class="stat-number" data-target="6">0</h3>
+                    <p>Anos de História</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Loja -->
+        <section id="loja" class="shop-section" data-aos="fade-up">
+            <h2>Nossa Loja</h2>
+            <div class="shop-items">
+                <div class="shop-item hover-effect">
+                    <picture>
+                        <source srcset="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/image3.webp" type="image/webp">
+                        <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/image3.jpg" alt="Moletom Confortável BIGFOOT" class="hover-zoom" loading="lazy">
+                    </picture>
+                    <p>Moletom Confortável</p>
+                    <p>R$ 120,00</p>
+                </div>
+                <div class="shop-item hover-effect">
+                    <picture>
+                        <source srcset="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/image10.webp" type="image/webp">
+                        <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/image10.jpg" alt="Mouse Gamer Ergonômico BIGFOOT" class="hover-zoom" loading="lazy">
+                    </picture>
+                    <p>Mouse Gamer Ergonômico</p>
+                    <p>R$ 120,00</p>
+                </div>
+                <div class="shop-item hover-effect">
+                    <picture>
+                        <source srcset="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/image6.webp" type="image/webp">
+                        <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/image6.jpg" alt="Meias Estilosas BIGFOOT" class="hover-zoom" loading="lazy">
+                    </picture>
                     <p>Meias Estilosas BIGFOOT</p>
                     <p>R$ 20,00</p>
                 </div>
                 <div class="shop-item hover-effect">
-                    <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/image4.jpg"
-                        alt="Jaqueta" class="hover-zoom">
+                    <picture>
+                        <source srcset="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/image4.webp" type="image/webp">
+                        <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/image4.jpg" alt="Jaqueta Leve BIGFOOT" class="hover-zoom" loading="lazy">
+                    </picture>
                     <p>Jaqueta Leve BIGFOOT</p>
                     <p>R$ 120,00</p>
                 </div>
@@ -147,37 +282,40 @@
         </section>
 
         <!-- Sobre a gente -->
-        <section class="team-section reveal">
+        <section class="team-section" data-aos="fade-up">
             <h2>Sobre a gente</h2>
-            <div class="team-content">
+            <article class="team-content">
                 <div class="team-text">
-                    <p>A BIGFOOT Esports nasceu em 2019, quando montamos nosso primeiro time para disputar campeonatos
-                        amadores. O que começou como um projeto entre amigos rapidamente cresceu e se transformou em uma
-                        comunidade apaixonada por competição, superação e trabalho em equipe.</p>
-                    <p>Hoje, a BIGFOOT promove torneios como a BIG Cup, marca presença em campeonatos amadores,
-                        incentiva novos talentos e mantém seu compromisso com o crescimento do cenário dos Esports.</p>
+                    <p>A BIGFOOT Esports nasceu em 2019, quando montamos nosso primeiro time para disputar campeonatos amadores. O que começou como um projeto entre amigos rapidamente cresceu e se transformou em uma comunidade apaixonada por competição, superação e trabalho em equipe.</p>
+                    <p>Hoje, a BIGFOOT promove torneios como a BIG Cup, marca presença em campeonatos amadores, incentiva novos talentos e mantém seu compromisso com o crescimento do cenário dos Esports.</p>
                     <p>BIGFOOT Esports, o melhor ainda está por vir.</p>
                 </div>
                 <div class="team-image hover-effect">
-                    <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/equipe.jpg"
-                        alt="Time BIGFOOT" class="hover-zoom">
+                    <picture>
+                        <source srcset="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/equipe.webp" type="image/webp">
+                        <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/equipe.jpg" alt="Equipe da BIGFOOT Esports em ação" class="hover-zoom" loading="lazy">
+                    </picture>
                 </div>
-            </div>
+            </article>
         </section>
 
         <!-- Time -->
-        <section class="players-section reveal">
+        <section class="players-section" data-aos="fade-up">
             <h2>Nosso Time</h2>
             <div class="players-content">
                 <div class="player hover-effect">
-                    <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/ghibli1.jpg"
-                        alt="Fabrício Ricard" class="hover-zoom">
+                    <picture>
+                        <source srcset="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/ghibli1.webp" type="image/webp">
+                        <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/ghibli1.jpg" alt="Fabrício Ricard, fundador da BIGFOOT Esports" class="hover-zoom" loading="lazy">
+                    </picture>
                     <p>Fabrício Ricard</p>
                     <p>Fundador</p>
                 </div>
                 <div class="player hover-effect">
-                    <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/ghibli2.jpg"
-                        alt="Yan Renat" class="hover-zoom">
+                    <picture>
+                        <source srcset="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/ghibli2.webp" type="image/webp">
+                        <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/ghibli2.jpg" alt="Yan Renat, fundador da BIGFOOT Esports" class="hover-zoom" loading="lazy">
+                    </picture>
                     <p>Yan Renat</p>
                     <p>Fundador</p>
                 </div>
@@ -185,24 +323,25 @@
         </section>
 
         <!-- Contato -->
-        <section id="contato" class="contact-section reveal">
+        <section id="contato" class="contact-section" data-aos="fade-up">
             <h2>Entre em Contato</h2>
-            <p>Entre em contato com a BIGFOOT Esports! Estamos sempre prontos para ouvir você e responder suas perguntas
-                sobre nossa comunidade.</p>
+            <p>Entre em contato com a BIGFOOT Esports! Estamos sempre prontos para ouvir você e responder suas perguntas sobre nossa comunidade.</p>
             <div class="contact-content">
                 <div class="contact-image">
-                    <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/foto1.jpg"
-                        alt="Contato" class="hover-zoom">
+                    <picture>
+                        <source srcset="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/foto1.webp" type="image/webp">
+                        <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/foto1.jpg" alt="Imagem de contato da BIGFOOT Esports" class="hover-zoom" loading="lazy">
+                    </picture>
                 </div>
-                <form>
+                <form id="contact-form">
                     <label for="nome-contato">Nome *</label>
-                    <input type="text" id="nome-contato" name="nome-contato" placeholder="Nome" required>
+                    <input type="text" id="nome-contato" name="nome-contato" placeholder="Nome" required aria-required="true">
                     <label for="sobrenome-contato">Sobrenome *</label>
-                    <input type="text" id="sobrenome-contato" name="sobrenome-contato" placeholder="Sobrenome" required>
+                    <input type="text" id="sobrenome-contato" name="sobrenome-contato" placeholder="Sobrenome" required aria-required="true">
                     <label for="email-contato">Email *</label>
-                    <input type="email" id="email-contato" name="email-contato" placeholder="Email" required>
+                    <input type="email" id="email-contato" name="email-contato" placeholder="Email" required aria-required="true">
                     <label for="mensagem">Mensagem *</label>
-                    <textarea id="mensagem" name="mensagem" placeholder="Mensagem" required></textarea>
+                    <textarea id="mensagem" name="mensagem" placeholder="Mensagem" required aria-required="true"></textarea>
                     <button type="submit" class="btn-primary hover-effect">Enviar</button>
                 </form>
             </div>
@@ -210,7 +349,7 @@
     </main>
 
     <!-- Rodapé -->
-    <footer class="reveal">
+    <footer class="reveal" data-aos="fade-up">
         <div class="footer-content">
             <div class="footer-left">
                 <p>BIGFOOT Esports</p>
@@ -218,25 +357,165 @@
                 <p>Brasil</p>
             </div>
             <div class="footer-right">
-                <a href="https://discord.gg/3aHhvgzGSz" class="social-icon hover-effect"><img
-                        src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/dc.svg"
-                        alt="Discord"></a>
-                <a href="https://x.com/BFTesports" class="social-icon hover-effect"><img
-                        src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/x.svg"
-                        alt="X"></a>
-                <a href="https://youtube.com/@BIGFOOTEsports" class="social-icon hover-effect"><img
-                        src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/yt.svg"
-                        alt="YouTube"></a>
+                <a href="https://discord.gg/3aHhvgzGSz" class="social-icon hover-effect" aria-label="Discord da BIGFOOT Esports">
+                    <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/dc.svg" alt="Ícone do Discord">
+                </a>
+                <a href="https://x.com/BFTesports" class="social-icon hover-effect" aria-label="X da BIGFOOT Esports">
+                    <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/x.svg" alt="Ícone do X">
+                </a>
+                <a href="https://youtube.com/@BIGFOOTEsports" class="social-icon hover-effect" aria-label="YouTube da BIGFOOT Esports">
+                    <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/yt.svg" alt="Ícone do YouTube">
+                </a>
             </div>
         </div>
     </footer>
 
     <!-- Botão Voltar ao Topo -->
-    <button id="back-to-top" class="back-to-top">⬆</button>
+    <button id="back-to-top" class="back-to-top" aria-label="Voltar ao topo">⬆</button>
 
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Snowstorm/20131208/snowstorm-min.js"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="script.js"></script>
-</body>
+    <script>
+        // Inicializar AOS
+        AOS.init({
+            duration: 800,
+            once: true,
+        });
 
+        // Menu hambúrguer
+        document.querySelector('.hamburger').addEventListener('click', () => {
+            document.querySelector('.nav-menu').classList.toggle('active');
+        });
+
+        // Carrossel Swiper
+        const swiper = new Swiper('.swiper-container', {
+            loop: true,
+            autoplay: {
+                delay: 5000,
+            },
+        });
+
+        // Validação do formulário de login
+        document.getElementById('login-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            if (username.length < 3) {
+                alert('O usuário deve ter pelo menos 3 caracteres.');
+                return;
+            }
+            if (password.length < 6) {
+                alert('A senha deve ter pelo menos 6 caracteres.');
+                return;
+            }
+            // Prosseguir com o envio (ex.: chamada à API)
+            alert('Login enviado! (Implemente a integração com backend aqui)');
+        });
+
+        // Validação do formulário de contato
+        document.getElementById('contact-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const nome = document.getElementById('nome-contato').value;
+            const sobrenome = document.getElementById('sobrenome-contato').value;
+            const email = document.getElementById('email-contato').value;
+            const mensagem = document.getElementById('mensagem').value;
+            if (nome.length < 2 || sobrenome.length < 2) {
+                alert('Nome e sobrenome devem ter pelo menos 2 caracteres.');
+                return;
+            }
+            if (!email.includes('@')) {
+                alert('Por favor, insira um email válido.');
+                return;
+            }
+            if (mensagem.length < 10) {
+                alert('A mensagem deve ter pelo menos 10 caracteres.');
+                return;
+            }
+            // Prosseguir com o envio (ex.: chamada à API)
+            alert('Mensagem enviada! (Implemente a integração com backend aqui)');
+        });
+
+        // Copiar chave PIX
+        function copyPixKey() {
+            const pixKey = document.getElementById('pix-key').textContent;
+            navigator.clipboard.writeText(pixKey).then(() => {
+                const button = document.querySelector('button[onclick="copyPixKey()"]');
+                button.textContent = 'Copiado!';
+                setTimeout(() => {
+                    button.textContent = 'Copiar chave PIX';
+                }, 2000);
+            });
+        }
+
+        // Gerenciamento de foco no modal
+        const modal = document.getElementById('login-modal');
+        const firstInput = modal.querySelector('input');
+        const closeModal = document.getElementById('close-modal');
+        document.getElementById('login-btn').addEventListener('click', () => {
+            modal.style.display = 'block';
+            firstInput.focus();
+        });
+        closeModal.addEventListener('click', () => {
+            modal.style.display = 'none';
+            document.getElementById('login-btn').focus();
+        });
+        modal.addEventListener('keydown', (e) => {
+            if (e.key === 'Tab') {
+                const focusable = modal.querySelectorAll('input, button, a');
+                if (e.shiftKey && document.activeElement === firstInput) {
+                    e.preventDefault();
+                    focusable[focusable.length - 1].focus();
+                } else if (!e.shiftKey && document.activeElement === focusable[focusable.length - 1]) {
+                    e.preventDefault();
+                    firstInput.focus();
+                }
+            }
+        });
+
+        // Contador de estatísticas
+        function animateStats() {
+            const stats = document.querySelectorAll('.stat-number');
+            stats.forEach(stat => {
+                const target = +stat.getAttribute('data-target');
+                let count = 0;
+                const increment = target / 100;
+                const updateCount = () => {
+                    if (count < target) {
+                        count += increment;
+                        stat.textContent = Math.ceil(count);
+                        requestAnimationFrame(updateCount);
+                    } else {
+                        stat.textContent = target;
+                    }
+                };
+                updateCount();
+            });
+        }
+        window.addEventListener('scroll', () => {
+            const statsSection = document.querySelector('.stats-section');
+            if (statsSection.getBoundingClientRect().top < window.innerHeight) {
+                animateStats();
+            }
+        });
+
+        // Botão Voltar ao Topo
+        document.getElementById('back-to-top').addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        window.addEventListener('scroll', () => {
+            const backToTop = document.getElementById('back-to-top');
+            if (window.scrollY > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+    </script>
+</body>
 </html>

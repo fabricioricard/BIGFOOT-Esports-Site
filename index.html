@@ -11,13 +11,14 @@
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@600;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@9.4.1/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
     <style>
-        /* Estilos para menu hambúrguer e responsividade */
+        /* Estilos para menu hambúrguer */
         .hamburger {
             display: none;
             cursor: pointer;
+            padding: 10px;
         }
         .hamburger span {
             display: block;
@@ -25,6 +26,16 @@
             height: 3px;
             background: #fff;
             margin: 5px 0;
+            transition: all 0.3s;
+        }
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
         }
         @media (max-width: 768px) {
             .nav-menu {
@@ -35,6 +46,7 @@
                 left: 0;
                 width: 100%;
                 background: #1a1a1a;
+                padding: 10px 0;
             }
             .nav-menu.active {
                 display: flex;
@@ -81,6 +93,13 @@
             background-size: cover;
             background-position: center;
         }
+        /* Estilo para mensagens de erro */
+        .error-message {
+            color: #ff4d4d;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
     </style>
 </head>
 
@@ -125,8 +144,10 @@
             <form id="login-form">
                 <label for="username">Usuário</label>
                 <input type="text" id="username" name="username" placeholder="Usuário" required aria-required="true">
+                <p id="username-error" class="error-message">O usuário deve ter pelo menos 3 caracteres.</p>
                 <label for="password">Senha</label>
                 <input type="password" id="password" name="password" placeholder="Senha" required aria-required="true">
+                <p id="password-error" class="error-message">A senha deve ter pelo menos 6 caracteres.</p>
                 <button type="submit" class="btn-primary">Entrar</button>
             </form>
             <div class="modal-links">
@@ -142,8 +163,8 @@
         <section id="home" class="hero-section">
             <div class="swiper-container">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide" style="background-image: url('https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/hero1.jpg');"></div>
-                    <div class="swiper-slide" style="background-image: url('https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/hero2.jpg');"></div>
+                    <div class="swiper-slide" style="background-image: url('https://via.placeholder.com/1920x600?text=Hero+Image+1');"></div>
+                    <div class="swiper-slide" style="background-image: url('https://via.placeholder.com/1920x600?text=Hero+Image+2');"></div>
                 </div>
             </div>
             <div class="hero-overlay"></div>
@@ -169,6 +190,7 @@
                 </picture>
                 <p style="margin-top: 10px; word-break: break-all; font-size: 14px; color: #ccc;">Chave PIX: <span id="pix-key">773f51bf-d4d9-48bc-9b26-812ed63618a8</span></p>
                 <button onclick="copyPixKey()" class="btn-primary" style="margin-top: 10px; font-size: 14px; padding: 8px 16px;">Copiar chave PIX</button>
+                <p id="pix-copy-message" class="error-message" style="color: #28a745;">Chave copiada!</p>
                 <a href="/doacao" class="btn-primary hover-effect" style="display: block; margin-top: 12px; font-size: 14px; padding: 8px 16px; text-align: center;">Outras formas de doar</a>
             </div>
         </div>
@@ -289,13 +311,18 @@
                 <form id="contact-form">
                     <label for="nome-contato">Nome *</label>
                     <input type="text" id="nome-contato" name="nome-contato" placeholder="Nome" required aria-required="true">
+                    <p id="nome-error" class="error-message">Nome deve ter pelo menos 2 caracteres.</p>
                     <label for="sobrenome-contato">Sobrenome *</label>
                     <input type="text" id="sobrenome-contato" name="sobrenome-contato" placeholder="Sobrenome" required aria-required="true">
+                    <p id="sobrenome-error" class="error-message">Sobrenome deve ter pelo menos 2 caracteres.</p>
                     <label for="email-contato">Email *</label>
                     <input type="email" id="email-contato" name="email-contato" placeholder="Email" required aria-required="true">
+                    <p id="email-error" class="error-message">Por favor, insira um email válido.</p>
                     <label for="mensagem">Mensagem *</label>
                     <textarea id="mensagem" name="mensagem" placeholder="Mensagem" required aria-required="true"></textarea>
+                    <p id="mensagem-error" class="error-message">A mensagem deve ter pelo menos 10 caracteres.</p>
                     <button type="submit" class="btn-primary hover-effect">Enviar</button>
+                    <p id="contact-success" class="error-message" style="color: #28a745;">Mensagem enviada!</p>
                 </form>
             </div>
         </section>
@@ -334,44 +361,59 @@
 
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Snowstorm/20131208/snowstorm-min.js"></script>
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://unpkg.com/swiper@9.4.1/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
     <script src="script.js"></script>
     <script>
         // Inicializar AOS
-        AOS.init({
-            duration: 800,
-            once: true,
-        });
+        if (typeof AOS !== 'undefined') {
+            AOS.init({
+                duration: 800,
+                once: true,
+            });
+        }
 
         // Menu hambúrguer
-        document.querySelector('.hamburger').addEventListener('click', () => {
-            document.querySelector('.nav-menu').classList.toggle('active');
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
         });
 
         // Carrossel Swiper
-        const swiper = new Swiper('.swiper-container', {
-            loop: true,
-            autoplay: {
-                delay: 5000,
-            },
-        });
+        if (typeof Swiper !== 'undefined') {
+            const swiper = new Swiper('.swiper-container', {
+                loop: true,
+                autoplay: {
+                    delay: 5000,
+                },
+            });
+        }
 
         // Validação do formulário de login
         document.getElementById('login-form').addEventListener('submit', (e) => {
             e.preventDefault();
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
+            const usernameError = document.getElementById('username-error');
+            const passwordError = document.getElementById('password-error');
+            usernameError.style.display = 'none';
+            passwordError.style.display = 'none';
+
+            let valid = true;
             if (username.length < 3) {
-                alert('O usuário deve ter pelo menos 3 caracteres.');
-                return;
+                usernameError.style.display = 'block';
+                valid = false;
             }
             if (password.length < 6) {
-                alert('A senha deve ter pelo menos 6 caracteres.');
-                return;
+                passwordError.style.display = 'block';
+                valid = false;
             }
-            // Prosseguir com o envio (ex.: chamada à API)
-            alert('Login enviado! (Implemente a integração com backend aqui)');
+            if (valid) {
+                // Prosseguir com o envio (ex.: chamada à API)
+                console.log('Login enviado! (Implemente a integração com backend aqui)');
+            }
         });
 
         // Validação do formulário de contato
@@ -381,20 +423,39 @@
             const sobrenome = document.getElementById('sobrenome-contato').value;
             const email = document.getElementById('email-contato').value;
             const mensagem = document.getElementById('mensagem').value;
-            if (nome.length < 2 || sobrenome.length < 2) {
-                alert('Nome e sobrenome devem ter pelo menos 2 caracteres.');
-                return;
+            const nomeError = document.getElementById('nome-error');
+            const sobrenomeError = document.getElementById('sobrenome-error');
+            const emailError = document.getElementById('email-error');
+            const mensagemError = document.getElementById('mensagem-error');
+            const successMessage = document.getElementById('contact-success');
+            nomeError.style.display = 'none';
+            sobrenomeError.style.display = 'none';
+            emailError.style.display = 'none';
+            mensagemError.style.display = 'none';
+            successMessage.style.display = 'none';
+
+            let valid = true;
+            if (nome.length < 2) {
+                nomeError.style.display = 'block';
+                valid = false;
+            }
+            if (sobrenome.length < 2) {
+                sobrenomeError.style.display = 'block';
+                valid = false;
             }
             if (!email.includes('@')) {
-                alert('Por favor, insira um email válido.');
-                return;
+                emailError.style.display = 'block';
+                valid = false;
             }
             if (mensagem.length < 10) {
-                alert('A mensagem deve ter pelo menos 10 caracteres.');
-                return;
+                mensagemError.style.display = 'block';
+                valid = false;
             }
-            // Prosseguir com o envio (ex.: chamada à API)
-            alert('Mensagem enviada! (Implemente a integração com backend aqui)');
+            if (valid) {
+                successMessage.style.display = 'block';
+                // Prosseguir com o envio (ex.: chamada à API)
+                console.log('Mensagem enviada! (Implemente a integração com backend aqui)');
+            }
         });
 
         // Copiar chave PIX
@@ -402,10 +463,15 @@
             const pixKey = document.getElementById('pix-key').textContent;
             navigator.clipboard.writeText(pixKey).then(() => {
                 const button = document.querySelector('button[onclick="copyPixKey()"]');
+                const message = document.getElementById('pix-copy-message');
                 button.textContent = 'Copiado!';
+                message.style.display = 'block';
                 setTimeout(() => {
                     button.textContent = 'Copiar chave PIX';
+                    message.style.display = 'none';
                 }, 2000);
+            }).catch(() => {
+                console.error('Falha ao copiar a chave PIX');
             });
         }
 

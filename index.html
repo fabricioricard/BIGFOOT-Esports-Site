@@ -10,6 +10,134 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@600;800&family=Poppins:wght@400;600&display=swap"
         rel="stylesheet">
+    <style>
+        /* Melhorias no formulário de contato */
+        .contact-section form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 500px;
+        }
+
+        .contact-section .form-group {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .contact-section label {
+            font-weight: 600;
+            color: #00ff88;
+            margin-bottom: 8px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .contact-section input,
+        .contact-section textarea {
+            padding: 15px 20px;
+            border: 2px solid #333;
+            border-radius: 10px;
+            background: rgba(20, 20, 20, 0.8);
+            color: #fff;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .contact-section input::placeholder,
+        .contact-section textarea::placeholder {
+            color: #888;
+            font-style: italic;
+        }
+
+        .contact-section input:focus,
+        .contact-section textarea:focus {
+            outline: none;
+            border-color: #00ff88;
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .contact-section textarea {
+            min-height: 120px;
+            resize: vertical;
+            font-family: inherit;
+        }
+
+        .contact-section .btn-primary {
+            padding: 15px 30px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 10px;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-section .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.4);
+        }
+
+        /* Melhorias nos ícones sociais */
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-icon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            z-index: -1;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .social-icon.discord::before {
+            background: linear-gradient(135deg, #5865F2, #7289da);
+        }
+
+        .social-icon.twitter::before {
+            background: linear-gradient(135deg, #1DA1F2, #0d8bd9);
+        }
+
+        .social-icon.youtube::before {
+            background: linear-gradient(135deg, #FF0000, #cc0000);
+        }
+
+        .social-icon.twitch::before {
+            background: linear-gradient(135deg, #9146FF, #772ce8);
+        }
+
+        .social-icon.facebook::before {
+            background: linear-gradient(135deg, #1877F2, #0d5aa7);
+        }
+
+        .social-icon svg {
+            width: 24px;
+            height: 24px;
+            fill: white;
+            z-index: 1;
+        }
+    </style>
 </head>
 
 <body>
@@ -25,29 +153,11 @@
         <nav>
             <ul class="nav-menu">
                 <li class="dropdown">
-                    <a href="#">📰 Notícias</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/noticias-lol">Notícias de League of Legends</a></li>
-                        <li><a href="/noticias-hots">Notícias de Heroes of the Storm</a></li>
-                        <li><a href="/noticias-tibia">Notícias de Tibia</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#">🏆 Campeonatos</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/lta-sul">LTA Sul 2025</a></li>
-                        <li><a href="/big-cup">BIG Cup 2025</a></li>
-                        <li><a href="/campeonato-hots">Campeonato HotS 2025</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
                     <a href="#">👥 Equipes</a>
                     <ul class="dropdown-menu">
                         <li><a href="/equipe-lol">Equipe de League of Legends</a></li>
-                        <li><a href="/equipe-hots">Equipe de Heroes of the Storm</a></li>
                     </ul>
                 </li>
-                <li><a href="/eventos">📅 Eventos</a></li>
                 <li><a href="/loja">🛒 Loja</a></li>
                 <li><a href="/lanhouse">🖥️ Lan House</a></li>
                 <li><a href="/doacao">💰 Doação</a></li>
@@ -87,7 +197,7 @@
                 <p>Junte-se a nós e faça parte da evolução do esporte eletrônico!</p>
                 <div class="hero-buttons">
                     <a href="/lanhouse" class="btn-primary hover-effect">Conheça nossa Comunidade</a>
-                    <a href="/eventos" class="btn-secondary hover-effect">Ver Eventos</a>
+                    <a href="/loja" class="btn-secondary hover-effect">Ver Loja</a>
                 </div>
             </div>
         </section>
@@ -126,34 +236,6 @@
                     <h3 class="stat-number" data-target="5">0</h3>
                     <p>Anos de História</p>
                 </div>
-            </div>
-        </section>
-
-        <!-- Eventos -->
-        <section class="events-section reveal">
-            <h2>Eventos Futuros</h2>
-            <div class="events-carousel">
-                <div class="events-content">
-                    <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/camp.jpg"
-                        alt="BIG Cup - Torneio de League of Legends" class="event-image hover-zoom">
-                    <h3>BIG Cup - Torneio de League of Legends</h3>
-                    <p>Venha jogar com a nossa comunidade o melhor torneio amador de League of Legends. Experiência
-                        emocionante!</p>
-                </div>
-                <div class="events-content">
-                    <img src="https://via.placeholder.com/700x300?text=Campeonato+CS2" alt="Campeonato CS2"
-                        class="event-image hover-zoom">
-                    <h3>Campeonato CS2</h3>
-                    <p>Participe do nosso campeonato de Counter-Strike 2 e mostre suas habilidades! Premiação especial
-                        para os vencedores.</p>
-                </div>
-            </div>
-            <div class="subscribe-button-container">
-                <a href="/inscricao" class="btn-primary hover-effect">Inscreva-se</a>
-            </div>
-            <div class="carousel-controls">
-                <button id="prev-event">◄</button>
-                <button id="next-event">►</button>
             </div>
         </section>
 
@@ -240,15 +322,23 @@
                         alt="Contato" class="hover-zoom">
                 </div>
                 <form>
-                    <label for="nome-contato">Nome *</label>
-                    <input type="text" id="nome-contato" name="nome-contato" placeholder="Nome" required>
-                    <label for="sobrenome-contato">Sobrenome *</label>
-                    <input type="text" id="sobrenome-contato" name="sobrenome-contato" placeholder="Sobrenome" required>
-                    <label for="email-contato">Email *</label>
-                    <input type="email" id="email-contato" name="email-contato" placeholder="Email" required>
-                    <label for="mensagem">Mensagem *</label>
-                    <textarea id="mensagem" name="mensagem" placeholder="Mensagem" required></textarea>
-                    <button type="submit" class="btn-primary hover-effect">Enviar</button>
+                    <div class="form-group">
+                        <label for="nome-contato">Nome *</label>
+                        <input type="text" id="nome-contato" name="nome-contato" placeholder="Digite seu nome completo" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="sobrenome-contato">Sobrenome *</label>
+                        <input type="text" id="sobrenome-contato" name="sobrenome-contato" placeholder="Digite seu sobrenome" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email-contato">Email *</label>
+                        <input type="email" id="email-contato" name="email-contato" placeholder="seu.email@exemplo.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="mensagem">Mensagem *</label>
+                        <textarea id="mensagem" name="mensagem" placeholder="Escreva sua mensagem aqui... Como podemos ajudá-lo?" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary hover-effect">Enviar Mensagem</button>
                 </form>
             </div>
         </section>
@@ -263,21 +353,31 @@
                 <p>Brasil</p>
             </div>
             <div class="footer-right">
-                <a href="https://discord.gg/3aHhvgzGSz" class="social-icon hover-effect"><img
-                        src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/dc.svg"
-                        alt="Discord"></a>
-                <a href="https://x.com/BFTesports" class="social-icon hover-effect"><img
-                        src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/x.svg"
-                        alt="X"></a>
-                <a href="https://youtube.com/@BIGFOOTEsports" class="social-icon hover-effect"><img
-                        src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/yt.svg"
-                        alt="YouTube"></a>
-                <a href="https://twitch.tv/bigfootesports" class="social-icon hover-effect"><img
-                        src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/tw.svg"
-                        alt="Twitch"></a>
-                <a href="https://facebook.com/BIGFOOTEsports" class="social-icon hover-effect"><img
-                        src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/fb.svg"
-                        alt="Facebook"></a>
+                <a href="https://discord.gg/3aHhvgzGSz" class="social-icon discord hover-effect">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z"/>
+                    </svg>
+                </a>
+                <a href="https://x.com/BFTesports" class="social-icon twitter hover-effect">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26l8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                </a>
+                <a href="https://youtube.com/@BIGFOOTEsports" class="social-icon youtube hover-effect">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                    </svg>
+                </a>
+                <a href="https://twitch.tv/bigfootesports" class="social-icon twitch hover-effect">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zm-9.715-2.857L4.003 4.429v15.428h5.143V24l2.572-2.572h4.285L21.14 16.29V1.857zm17.715 13.714l-3.428 3.428h-5.143L13.143 22l-2.572-2.857H3.43V3.429L5.857 1h16.429z"/>
+                    </svg>
+                </a>
+                <a href="https://facebook.com/BIGFOOTEsports" class="social-icon facebook hover-effect">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669c1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                    </svg>
+                </a>
             </div>
         </div>
     </footer>
@@ -288,6 +388,16 @@
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Snowstorm/20131208/snowstorm-min.js"></script>
     <script src="script.js"></script>
+
+    <script>
+        // Função para copiar chave PIX
+        function copyPixKey() {
+            const pixKey = document.getElementById('pix-key').textContent;
+            navigator.clipboard.writeText(pixKey).then(function() {
+                alert('Chave PIX copiada para a área de transferência!');
+            });
+        }
+    </script>
 </body>
 
 </html>

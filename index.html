@@ -24,29 +24,7 @@
         </div>
         <nav>
             <ul class="nav-menu">
-                <li class="dropdown">
-                    <a href="#">📰 Notícias</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/noticias-lol">Notícias de League of Legends</a></li>
-                        <li><a href="/noticias-hots">Notícias de Heroes of the Storm</a></li>
-                        <li><a href="/noticias-tibia">Notícias de Tibia</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#">🏆 Campeonatos</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/lta-sul">LTA Sul 2025</a></li>
-                        <li><a href="/big-cup">BIG Cup 2025</a></li>
-                        <li><a href="/campeonato-hots">Campeonato HotS 2025</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#">👥 Equipes</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/equipe-lol">Equipe de League of Legends</a></li>
-                        <li><a href="/equipe-hots">Equipe de Heroes of the Storm</a></li>
-                    </ul>
-                </li>
+                <li><a href="/equipe-lol">👥 Equipe LoL</a></li>
                 <li><a href="/eventos">📅 Eventos</a></li>
                 <li><a href="/loja">🛒 Loja</a></li>
                 <li><a href="/lanhouse">🖥️ Lan House</a></li>
@@ -126,34 +104,6 @@
                     <h3 class="stat-number" data-target="5">0</h3>
                     <p>Anos de História</p>
                 </div>
-            </div>
-        </section>
-
-        <!-- Eventos -->
-        <section class="events-section reveal">
-            <h2>Eventos Futuros</h2>
-            <div class="events-carousel">
-                <div class="events-content">
-                    <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/camp.jpg"
-                        alt="BIG Cup - Torneio de League of Legends" class="event-image hover-zoom">
-                    <h3>BIG Cup - Torneio de League of Legends</h3>
-                    <p>Venha jogar com a nossa comunidade o melhor torneio amador de League of Legends. Experiência
-                        emocionante!</p>
-                </div>
-                <div class="events-content">
-                    <img src="https://via.placeholder.com/700x300?text=Campeonato+CS2" alt="Campeonato CS2"
-                        class="event-image hover-zoom">
-                    <h3>Campeonato CS2</h3>
-                    <p>Participe do nosso campeonato de Counter-Strike 2 e mostre suas habilidades! Premiação especial
-                        para os vencedores.</p>
-                </div>
-            </div>
-            <div class="subscribe-button-container">
-                <a href="/inscricao" class="btn-primary hover-effect">Inscreva-se</a>
-            </div>
-            <div class="carousel-controls">
-                <button id="prev-event">◄</button>
-                <button id="next-event">►</button>
             </div>
         </section>
 
@@ -239,16 +189,24 @@
                     <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/foto1.jpg"
                         alt="Contato" class="hover-zoom">
                 </div>
-                <form>
-                    <label for="nome-contato">Nome *</label>
-                    <input type="text" id="nome-contato" name="nome-contato" placeholder="Nome" required>
-                    <label for="sobrenome-contato">Sobrenome *</label>
-                    <input type="text" id="sobrenome-contato" name="sobrenome-contato" placeholder="Sobrenome" required>
-                    <label for="email-contato">Email *</label>
-                    <input type="email" id="email-contato" name="email-contato" placeholder="Email" required>
-                    <label for="mensagem">Mensagem *</label>
-                    <textarea id="mensagem" name="mensagem" placeholder="Mensagem" required></textarea>
-                    <button type="submit" class="btn-primary hover-effect">Enviar</button>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label for="nome-contato">Nome *</label>
+                        <input type="text" id="nome-contato" name="nome-contato" placeholder="Digite seu nome" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="sobrenome-contato">Sobrenome *</label>
+                        <input type="text" id="sobrenome-contato" name="sobrenome-contato" placeholder="Digite seu sobrenome" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email-contato">Email *</label>
+                        <input type="email" id="email-contato" name="email-contato" placeholder="Digite seu email" required>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="mensagem">Mensagem *</label>
+                        <textarea id="mensagem" name="mensagem" placeholder="Digite sua mensagem aqui..." rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary hover-effect">Enviar Mensagem</button>
                 </form>
             </div>
         </section>
@@ -288,6 +246,147 @@
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Snowstorm/20131208/snowstorm-min.js"></script>
     <script src="script.js"></script>
+
+    <style>
+        /* Estilos para melhorar o formulário de contato */
+        .contact-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            max-width: 600px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 12px 16px;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            background-color: #fff;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: #a0a0a0;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .contact-form button {
+            grid-column: 1 / -1;
+            justify-self: start;
+            padding: 14px 28px;
+            font-size: 16px;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        /* Responsividade para o formulário */
+        @media (max-width: 768px) {
+            .contact-form {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+            
+            .form-group.full-width {
+                grid-column: 1;
+            }
+            
+            .contact-form button {
+                grid-column: 1;
+                justify-self: stretch;
+            }
+        }
+
+        /* Melhorias no header para alinhamento */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+            align-items: center;
+        }
+
+        .nav-menu li a {
+            text-decoration: none;
+            color: inherit;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu li a:hover {
+            color: #3498db;
+        }
+
+        .login-bar {
+            margin-left: auto;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+            
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .login-bar {
+                margin-left: 0;
+            }
+        }
+    </style>
 </body>
 
 </html>

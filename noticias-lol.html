@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notícias LoL - BIGFOOT Esports</title>
+    <link rel="icon" href="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/favicon.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@600;800&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/noticias-lol.css">
+    <!-- Firebase SDK (versão 9.23.0, compatível com UMD) -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+    <!-- Overlay para efeito visual -->
+    <div class="dark-overlay"></div>
+
+    <!-- Cabeçalho -->
+    <header id="header">
+        <div class="logo">
+            <a href="index.html">
+                <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/logo.jpg"
+                    alt="Logo BIGFOOT Esports" class="logo-jpg">
+                <span>BIGFOOT Esports</span>
+            </a>
+        </div>
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="noticias-lol.html">📰 Notícias LoL</a></li>
+                <li><a href="index.html#loja">🛒 Loja</a></li>
+                <li><a href="index.html#lanhouse">🖥️ Lan House</a></li>
+                <li><a href="index.html#doacao">💰 Doação</a></li>
+                <li><a href="index.html#equipe-lol">👥 Equipe LoL</a></li>
+            </ul>
+            <div class="user-section loading" id="user-section">
+                <!-- Painel de Recompensas -->
+                <div class="rewards-panel" id="rewardsPanel">
+                    <div class="points-display">
+                        <span>💎</span>
+                        <span id="points">0</span>
+                        <span>pontos</span>
+                    </div>
+                    <div class="reading-indicator">
+                        <div class="reading-dot" id="readingDot"></div>
+                        <span id="readingStatus">Parado</span>
+                    </div>
+                </div>
+                
+                <!-- Informações do usuário -->
+                <div class="user-info" id="userInfo">
+                    <img id="userAvatar" class="user-avatar" src="" alt="Avatar">
+                    <span id="userName" class="user-name"></span>
+                    <button id="logout-btn" class="btn-secondary">Sair</button>
+                </div>
+                
+                <!-- Botão de Login -->
+                <button id="login-btn" class="btn-primary">🔐 Entrar</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Modal de Login/Registro -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span id="close-modal" class="close">×</span>
+            
+            <div class="modal-header">
+                <h2>🎮 Bem-vindo!</h2>
+                <p>Faça login para acessar as notícias e ganhar pontos</p>
+            </div>
+            
+            <div class="modal-body">
+                <div class="modal-tabs">
+                    <div class="modal-tab active" data-tab="login">Login</div>
+                    <div class="modal-tab" data-tab="register">Registro</div>
+                </div>
+
+                <!-- Tab de Login -->
+                <div id="login-tab" class="tab-content active">
+                    <form id="login-form">
+                        <div class="form-group">
+                            <label for="login-email">Email</label>
+                            <input type="email" id="login-email" name="email" placeholder="seu@email.com" required>
+                            <span id="login-email-error" class="error-text" style="display: none; color: red; font-size: 12px;"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="login-password">Senha</label>
+                            <input type="password" id="login-password" name="password" placeholder="Sua senha" required>
+                            <span id="login-password-error" class="error-text" style="display: none; color: red; font-size: 12px;"></span>
+                        </div>
+                        <a href="#" id="forgot-password-link" style="display: block; text-align: right; font-size: 12px; color: #667eea; margin-bottom: 15px;">Esqueci minha senha</a>
+                        <button type="submit" class="btn-primary" style="width: 100%; margin-bottom: 15px;">
+                            🚀 Entrar
+                        </button>
+                    </form>
+                    
+                    <button id="google-login" class="btn-google" style="width: 100%;">
+                        <svg width="20" height="20" viewBox="0 0 24 24">
+                            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                        </svg>
+                        Continuar com Google
+                    </button>
+                </div>
+
+                <!-- Tab de Registro -->
+                <div id="register-tab" class="tab-content">
+                    <form id="register-form">
+                        <div class="form-group">
+                            <label for="register-email">Email</label>
+                            <input type="email" id="register-email" name="email" placeholder="seu@email.com" required>
+                            <span id="register-email-error" class="error-text" style="display: none; color: red; font-size: 12px;"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="register-password">Senha</label>
+                            <input type="password" id="register-password" name="password" placeholder="Mínimo 6 caracteres" required>
+                            <span id="register-password-error" class="error-text" style="display: none; color: red; font-size: 12px;"></span>
+                        </div>
+                        <button type="submit" class="btn-primary" style="width: 100%;">
+                            🎯 Criar Conta
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Conteúdo Principal -->
+    <main>
+        <div class="container reveal">
+            <div class="daily-info">
+                <h2>Notícias de League of Legends</h2>
+                <p id="currentDate"></p>
+                <p>Cada artigo completamente lido vale <strong>50 pontos</strong>.</p>
+            </div>
+
+            <!-- Seção para usuários não logados -->
+            <div class="login-required" id="loginRequired">
+                <h3>🔒 Acesso Restrito</h3>
+                <p>Para ler as notícias e ganhar pontos, você precisa fazer login ou criar uma conta.</p>
+                <button class="btn-primary" onclick="document.getElementById('login-btn').click()">
+                    🚀 Fazer Login
+                </button>
+            </div>
+
+            <!-- Loading State -->
+            <div id="loadingState" class="loading">
+                <div class="loading-spinner"></div>
+                <span>Carregando notícias...</span>
+            </div>
+
+            <!-- Error State -->
+            <div id="errorState" class="error-message">
+                <h3>⚠️ Erro ao Carregar Notícias</h3>
+                <p>Não foi possível carregar as notícias no momento.</p>
+                <button onclick="loadDemoNews()" class="btn-primary">🔄 Tentar Novamente</button>
+            </div>
+
+            <!-- Grid de Notícias -->
+            <div class="news-grid" id="newsGrid"></div>
+
+            <!-- Painel de Estatísticas -->
+            <div class="stats-panel" id="statsPanel">
+                <div class="stat-item">
+                    <span class="stat-number" id="totalPoints">0</span>
+                    <span class="stat-label">Total de Pontos</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="articlesRead">0</span>
+                    <span class="stat-label">Artigos Lidos</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="readingTime">0</span>
+                    <span class="stat-label">Tempo Lendo (min)</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="newsLoaded">0</span>
+                    <span class="stat-label">Notícias Carregadas</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal para leitura de artigos -->
+    <div class="modal-article" id="modal">
+        <div class="modal-content-article">
+            <div class="reading-progress" id="readingProgress"></div>
+            <span class="close" id="closeBtn">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <div class="content-body">
+                <div id="modalContent"></div>
+                <div class="article-source" id="articleSource">
+                    <p>📰 Fonte: <a href="#" target="_blank" rel="noopener">Ver discussão no Reddit</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Timer de leitura -->
+    <div class="reading-timer" id="readingTimer">
+        <div>⏱️ Lendo: <span id="timerDisplay">0s</span></div>
+        <div>📈 Progresso: <span id="progressDisplay">0%</span></div>
+    </div>
+
+    <!-- Notificação de recompensa -->
+    <div class="notification" id="notification">
+        🎉 +50 pontos! Artigo completado!
+    </div>
+
+    <!-- Rodapé -->
+    <footer class="reveal">
+        <div class="footer-content">
+            <div class="footer-left">
+                <p><strong>BIGFOOT Esports</strong></p>
+                <p>bigftesports@gmail.com</p>
+                <p>Brasil</p>
+            </div>
+            <div class="footer-right">
+                <a href="https://discord.gg/3aHhvgzGSz" class="social-icon hover-effect">
+                    <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/dc.svg" alt="Discord">
+                </a>
+                <a href="https://x.com/BFTesports" class="social-icon hover-effect">
+                    <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/x.svg" alt="X">
+                </a>
+                <a href="https://youtube.com/@BIGFOOTEsports" class="social-icon hover-effect">
+                    <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/yt.svg" alt="YouTube">
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botão Voltar ao Topo -->
+    <button id="back-to-top" class="back-to-top">⬆</button>
+
+    <!-- Scripts -->
+    <script src="js/auth.js"></script>
+    <script>
+        // Estado global da aplicação
+        let userState = {
+            isLoggedIn: false,
+            points: 0,
+            articlesRead: 0,
+            readingTime: 0,
+            currentUser: null
+        };
+
+        let readingState = {
+            isReading: false,
+            startTime: null,
+            readingProgress: 0,
+            currentArticle: null
+        };
+
+        // Dados de exemplo para notícias
+        const demoNews = [
+            {
+                id: 1,
+                title: "Worlds 2024: Semifinals Analysis and Predictions",
+                excerpt: "The semifinals of the League of Legends World Championship are here! Analysis of team strategies, player performances, and predictions for the upcoming matches.",
+                content: "The semifinals of Worlds 2024 have arrived, bringing incredible tension and excitement to the competitive League of Legends scene. After weeks of intense competition, only four teams remain standing, each with their unique playstyles and strategies that got them this far. T1, the defending champions, continue to show why they're considered one of the greatest teams in League of Legends history. Their mid-game rotations and team fighting prowess have been exceptional throughout the tournament. Faker's performance on champions like Azir and LeBlanc has been nothing short of phenomenal, reminding everyone why he's called the greatest player of all time. On the other side, we have Gen.G showing incredible individual skill and macro understanding. Their bot lane duo has been consistently outperforming opponents in laning phase, creating early advantages that they translate into objective control. The European representatives have also proven that the region is still competitive on the world stage. Their innovative picks and aggressive early game strategies have caught many teams off guard. Finally, the LPL's last hope continues to showcase the region's characteristic team fighting and skirmishing abilities. The upcoming matches promise to be some of the most exciting League of Legends we've seen all year. Each team has shown they deserve their spot, and the level of play has been incredibly high.",
+                source: "r/leagueoflegends",
+                url: "https://reddit.com/r/leagueoflegends",
+                imageUrl: null,
+                points: 50,
+                read: false
+            },
+            {
+                id: 2,
+                title: "New Champion Teaser: Mysterious Mage from the Void",
+                excerpt: "Riot Games releases cryptic teasers for the next champion - appears to be a void-born mage with reality-bending abilities. Release expected next patch.",
+                content: "Riot Games has begun their mysterious champion teaser campaign, and the community is buzzing with theories and speculation. The latest champion appears to be connected to the Void, that terrifying dimension that threatens to consume all of Runeterra. Based on the teaser images and cryptic messages, this new champion seems to be a mage with reality-bending abilities that could fundamentally change how we think about magic in League of Legends. The artistic direction shown in the teasers suggests a champion that exists partially in our reality and partially in the Void itself. This unique positioning could translate into a kit that manipulates space and time, potentially offering new mechanics we haven't seen before in the game. Players are speculating about abilities that could involve teleportation, reality rifts, or even time manipulation. The champion's visual design, from what we can glimpse in the shadowy teasers, appears both elegant and terrifying. The color palette seems to blend deep purples and void-like blacks with ethereal blues and whites, suggesting a being caught between dimensions. This aesthetic choice aligns perfectly with the Void's established visual language while introducing new elements that could expand the region's lore. From a gameplay perspective, a void mage could fill several potential roles. The community is hoping for either a new mid-lane control mage or possibly an innovative support that brings entirely new utility to the bot lane. Either way, Riot's champion design team has consistently delivered unique and engaging kits in recent releases.",
+                source: "r/leagueoflegends",
+                url: "https://reddit.com/r/leagueoflegends",
+                imageUrl: null,
+                points: 50,
+                read: false
+            },
+            {
+                id: 3,
+                title: "Patch 14.22 Meta Analysis: ADC Changes Impact",
+                excerpt: "The latest patch brings significant changes to ADC itemization and several champion adjustments. Professional players share their thoughts on the evolving meta.",
+                content: "Patch 14.22 has brought some of the most significant changes to the ADC role that we've seen all season, and the impact is already being felt across all levels of play. The itemization updates have fundamentally shifted how marksmen approach their builds, with several classic items receiving major overhauls and new options being introduced. The changes to Infinity Edge have been particularly controversial, with its passive now scaling differently with critical strike chance. This adjustment means that ADCs need to reconsider their build paths, especially in terms of when to purchase their third item. Many professional players have noted that the traditional three-item power spike feels different now, requiring adaptations in team fighting timings and objective control. Kraken Slayer's updates have also created interesting dynamics in bot lane trading patterns. The item now provides more consistent damage output against tanks while offering better scaling into the late game. This has made tank supports more viable while simultaneously making positioning even more crucial for ADC players. The ripple effects extend beyond just itemization - several champions have seen their win rates fluctuate significantly as players adapt to these changes. Champions like Jinx and Caitlyn, who were already strong in the previous patch, have seen their power levels adjust as players optimize their new builds. Meanwhile, champions like Kog'Maw and Twitch are experiencing a renaissance as their scaling patterns align better with the new itemization timeline.",
+                source: "r/leagueoflegends",
+                url: "https://reddit.com/r/leagueoflegends",
+                imageUrl: null,
+                points: 50,
+                read: false
+            }
+        ];
+
+        // Funções de utilidade
+        function formatDate() {
+            const today = new Date();
+            const options = { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            };
+            return today.toLocaleDateString('pt-BR', options);
+        }
+
+        function createNewsCard(article) {
+            const card = document.createElement('div');
+            card.className = 'news-card';
+            card.dataset.articleId = article.id;
+            
+            card.innerHTML = `
+                <div class="reading-progress"></div>
+                <div class="news-image placeholder">📰</div>
+                <div class="news-content">
+                    <h3 class="news-title">${article.title}</h3>
+                    <p class="news-excerpt">${article.excerpt}</p>
+                    <div class="news-meta">
+                        <span class="news-source">${article.source}</span>
+                        <span class="reward-badge ${article.read ? 'read' : ''}">${article.read ? '✓ Lido' : '+50 pts'}</span>
+                    </div>
+                </div>
+            `;
+            
+            card.addEventListener('click', () => openArticle(article));
+            return card;
+        }
+
+        function openArticle(article) {
+            const modal = document.getElementById('modal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalContent = document.getElementById('modalContent');
+            const articleSource = document.getElementById('articleSource');
+            
+            modalTitle.textContent = article.title;
+            modalContent.innerHTML = `<p>${article.content}</p>`;
+            articleSource.querySelector('a').href = article.url;
+            
+            modal.style.display = 'block';
+            startReading(article);
+        }
+
+        function startReading(article) {
+            readingState.isReading = true;
+            readingState.startTime = Date.now();
+            readingState.currentArticle = article;
+            readingState.readingProgress = 0;
+            
+            // Atualizar indicadores visuais
+            const readingDot = document.getElementById('readingDot');
+            const readingStatus = document.getElementById('readingStatus');
+            const readingTimer = document.getElementById('readingTimer');
+            
+            readingDot.classList.add('active');
+            readingStatus.textContent = 'Lendo';
+            readingTimer.style.display = 'block';
+            
+            updateReadingProgress();
+        }
+
+        function updateReadingProgress() {
+            if (!readingState.isReading) return;
+            
+            const currentTime = Date.now();
+            const timeReading = currentTime - readingState.startTime;
+            const progressPercent = Math.min((timeReading / 30000) * 100, 100); // 30 segundos para completar
+            
+            readingState.readingProgress = progressPercent;
+            
+            // Atualizar displays
+            document.getElementById('timerDisplay').textContent = `${Math.floor(timeReading / 1000)}s`;
+            document.getElementById('progressDisplay').textContent = `${Math.floor(progressPercent)}%`;
+            document.getElementById('readingProgress').style.width = `${progressPercent}%`;
+            
+            // Verificar se o artigo foi completado
+            if (progressPercent >= 100 && !readingState.currentArticle.read) {
+                completeArticle(readingState.currentArticle);
+            } else if (readingState.isReading) {
+                setTimeout(updateReadingProgress, 100);
+            }
+        }
+
+        async function completeArticle(article) {
+            article.read = true;
+            userState.points += 50;
+            userState.articlesRead += 1;
+            userState.readingTime += 0.5; // 30 segundos = 0.5 minutos
+            
+            // Atualizar Firestore
+            if (window.authSystem.currentUser) {
+                await window.authSystem.updateUserData({
+                    points: window.authSystem.points + 50,
+                    articlesRead: window.authSystem.articlesRead + 1,
+                    totalReadingTime: window.authSystem.totalReadingTime + 0.5,
+                    readArticles: [...window.authSystem.readArticles, article.id]
+                });
+            }
+            
+            // Mostrar notificação
+            const notification = document.getElementById('notification');
+            notification.classList.add('show');
+            setTimeout(() => notification.classList.remove('show'), 3000);
+            
+            // Atualizar estatísticas
+            updateStats();
+            
+            // Atualizar o card do artigo
+            const card = document.querySelector(`[data-article-id="${article.id}"]`);
+            if (card) {
+                const badge = card.querySelector('.reward-badge');
+                badge.textContent = '✓ Lido';
+                badge.classList.add('read');
+            }
+        }
+
+        function stopReading() {
+            readingState.isReading = false;
+            
+            const readingDot = document.getElementById('readingDot');
+            const readingStatus = document.getElementById('readingStatus');
+            const readingTimer = document.getElementById('readingTimer');
+            
+            readingDot.classList.remove('active');
+            readingStatus.textContent = 'Parado';
+            readingTimer.style.display = 'none';
+        }
+
+        function updateStats() {
+            const points = window.authSystem.points || userState.points;
+            const articlesRead = window.authSystem.articlesRead || userState.articlesRead;
+            const readingTime = window.authSystem.totalReadingTime || userState.readingTime;
+            
+            document.getElementById('points').textContent = points;
+            document.getElementById('totalPoints').textContent = points;
+            document.getElementById('articlesRead').textContent = articlesRead;
+            document.getElementById('readingTime').textContent = Math.floor(readingTime);
+            document.getElementById('newsLoaded').textContent = demoNews.length;
+        }
+
+        function loadDemoNews() {
+            if (!window.authSystem.currentUser) return;
+            
+            const newsGrid = document.getElementById('newsGrid');
+            const loadingState = document.getElementById('loadingState');
+            const errorState = document.getElementById('errorState');
+            
+            // Mostrar loading
+            loadingState.classList.add('show');
+            errorState.classList.remove('show');
+            newsGrid.innerHTML = '';
+            
+            // Atualizar demoNews com base nos artigos lidos
+            demoNews.forEach(article => {
+                article.read = window.authSystem.readArticles.includes(article.id);
+            });
+            
+            setTimeout(() => {
+                // Simular carregamento
+                loadingState.classList.remove('show');
+                
+                // Renderizar notícias
+                demoNews.forEach(article => {
+                    const card = createNewsCard(article);
+                    newsGrid.appendChild(card);
+                });
+                
+                updateStats();
+            }, 2000);
+        }
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', function() {
+            // Definir data atual
+            document.getElementById('currentDate').textContent = formatDate();
+            
+            // Configurar modal de artigo
+            const modal = document.getElementById('modal');
+            const closeBtn = document.getElementById('closeBtn');
+            
+            closeBtn?.addEventListener('click', () => {
+                modal.style.display = 'none';
+                stopReading();
+            });
+            
+            window.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                    stopReading();
+                }
+            });
+            
+            // Configurar botão voltar ao topo
+            const backToTop = document.getElementById('back-to-top');
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    backToTop.style.display = 'block';
+                } else {
+                    backToTop.style.display = 'none';
+                }
+            });
+            
+            backToTop?.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+            
+            // Animações de scroll
+            function animateOnScroll() {
+                const reveals = document.querySelectorAll('.reveal');
+                reveals.forEach(reveal => {
+                    const windowHeight = window.innerHeight;
+                    const elementTop = reveal.getBoundingClientRect().top;
+                    const elementVisible = 150;
+                    
+                    if (elementTop < windowHeight - elementVisible) {
+                        reveal.classList.add('visible');
+                    }
+                });
+            }
+            
+            window.addEventListener('scroll', animateOnScroll);
+            animateOnScroll();
+            
+            // Criar flocos de neve
+            function createSnowflakes() {
+                for (let i = 0; i < 50; i++) {
+                    setTimeout(() => {
+                        const snowflake = document.createElement('div');
+                        snowflake.classList.add('snowflake');
+                        snowflake.innerHTML = '❄';
+                        snowflake.style.left = Math.random() * 100 + 'vw';
+                        snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
+                        snowflake.style.fontSize = Math.random() * 10 + 10 + 'px';
+                        document.body.appendChild(snowflake);
+                        
+                        setTimeout(() => {
+                            snowflake.remove();
+                        }, 5000);
+                    }, Math.random() * 2000);
+                }
+            }
+            
+            createSnowflakes();
+            setInterval(createSnowflakes, 10000);
+            
+            // Reagir a eventos de login/logout
+            document.addEventListener('userLoggedIn', () => {
+                userState.isLoggedIn = true;
+                userState.currentUser = window.authSystem.currentUser;
+                userState.points = window.authSystem.points;
+                userState.articlesRead = window.authSystem.articlesRead;
+                userState.readingTime = window.authSystem.totalReadingTime;
+                loadDemoNews();
+            });
+            
+            document.addEventListener('userLoggedOut', () => {
+                userState.isLoggedIn = false;
+                userState.currentUser = null;
+                userState.points = 0;
+                userState.articlesRead = 0;
+                userState.readingTime = 0;
+                document.getElementById('newsGrid').innerHTML = '';
+                updateStats();
+            });
+        });
+
+        // Expor função global para recarregar notícias
+        window.loadDemoNews = loadDemoNews;
+    </script>
+</body>
+</html>

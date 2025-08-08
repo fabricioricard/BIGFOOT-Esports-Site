@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equipe LoL - BIGFOOT Esports</title>
+    <link rel="icon" href="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/favicon.ico" type="image/x-icon">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@600;800&family=Poppins:wght@400;600&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            background-color: #f8f9fa;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            line-height: 1.6;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        main {
+            flex: 1 0 auto;
+        }
+
+        /* Efeito de Neve */
+        .snowflake {
+            position: fixed;
+            top: -10px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1em;
+            animation: fall linear infinite;
+            z-index: 1;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Animações */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .no-js .reveal {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Efeito de Hover */
+        .hover-effect {
+            transition: all 0.3s ease;
+        }
+
+        .hover-effect:hover {
+            transform: translateY(-5px);
+        }
+
+        .hover-zoom {
+            transition: transform 0.5s ease, filter 0.3s ease;
+        }
+
+        .hover-zoom:hover {
+            filter: brightness(1.1);
+            transform: scale(1.1);
+        }
+
+        /* Botões */
+        .btn-primary {
+            background: linear-gradient(45deg, #1a73e8, #34c0eb);
+            border-radius: 50px;
+            box-shadow: 0 5px 15px rgba(26, 115, 232, 0.3);
+            color: #fff;
+            display: inline-block;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            overflow: hidden;
+            padding: 14px 28px;
+            position: relative;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(45deg, #1557b0, #2a9fd6);
+            box-shadow: 0 8px 20px rgba(26, 115, 232, 0.5);
+            transform: translateY(-5px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid #1a73e8;
+            border-radius: 50px;
+            color: #1a73e8;
+            display: inline-block;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            padding: 12px 26px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: #1a73e8;
+            box-shadow: 0 8px 20px rgba(26, 115, 232, 0.3);
+            color: #fff;
+            transform: translateY(-5px);
+        }
+
+        /* Cabeçalho */
+        header {
+            align-items: center;
+            background: linear-gradient(90deg, #d6e4f0, #e0e7ef);
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            position: sticky;
+            top: 0;
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .scrolled {
+            background: linear-gradient(90deg, #d6e4f0, #e0e7ef);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .scrolled .nav-menu li a {
+            color: #1a73e8;
+        }
+
+        .scrolled .logo span {
+            color: #1a73e8;
+        }
+
+        .logo {
+            align-items: center;
+            display: flex;
+            gap: 10px;
+        }
+
+        .logo a {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .logo-jpg {
+            height: 40px;
+            width: 40px;
+            transition: transform 0.5s ease, filter 0.3s ease;
+        }
+
+        .logo-jpg:hover {
+            transform: scale(1.1);
+            filter: brightness(1.2);
+        }
+
+        .logo span {
+            margin: 0;
+            color: #1a73e8;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 30px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            line-height: 1;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            list-style: none;
+            margin: 0;
+            gap: 15px;
+        }
+
+        .nav-menu li a {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+            color: #444;
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            position: relative;
+            text-decoration: none;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .nav-menu li a::after {
+            background: #1a73e8;
+            bottom: -5px;
+            content: '';
+            height: 2px;
+            left: 0;
+            position: absolute;
+            transition: width 0.3s ease;
+            width: 0;
+        }
+
+        .nav-menu li a:hover::after {
+            width: 100%;
+        }
+
+        .nav-menu li a:hover {
+            color: #1a73e8;
+            transform: translateY(-2px);
+        }
+
+        .nav-menu li a.active {
+            color: #1a73e8;
+        }
+
+        .nav-menu li a.active::after {
+            width: 100%;
+        }
+
+        .login-bar {
+            margin-left: auto;
+        }
+
+        .login-bar button {
+            background: linear-gradient(45deg, #1a73e8, #34c0eb);
+            border: none;
+            border-radius: 50px;
+            color: #fff;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            padding: 10px 20px;
+            transition: all 0.3s ease;
+        }
+
+        .login-bar button:hover {
+            background: linear-gradient(45deg, #1557b0, #2a9fd6);
+            box-shadow: 0 5px 15px rgba(26, 115, 232, 0.3);
+            transform: translateY(-3px);
+        }
+
+        /* Modal de Login */
+        .modal {
+            animation: fadeIn 0.5s ease;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: none;
+            height: 100%;
+            left: 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1001;
+        }
+
+        .modal-content {
+            animation: slideInTop 0.5s ease;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            margin: 10% auto;
+            max-width: 450px;
+            padding: 30px;
+            position: relative;
+            width: 90%;
+        }
+
+        @keyframes slideInTop {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .close {
+            color: #666;
+            cursor: pointer;
+            font-size: 28px;
+            position: absolute;
+            right: 25px;
+            top: 15px;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .close:hover {
+            color: #1a73e8;
+            transform: rotate(90deg);
+        }
+
+        .modal-content h2 {
+            color: #1a73e8;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 28px;
+            margin-bottom: 25px;
+            text-align: center;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .modal-content form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-content label {
+            color: #444;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .modal-content input {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            margin-bottom: 20px;
+            outline: none;
+            padding: 12px;
+            transition: border 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .modal-content input:focus {
+            border-color: #1a73e8;
+            box-shadow: 0 0 8px rgba(26, 115, 232, 0.2);
+        }
+
+        .modal-content button {
+            background: linear-gradient(45deg, #1a73e8, #34c0eb);
+            border: none;
+            border-radius: 50px;
+            color: #fff;
+            cursor: pointer;
+            font-weight: 600;
+            padding: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .modal-content button:hover {
+            background: linear-gradient(45deg, #1557b0, #2a9fd6);
+            box-shadow: 0 5px 15px rgba(26, 115, 232, 0.3);
+            transform: translateY(-3px);
+        }
+
+        .modal-links {
+            margin-top: 15px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .modal-link {
+            display: inline-block;
+            margin: 5px 10px;
+            color: #1a73e8;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            text-align: center;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .modal-link:hover {
+            color: #1557b0;
+            text-decoration: underline;
+        }
+
+        /* Hero Section */
+        .page-hero {
+            background: linear-gradient(135deg, #1a73e8, #34c0eb);
+            color: #fff;
+            padding: 100px 20px 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" fill-opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" fill-opacity="0.1"/><circle cx="50" cy="10" r="1" fill="white" fill-opacity="0.1"/><circle cx="10" cy="90" r="1" fill="white" fill-opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .page-hero-content {
+            position: relative;
+            z-index: 2;
+            animation: fadeIn 1s ease;
+        }
+
+        .page-hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .page-hero p {
+            font-family: 'Poppins', sans-serif;
+            font-size: 20px;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Seção de Jogadores */
+        .players-detailed-section {
+            background: linear-gradient(135deg, #ffffff, #f8f9fa);
+            padding: 80px 20px;
+        }
+
+        .players-detailed-section h2 {
+            color: #1a73e8;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 40px;
+            font-weight: 800;
+            margin-bottom: 60px;
+            text-align: center;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .players-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .player-card {
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .player-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .player-image {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .player-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .player-card:hover .player-image img {
+            transform: scale(1.1);
+        }
+
+        .player-position {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(45deg, #1a73e8, #34c0eb);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .player-info {
+            padding: 25px;
+        }
+
+        .player-name {
+            color: #1a73e8;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .player-real-name {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        .player-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .stat-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1a73e8;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        /* Seção de Conquistas */
+        .achievements-section {
+            background: linear-gradient(135deg, #1a73e8, #34c0eb);
+            color: #fff;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .achievements-section h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 40px;
+            font-weight: 800;
+            margin-bottom: 60px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .achievement-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .achievement-item:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .achievement-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .achievement-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .achievement-description {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* Seção de Recrutamento */
+        .recruitment-section {
+            background: linear-gradient(135deg, #ffffff, #f8f9fa);
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .recruitment-section h2 {
+            color: #1a73e8;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 40px;
+            font-weight: 800;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .recruitment-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .recruitment-content p {
+            color: #666;
+            font-family: 'Poppins', sans-serif;
+            font-size: 18px;
+            margin-bottom: 30px;
+            line-height: 1.7;
+        }
+
+        .requirements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .requirement-item {
+            background: #fff;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .requirement-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .requirement-icon {
+            font-size: 32px;
+            color: #1a73e8;
+            margin-bottom: 15px;
+        }
+
+        .requirement-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a73e8;
+            margin-bottom: 10px;
+        }
+
+        .requirement-description {
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* Rodapé */
+        footer {
+            background: linear-gradient(90deg, #1a73e8, #34c0eb);
+            color: #fff;
+            flex-shrink: 0;
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .footer-content {
+            align-items: center;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin: 0 auto;
+            max-width: 1200px;
+            gap: 30px;
+            width: 100%;
+        }
+
+        .footer-left p {
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            margin: 10px 0;
+            opacity: 0.9;
+        }
+
+        .footer-right {
+            display: flex;
+            gap: 20px;
+        }
+
+        .social-icon img {
+            height: 40px;
+            transition: transform 0.5s ease, filter 0.3s ease;
+            width: 40px;
+        }
+
+        .social-icon:hover img {
+            filter: brightness(1.3);
+            transform: rotate(360deg);
+        }
+
+        /* Botão Voltar ao Topo */
+        .back-to-top {
+            background: linear-gradient(45deg, #1a73e8, #34c0eb);
+            border: none;
+            border-radius: 50%;
+            bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            color: #fff;
+            cursor: pointer;
+            display: none;
+            font-size: 24px;
+            height: 50px;
+            position: fixed;
+            right: 30px;
+            transition: all 0.3s ease;
+            width: 50px;
+            z-index: 1000;
+        }
+
+        .back-to-top:hover {
+            background: linear-gradient(45deg, #1557b0, #2a9fd6);
+            transform: scale(1.2);
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .page-hero h1 {
+                font-size: 36px;
+            }
+
+            .page-hero p {
+                font-size: 16px;
+            }
+
+            header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .login-bar {
+                margin-left: 0;
+            }
+
+            .nav-menu li a {
+                font-size: 14px;
+            }
+
+            .players-grid,
+            .achievements-grid,
+            .requirements-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .player-stats {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .players-detailed-section h2,
+            .achievements-section h2,
+            .recruitment-section h2 {
+                font-size: 32px;
+            }
+
+            .recruitment-content p {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Cabeçalho -->
+    <header id="header">
+        <div class="logo">
+            <a href="/">
+                <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/logo.jpg"
+                    alt="Logo BIGFOOT Esports" class="logo-jpg">
+                <span>BIGFOOT Esports</span>
+            </a>
+        </div>
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="/noticias-lol">📰 Notícias LoL</a></li>
+                <li><a href="/loja">🛒 Loja</a></li>
+                <li><a href="/lanhouse">🖥️ Lan House</a></li>
+                <li><a href="/doacao">💰 Doação</a></li>
+                <li><a href="/equipe-lol" class="active">👥 Equipe LoL</a></li>
+            </ul>
+            <div class="login-bar">
+                <button id="login-btn" class="btn-primary">Login</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Modal de Login -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span id="close-modal" class="close">×</span>
+            <h2>Login</h2>
+            <form id="login-form">
+                <label for="username">Usuário</label>
+                <input type="text" id="username" name="username" placeholder="Usuário" required>
+                <label for="password">Senha</label>
+                <input type="password" id="password" name="password" placeholder="Senha" required>
+                <button type="submit" class="btn-primary">Entrar</button>
+            </form>
+            <div class="modal-links">
+                <a href="/registrar" class="modal-link">Registrar</a>
+                <a href="/recuperar-senha" class="modal-link">Recuperar Senha</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Conteúdo Principal -->
+    <main>
+        <!-- Hero Section -->
+        <section class="page-hero">
+            <div class="page-hero-content">
+                <h1>Equipe League of Legends</h1>
+                <p>Conheça os guerreiros que representam a BIGFOOT Esports nos Rifts de Runeterra. Juntos, buscamos a excelência e a vitória em cada partida.</p>
+            </div>
+        </section>
+
+        <!-- Seção de Jogadores -->
+        <section class="players-detailed-section reveal">
+            <h2>Nossos Jogadores</h2>
+            <div class="players-grid">
+                <div class="player-card hover-effect">
+                    <div class="player-image">
+                        <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/ghibli1.jpg" alt="Fabrício Ricard" class="hover-zoom">
+                        <div class="player-position">Top Lane</div>
+                    </div>
+                    <div class="player-info">
+                        <div class="player-name">BigFoot</div>
+                        <div class="player-real-name">Fabrício Ricard</div>
+                        <p>Veterano da equipe, especialista em champions tanques e carry de topo. Lidera pelo exemplo com sua experiência e game sense apurado.</p>
+                        <div class="player-stats">
+                            <div class="stat-item">
+                                <span class="stat-value">Diamond</span>
+                                <span class="stat-label">Elo Atual</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-value">5</span>
+                                <span class="stat-label">Anos de Experiência</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="player-card hover-effect">
+                    <div class="player-image">
+                        <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/ghibli2.jpg" alt="Yan Renat" class="hover-zoom">
+                        <div class="player-position">ADC</div>
+                    </div>
+                    <div class="player-info">
+                        <div class="player-name">Renat</div>
+                        <div class="player-real-name">Yan Renat</div>
+                        <p>Atirador principal da equipe, conhecido por suas jogadas precisas e posicionamento impecável nas team fights decisivas.</p>
+                        <div class="player-stats">
+                            <div class="stat-item">
+                                <span class="stat-value">Platinum</span>
+                                <span class="stat-label">Elo Atual</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-value">4</span>
+                                <span class="stat-label">Anos de Experiência</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="player-card hover-effect">
+                    <div class="player-image">
+                        <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/ghibli1.jpg" alt="Jogador 3" class="hover-zoom">
+                        <div class="player-position">Mid Lane</div>
+                    </div>
+                    <div class="player-info">
+                        <div class="player-name">ShadowMid</div>
+                        <div class="player-real-name">Em busca de talento</div>
+                        <p>Posição em aberto! Estamos procurando um mid laner talentoso para completar nossa lineup. Será você o próximo a vestir a camisa da BIGFOOT?</p>
+                        <div class="player-stats">
+                            <div class="stat-item">
+                                <span class="stat-value">Gold+</span>
+                                <span class="stat-label">Elo Mínimo</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-value">?</span>
+                                <span class="stat-label">Aguardando</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="player-card hover-effect">
+                    <div class="player-image">
+                        <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/ghibli2.jpg" alt="Jogador 4" class="hover-zoom">
+                        <div class="player-position">Jungle</div>
+                    </div>
+                    <div class="player-info">
+                        <div class="player-name">WildHunter</div>
+                        <div class="player-real-name">Em busca de talento</div>
+                        <p>Vaga disponível para um jungler estratégico! Procuramos alguém com visão de jogo e capacidade de controlar o mapa.</p>
+                        <div class="player-stats">
+                            <div class="stat-item">
+                                <span class="stat-value">Gold+</span>
+                                <span class="stat-label">Elo Mínimo</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-value">?</span>
+                                <span class="stat-label">Aguardando</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="player-card hover-effect">
+                    <div class="player-image">
+                        <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/ghibli1.jpg" alt="Jogador 5" class="hover-zoom">
+                        <div class="player-position">Support</div>
+                    </div>
+                    <div class="player-info">
+                        <div class="player-name">Guardian</div>
+                        <div class="player-real-name">Em busca de talento</div>
+                        <p>Buscamos um support dedicado! Alguém que saiba proteger o carry e fazer as calls certas nos momentos decisivos.</p>
+                        <div class="player-stats">
+                            <div class="stat-item">
+                                <span class="stat-value">Gold+</span>
+                                <span class="stat-label">Elo Mínimo</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-value">?</span>
+                                <span class="stat-label">Aguardando</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="/" class="btn-secondary hover-effect">⬅ Voltar ao Início</a>
+            </div>
+        </section>
+
+        <!-- Seção de Conquistas -->
+        <section class="achievements-section reveal">
+            <h2>Nossas Conquistas</h2>
+            <div class="achievements-grid">
+                <div class="achievement-item hover-effect">
+                    <span class="achievement-icon">🏆</span>
+                    <div class="achievement-title">BIG Cup 2023</div>
+                    <div class="achievement-description">Campeões do nosso próprio torneio, demonstrando domínio em casa</div>
+                </div>
+                <div class="achievement-item hover-effect">
+                    <span class="achievement-icon">🥈</span>
+                    <div class="achievement-title">Torneio Regional</div>
+                    <div class="achievement-description">Vice-campeões em competição com mais de 32 equipes</div>
+                </div>
+                <div class="achievement-item hover-effect">
+                    <span class="achievement-icon">⭐</span>
+                    <div class="achievement-title">Melhor Evolução</div>
+                    <div class="achievement-description">Prêmio de equipe que mais evoluiu no ano de 2023</div>
+                </div>
+                <div class="achievement-item hover-effect">
+                    <span class="achievement-icon">🎯</span>
+                    <div class="achievement-title">5 Vitórias Seguidas</div>
+                    <div class="achievement-description">Sequência invicta em campeonatos amadores</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Recrutamento -->
+        <section class="recruitment-section reveal">
+            <h2>Junte-se à Nossa Equipe</h2>
+            <div class="recruitment-content">
+                <p>A BIGFOOT Esports está sempre em busca de novos talentos para completar nossa roster de League of Legends. Se você tem paixão pelo jogo e quer fazer parte de uma equipe séria e comprometida, esta é sua chance!</p>
+                <div class="requirements-grid">
+                    <div class="requirement-item hover-effect">
+                        <div class="requirement-icon">🎮</div>
+                        <div class="requirement-title">Skill Mínimo</div>
+                        <div class="requirement-description">Elo Gold ou superior, com conhecimento sólido do meta atual</div>
+                    </div>
+                    <div class="requirement-item hover-effect">
+                        <div class="requirement-icon">⏰</div>
+                        <div class="requirement-title">Disponibilidade</div>
+                        <div class="requirement-description">Treinos 3x por semana, horários de 19h às 22h</div>
+                    </div>
+                    <div class="requirement-item hover-effect">
+                        <div class="requirement-icon">🎤</div>
+                        <div class="requirement-title">Comunicação</div>
+                        <div class="requirement-description">Microfone funcional e boa comunicação em equipe</div>
+                    </div>
+                    <div class="requirement-item hover-effect">
+                        <div class="requirement-icon">🏃</div>
+                        <div class="requirement-title">Dedicação</div>
+                        <div class="requirement-description">Comprometimento com treinos e competições</div>
+                    </div>
+                </div>
+                <p>Interessado? Entre em contato conosco através do Discord ou envie um e-mail para <strong>bigftesports@gmail.com</strong> com seu nick, elo atual e posição preferida.</p>
+                <div style="margin-top: 30px;">
+                    <a href="https://discord.gg/3aHhvgzGSz" class="btn-primary hover-effect">Entrar no Discord</a>
+                    <a href="mailto:bigftesports@gmail.com" class="btn-secondary hover-effect">Enviar E-mail</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="reveal">
+        <div class="footer-content">
+            <div class="footer-left">
+                <p>BIGFOOT Esports</p>
+                <p>bigftesports@gmail.com</p>
+                <p>Brasil</p>
+            </div>
+            <div class="footer-right">
+                <a href="https://discord.gg/3aHhvgzGSz" class="social-icon hover-effect"><img
+                        src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/dc.svg"
+                        alt="Discord"></a>
+                <a href="https://x.com/BFTesports" class="social-icon hover-effect"><img
+                        src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/x.svg"
+                        alt="X"></a>
+                <a href="https://youtube.com/@BIGFOOTEsports" class="social-icon hover-effect"><img
+                        src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/yt.svg"
+                        alt="YouTube"></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botão Voltar ao Topo -->
+    <button id="back-to-top" class="back-to-top">⬆</button>
+
+    <script>
+        // Efeito de Neve
+        function createSnowflake() {
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+            snowflake.innerHTML = '❄';
+            snowflake.style.left = Math.random() * 100 + 'vw';
+            snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
+            snowflake.style.opacity = Math.random();
+            snowflake.style.fontSize = Math.random() * 10 + 10 + 'px';
+            
+            document.body.appendChild(snowflake);
+            
+            setTimeout(() => {
+                snowflake.remove();
+            }, 5000);
+        }
+
+        setInterval(createSnowflake, 300);
+
+        // Modal de Login
+        const loginBtn = document.getElementById('login-btn');
+        const loginModal = document.getElementById('login-modal');
+        const closeModal = document.getElementById('close-modal');
+
+        if (loginBtn && loginModal && closeModal) {
+            loginBtn.addEventListener('click', () => {
+                loginModal.style.display = 'block';
+            });
+
+            closeModal.addEventListener('click', () => {
+                loginModal.style.display = 'none';
+            });
+
+            window.addEventListener('click', (e) => {
+                if (e.target === loginModal) {
+                    loginModal.style.display = 'none';
+                }
+            });
+        }
+
+        const loginForm = document.getElementById('login-form');
+        if (loginForm) {
+            loginForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                alert('Login realizado com sucesso! (Funcionalidade de exemplo)');
+                loginModal.style.display = 'none';
+            });
+        }
+
+        // Scroll Reveal
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealOnScroll = () => {
+            revealElements.forEach(element => {
+                const windowHeight = window.innerHeight;
+                const elementTop = element.getBoundingClientRect().top;
+                const revealPoint = 100;
+
+                if (elementTop < windowHeight - revealPoint && !element.classList.contains('visible')) {
+                    element.classList.add('visible');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll();
+
+        // Efeito de Transparência no Cabeçalho ao Rolar
+        const header = document.getElementById('header');
+        if (header) {
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+        }
+
+        // Botão Voltar ao Topo
+        const backToTopBtn = document.getElementById('back-to-top');
+        if (backToTopBtn) {
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    backToTopBtn.style.display = 'block';
+                } else {
+                    backToTopBtn.style.display = 'none';
+                }
+            });
+
+            backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+    </script>
+</body>
+</html>

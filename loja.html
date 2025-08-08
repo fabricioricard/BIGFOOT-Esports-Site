@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja - BIGFOOT Esports</title>
+    <link rel="icon" href="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/favicon.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@600;800&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/loja.css">
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js"></script>
+</head>
+<body>
+    <!-- Cabeçalho -->
+    <header id="header">
+        <div class="logo">
+            <a href="/">
+                <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/logo.jpg" alt="Logo BIGFOOT Esports" class="logo-jpg">
+                <span>BIGFOOT Esports</span>
+            </a>
+        </div>
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="/noticias-lol">📰 Notícias LoL</a></li>
+                <li><a href="/loja" class="active">🛒 Loja</a></li>
+                <li><a href="/lanhouse">🖥️ Lan House</a></li>
+                <li><a href="/doacao">💰 Doação</a></li>
+                <li><a href="/equipe-lol">👥 Equipe LoL</a></li>
+            </ul>
+            <div class="user-section loading" id="user-section">
+                <div class="user-info" id="userInfo">
+                    <img id="userAvatar" class="user-avatar" src="" alt="Avatar">
+                    <span id="userName" class="user-name"></span>
+                    <button id="logout-btn" class="btn-secondary">Sair</button>
+                </div>
+                <button id="login-btn" class="btn-primary">🔐 Login</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Modal de Login -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span id="close-modal" class="close">×</span>
+            <div class="modal-tabs">
+                <div class="modal-tab active" data-tab="login">Login</div>
+                <div class="modal-tab" data-tab="register">Registrar</div>
+            </div>
+            <div id="login-tab" class="tab-content active">
+                <h2>Login</h2>
+                <form id="login-form">
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" name="email" placeholder="Email" required>
+                    <span id="login-email-error" class="error-text"></span>
+                    <label for="login-password">Senha</label>
+                    <input type="password" id="login-password" name="password" placeholder="Senha" required>
+                    <span id="login-password-error" class="error-text"></span>
+                    <button type="submit" class="btn-primary">Entrar</button>
+                </form>
+                <button id="google-login" class="btn-primary" style="margin-top: 10px;">Login com Google</button>
+                <div class="modal-links">
+                    <a href="#" id="forgot-password-link" class="modal-link">Esqueci minha senha</a>
+                </div>
+            </div>
+            <div id="register-tab" class="tab-content">
+                <h2>Registrar</h2>
+                <form id="register-form">
+                    <label for="register-email">Email</label>
+                    <input type="email" id="register-email" name="email" placeholder="Email" required>
+                    <span id="register-email-error" class="error-text"></span>
+                    <label for="register-password">Senha</label>
+                    <input type="password" id="register-password" name="password" placeholder="Senha" required>
+                    <span id="register-password-error" class="error-text"></span>
+                    <button type="submit" class="btn-primary">Registrar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Carrinho Flutuante -->
+    <button class="cart-icon" id="cart-btn">
+        🛒
+        <span class="cart-count" id="cart-count">0</span>
+    </button>
+
+    <!-- Modal do Carrinho -->
+    <div id="cart-modal" class="cart-modal">
+        <div class="cart-modal-content">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h3 style="color: #1a73e8; font-family: 'Montserrat', sans-serif;">Meu Carrinho</h3>
+                <span class="close" id="close-cart">×</span>
+            </div>
+            <div id="cart-items"></div>
+            <div class="cart-total">
+                <div class="cart-total-price">Total: R$ <span id="cart-total">0,00</span></div>
+                <button class="btn-primary" style="margin-top: 20px; width: 100%;">Finalizar Compra</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Conteúdo Principal -->
+    <main>
+        <!-- Hero Section da Página -->
+        <section class="page-hero">
+            <div class="page-hero-content">
+                <h1>Loja BIGFOOT Esports</h1>
+                <p>Vista as cores da BIGFOOT! Encontre produtos exclusivos, equipamentos gamer e muito mais para mostrar seu apoio à nossa equipe.</p>
+            </div>
+        </section>
+
+        <!-- Seção de Categorias -->
+        <section class="categories-section reveal">
+            <h2>Categorias</h2>
+            <div class="categories-grid">
+                <div class="category-card hover-effect" data-category="roupas">
+                    <span class="category-icon">👕</span>
+                    <div class="category-name">Roupas</div>
+                    <div class="category-count">8 produtos</div>
+                </div>
+                <div class="category-card hover-effect" data-category="acessorios">
+                    <span class="category-icon">🎧</span>
+                    <div class="category-name">Acessórios</div>
+                    <div class="category-count">6 produtos</div>
+                </div>
+                <div class="category-card hover-effect" data-category="equipamentos">
+                    <span class="category-icon">🖱️</span>
+                    <div class="category-name">Equipamentos</div>
+                    <div class="category-count">4 produtos</div>
+                </div>
+                <div class="category-card hover-effect" data-category="colecao">
+                    <span class="category-icon">⭐</span>
+                    <div class="category-name">Coleção Limitada</div>
+                    <div class="category-count">3 produtos</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Filtros -->
+        <section class="shop-filters reveal">
+            <div class="filter-container">
+                <div class="filter-group">
+                    <label for="category-filter">Categoria:</label>
+                    <select id="category-filter" class="filter-select">
+                        <option value="all">Todas</option>
+                        <option value="roupas">Roupas</option>
+                        <option value="acessorios">Acessórios</option>
+                        <option value="equipamentos">Equipamentos</option>
+                        <option value="colecao">Coleção Limitada</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="price-filter">Preço:</label>
+                    <select id="price-filter" class="filter-select">
+                        <option value="all">Todos</option>
+                        <option value="0-50">R$ 0 - 50</option>
+                        <option value="50-100">R$ 50 - 100</option>
+                        <option value="100-200">R$ 100 - 200</option>
+                        <option value="200+">R$ 200+</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="sort-filter">Ordenar por:</label>
+                    <select id="sort-filter" class="filter-select">
+                        <option value="name">Nome</option>
+                        <option value="price-low">Menor preço</option>
+                        <option value="price-high">Maior preço</option>
+                        <option value="newest">Mais recente</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        <!-- Produtos -->
+        <section class="products-section reveal">
+            <div class="products-grid">
+                <!-- Produto 1 -->
+                <div class="product-card hover-effect" data-category="roupas" data-price="120">
+                    <div class="product-image">
+                        <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/image3.jpg" alt="Moletom BIGFOOT" class="hover-zoom">
+                        <div class="product-badge new">Novo</div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Moletom Confortável BIGFOOT</div>
+                        <div class="product-description">Moletom premium com capuz, perfeito para os dias frios. Material de alta qualidade com logo bordado.</div>
+                        <div class="product-price">
+                            <span class="current-price">R$ 120,00</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn-primary btn-small add-to-cart-btn" data-name="Moletom Confortável BIGFOOT" data-price="120" data-image="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/image3.jpg">Adicionar ao Carrinho</button>
+                            <button class="wishlist-btn">❤</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produto 2 -->
+                <div class="product-card hover-effect" data-category="equipamentos" data-price="120">
+                    <div class="product-image">
+                        <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/image10.jpg" alt="Mouse Gamer" class="hover-zoom">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Mouse Gamer Ergonômico</div>
+                        <div class="product-description">Mouse gamer de alta precisão com sensor óptico avançado. Design ergonômico para longas sessões de jogo.</div>
+                        <div class="product-price">
+                            <span class="current-price">R$ 120,00</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn-primary btn-small add-to-cart-btn" data-name="Mouse Gamer Ergonômico" data-price="120" data-image="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/image10.jpg">Adicionar ao Carrinho</button>
+                            <button class="wishlist-btn">❤</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produto 3 -->
+                <div class="product-card hover-effect" data-category="acessorios" data-price="20">
+                    <div class="product-image">
+                        <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/image6.jpg" alt="Meias BIGFOOT" class="hover-zoom">
+                        <div class="product-badge sale">Oferta</div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Meias Estilosas BIGFOOT</div>
+                        <div class="product-description">Meias confortáveis com design exclusivo da BIGFOOT. Material respirável e durável.</div>
+                        <div class="product-price">
+                            <span class="current-price">R$ 20,00</span>
+                            <span class="old-price">R$ 30,00</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn-primary btn-small add-to-cart-btn" data-name="Meias Estilosas BIGFOOT" data-price="20" data-image="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/image6.jpg">Adicionar ao Carrinho</button>
+                            <button class="wishlist-btn">❤</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produto 4 -->
+                <div class="product-card hover-effect" data-category="roupas" data-price="120">
+                    <div class="product-image">
+                        <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/image4.jpg" alt="Jaqueta BIGFOOT" class="hover-zoom">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Jaqueta Leve BIGFOOT</div>
+                        <div class="product-description">Jaqueta leve e estilosa para o dia a dia. Material resistente ao vento com detalhes exclusivos.</div>
+                        <div class="product-price">
+                            <span class="current-price">R$ 120,00</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn-primary btn-small add-to-cart-btn" data-name="Jaqueta Leve BIGFOOT" data-price="120" data-image="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/image4.jpg">Adicionar ao Carrinho</button>
+                            <button class="wishlist-btn">❤</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produto 5 -->
+                <div class="product-card hover-effect" data-category="roupas" data-price="80">
+                    <div class="product-image">
+                        <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/image3.jpg" alt="Camiseta BIGFOOT" class="hover-zoom">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Camiseta Team BIGFOOT</div>
+                        <div class="product-description">Camiseta oficial da equipe com tecido dry-fit. Ideal para treinos e competições.</div>
+                        <div class="product-price">
+                            <span class="current-price">R$ 80,00</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn-primary btn-small add-to-cart-btn" data-name="Camiseta Team BIGFOOT" data-price="80" data-image="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/image3.jpg">Adicionar ao Carrinho</button>
+                            <button class="wishlist-btn">❤</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produto 6 -->
+                <div class="product-card hover-effect" data-category="acessorios" data-price="150">
+                    <div class="product-image">
+                        <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/image10.jpg" alt="Headset Gamer" class="hover-zoom">
+                        <div class="product-badge new">Novo</div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Headset Gamer Pro</div>
+                        <div class="product-description">Headset profissional com áudio surround 7.1. Microfone com cancelamento de ruído.</div>
+                        <div class="product-price">
+                            <span class="current-price">R$ 150,00</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn-primary btn-small add-to-cart-btn" data-name="Headset Gamer Pro" data-price="150" data-image="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/image10.jpg">Adicionar ao Carrinho</button>
+                            <button class="wishlist-btn">❤</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="reveal">
+        <div class="footer-content">
+            <div class="footer-left">
+                <p>BIGFOOT Esports</p>
+                <p>bigftesports@gmail.com</p>
+                <p>Brasil</p>
+            </div>
+            <div class="footer-right">
+                <a href="https://discord.gg/3aHhvgzGSz" class="social-icon hover-effect"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/dc.svg" alt="Discord"></a>
+                <a href="https://x.com/BFTesports" class="social-icon hover-effect"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/x.svg" alt="X"></a>
+                <a href="https://youtube.com/@BIGFOOTEsports" class="social-icon hover-effect"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/yt.svg" alt="YouTube"></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botão Voltar ao Topo -->
+    <button id="back-to-top" class="back-to-top">⬆</button>
+
+    <!-- Scripts -->
+    <script src="js/auth.js"></script>
+    <script>
+        // Efeito de Neve
+        function createSnowflake() {
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+            snowflake.innerHTML = '❄';
+            snowflake.style.left = Math.random() * 100 + 'vw';
+            snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
+            snowflake.style.opacity = Math.random();
+            snowflake.style.fontSize = Math.random() * 10 + 10 + 'px';
+            
+            document.body.appendChild(snowflake);
+            
+            setTimeout(() => {
+                snowflake.remove();
+            }, 5000);
+        }
+
+        setInterval(createSnowflake, 300);
+
+        // Carrinho de compras
+        let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+
+        // Carrinho
+        const cartBtn = document.getElementById('cart-btn');
+        const cartModal = document.getElementById('cart-modal');
+        const closeCart = document.getElementById('close-cart');
+        const cartCount = document.getElementById('cart-count');
+        const cartItems = document.getElementById('cart-items');
+        const cartTotal = document.getElementById('cart-total');
+
+        cartBtn.addEventListener('click', () => {
+            cartModal.style.display = 'block';
+            updateCartDisplay();
+        });
+
+        closeCart.addEventListener('click', () => {
+            cartModal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === cartModal) {
+                cartModal.style.display = 'none';
+            }
+        });
+
+        // Adicionar ao carrinho
+        document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const name = btn.getAttribute('data-name');
+                const price = parseFloat(btn.getAttribute('data-price'));
+                const image = btn.getAttribute('data-image');
+
+                const existingItem = cart.find(item => item.name === name);
+                if (existingItem) {
+                    existingItem.quantity += 1;
+                } else {
+                    cart.push({ name, price, image, quantity: 1 });
+                }
+
+                localStorage.setItem('cart', JSON.stringify(cart));
+                updateCartCount();
+                btn.textContent = 'Adicionado!';
+                btn.style.background = '#10ac84';
+                
+                setTimeout(() => {
+                    btn.textContent = 'Adicionar ao Carrinho';
+                    btn.style.background = '';
+                }, 1000);
+            });
+        });
+
+        // Wishlist
+        document.querySelectorAll('.wishlist-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                btn.classList.toggle('active');
+                if (btn.classList.contains('active')) {
+                    btn.innerHTML = '❤️';
+                } else {
+                    btn.innerHTML = '❤';
+                }
+            });
+        });
+
+        function updateCartCount() {
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartCount.textContent = totalItems;
+        }
+
+        function updateCartDisplay() {
+            cartItems.innerHTML = '';
+            let total = 0;
+
+            cart.forEach(item => {
+                total += item.price * item.quantity;
+                cartItems.innerHTML += `
+                    <div class="cart-item">
+                        <img src="${item.image}" alt="${item.name}">
+                        <div class="cart-item-info">
+                            <div class="cart-item-name">${item.name}</div>
+                            <div class="cart-item-price">R$ ${item.price.toFixed(2)} x ${item.quantity}</div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            cartTotal.textContent = total.toFixed(2);
+        }
+
+        // Filtros
+        const categoryFilter = document.getElementById('category-filter');
+        const priceFilter = document.getElementById('price-filter');
+        const sortFilter = document.getElementById('sort-filter');
+        const productCards = document.querySelectorAll('.product-card');
+
+        function filterProducts() {
+            const categoryValue = categoryFilter.value;
+            const priceValue = priceFilter.value;
+            const sortValue = sortFilter.value;
+
+            let visibleProducts = Array.from(productCards);
+
+            // Filtro por categoria
+            if (categoryValue !== 'all') {
+                visibleProducts = visibleProducts.filter(card => 
+                    card.getAttribute('data-category') === categoryValue
+                );
+            }
+
+            // Filtro por preço
+            if (priceValue !== 'all') {
+                visibleProducts = visibleProducts.filter(card => {
+                    const price = parseFloat(card.getAttribute('data-price'));
+                    switch (priceValue) {
+                        case '0-50': return price >= 0 && price <= 50;
+                        case '50-100': return price > 50 && price <= 100;
+                        case '100-200': return price > 100 && price <= 200;
+                        case '200+': return price > 200;
+                        default: return true;
+                    }
+                });
+            }
+
+            // Ocultar todos os produtos
+            productCards.forEach(card => {
+                card.style.display = 'none';
+            });
+
+            // Mostrar produtos filtrados
+            visibleProducts.forEach(card => {
+                card.style.display = 'block';
+            });
+
+            // Ordenação
+            const productsGrid = document.querySelector('.products-grid');
+            if (sortValue !== 'name') {
+                visibleProducts.sort((a, b) => {
+                    const priceA = parseFloat(a.getAttribute('data-price'));
+                    const priceB = parseFloat(b.getAttribute('data-price'));
+                    
+                    switch (sortValue) {
+                        case 'price-low': return priceA - priceB;
+                        case 'price-high': return priceB - priceA;
+                        case 'newest': return 0; // Manter ordem original para "newest"
+                        default: return 0;
+                    }
+                });
+
+                // Reordenar no DOM
+                visibleProducts.forEach(card => {
+                    productsGrid.appendChild(card);
+                });
+            }
+        }
+
+        categoryFilter.addEventListener('change', filterProducts);
+        priceFilter.addEventListener('change', filterProducts);
+        sortFilter.addEventListener('change', filterProducts);
+
+        // Filtro por categoria via cards
+        document.querySelectorAll('.category-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const category = card.getAttribute('data-category');
+                categoryFilter.value = category;
+                filterProducts();
+                
+                // Scroll para a seção de produtos
+                document.querySelector('.products-section').scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Scroll Reveal
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealOnScroll = () => {
+            revealElements.forEach(element => {
+                const windowHeight = window.innerHeight;
+                const elementTop = element.getBoundingClientRect().top;
+                const revealPoint = 100;
+
+                if (elementTop < windowHeight - revealPoint && !element.classList.contains('visible')) {
+                    element.classList.add('visible');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll();
+
+        // Efeito de Transparência no Cabeçalho ao Rolar
+        const header = document.getElementById('header');
+        if (header) {
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+        }
+
+        // Botão Voltar ao Topo
+        const backToTopBtn = document.getElementById('back-to-top');
+        if (backToTopBtn) {
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    backToTopBtn.style.display = 'block';
+                } else {
+                    backToTopBtn.style.display = 'none';
+                }
+            });
+
+            backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+
+        // Inicializar contagem do carrinho
+        updateCartCount();
+
+        // Evitar erro de smooth scroll para links com href="#"
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Lógica para "Esqueci minha senha" (exemplo)
+        document.getElementById('forgot-password-link').addEventListener('click', (e) => {
+            e.preventDefault();
+            alert('Funcionalidade de redefinição de senha em desenvolvimento.');
+        });
+    </script>
+</body>
+</html>

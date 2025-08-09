@@ -103,8 +103,7 @@ class NewsSystem {
             
             this.setupEventListeners();
             this.setupAuthListeners();
-            await this.checkInitialAuthState();
-            
+            // Não chamar checkInitialAuthState aqui para evitar flash
             this.isInitialized = true;
             console.log("NewsSystem: Inicializado com sucesso");
         } catch (error) {
@@ -138,7 +137,7 @@ class NewsSystem {
             }
         } catch (error) {
             console.error("NewsSystem: Erro ao verificar estado inicial:", error);
-            this.handleUserLogout();
+            this.showError("Erro ao verificar autenticação");
         }
     }
 
@@ -246,6 +245,7 @@ class NewsSystem {
         const loadingState = document.getElementById('loadingState');
         const newsGrid = document.getElementById('newsGrid');
         const errorState = document.getElementById('errorState');
+        const loginRequired = document.getElementById('loginRequired');
         
         if (loadingState) {
             loadingState.classList.add('show');
@@ -255,6 +255,9 @@ class NewsSystem {
         }
         if (errorState) {
             errorState.classList.remove('show');
+        }
+        if (loginRequired) {
+            loginRequired.classList.add('hidden'); // Garantir que loginRequired não apareça durante o carregamento
         }
     }
 
@@ -283,12 +286,16 @@ class NewsSystem {
         const errorState = document.getElementById('errorState');
         const loadingState = document.getElementById('loadingState');
         const newsGrid = document.getElementById('newsGrid');
+        const loginRequired = document.getElementById('loginRequired');
         
         if (loadingState) {
             loadingState.classList.remove('show');
         }
         if (newsGrid) {
             newsGrid.classList.add('hidden');
+        }
+        if (loginRequired) {
+            loginRequired.classList.add('hidden');
         }
         if (errorState) {
             errorState.classList.add('show');
@@ -299,12 +306,16 @@ class NewsSystem {
     renderNews() {
         const newsGrid = document.getElementById('newsGrid');
         const loadingState = document.getElementById('loadingState');
+        const loginRequired = document.getElementById('loginRequired');
         
         if (loadingState) {
             loadingState.classList.remove('show');
         }
         if (newsGrid) {
             newsGrid.classList.remove('hidden');
+        }
+        if (loginRequired) {
+            loginRequired.classList.add('hidden');
         }
         
         if (!newsGrid || !this.newsData.length) return;
@@ -474,6 +485,8 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log("NewsSystem: Inicializando...");
             window.newsSystem = new NewsSystem();
         }
+        // Chamar checkInitialAuthState após a inicialização
+        window.newsSystem.checkInitialAuthState();
     }, 200);
 });
 

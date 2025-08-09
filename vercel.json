@@ -1,64 +1,14 @@
 {
-  "rewrites": [
+  "builds": [
     {
-      "source": "/",
-      "destination": "/index.html"
-    },
+      "src": "*.html",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
     {
-      "source": "/noticias-lol",
-      "destination": "/noticias-lol.html"
-    },
-    {
-      "source": "/noticias-hots",
-      "destination": "/noticias-hots.html"
-    },
-    {
-      "source": "/noticias-tibia",
-      "destination": "/noticias-tibia.html"
-    },
-    {
-      "source": "/lta-sul",
-      "destination": "/lta-sul.html"
-    },
-    {
-      "source": "/big-cup",
-      "destination": "/big-cup.html"
-    },
-    {
-      "source": "/campeonato-hots",
-      "destination": "/campeonato-hots.html"
-    },
-    {
-      "source": "/equipe-lol",
-      "destination": "/equipe-lol.html"
-    },
-    {
-      "source": "/equipe-hots",
-      "destination": "/equipe-hots.html"
-    },
-    {
-      "source": "/eventos",
-      "destination": "/eventos.html"
-    },
-    {
-      "source": "/loja",
-      "destination": "/loja.html"
-    },
-    {
-      "source": "/lanhouse",
-      "destination": "/lanhouse.html"
-    },
-    {
-      "source": "/doacao",
-      "destination": "/doacao.html"
-    },
-    {
-      "source": "/registrar",
-      "destination": "/registrar.html"
-    },
-    {
-      "source": "/recuperar-senha",
-      "destination": "/recuperar-senha.html"
+      "src": "/(.*)",
+      "dest": "/index.html"
     }
   ]
 }

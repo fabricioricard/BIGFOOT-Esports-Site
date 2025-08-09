@@ -1689,203 +1689,199 @@
 <script src="js/auth.js"></script>
 <script src="js/news-system.js"></script>
 <script>
-    // Estado global da aplicação
-    let userState = {
-        isLoggedIn: false,
-        points: 0,
-        articlesRead: 0,
-        readingTime: 0,
-        currentUser: null
+// Estado global da aplicação
+let userState = {
+    isLoggedIn: false,
+    points: 0,
+    articlesRead: 0,
+    readingTime: 0,
+    currentUser: null
+};
+
+// Funções de utilidade
+function formatDate() {
+    const today = new Date();
+    const options = { 
+        weekday: 'long', 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric' 
     };
+    return today.toLocaleDateString('pt-BR', options);
+}
 
-    // Funções de utilidade
-    function formatDate() {
-        const today = new Date();
-        const options = { 
-            weekday: 'long', 
-            year: 'numeric', 
-            month: 'long', 
-            day: 'numeric' 
-        };
-        return today.toLocaleDateString('pt-BR', options);
+function updateStats() {
+    const points = (window.bigFootAuth && window.bigFootAuth.points) || userState.points;
+    const articlesRead = (window.bigFootAuth && window.bigFootAuth.articlesRead) || userState.articlesRead;
+    const readingTime = (window.bigFootAuth && window.bigFootAuth.totalReadingTime) || userState.readingTime;
+    
+    document.getElementById('totalPoints').textContent = points;
+    document.getElementById('articlesRead').textContent = articlesRead;
+    document.getElementById('readingTime').textContent = Math.floor(readingTime);
+    document.getElementById('newsLoaded').textContent = window.newsSystem?.newsData?.length || 0;
+    document.getElementById('points').textContent = points;
+    document.getElementById('userPoints').textContent = `${points} pontos`;
+}
+
+function updateUIForLoggedUser(user) {
+    const userSection = document.getElementById('user-section');
+    const userInfo = document.getElementById('userInfo');
+    const userName = document.getElementById('userName');
+    const userAvatar = document.getElementById('userAvatar');
+    const rewardsPanel = document.getElementById('rewardsPanel');
+    const statsPanel = document.getElementById('statsPanel');
+    const newsGrid = document.getElementById('newsGrid');
+    const loginRequired = document.getElementById('loginRequired');
+    
+    userState.isLoggedIn = true;
+    userState.currentUser = user;
+    userState.points = window.bigFootAuth.points || 0;
+    userState.articlesRead = window.bigFootAuth.articlesRead || 0;
+    userState.readingTime = window.bigFootAuth.totalReadingTime || 0;
+    
+    userSection.classList.add('logged-in');
+    userSection.classList.remove('loading');
+    userInfo.classList.add('logged-in');
+    rewardsPanel.classList.add('logged-in');
+    statsPanel.classList.remove('hidden');
+    newsGrid.classList.remove('hidden');
+    loginRequired.classList.add('hidden');
+    
+    // Atualizar nome do usuário
+    const displayName = user.displayName || user.email?.split('@')[0] || 'Usuário';
+    userName.textContent = displayName;
+    userName.classList.add('gradient');
+    
+    // Atualizar avatar com fallback para inicial
+    if (user.photoURL) {
+        userAvatar.src = user.photoURL;
+        userAvatar.alt = `Avatar de ${displayName}`;
+    } else {
+        const initials = displayName.charAt(0).toUpperCase();
+        userAvatar.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&size=36&background=667eea&color=ffffff`;
+        userAvatar.alt = `Avatar de ${displayName}`;
     }
-
-    function updateStats() {
-        const points = (window.bigFootAuth && window.bigFootAuth.points) || userState.points;
-        const articlesRead = (window.bigFootAuth && window.bigFootAuth.articlesRead) || userState.articlesRead;
-        const readingTime = (window.bigFootAuth && window.bigFootAuth.totalReadingTime) || userState.readingTime;
-        
-        document.getElementById('totalPoints').textContent = points;
-        document.getElementById('articlesRead').textContent = articlesRead;
-        document.getElementById('readingTime').textContent = Math.floor(readingTime);
-        document.getElementById('newsLoaded').textContent = window.newsSystem?.newsData?.length || 0;
-        document.getElementById('points').textContent = points;
-        document.getElementById('userPoints').textContent = `${points} pontos`;
+    
+    // Carregar notícias
+    if (window.newsSystem) {
+        window.newsSystem.loadNews();
     }
+    updateStats();
+}
 
-    function updateUIForLoggedUser(user) {
-        const userSection = document.getElementById('user-section');
-        const userInfo = document.getElementById('userInfo');
-        const userName = document.getElementById('userName');
-        const userAvatar = document.getElementById('userAvatar');
-        const rewardsPanel = document.getElementById('rewardsPanel');
-        const statsPanel = document.getElementById('statsPanel');
-        const newsGrid = document.getElementById('newsGrid');
-        const loginRequired = document.getElementById('loginRequired');
-        
-        userState.isLoggedIn = true;
-        userState.currentUser = user;
-        userState.points = window.bigFootAuth.points || 0;
-        userState.articlesRead = window.bigFootAuth.articlesRead || 0;
-        userState.readingTime = window.bigFootAuth.totalReadingTime || 0;
-        
-        userSection.classList.add('logged-in');
-        userSection.classList.remove('loading');
-        userInfo.classList.add('logged-in');
-        rewardsPanel.classList.add('logged-in');
-        statsPanel.classList.remove('hidden');
-        newsGrid.classList.remove('hidden');
-        loginRequired.classList.add('hidden');
-        
-        if (user.displayName) {
-            userName.textContent = user.displayName;
-            userName.classList.add('gradient');
-        } else if (user.email) {
-            userName.textContent = user.email.split('@')[0];
-            userName.classList.add('gradient');
-        }
-        
-        if (user.photoURL) {
-            userAvatar.src = user.photoURL;
-            userAvatar.alt = `Avatar de ${user.displayName || 'usuário'}`;
+function updateUIForLoggedOutUser() {
+    const userSection = document.getElementById('user-section');
+    const userInfo = document.getElementById('userInfo');
+    const rewardsPanel = document.getElementById('rewardsPanel');
+    const statsPanel = document.getElementById('statsPanel');
+    const newsGrid = document.getElementById('newsGrid');
+    const loginRequired = document.getElementById('loginRequired');
+    
+    userState.isLoggedIn = false;
+    userState.currentUser = null;
+    userState.points = 0;
+    userState.articlesRead = 0;
+    userState.readingTime = 0;
+    
+    userSection.classList.remove('logged-in', 'loading');
+    userInfo.classList.remove('logged-in');
+    rewardsPanel.classList.remove('logged-in');
+    statsPanel.classList.add('hidden');
+    newsGrid.classList.add('hidden');
+    loginRequired.classList.remove('hidden');
+    
+    newsGrid.innerHTML = '';
+    updateStats();
+}
+
+// Inicialização
+document.addEventListener('DOMContentLoaded', function() {
+    // Definir data atual
+    document.getElementById('currentDate').textContent = formatDate();
+    
+    // Configurar botão voltar ao topo
+    const backToTop = document.getElementById('back-to-top');
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+            backToTop.style.display = 'block';
         } else {
-            const name = user.displayName || user.email.split('@')[0];
-            const initials = name.charAt(0).toUpperCase();
-            userAvatar.src = `https://via.placeholder.com/36x36/667eea/ffffff?text=${initials}`;
-            userAvatar.alt = `Avatar de ${name}`;
-        }
-        
-        // Carregar notícias via newsSystem
-        if (window.newsSystem) {
-            window.newsSystem.loadNews();
-        }
-        updateStats();
-    }
-
-    function updateUIForLoggedOutUser() {
-        const userSection = document.getElementById('user-section');
-        const userInfo = document.getElementById('userInfo');
-        const rewardsPanel = document.getElementById('rewardsPanel');
-        const statsPanel = document.getElementById('statsPanel');
-        const newsGrid = document.getElementById('newsGrid');
-        const loginRequired = document.getElementById('loginRequired');
-        
-        userState.isLoggedIn = false;
-        userState.currentUser = null;
-        userState.points = 0;
-        userState.articlesRead = 0;
-        userState.readingTime = 0;
-        
-        userSection.classList.remove('logged-in', 'loading');
-        userInfo.classList.remove('logged-in');
-        rewardsPanel.classList.remove('logged-in');
-        statsPanel.classList.add('hidden');
-        newsGrid.classList.add('hidden');
-        loginRequired.classList.remove('hidden');
-        
-        newsGrid.innerHTML = '';
-        updateStats();
-    }
-
-    // Inicialização
-    document.addEventListener('DOMContentLoaded', function() {
-        // Definir data atual
-        document.getElementById('currentDate').textContent = formatDate();
-        
-        // Configurar botão voltar ao topo
-        const backToTop = document.getElementById('back-to-top');
-        window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 300) {
-                backToTop.style.display = 'block';
-            } else {
-                backToTop.style.display = 'none';
-            }
-        });
-        
-        backToTop?.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-        
-        // Animações de scroll
-        function animateOnScroll() {
-            const reveals = document.querySelectorAll('.reveal');
-            reveals.forEach(reveal => {
-                const windowHeight = window.innerHeight;
-                const elementTop = reveal.getBoundingClientRect().top;
-                const elementVisible = 150;
-                
-                if (elementTop < windowHeight - elementVisible) {
-                    reveal.classList.add('visible');
-                }
-            });
-        }
-        
-        window.addEventListener('scroll', animateOnScroll);
-        animateOnScroll();
-        
-        // Criar flocos de neve
-        function createSnowflakes() {
-            for (let i = 0; i < 30; i++) {
-                setTimeout(() => {
-                    const snowflake = document.createElement('div');
-                    snowflake.classList.add('snowflake');
-                    snowflake.innerHTML = '❄';
-                    snowflake.style.left = Math.random() * 100 + 'vw';
-                    snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
-                    snowflake.style.fontSize = Math.random() * 10 + 10 + 'px';
-                    document.body.appendChild(snowflake);
-                    
-                    setTimeout(() => {
-                        snowflake.remove();
-                    }, 5000);
-                }, Math.random() * 2000);
-            }
-        }
-        
-        createSnowflakes();
-        setInterval(createSnowflakes, 15000);
-        
-        // Aguardar inicialização do sistema de autenticação
-        if (window.bigFootAuth) {
-            window.bigFootAuth.waitForInit().then(() => {
-                window.bigFootAuth.addAuthListener(user => {
-                    if (user) {
-                        // Carregar dados do usuário do Firestore
-                        firebase.firestore().collection('users').doc(user.uid).get().then(doc => {
-                            if (doc.exists) {
-                                window.bigFootAuth.points = doc.data().points || 0;
-                                window.bigFootAuth.articlesRead = doc.data().articlesRead || 0;
-                                window.bigFootAuth.totalReadingTime = doc.data().totalReadingTime || 0;
-                                window.bigFootAuth.readArticles = doc.data().readArticles || [];
-                            }
-                            updateUIForLoggedUser(user);
-                        }).catch(error => {
-                            console.error('Erro ao carregar dados do usuário:', error);
-                            updateUIForLoggedOutUser();
-                        });
-                    } else {
-                        updateUIForLoggedOutUser();
-                    }
-                });
-            }).catch(error => {
-                console.error('Erro ao inicializar autenticação:', error);
-                updateUIForLoggedOutUser();
-            });
-        } else {
-            console.error('bigFootAuth não está definido.');
-            updateUIForLoggedOutUser();
+            backToTop.style.display = 'none';
         }
     });
+    
+    backToTop?.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    
+    // Animações de scroll
+    function animateOnScroll() {
+        const reveals = document.querySelectorAll('.reveal');
+        reveals.forEach(reveal => {
+            const windowHeight = window.innerHeight;
+            const elementTop = reveal.getBoundingClientRect().top;
+            const elementVisible = 150;
+            
+            if (elementTop < windowHeight - elementVisible) {
+                reveal.classList.add('visible');
+            }
+        });
+    }
+    
+    window.addEventListener('scroll', animateOnScroll);
+    animateOnScroll();
+    
+    // Criar flocos de neve
+    function createSnowflakes() {
+        for (let i = 0; i < 30; i++) {
+            setTimeout(() => {
+                const snowflake = document.createElement('div');
+                snowflake.classList.add('snowflake');
+                snowflake.innerHTML = '❄';
+                snowflake.style.left = Math.random() * 100 + 'vw';
+                snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
+                snowflake.style.fontSize = Math.random() * 10 + 10 + 'px';
+                document.body.appendChild(snowflake);
+                
+                setTimeout(() => {
+                    snowflake.remove();
+                }, 5000);
+            }, Math.random() * 2000);
+        }
+    }
+    
+    createSnowflakes();
+    setInterval(createSnowflakes, 15000);
+    
+    // Aguardar inicialização do sistema de autenticação
+    if (window.bigFootAuth) {
+        window.bigFootAuth.waitForInit().then(() => {
+            window.bigFootAuth.addAuthListener(user => {
+                if (user) {
+                    firebase.firestore().collection('users').doc(user.uid).get().then(doc => {
+                        if (doc.exists) {
+                            window.bigFootAuth.points = doc.data().points || 0;
+                            window.bigFootAuth.articlesRead = doc.data().articlesRead || 0;
+                            window.bigFootAuth.totalReadingTime = doc.data().totalReadingTime || 0;
+                            window.bigFootAuth.readArticles = doc.data().readArticles || [];
+                        }
+                        updateUIForLoggedUser(user);
+                    }).catch(error => {
+                        console.error('Erro ao carregar dados do usuário:', error);
+                        updateUIForLoggedOutUser();
+                    });
+                } else {
+                    updateUIForLoggedOutUser();
+                }
+            });
+        }).catch(error => {
+            console.error('Erro ao inicializar autenticação:', error);
+            updateUIForLoggedOutUser();
+        });
+    } else {
+        console.error('bigFootAuth não está definido.');
+        updateUIForLoggedOutUser();
+    }
+});
 </script>
 </body>
 </html>

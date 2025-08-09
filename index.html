@@ -72,6 +72,7 @@
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            padding-top: 80px; /* Added to prevent content from being hidden under fixed header */
         }
 
         /* ===== 2. TYPOGRAPHY & FONTS ===== */
@@ -184,8 +185,7 @@
         .user-section {
             display: flex;
             align-items: center;
-            gap: var(--spacing-md);
-            position: relative;
+            gap: var(--spacing-sm);
             flex-shrink: 0;
         }
 
@@ -199,7 +199,7 @@
             border-radius: var(--radius-xl);
             padding: var(--spacing-sm) var(--spacing-md);
             transition: all var(--transition-normal);
-            max-width: 250px;
+            max-width: 300px;
             cursor: pointer;
         }
 
@@ -243,6 +243,7 @@
             font-weight: var(--font-weight-medium);
             color: var(--text-secondary);
             line-height: 1.2;
+            max-width: 150px;
         }
 
         .user-name.gradient {
@@ -416,15 +417,16 @@
         .header-container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: var(--spacing-md) var(--spacing-lg);
+            padding: var(--spacing-sm) var(--spacing-lg);
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
+            min-height: 60px;
         }
 
         .logo {
-            align-items: center;
             display: flex;
+            align-items: center;
             gap: var(--spacing-sm);
             flex-shrink: 0;
         }
@@ -437,8 +439,9 @@
         }
 
         .logo-jpg {
-            height: 40px;
-            width: 40px;
+            width: 48px;
+            height: 48px;
+            object-fit: contain; /* Changed from cover to contain to prevent cropping */
             border-radius: 50%;
             transition: transform var(--transition-slow), filter var(--transition-normal);
         }
@@ -451,7 +454,7 @@
         .logo span {
             margin: 0;
             font-family: 'Montserrat', sans-serif;
-            font-size: 28px;
+            font-size: 24px;
             font-weight: 800;
             letter-spacing: 1px;
             line-height: 1;
@@ -462,10 +465,8 @@
         }
 
         nav {
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-lg);
             flex-grow: 1;
+            display: flex;
             justify-content: center;
         }
 
@@ -474,6 +475,7 @@
             align-items: center;
             list-style: none;
             margin: 0;
+            padding: 0;
             gap: var(--spacing-md);
         }
 
@@ -502,6 +504,8 @@
         .user-section {
             justify-content: flex-end;
             min-width: 200px;
+            max-width: 350px;
+            flex-shrink: 0;
         }
 
         .login-btn {
@@ -1024,12 +1028,13 @@
             }
 
             header {
-                padding: var(--spacing-sm) var(--spacing-md);
+                padding: var(--spacing-xs) var(--spacing-md);
             }
 
             .header-container {
                 flex-direction: column;
                 gap: var(--spacing-sm);
+                padding: var(--spacing-sm) var(--spacing-md);
             }
 
             nav {
@@ -1044,15 +1049,14 @@
             }
 
             .user-section {
-                flex-direction: row;
                 justify-content: center;
-                gap: var(--spacing-sm);
                 min-width: unset;
+                max-width: 100%;
+                padding: var(--spacing-sm) 0;
             }
 
             .user-info {
-                padding: 5px 10px;
-                max-width: 180px;
+                max-width: 250px;
             }
 
             .user-name {
@@ -1130,11 +1134,20 @@
             }
 
             .user-info {
-                max-width: 140px;
+                max-width: 200px;
             }
 
             .user-name {
                 max-width: 100px;
+            }
+
+            .logo span {
+                font-size: 20px;
+            }
+
+            .logo-jpg {
+                width: 40px;
+                height: 40px;
             }
         }
 
@@ -1250,7 +1263,7 @@
                     <li><a href="equipe-lol.html">👥 Equipe LoL</a></li>
                 </ul>
             </nav>
-            <div class="user-section">
+            <div class="user-section" id="user-section">
                 <button id="login-btn" class="btn btn-primary login-btn">🔐 Login</button>
                 <div class="user-info" id="userInfo">
                     <img id="userAvatar" class="user-avatar" src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/default-avatar.png" alt="Avatar">

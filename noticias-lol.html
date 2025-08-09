@@ -250,7 +250,6 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: var(--shadow-light);
             transition: all var(--transition-normal);
-            padding: 20px;
         }
 
         .header-container {
@@ -259,13 +258,16 @@
             justify-content: space-between;
             max-width: 1400px;
             margin: 0 auto;
+            padding: var(--spacing-md) var(--spacing-xl);
             width: 100%;
+            min-height: 80px;
         }
 
         .logo {
             display: flex;
             align-items: center;
             gap: var(--spacing-sm);
+            flex-shrink: 0;
         }
 
         .logo a {
@@ -290,7 +292,7 @@
 
         .logo span {
             font-family: var(--font-heading);
-            font-size: 28px;
+            font-size: 24px;
             font-weight: var(--weight-extrabold);
             letter-spacing: 1px;
             line-height: 1;
@@ -300,10 +302,10 @@
             background-clip: text;
         }
 
-        nav {
+        .nav-center {
+            flex: 1;
             display: flex;
-            align-items: center;
-            gap: var(--spacing-lg);
+            justify-content: center;
         }
 
         .nav-menu {
@@ -327,6 +329,7 @@
             transition: all var(--transition-normal);
             position: relative;
             overflow: hidden;
+            white-space: nowrap;
         }
 
         .nav-menu li a::before {
@@ -339,7 +342,8 @@
             border-radius: inherit;
         }
 
-        .nav-menu li a:hover::before {
+        .nav-menu li a:hover::before,
+        .nav-menu li a.active::before {
             opacity: 0.1;
         }
 
@@ -355,6 +359,7 @@
             align-items: center;
             gap: var(--spacing-md);
             position: relative;
+            flex-shrink: 0;
         }
 
         .user-section.loading::after {
@@ -383,7 +388,7 @@
             border-radius: var(--radius-2xl);
             padding: var(--spacing-sm) var(--spacing-md);
             transition: all var(--transition-normal);
-            max-width: 220px;
+            max-width: 250px;
             cursor: pointer;
         }
 
@@ -402,10 +407,11 @@
             height: 36px;
             border-radius: var(--radius-full);
             border: 2px solid transparent;
-            background: var(--primary-gradient) border-box;
+            background: var(--primary-gradient);
             box-shadow: 0 0 12px rgba(102, 126, 234, 0.3);
             object-fit: cover;
             transition: all var(--transition-normal);
+            flex-shrink: 0;
         }
 
         .user-avatar:hover {
@@ -413,12 +419,19 @@
             box-shadow: 0 0 16px rgba(102, 126, 234, 0.4);
         }
 
+        .user-details {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            flex: 1;
+        }
+
         .user-name {
             font-family: var(--font-family);
             font-size: var(--font-sm);
             font-weight: var(--weight-medium);
             color: var(--text-secondary);
-            max-width: 150px;
+            line-height: 1.2;
         }
 
         .user-name.gradient {
@@ -426,6 +439,12 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+        }
+
+        .user-points {
+            font-size: var(--font-xs);
+            color: var(--text-muted);
+            font-weight: var(--weight-medium);
         }
 
         .rewards-panel {
@@ -503,7 +522,7 @@
         .btn-primary {
             background: var(--primary-gradient);
             color: white;
-            padding: 14px 28px;
+            padding: 12px 24px;
             border-radius: var(--radius-full);
             box-shadow: var(--shadow-primary);
             font-size: var(--font-sm);
@@ -537,9 +556,9 @@
             background: transparent;
             color: var(--primary-color);
             border: 2px solid var(--primary-color);
-            padding: var(--spacing-sm) var(--spacing-md);
+            padding: 8px 16px;
             border-radius: var(--radius-full);
-            font-size: var(--font-sm);
+            font-size: var(--font-xs);
         }
 
         .btn-secondary:hover {
@@ -1010,6 +1029,29 @@
             animation: slideInRight var(--transition-fast) ease;
         }
 
+        .close {
+            position: absolute;
+            top: var(--spacing-md);
+            right: var(--spacing-md);
+            font-size: 28px;
+            font-weight: bold;
+            color: rgba(255, 255, 255, 0.8);
+            cursor: pointer;
+            z-index: 10;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-full);
+            transition: all var(--transition-normal);
+        }
+
+        .close:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
         .modal-article {
             position: fixed;
             inset: 0;
@@ -1185,7 +1227,11 @@
         /* ===== 11. RESPONSIVE DESIGN ===== */
         @media (max-width: 1024px) {
             .container {
-                padding: 0 var(--spacing-lg);
+                padding: var(--spacing-xl) var(--spacing-lg);
+            }
+            
+            .header-container {
+                padding: var(--spacing-md) var(--spacing-lg);
             }
         }
 
@@ -1195,41 +1241,46 @@
                 --spacing-2xl: 32px;
             }
 
-            header {
+            .header-container {
                 flex-direction: column;
                 gap: var(--spacing-md);
                 padding: var(--spacing-md);
             }
 
-            .header-container {
-                flex-direction: column;
-                gap: var(--spacing-md);
-            }
-
-            nav {
-                flex-direction: column;
-                gap: var(--spacing-md);
+            .nav-center {
+                order: 2;
+                width: 100%;
             }
 
             .nav-menu {
                 flex-wrap: wrap;
                 justify-content: center;
-                gap: var(--spacing-md);
-            }
-
-            .user-section {
-                justify-content: center;
                 gap: var(--spacing-sm);
             }
 
+            .nav-menu li a {
+                font-size: var(--font-xs);
+                padding: var(--spacing-xs) var(--spacing-sm);
+            }
+
+            .user-section {
+                order: 3;
+                justify-content: center;
+                gap: var(--spacing-sm);
+                width: 100%;
+            }
+
             .user-info {
-                padding: 5px 10px;
-                max-width: 180px;
+                padding: var(--spacing-xs) var(--spacing-sm);
+                max-width: 200px;
             }
 
             .user-name {
                 font-size: var(--font-xs);
-                max-width: 120px;
+            }
+
+            .user-points {
+                font-size: 10px;
             }
 
             .user-avatar {
@@ -1248,10 +1299,12 @@
 
             .news-grid {
                 grid-template-columns: 1fr;
+                gap: var(--spacing-lg);
             }
 
             .stats-panel {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr);
+                gap: var(--spacing-md);
             }
 
             .modal-content,
@@ -1269,6 +1322,10 @@
         }
 
         @media (max-width: 480px) {
+            .logo span {
+                font-size: var(--font-lg);
+            }
+
             .modal-tabs {
                 margin-bottom: var(--spacing-lg);
             }
@@ -1283,11 +1340,7 @@
             }
 
             .user-info {
-                max-width: 140px;
-            }
-
-            .user-name {
-                max-width: 100px;
+                max-width: 180px;
             }
 
             .news-title {
@@ -1296,6 +1349,10 @@
 
             .news-excerpt {
                 font-size: var(--font-sm);
+            }
+
+            .stats-panel {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -1399,28 +1456,34 @@
 
     <!-- Cabeçalho -->
     <header id="header">
-        <div class="logo">
-            <a href="index.html">
-                <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/logo.jpg"
-                    alt="Logo BIGFOOT Esports" class="logo-jpg">
-                <span>BIGFOOT Esports</span>
-            </a>
-        </div>
-        <nav>
-            <ul class="nav-menu">
-                    <li><a href="noticias-lol.html" aria-label="Ir para notícias de League of Legends">📰 Notícias LoL</a></li>
-                    <li><a href="loja.html" class="active" aria-label="Ir para a loja">🛒 Loja</a></li>
-                    <li><a href="lan-house.html" aria-label="Ir para a página da Lan House">🖥️ Lan House</a></li>
-                    <li><a href="doacao.html" aria-label="Ir para a página de doações">💰 Doação</a></li>
-                    <li><a href="equipe-lol.html" aria-label="Ir para a página da equipe de League of Legends">👥 Equipe LoL</a></li>
-                </ul>
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/logo.jpg"
+                        alt="Logo BIGFOOT Esports" class="logo-jpg">
+                    <span>BIGFOOT Esports</span>
+                </a>
+            </div>
+            
+            <div class="nav-center">
+                <nav>
+                    <ul class="nav-menu">
+                        <li><a href="noticias-lol.html" class="active" aria-label="Ir para notícias de League of Legends">📰 Notícias LoL</a></li>
+                        <li><a href="loja.html" aria-label="Ir para a loja">🛒 Loja</a></li>
+                        <li><a href="lan-house.html" aria-label="Ir para a página da Lan House">🖥️ Lan House</a></li>
+                        <li><a href="doacao.html" aria-label="Ir para a página de doações">💰 Doação</a></li>
+                        <li><a href="equipe-lol.html" aria-label="Ir para a página da equipe de League of Legends">👥 Equipe LoL</a></li>
+                    </ul>
+                </nav>
+            </div>
+            
             <div class="user-section loading" id="user-section">
                 <!-- Painel de Recompensas -->
                 <div class="rewards-panel" id="rewardsPanel">
                     <div class="points-display">
                         <span>💎</span>
                         <span id="points">0</span>
-                        <span>pontos</span>
+                        <span>pts</span>
                     </div>
                     <div class="reading-indicator">
                         <div class="reading-dot" id="readingDot"></div>
@@ -1430,15 +1493,18 @@
                 
                 <!-- Informações do usuário -->
                 <div class="user-info" id="userInfo">
-                    <img id="userAvatar" class="user-avatar" src="" alt="Avatar">
-                    <span id="userName" class="user-name"></span>
+                    <img id="userAvatar" class="user-avatar" src="https://via.placeholder.com/36x36/667eea/ffffff?text=U" alt="Avatar do usuário">
+                    <div class="user-details">
+                        <span id="userName" class="user-name text-truncate">Usuário</span>
+                        <span id="userPoints" class="user-points">0 pontos</span>
+                    </div>
                     <button id="logout-btn" class="btn-secondary">Sair</button>
                 </div>
                 
                 <!-- Botão de Login -->
                 <button id="login-btn" class="btn-primary">🔐 Entrar</button>
             </div>
-        </nav>
+        </div>
     </header>
 
     <!-- Modal de Login/Registro -->
@@ -1463,12 +1529,12 @@
                         <div class="form-group">
                             <label for="login-email">Email</label>
                             <input type="email" id="login-email" name="email" placeholder="seu@email.com" required>
-                            <span id="login-email-error" class="error-text" style="display: none; color: red; font-size: 12px;"></span>
+                            <span id="login-email-error" class="error-text"></span>
                         </div>
                         <div class="form-group">
                             <label for="login-password">Senha</label>
                             <input type="password" id="login-password" name="password" placeholder="Sua senha" required>
-                            <span id="login-password-error" class="error-text" style="display: none; color: red; font-size: 12px;"></span>
+                            <span id="login-password-error" class="error-text"></span>
                         </div>
                         <a href="#" id="forgot-password-link" style="display: block; text-align: right; font-size: 12px; color: #667eea; margin-bottom: 15px;">Esqueci minha senha</a>
                         <button type="submit" class="btn-primary" style="width: 100%; margin-bottom: 15px;">
@@ -1493,12 +1559,12 @@
                         <div class="form-group">
                             <label for="register-email">Email</label>
                             <input type="email" id="register-email" name="email" placeholder="seu@email.com" required>
-                            <span id="register-email-error" class="error-text" style="display: none; color: red; font-size: 12px;"></span>
+                            <span id="register-email-error" class="error-text"></span>
                         </div>
                         <div class="form-group">
                             <label for="register-password">Senha</label>
                             <input type="password" id="register-password" name="password" placeholder="Mínimo 6 caracteres" required>
-                            <span id="register-password-error" class="error-text" style="display: none; color: red; font-size: 12px;"></span>
+                            <span id="register-password-error" class="error-text"></span>
                         </div>
                         <button type="submit" class="btn-primary" style="width: 100%;">
                             🎯 Criar Conta
@@ -1537,7 +1603,7 @@
             <div id="errorState" class="error-message">
                 <h3>⚠️ Erro ao Carregar Notícias</h3>
                 <p>Não foi possível carregar as notícias no momento.</p>
-                <button onclick="loadDemoNews()" class="btn-primary">🔄 Tentar Novamente</button>
+                <button onclick="loadNews()" class="btn-primary">🔄 Tentar Novamente</button>
             </div>
 
             <!-- Grid de Notícias -->
@@ -1639,9 +1705,9 @@
         const demoNews = [
             {
                 id: 1,
-                title: "Worlds 2024: Semifinals Analysis and Predictions",
-                excerpt: "The semifinals of the League of Legends World Championship are here! Analysis of team strategies, player performances, and predictions for the upcoming matches.",
-                content: "The semifinals of Worlds 2024 have arrived, bringing incredible tension and excitement to the competitive League of Legends scene. After weeks of intense competition, only four teams remain standing, each with their unique playstyles and strategies that got them this far. T1, the defending champions, continue to show why they're considered one of the greatest teams in League of Legends history. Their mid-game rotations and team fighting prowess have been exceptional throughout the tournament. Faker's performance on champions like Azir and LeBlanc has been nothing short of phenomenal, reminding everyone why he's called the greatest player of all time. On the other side, we have Gen.G showing incredible individual skill and macro understanding. Their bot lane duo has been consistently outperforming opponents in laning phase, creating early advantages that they translate into objective control. The European representatives have also proven that the region is still competitive on the world stage. Their innovative picks and aggressive early game strategies have caught many teams off guard. Finally, the LPL's last hope continues to showcase the region's characteristic team fighting and skirmishing abilities. The upcoming matches promise to be some of the most exciting League of Legends we've seen all year. Each team has shown they deserve their spot, and the level of play has been incredibly high.",
+                title: "Worlds 2024: Análise das Semifinais e Previsões",
+                excerpt: "As semifinais do Campeonato Mundial de League of Legends chegaram! Análise das estratégias das equipes, performances dos jogadores e previsões para as próximas partidas.",
+                content: "As semifinais do Worlds 2024 chegaram, trazendo tensão e emoção incríveis para a cena competitiva de League of Legends. Após semanas de competição intensa, apenas quatro equipes permanecem de pé, cada uma com seus estilos únicos e estratégias que as trouxeram até aqui. A T1, atual campeã, continua mostrando por que é considerada uma das maiores equipes da história do League of Legends. Suas rotações de meio de jogo e habilidade em team fights têm sido excepcionais ao longo do torneio. A performance do Faker em campeões como Azir e LeBlanc tem sido fenomenal, lembrando a todos por que ele é chamado de o maior jogador de todos os tempos. Do outro lado, temos a Gen.G mostrando habilidade individual incrível e compreensão macro. Sua dupla de bot lane tem consistentemente superado os oponentes na fase de lanes, criando vantagens iniciais que traduzem em controle de objetivos. Os representantes europeus também provaram que a região ainda é competitiva no cenário mundial. Suas escolhas inovadoras e estratégias agressivas de early game pegaram muitas equipes desprevenidas. Finalmente, a última esperança da LPL continua demonstrando as características de team fight e skirmish da região. As próximas partidas prometem ser algumas das mais emocionantes que vimos este ano.",
                 source: "r/leagueoflegends",
                 url: "https://reddit.com/r/leagueoflegends",
                 imageUrl: null,
@@ -1650,9 +1716,9 @@
             },
             {
                 id: 2,
-                title: "New Champion Teaser: Mysterious Mage from the Void",
-                excerpt: "Riot Games releases cryptic teasers for the next champion - appears to be a void-born mage with reality-bending abilities. Release expected next patch.",
-                content: "Riot Games has begun their mysterious champion teaser campaign, and the community is buzzing with theories and speculation. The latest champion appears to be connected to the Void, that terrifying dimension that threatens to consume all of Runeterra. Based on the teaser images and cryptic messages, this new champion seems to be a mage with reality-bending abilities that could fundamentally change how we think about magic in League of Legends. The artistic direction shown in the teasers suggests a champion that exists partially in our reality and partially in the Void itself. This unique positioning could translate into a kit that manipulates space and time, potentially offering new mechanics we haven't seen before in the game. Players are speculating about abilities that could involve teleportation, reality rifts, or even time manipulation. The champion's visual design, from what we can glimpse in the shadowy teasers, appears both elegant and terrifying. The color palette seems to blend deep purples and void-like blacks with ethereal blues and whites, suggesting a being caught between dimensions. This aesthetic choice aligns perfectly with the Void's established visual language while introducing new elements that could expand the region's lore. From a gameplay perspective, a void mage could fill several potential roles. The community is hoping for either a new mid-lane control mage or possibly an innovative support that brings entirely new utility to the bot lane. Either way, Riot's champion design team has consistently delivered unique and engaging kits in recent releases.",
+                title: "Novo Campeão: Mago Misterioso do Vazio",
+                excerpt: "Riot Games divulga teasers crípticos para o próximo campeão - parece ser um mago nascido do vazio com habilidades de manipulação da realidade. Lançamento esperado no próximo patch.",
+                content: "A Riot Games começou sua misteriosa campanha de teaser do campeão, e a comunidade está fervilhando com teorias e especulações. O mais recente campeão parece estar conectado ao Vazio, aquela dimensão aterrorizante que ameaça consumir toda Runeterra. Com base nas imagens de teaser e mensagens crípticas, este novo campeão parece ser um mago com habilidades de manipulação da realidade que poderiam mudar fundamentalmente como pensamos sobre magia em League of Legends. A direção artística mostrada nos teasers sugere um campeão que existe parcialmente em nossa realidade e parcialmente no próprio Vazio. Esta posição única poderia se traduzir em um kit que manipula espaço e tempo, potencialmente oferecendo novas mecânicas que nunca vimos antes no jogo. Os jogadores estão especulando sobre habilidades que poderiam envolver teletransporte, fendas da realidade, ou até mesmo manipulação temporal. O design visual do campeão, pelo que podemos vislumbrar nos teasers sombrios, parece tanto elegante quanto aterrorizante. A paleta de cores parece misturar roxos profundos e pretos semelhantes ao vazio com azuis etéreos e brancos, sugerindo um ser preso entre dimensões.",
                 source: "r/leagueoflegends",
                 url: "https://reddit.com/r/leagueoflegends",
                 imageUrl: null,
@@ -1661,9 +1727,42 @@
             },
             {
                 id: 3,
-                title: "Patch 14.22 Meta Analysis: ADC Changes Impact",
-                excerpt: "The latest patch brings significant changes to ADC itemization and several champion adjustments. Professional players share their thoughts on the evolving meta.",
-                content: "Patch 14.22 has brought some of the most significant changes to the ADC role that we've seen all season, and the impact is already being felt across all levels of play. The itemization updates have fundamentally shifted how marksmen approach their builds, with several classic items receiving major overhauls and new options being introduced. The changes to Infinity Edge have been particularly controversial, with its passive now scaling differently with critical strike chance. This adjustment means that ADCs need to reconsider their build paths, especially in terms of when to purchase their third item. Many professional players have noted that the traditional three-item power spike feels different now, requiring adaptations in team fighting timings and objective control. Kraken Slayer's updates have also created interesting dynamics in bot lane trading patterns. The item now provides more consistent damage output against tanks while offering better scaling into the late game. This has made tank supports more viable while simultaneously making positioning even more crucial for ADC players. The ripple effects extend beyond just itemization - several champions have seen their win rates fluctuate significantly as players adapt to these changes. Champions like Jinx and Caitlyn, who were already strong in the previous patch, have seen their power levels adjust as players optimize their new builds. Meanwhile, champions like Kog'Maw and Twitch are experiencing a renaissance as their scaling patterns align better with the new itemization timeline.",
+                title: "Patch 14.22: Análise do Meta e Mudanças nos ADCs",
+                excerpt: "O patch mais recente traz mudanças significativas na itemização de ADC e vários ajustes de campeões. Jogadores profissionais compartilham suas opiniões sobre o meta em evolução.",
+                content: "O Patch 14.22 trouxe algumas das mudanças mais significativas para a função de ADC que vimos durante toda a temporada, e o impacto já está sendo sentido em todos os níveis de jogo. As atualizações de itemização mudaram fundamentalmente como os marksmen abordam suas builds, com vários itens clássicos recebendo grandes reformulações e novas opções sendo introduzidas. As mudanças no Infinity Edge têm sido particularmente controversas, com sua passiva agora escalando diferentemente com chance de crítico. Este ajuste significa que os ADCs precisam reconsiderar seus caminhos de build, especialmente em termos de quando comprar seu terceiro item. Muitos jogadores profissionais notaram que o tradicional power spike de três itens agora se sente diferente, exigindo adaptações nos timings de team fight e controle de objetivos. As atualizações do Kraken Slayer também criaram dinâmicas interessantes nos padrões de trade da bot lane. O item agora fornece dano mais consistente contra tanks enquanto oferece melhor scaling para o late game. Isso tornou os supports tank mais viáveis enquanto simultaneamente tornou o posicionamento ainda mais crucial para jogadores de ADC.",
+                source: "r/leagueoflegends", 
+                url: "https://reddit.com/r/leagueoflegends",
+                imageUrl: null,
+                points: 50,
+                read: false
+            },
+            {
+                id: 4,
+                title: "Arena Mode: Nova Temporada com Mudanças Épicas",
+                excerpt: "O modo Arena retorna com uma nova temporada cheia de mudanças emocionantes, novos aumentos e mecânicas revisadas que prometem revolucionar a experiência de jogo.",
+                content: "O modo Arena está de volta com uma nova temporada que promete ser a mais empolgante até agora! A Riot Games ouviu o feedback da comunidade e implementou mudanças significativas que abordam muitas das preocupações dos jogadores. As novas mecânicas incluem um sistema de draft revisado que permite mais estratégia na seleção de campeões, além de novos aumentos que podem mudar completamente o rumo das partidas. Um dos destaques desta temporada são os aumentos épicos - modificações poderosas que aparecem apenas nos rounds finais e podem transformar completamente seu campeão. Imagine um Yasuo que pode usar seu ultimate em qualquer inimigo, ou uma Jinx cujos foguetes explodem em cadeia! Essas mecânicas criam momentos únicos e emocionantes que mantêm cada partida fresca e imprevisível. O sistema de matchmaking também foi refinado para garantir partidas mais equilibradas, especialmente nos rankings mais altos. Os desenvolvedores implementaram um novo algoritmo que considera não apenas seu MMR atual, mas também seu histórico de performance com diferentes tipos de composições de equipe.",
+                source: "r/leagueoflegends",
+                url: "https://reddit.com/r/leagueoflegends", 
+                imageUrl: null,
+                points: 50,
+                read: false
+            },
+            {
+                id: 5,
+                title: "CBLOL 2025: Novas Equipes e Transferências Surpreendentes",
+                excerpt: "O cenário competitivo brasileiro se prepara para 2025 com transferências bombásticas e novas organizações entrando no CBLOL. Confira todas as mudanças confirmadas.",
+                content: "O CBLOL 2025 promete ser uma das temporadas mais competitivas e emocionantes da história do League of Legends brasileiro! Com o período de transferências em pleno vapor, já tivemos várias movimentações surpreendentes que estão mudando completamente o cenário competitivo nacional. Uma das maiores surpresas foi a entrada de duas novas organizações no circuito principal, trazendo investimento fresco e novos talentos para o cenário. A FURIA, conhecida por seu sucesso em outros esports, finalmente fez sua estreia no LoL brasileiro com um roster que promete balançar as estruturas. Eles conseguiram contratar alguns dos jogadores mais promissores da região, incluindo dois imports coreanos que já têm experiência em ligas maiores. As transferências também revelaram algumas surpresas nos times já estabelecidos. A paiN Gaming fez uma reforma quase completa de seu roster, mantendo apenas o jungler que foi fundamental para suas conquistas recentes. Já a LOUD apostou em uma mistura de veteranos experientes com jovens talentos vindos diretamente do cenário amateur, uma estratégia que pode render frutos inesperados.",
+                source: "r/leagueoflegends", 
+                url: "https://reddit.com/r/leagueoflegends",
+                imageUrl: null,
+                points: 50,
+                read: false
+            },
+            {
+                id: 6,
+                title: "Briar: Guia Completo para Dominar a Jungle",
+                excerpt: "A campeã vampira continua dominando a jungle em todos os elos. Aprenda as melhores builds, runas e estratégias para maximizar seu potencial com Briar.",
+                content: "Briar estabeleceu-se firmemente como uma das junglers mais dominantes do meta atual, e por boas razões! Sua combinação única de sustain, dano e mobilidade a torna uma pick versátil que pode se adaptar a diferentes composições e estilos de jogo. O segredo para dominar com Briar está em entender seus power spikes e como aproveitar sua passiva ao máximo. Sua mecânica de Frenesi é o que a diferencia de outros campeões, permitindo plays agressivos que poucos outros junglers conseguem executar. Para a build, o caminho mais eficiente atualmente é começar com Machado do Caçador, seguido de Hidra Titânica como primeiro item principal. Este item sinergia perfeitamente com seu kit, oferecendo tanto o waveclear necessário para farming rápido quanto o dano em área para team fights. O segundo item varia dependendo da situação do jogo - Couraça do Defunto contra equipes com muito dano físico, ou Força da Natureza contra composições heavy AP. As runas mais eficazes são Conquistador como principal, oferecendo sustain adicional e dano escalonado, complementado por Triunfo, Lenda: Tenacidade e Golpe de Misericórdia. Na árvore secundária, Osso Revestido e Crescimento Excessivo proporcionam a survivability necessária para as trocas prolongadas.",
                 source: "r/leagueoflegends",
                 url: "https://reddit.com/r/leagueoflegends",
                 imageUrl: null,
@@ -1689,9 +1788,13 @@
             card.className = 'news-card';
             card.dataset.articleId = article.id;
             
+            // Gerar uma imagem placeholder baseada no ID do artigo
+            const placeholderEmojis = ['🎮', '⚔️', '🏆', '🎯', '💎', '🔥'];
+            const emoji = placeholderEmojis[article.id % placeholderEmojis.length];
+            
             card.innerHTML = `
                 <div class="reading-progress"></div>
-                <div class="news-image placeholder">📰</div>
+                <div class="news-image placeholder">${emoji}</div>
                 <div class="news-content">
                     <h3 class="news-title">${article.title}</h3>
                     <p class="news-excerpt">${article.excerpt}</p>
@@ -1716,7 +1819,7 @@
             modalContent.innerHTML = `<p>${article.content}</p>`;
             articleSource.querySelector('a').href = article.url;
             
-            modal.style.display = 'block';
+            modal.classList.add('show');
             startReading(article);
         }
 
@@ -1733,7 +1836,7 @@
             
             readingDot.classList.add('active');
             readingStatus.textContent = 'Lendo';
-            readingTimer.style.display = 'block';
+            readingTimer.style.display = 'flex';
             
             updateReadingProgress();
         }
@@ -1766,14 +1869,18 @@
             userState.articlesRead += 1;
             userState.readingTime += 0.5; // 30 segundos = 0.5 minutos
             
-            // Atualizar Firestore
-            if (window.authSystem.currentUser) {
-                await window.authSystem.updateUserData({
-                    points: window.authSystem.points + 50,
-                    articlesRead: window.authSystem.articlesRead + 1,
-                    totalReadingTime: window.authSystem.totalReadingTime + 0.5,
-                    readArticles: [...window.authSystem.readArticles, article.id]
-                });
+            // Atualizar Firestore se o sistema de autenticação estiver disponível
+            if (window.authSystem && window.authSystem.currentUser) {
+                try {
+                    await window.authSystem.updateUserData({
+                        points: window.authSystem.points + 50,
+                        articlesRead: window.authSystem.articlesRead + 1,
+                        totalReadingTime: window.authSystem.totalReadingTime + 0.5,
+                        readArticles: [...window.authSystem.readArticles, article.id]
+                    });
+                } catch (error) {
+                    console.error('Erro ao atualizar dados do usuário:', error);
+                }
             }
             
             // Mostrar notificação
@@ -1783,6 +1890,7 @@
             
             // Atualizar estatísticas
             updateStats();
+            updateUserDisplay();
             
             // Atualizar o card do artigo
             const card = document.querySelector(`[data-article-id="${article.id}"]`);
@@ -1806,23 +1914,39 @@
         }
 
         function updateStats() {
-            const points = window.authSystem.points || userState.points;
-            const articlesRead = window.authSystem.articlesRead || userState.articlesRead;
-            const readingTime = window.authSystem.totalReadingTime || userState.readingTime;
+            const points = (window.authSystem && window.authSystem.points) || userState.points;
+            const articlesRead = (window.authSystem && window.authSystem.articlesRead) || userState.articlesRead;
+            const readingTime = (window.authSystem && window.authSystem.totalReadingTime) || userState.readingTime;
             
-            document.getElementById('points').textContent = points;
             document.getElementById('totalPoints').textContent = points;
             document.getElementById('articlesRead').textContent = articlesRead;
             document.getElementById('readingTime').textContent = Math.floor(readingTime);
             document.getElementById('newsLoaded').textContent = demoNews.length;
         }
 
-        function loadDemoNews() {
-            if (!window.authSystem.currentUser) return;
-            
+        function updateUserDisplay() {
+            const points = (window.authSystem && window.authSystem.points) || userState.points;
+            document.getElementById('points').textContent = points;
+            document.getElementById('userPoints').textContent = `${points} pontos`;
+        }
+
+        function loadNews() {
             const newsGrid = document.getElementById('newsGrid');
             const loadingState = document.getElementById('loadingState');
             const errorState = document.getElementById('errorState');
+            const loginRequired = document.getElementById('loginRequired');
+            
+            // Verificar se o usuário está logado
+            if (!window.authSystem || !window.authSystem.currentUser) {
+                newsGrid.innerHTML = '';
+                loadingState.classList.remove('show');
+                errorState.classList.remove('show');
+                loginRequired.classList.remove('hidden');
+                return;
+            }
+            
+            // Esconder seção de login obrigatório
+            loginRequired.classList.add('hidden');
             
             // Mostrar loading
             loadingState.classList.add('show');
@@ -1830,22 +1954,99 @@
             newsGrid.innerHTML = '';
             
             // Atualizar demoNews com base nos artigos lidos
-            demoNews.forEach(article => {
-                article.read = window.authSystem.readArticles.includes(article.id);
-            });
+            if (window.authSystem.readArticles) {
+                demoNews.forEach(article => {
+                    article.read = window.authSystem.readArticles.includes(article.id);
+                });
+            }
             
             setTimeout(() => {
-                // Simular carregamento
-                loadingState.classList.remove('show');
-                
-                // Renderizar notícias
-                demoNews.forEach(article => {
-                    const card = createNewsCard(article);
-                    newsGrid.appendChild(card);
-                });
-                
-                updateStats();
-            }, 2000);
+                try {
+                    // Simular carregamento
+                    loadingState.classList.remove('show');
+                    
+                    // Renderizar notícias
+                    demoNews.forEach(article => {
+                        const card = createNewsCard(article);
+                        newsGrid.appendChild(card);
+                    });
+                    
+                    updateStats();
+                    updateUserDisplay();
+                } catch (error) {
+                    console.error('Erro ao carregar notícias:', error);
+                    loadingState.classList.remove('show');
+                    errorState.classList.add('show');
+                }
+            }, 1500);
+        }
+
+        function updateUIForLoggedUser(user) {
+            const userSection = document.getElementById('user-section');
+            const userInfo = document.getElementById('userInfo');
+            const userName = document.getElementById('userName');
+            const userAvatar = document.getElementById('userAvatar');
+            const rewardsPanel = document.getElementById('rewardsPanel');
+            const statsPanel = document.getElementById('statsPanel');
+            
+            // Atualizar estado visual
+            userSection.classList.add('logged-in');
+            userSection.classList.remove('loading');
+            userInfo.classList.add('logged-in');
+            rewardsPanel.classList.add('logged-in');
+            statsPanel.classList.add('logged-in');
+            
+            // Atualizar informações do usuário
+            if (user.displayName) {
+                userName.textContent = user.displayName;
+                userName.classList.add('gradient');
+            } else if (user.email) {
+                userName.textContent = user.email.split('@')[0];
+                userName.classList.add('gradient');
+            }
+            
+            // Atualizar avatar
+            if (user.photoURL) {
+                userAvatar.src = user.photoURL;
+                userAvatar.alt = `Avatar de ${user.displayName || 'usuário'}`;
+            } else {
+                // Gerar avatar baseado nas iniciais
+                const name = user.displayName || user.email.split('@')[0];
+                const initials = name.charAt(0).toUpperCase();
+                userAvatar.src = `https://via.placeholder.com/36x36/667eea/ffffff?text=${initials}`;
+                userAvatar.alt = `Avatar de ${name}`;
+            }
+            
+            // Carregar notícias para usuário logado
+            loadNews();
+        }
+
+        function updateUIForLoggedOutUser() {
+            const userSection = document.getElementById('user-section');
+            const userInfo = document.getElementById('userInfo');
+            const rewardsPanel = document.getElementById('rewardsPanel');
+            const statsPanel = document.getElementById('statsPanel');
+            const newsGrid = document.getElementById('newsGrid');
+            const loginRequired = document.getElementById('loginRequired');
+            
+            // Remover estado de usuário logado
+            userSection.classList.remove('logged-in', 'loading');
+            userInfo.classList.remove('logged-in');
+            rewardsPanel.classList.remove('logged-in');
+            statsPanel.classList.remove('logged-in');
+            
+            // Limpar conteúdo
+            newsGrid.innerHTML = '';
+            loginRequired.classList.remove('hidden');
+            
+            // Resetar estado global
+            userState.isLoggedIn = false;
+            userState.currentUser = null;
+            userState.points = 0;
+            userState.articlesRead = 0;
+            userState.readingTime = 0;
+            
+            updateStats();
         }
 
         // Inicialização
@@ -1858,13 +2059,13 @@
             const closeBtn = document.getElementById('closeBtn');
             
             closeBtn?.addEventListener('click', () => {
-                modal.style.display = 'none';
+                modal.classList.remove('show');
                 stopReading();
             });
             
             window.addEventListener('click', (e) => {
                 if (e.target === modal) {
-                    modal.style.display = 'none';
+                    modal.classList.remove('show');
                     stopReading();
                 }
             });
@@ -1902,7 +2103,7 @@
             
             // Criar flocos de neve
             function createSnowflakes() {
-                for (let i = 0; i < 50; i++) {
+                for (let i = 0; i < 30; i++) {
                     setTimeout(() => {
                         const snowflake = document.createElement('div');
                         snowflake.classList.add('snowflake');
@@ -1920,31 +2121,40 @@
             }
             
             createSnowflakes();
-            setInterval(createSnowflakes, 10000);
+            setInterval(createSnowflakes, 15000);
+            
+            // Aguardar sistema de autenticação
+            const checkAuthSystem = () => {
+                if (window.authSystem) {
+                    // Sistema de auth carregado
+                    if (window.authSystem.currentUser) {
+                        updateUIForLoggedUser(window.authSystem.currentUser);
+                    } else {
+                        updateUIForLoggedOutUser();
+                    }
+                } else {
+                    // Aguardar mais um pouco
+                    setTimeout(checkAuthSystem, 100);
+                }
+            };
+            
+            checkAuthSystem();
             
             // Reagir a eventos de login/logout
-            document.addEventListener('userLoggedIn', () => {
+            document.addEventListener('userLoggedIn', (event) => {
                 userState.isLoggedIn = true;
-                userState.currentUser = window.authSystem.currentUser;
-                userState.points = window.authSystem.points;
-                userState.articlesRead = window.authSystem.articlesRead;
-                userState.readingTime = window.authSystem.totalReadingTime;
-                loadDemoNews();
+                userState.currentUser = event.detail.user;
+                updateUIForLoggedUser(event.detail.user);
             });
             
             document.addEventListener('userLoggedOut', () => {
-                userState.isLoggedIn = false;
-                userState.currentUser = null;
-                userState.points = 0;
-                userState.articlesRead = 0;
-                userState.readingTime = 0;
-                document.getElementById('newsGrid').innerHTML = '';
-                updateStats();
+                updateUIForLoggedOutUser();
             });
         });
 
-        // Expor função global para recarregar notícias
-        window.loadDemoNews = loadDemoNews;
+        // Expor funções globais
+        window.loadNews = loadNews;
+        window.openArticle = openArticle;
     </script>
 </body>
 </html>

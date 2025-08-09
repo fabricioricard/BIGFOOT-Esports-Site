@@ -1,4 +1,79 @@
-// ===== SISTEMA DE NOTÍCIAS CORRIGIDO =====
+// Dados de exemplo para notícias
+const demoNews = [
+    {
+        id: 1,
+        title: "Worlds 2024: Análise das Semifinais e Previsões",
+        summary: "As semifinais do Campeonato Mundial de League of Legends chegaram! Análise das estratégias das equipes, performances dos jogadores e previsões para as próximas partidas.",
+        content: "As semifinais do Worlds 2024 chegaram, trazendo tensão e emoção incríveis para a cena competitiva de League of Legends. Após semanas de competição intensa, apenas quatro equipes permanecem de pé, cada uma com seus estilos únicos e estratégias que as trouxeram até aqui. A T1, atual campeã, continua mostrando por que é considerada uma das maiores equipes da história do League of Legends. Suas rotações de meio de jogo e habilidade em team fights têm sido excepcionais ao longo do torneio. A performance do Faker em campeões como Azir e LeBlanc tem sido fenomenal, lembrando a todos por que ele é chamado de o maior jogador de todos os tempos. Do outro lado, temos a Gen.G mostrando habilidade individual incrível e compreensão macro. Sua dupla de bot lane tem consistentemente superado os oponentes na fase de lanes, criando vantagens iniciais que traduzem em controle de objetivos. Os representantes europeus também provaram que a região ainda é competitiva no cenário mundial. Suas escolhas inovadoras e estratégias agressivas de early game pegaram muitas equipes desprevenidas. Finalmente, a última esperança da LPL continua demonstrando as características de team fight e skirmish da região. As próximas partidas prometem ser algumas das mais emocionantes que vimos este ano.",
+        source: "r/leagueoflegends",
+        url: "https://reddit.com/r/leagueoflegends",
+        image: null,
+        readTime: 5,
+        points: 50,
+        read: false
+    },
+    {
+        id: 2,
+        title: "Novo Campeão: Mago Misterioso do Vazio",
+        summary: "Riot Games divulga teasers crípticos para o próximo campeão - parece ser um mago nascido do vazio com habilidades de manipulação da realidade. Lançamento esperado no próximo patch.",
+        content: "A Riot Games começou sua misteriosa campanha de teaser do campeão, e a comunidade está fervilhando com teorias e especulações. O mais recente campeão parece estar conectado ao Vazio, aquela dimensão aterrorizante que ameaça consumir toda Runeterra. Com base nas imagens de teaser e mensagens crípticas, este novo campeão parece ser um mago com habilidades de manipulação da realidade que poderiam mudar fundamentalmente como pensamos sobre magia em League of Legends. A direção artística mostrada nos teasers sugere um campeão que existe parcialmente em nossa realidade e parcialmente no próprio Vazio. Esta posição única poderia se traduzir em um kit que manipula espaço e tempo, potencialmente oferecendo novas mecânicas que nunca vimos antes no jogo. Os jogadores estão especulando sobre habilidades que poderiam envolver teletransporte, fendas da realidade, ou até mesmo manipulação temporal. O design visual do campeão, pelo que podemos vislumbrar nos teasers sombrios, parece tanto elegante quanto aterrorizante. A paleta de cores parece misturar roxos profundos e pretos semelhantes ao vazio com azuis etéreos e brancos, sugerindo um ser preso entre dimensões.",
+        source: "r/leagueoflegends",
+        url: "https://reddit.com/r/leagueoflegends",
+        image: null,
+        readTime: 3,
+        points: 50,
+        read: false
+    },
+    {
+        id: 3,
+        title: "Patch 14.22: Análise do Meta e Mudanças nos ADCs",
+        summary: "O patch mais recente traz mudanças significativas na itemização de ADC e vários ajustes de campeões. Jogadores profissionais compartilham suas opiniões sobre o meta em evolução.",
+        content: "O Patch 14.22 trouxe algumas das mudanças mais significativas para a função de ADC que vimos durante toda a temporada, e o impacto já está sendo sentido em todos os níveis de jogo. As atualizações de itemização mudaram fundamentalmente como os marksmen abordam suas builds, com vários itens clássicos recebendo grandes reformulações e novas opções sendo introduzidas. As mudanças no Infinity Edge têm sido particularmente controversas, com sua passiva agora escalando diferentemente com chance de crítico. Este ajuste significa que os ADCs precisam reconsiderar seus caminhos de build, especialmente em termos de quando comprar seu terceiro item. Muitos jogadores profissionais notaram que o tradicional power spike de três itens agora se sente diferente, exigindo adaptações nos timings de team fight e controle de objetivos. As atualizações do Kraken Slayer também criaram dinâmicas interessantes nos padrões de trade da bot lane. O item agora fornece dano mais consistente contra tanks enquanto oferece melhor scaling para o late game. Isso tornou os supports tank mais viáveis enquanto simultaneamente tornou o posicionamento ainda mais crucial para jogadores de ADC.",
+        source: "r/leagueoflegends",
+        url: "https://reddit.com/r/leagueoflegends",
+        image: null,
+        readTime: 4,
+        points: 50,
+        read: false
+    },
+    {
+        id: 4,
+        title: "Arena Mode: Nova Temporada com Mudanças Épicas",
+        summary: "O modo Arena retorna com uma nova temporada cheia de mudanças emocionantes, novos aumentos e mecânicas revisadas que prometem revolucionar a experiência de jogo.",
+        content: "O modo Arena está de volta com uma nova temporada que promete ser a mais empolgante até agora! A Riot Games ouviu o feedback da comunidade e implementou mudanças significativas que abordam muitas das preocupações dos jogadores. As novas mecânicas incluem um sistema de draft revisado que permite mais estratégia na seleção de campeões, além de novos aumentos que podem mudar completamente o rumo das partidas. Um dos destaques desta temporada são os aumentos épicos - modificações poderosas que aparecem apenas nos rounds finais e podem transformar completamente seu campeão. Imagine um Yasuo que pode usar seu ultimate em qualquer inimigo, ou uma Jinx cujos foguetes explodem em cadeia! Essas mecânicas criam momentos únicos e emocionantes que mantêm cada partida fresca e imprevisível. O sistema de matchmaking também foi refinado para garantir partidas mais equilibradas, especialmente nos rankings mais altos. Os desenvolvedores implementaram um novo algoritmo que considera não apenas seu MMR atual, mas também seu histórico de performance com diferentes tipos de composições de equipe.",
+        source: "r/leagueoflegends",
+        url: "https://reddit.com/r/leagueoflegends",
+        image: null,
+        readTime: 4,
+        points: 50,
+        read: false
+    },
+    {
+        id: 5,
+        title: "CBLOL 2025: Novas Equipes e Transferências Surpreendentes",
+        summary: "O cenário competitivo brasileiro se prepara para 2025 com transferências bombásticas e novas organizações entrando no CBLOL. Confira todas as mudanças confirmadas.",
+        content: "O CBLOL 2025 promete ser uma das temporadas mais competitivas e emocionantes da história do League of Legends brasileiro! Com o período de transferências em pleno vapor, já tivemos várias movimentações surpreendentes que estão mudando completamente o cenário competitivo nacional. Uma das maiores surpresas foi a entrada de duas novas organizações no circuito principal, trazendo investimento fresco e novos talentos para o cenário. A FURIA, conhecida por seu sucesso em outros esports, finalmente fez sua estreia no LoL brasileiro com um roster que promete balançar as estruturas. Eles conseguiram contratar alguns dos jogadores mais promissores da região, incluindo dois imports coreanos que já têm experiência em ligas maiores. As transferências também revelaram algumas surpresas nos times já estabelecidos. A paiN Gaming fez uma reforma quase completa de seu roster, mantendo apenas o jungler que foi fundamental para suas conquistas recentes. Já a LOUD apostou em uma mistura de veteranos experientes com jovens talentos vindos diretamente do cenário amateur, uma estratégia que pode render frutos inesperados.",
+        source: "r/leagueoflegends",
+        url: "https://reddit.com/r/leagueoflegends",
+        image: null,
+        readTime: 4,
+        points: 50,
+        read: false
+    },
+    {
+        id: 6,
+        title: "Briar: Guia Completo para Dominar a Jungle",
+        summary: "A campeã vampira continua dominando a jungle em todos os elos. Aprenda as melhores builds, runas e estratégias para maximizar seu potencial com Briar.",
+        content: "Briar estabeleceu-se firmemente como uma das junglers mais dominantes do meta atual, e por boas razões! Sua combinação única de sustain, dano e mobilidade a torna uma pick versátil que pode se adaptar a diferentes composições e estilos de jogo. O segredo para dominar com Briar está em entender seus power spikes e como aproveitar sua passiva ao máximo. Sua mecânica de Frenesi é o que a diferencia de outros campeões, permitindo plays agressivos que poucos outros junglers conseguem executar. Para a build, o caminho mais eficiente atualmente é começar com Machado do Caçador, seguido de Hidra Titânica como primeiro item principal. Este item sinergia perfeitamente com seu kit, oferecendo tanto o waveclear necessário para farming rápido quanto o dano em área para team fights. O segundo item varia dependendo da situação do jogo - Couraça do Defunto contra equipes com muito dano físico, ou Força da Natureza contra composições heavy AP. As runas mais eficazes são Conquistador como principal, oferecendo sustain adicional e dano escalonado, complementado por Triunfo, Lenda: Tenacidade e Golpe de Misericórdia. Na árvore secundária, Osso Revestido e Crescimento Excessivo proporcionam a survivability necessária para as trocas prolongadas.",
+        source: "r/leagueoflegends",
+        url: "https://reddit.com/r/leagueoflegends",
+        image: null,
+        readTime: 4,
+        points: 50,
+        read: false
+    }
+];
+
 class NewsSystem {
     constructor() {
         this.newsData = [];
@@ -16,35 +91,28 @@ class NewsSystem {
 
     async init() {
         try {
-            // CORREÇÃO 1: Aguarda a inicialização do sistema de autenticação
             console.log("NewsSystem: Aguardando inicialização da autenticação...");
             
             if (window.bigFootAuth) {
                 await window.bigFootAuth.waitForInit();
             } else {
-                // Se bigFootAuth não existir ainda, aguarda um pouco e tenta novamente
                 await this.waitForAuthSystem();
             }
             
             console.log("NewsSystem: Sistema de autenticação pronto");
             
-            // CORREÇÃO 2: Configura listeners após a inicialização
             this.setupEventListeners();
             this.setupAuthListeners();
-            
-            // CORREÇÃO 3: Verifica o estado atual de autenticação
             await this.checkInitialAuthState();
             
             this.isInitialized = true;
             console.log("NewsSystem: Inicializado com sucesso");
-            
         } catch (error) {
             console.error("NewsSystem: Erro na inicialização:", error);
             this.showError("Erro ao inicializar sistema de notícias");
         }
     }
 
-    // CORREÇÃO 4: Método para aguardar o sistema de autenticação
     async waitForAuthSystem(maxAttempts = 50) {
         for (let i = 0; i < maxAttempts; i++) {
             if (window.bigFootAuth) {
@@ -56,7 +124,6 @@ class NewsSystem {
         throw new Error("Sistema de autenticação não foi carregado");
     }
 
-    // CORREÇÃO 5: Verifica estado inicial de autenticação
     async checkInitialAuthState() {
         try {
             const isLoggedIn = await window.bigFootAuth.isLoggedInAsync();
@@ -71,10 +138,10 @@ class NewsSystem {
             }
         } catch (error) {
             console.error("NewsSystem: Erro ao verificar estado inicial:", error);
+            this.handleUserLogout();
         }
     }
 
-    // CORREÇÃO 6: Configura listeners de autenticação
     setupAuthListeners() {
         if (window.bigFootAuth) {
             this.authListener = window.bigFootAuth.addAuthListener((user) => {
@@ -90,10 +157,11 @@ class NewsSystem {
     }
 
     setupEventListeners() {
-        // Modal de artigo
-        document.getElementById('closeBtn')?.addEventListener('click', () => this.closeArticle());
-        
         const modal = document.getElementById('modal');
+        const closeBtn = document.getElementById('closeBtn');
+        
+        closeBtn?.addEventListener('click', () => this.closeArticle());
+        
         if (modal) {
             modal.addEventListener('click', (e) => {
                 if (e.target.id === 'modal') this.closeArticle();
@@ -101,20 +169,26 @@ class NewsSystem {
         }
         
         document.addEventListener('keydown', (e) => {
-            const modal = document.getElementById('modal');
-            if (e.key === 'Escape' && modal && modal.style.display === 'block') {
+            if (e.key === 'Escape' && modal?.style.display === 'block') {
                 this.closeArticle();
             }
         });
     }
 
-    // ===== INTEGRAÇÃO CORRIGIDA COM AUTH SYSTEM =====
     async handleUserLogin(user) {
         console.log("NewsSystem: Usuário logado, carregando notícias para:", user.email);
         try {
+            const doc = await firebase.firestore().collection('users').doc(user.uid).get();
+            if (doc.exists) {
+                window.bigFootAuth.points = doc.data().points || 0;
+                window.bigFootAuth.articlesRead = doc.data().articlesRead || 0;
+                window.bigFootAuth.totalReadingTime = doc.data().totalReadingTime || 0;
+                window.bigFootAuth.readArticles = doc.data().readArticles || [];
+            }
             await this.loadNews();
         } catch (error) {
             console.error("NewsSystem: Erro ao carregar notícias após login:", error);
+            this.showError("Erro ao carregar notícias");
         }
     }
 
@@ -131,12 +205,11 @@ class NewsSystem {
         this.showLoginRequired();
     }
 
-    // ===== CARREGAMENTO DE NOTÍCIAS CORRIGIDO =====
     async loadNews() {
         try {
-            // CORREÇÃO 7: Verificação correta de autenticação
             if (!window.bigFootAuth) {
                 console.error("NewsSystem: Sistema de autenticação não encontrado");
+                this.showLoginRequired();
                 return;
             }
 
@@ -151,9 +224,10 @@ class NewsSystem {
             console.log("NewsSystem: Carregando notícias...");
             this.showLoadingState();
 
-            // CORREÇÃO 8: Simula carregamento de notícias (substitua pela sua API)
-            const news = await this.fetchNews();
-            this.newsData = news;
+            this.newsData = demoNews.map(article => ({
+                ...article,
+                read: window.bigFootAuth.readArticles?.includes(article.id) || false
+            }));
             this.renderNews();
             
         } catch (error) {
@@ -168,162 +242,57 @@ class NewsSystem {
         }
     }
 
-    // CORREÇÃO 9: Método para buscar notícias
-    async fetchNews() {
-        // Aqui você colocaria sua lógica real de API
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                resolve([
-                    {
-                        id: 1,
-                        title: "Worlds 2024: Grande Final",
-                        summary: "Análise completa da grande final do campeonato mundial",
-                        content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
-                        date: "2024-11-15",
-                        author: "BIGFOOT Admin",
-                        image: "https://via.placeholder.com/400x250",
-                        readTime: 5
-                    },
-                    {
-                        id: 2,
-                        title: "Meta Atual: Champions OP",
-                        summary: "Descubra quais champions estão dominando a rift",
-                        content: "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...",
-                        date: "2024-11-20",
-                        author: "Analista Pro",
-                        image: "https://via.placeholder.com/400x250",
-                        readTime: 3
-                    },
-                    {
-                        id: 3,
-                        title: "BIGFOOT no Cenário Competitivo",
-                        summary: "Últimas novidades da nossa equipe nos torneios",
-                        content: "Ut enim ad minim veniam, quis nostrud exercitation...",
-                        date: "2024-11-25",
-                        author: "BIGFOOT Esports",
-                        image: "https://via.placeholder.com/400x250",
-                        readTime: 4
-                    }
-                ]);
-            }, 1000);
-        });
-    }
-
-    // CORREÇÃO 10: Estados visuais melhorados
     showLoadingState() {
         const loadingState = document.getElementById('loadingState');
+        const newsGrid = document.getElementById('newsGrid');
+        const errorState = document.getElementById('errorState');
+        
         if (loadingState) {
-            loadingState.style.display = 'flex';
-            loadingState.innerHTML = `
-                <div style="text-align: center;">
-                    <div class="spinner" style="
-                        border: 4px solid #f3f3f3;
-                        border-top: 4px solid #3498db;
-                        border-radius: 50%;
-                        width: 40px;
-                        height: 40px;
-                        animation: spin 2s linear infinite;
-                        margin: 0 auto 1rem;
-                    "></div>
-                    <p>Carregando notícias...</p>
-                </div>
-                <style>
-                    @keyframes spin {
-                        0% { transform: rotate(0deg); }
-                        100% { transform: rotate(360deg); }
-                    }
-                </style>
-            `;
+            loadingState.classList.add('show');
+        }
+        if (newsGrid) {
+            newsGrid.classList.add('hidden');
+        }
+        if (errorState) {
+            errorState.classList.remove('show');
         }
     }
 
     showLoginRequired() {
         const newsGrid = document.getElementById('newsGrid');
         const loadingState = document.getElementById('loadingState');
+        const errorState = document.getElementById('errorState');
+        const loginRequired = document.getElementById('loginRequired');
         
         if (loadingState) {
-            loadingState.style.display = 'none';
+            loadingState.classList.remove('show');
         }
-        
+        if (errorState) {
+            errorState.classList.remove('show');
+        }
         if (newsGrid) {
-            newsGrid.innerHTML = `
-                <div class="login-required-message" style="
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    justify-content: center;
-                    min-height: 300px;
-                    text-align: center;
-                    background: #f8f9fa;
-                    border-radius: 8px;
-                    padding: 2rem;
-                    margin: 2rem 0;
-                ">
-                    <h2 style="color: #495057; margin-bottom: 1rem;">🔒 Área Exclusiva</h2>
-                    <p style="color: #6c757d; margin-bottom: 1.5rem; max-width: 500px; line-height: 1.6;">
-                        As notícias são exclusivas para membros logados. Faça login para acessar 
-                        as últimas novidades do cenário competitivo.
-                    </p>
-                    <button 
-                        onclick="document.getElementById('login-btn')?.click()"
-                        style="
-                            background: linear-gradient(45deg, #007bff, #0056b3);
-                            color: white;
-                            padding: 0.75rem 1.5rem;
-                            border: none;
-                            border-radius: 5px;
-                            cursor: pointer;
-                            font-size: 1rem;
-                            font-weight: bold;
-                            transition: transform 0.2s ease;
-                        "
-                        onmouseover="this.style.transform = 'translateY(-2px)'"
-                        onmouseout="this.style.transform = 'translateY(0)'"
-                    >
-                        Fazer Login
-                    </button>
-                </div>
-            `;
+            newsGrid.classList.add('hidden');
+            newsGrid.innerHTML = '';
+        }
+        if (loginRequired) {
+            loginRequired.classList.remove('hidden');
         }
     }
 
     showError(message) {
-        const newsGrid = document.getElementById('newsGrid');
+        const errorState = document.getElementById('errorState');
         const loadingState = document.getElementById('loadingState');
+        const newsGrid = document.getElementById('newsGrid');
         
         if (loadingState) {
-            loadingState.style.display = 'none';
+            loadingState.classList.remove('show');
         }
-        
         if (newsGrid) {
-            newsGrid.innerHTML = `
-                <div class="error-message" style="
-                    background: #f8d7da;
-                    color: #721c24;
-                    border: 1px solid #f5c6cb;
-                    border-radius: 4px;
-                    padding: 1rem;
-                    margin: 2rem 0;
-                    text-align: center;
-                ">
-                    <h3>Erro</h3>
-                    <p>${message}</p>
-                    <button 
-                        onclick="window.newsSystem?.loadNews()" 
-                        style="
-                            background: #dc3545;
-                            color: white;
-                            padding: 0.5rem 1rem;
-                            border: none;
-                            border-radius: 4px;
-                            cursor: pointer;
-                            margin-top: 0.5rem;
-                        "
-                    >
-                        Tentar Novamente
-                    </button>
-                </div>
-            `;
+            newsGrid.classList.add('hidden');
+        }
+        if (errorState) {
+            errorState.classList.add('show');
+            errorState.querySelector('p').textContent = message;
         }
     }
 
@@ -332,39 +301,35 @@ class NewsSystem {
         const loadingState = document.getElementById('loadingState');
         
         if (loadingState) {
-            loadingState.style.display = 'none';
+            loadingState.classList.remove('show');
+        }
+        if (newsGrid) {
+            newsGrid.classList.remove('hidden');
         }
         
         if (!newsGrid || !this.newsData.length) return;
 
-        const newsHTML = this.newsData.map(article => `
-            <article class="news-card" onclick="window.newsSystem?.openArticle(${article.id})" style="
-                background: white;
-                border-radius: 8px;
-                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-                overflow: hidden;
-                cursor: pointer;
-                transition: transform 0.2s ease, box-shadow 0.2s ease;
-            " onmouseover="this.style.transform = 'translateY(-2px)'; this.style.boxShadow = '0 4px 8px rgba(0,0,0,0.15)'"
-               onmouseout="this.style.transform = 'translateY(0)'; this.style.boxShadow = '0 2px 4px rgba(0,0,0,0.1)'">
-                <img src="${article.image}" alt="${article.title}" style="
-                    width: 100%;
-                    height: 200px;
-                    object-fit: cover;
-                ">
-                <div style="padding: 1rem;">
-                    <h3 style="margin-bottom: 0.5rem; color: #333; font-size: 1.1rem;">${article.title}</h3>
-                    <p style="color: #666; margin-bottom: 1rem; line-height: 1.4;">${article.summary}</p>
-                    <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; color: #888;">
-                        <span>${article.author}</span>
-                        <span>${article.readTime} min de leitura</span>
+        newsGrid.innerHTML = this.newsData.map(article => {
+            const placeholderEmojis = ['🎮', '⚔️', '🏆', '🎯', '💎', '🔥'];
+            const emoji = placeholderEmojis[article.id % placeholderEmojis.length];
+            return `
+                <div class="news-card" onclick="window.newsSystem.openArticle(${article.id})">
+                    <div class="reading-progress"></div>
+                    <div class="news-image placeholder">${emoji}</div>
+                    <div class="news-content">
+                        <h3 class="news-title">${article.title}</h3>
+                        <p class="news-excerpt">${article.summary}</p>
+                        <div class="news-meta">
+                            <span class="news-source">${article.source}</span>
+                            <span class="reward-badge ${article.read ? 'read' : ''}">${article.read ? '✓ Lido' : `+${article.points} pts`}</span>
+                        </div>
                     </div>
                 </div>
-            </article>
-        `).join('');
+            `;
+        }).join('');
 
-        newsGrid.innerHTML = newsHTML;
         console.log(`NewsSystem: ${this.newsData.length} notícias renderizadas`);
+        document.getElementById('newsLoaded').textContent = this.newsData.length;
     }
 
     openArticle(id) {
@@ -374,42 +339,92 @@ class NewsSystem {
         this.currentArticle = article;
         
         const modal = document.getElementById('modal');
+        const modalTitle = document.getElementById('modalTitle');
         const modalContent = document.getElementById('modalContent');
+        const articleSource = document.getElementById('articleSource');
         
-        if (modal && modalContent) {
+        if (modal && modalTitle && modalContent && articleSource) {
+            modalTitle.textContent = article.title;
             modalContent.innerHTML = `
-                <h1>${article.title}</h1>
-                <div class="article-meta" style="margin-bottom: 1rem; color: #666;">
-                    <span>Por: ${article.author}</span> • 
-                    <span>${new Date(article.date).toLocaleDateString('pt-BR')}</span> • 
+                <div class="article-meta">
+                    <span>Por: ${article.source}</span> • 
                     <span>${article.readTime} min de leitura</span>
                 </div>
-                <img src="${article.image}" alt="${article.title}" style="width: 100%; margin-bottom: 1rem; border-radius: 4px;">
-                <div class="article-content" style="line-height: 1.6;">
-                    ${article.content}
-                </div>
+                <div class="article-content">${article.content}</div>
             `;
+            articleSource.innerHTML = `<p>📰 Fonte: <a href="${article.url}" target="_blank" rel="noopener">Ver discussão no Reddit</a></p>`;
             
+            modal.classList.add('show');
             modal.style.display = 'block';
             this.startReadingSession();
         }
-    }
-
-    closeArticle() {
-        const modal = document.getElementById('modal');
-        if (modal) {
-            modal.style.display = 'none';
-        }
-        
-        this.stopReadingSession();
-        this.currentArticle = null;
     }
 
     startReadingSession() {
         this.currentReadingTime = 0;
         this.readingTimer = setInterval(() => {
             this.currentReadingTime++;
-        }, 1000);
+            this.updateReadingProgress();
+        }, 100);
+    }
+
+    updateReadingProgress() {
+        if (!this.currentArticle) return;
+
+        const progressPercent = Math.min((this.currentReadingTime / 300) * 100, 100); // 30 segundos para completar
+        
+        const timerDisplay = document.getElementById('timerDisplay');
+        const progressDisplay = document.getElementById('progressDisplay');
+        const readingProgress = document.getElementById('readingProgress');
+        
+        if (timerDisplay && progressDisplay && readingProgress) {
+            timerDisplay.textContent = `${Math.floor(this.currentReadingTime / 10)}s`;
+            progressDisplay.textContent = `${Math.floor(progressPercent)}%`;
+            readingProgress.style.width = `${progressPercent}%`;
+        }
+        
+        if (progressPercent >= 100 && !this.currentArticle.read) {
+            this.completeArticle(this.currentArticle);
+        }
+    }
+
+    async completeArticle(article) {
+        article.read = true;
+        window.bigFootAuth.points = (window.bigFootAuth.points || 0) + article.points;
+        window.bigFootAuth.articlesRead = (window.bigFootAuth.articlesRead || 0) + 1;
+        window.bigFootAuth.totalReadingTime = (window.bigFootAuth.totalReadingTime || 0) + 0.5;
+        window.bigFootAuth.readArticles = [...(window.bigFootAuth.readArticles || []), article.id];
+        
+        if (window.bigFootAuth.currentUser) {
+            await window.bigFootAuth.updateUserData({
+                points: window.bigFootAuth.points,
+                articlesRead: window.bigFootAuth.articlesRead,
+                totalReadingTime: window.bigFootAuth.totalReadingTime,
+                readArticles: window.bigFootAuth.readArticles
+            });
+        }
+        
+        const notification = document.getElementById('notification');
+        if (notification) {
+            notification.textContent = `🎉 +${article.points} pontos! Artigo completado!`;
+            notification.classList.add('show');
+            setTimeout(() => notification.classList.remove('show'), 3000);
+        }
+        
+        const card = document.querySelector(`[onclick="window.newsSystem.openArticle(${article.id})"]`);
+        if (card) {
+            const badge = card.querySelector('.reward-badge');
+            if (badge) {
+                badge.textContent = '✓ Lido';
+                badge.classList.add('read');
+            }
+        }
+        
+        document.getElementById('totalPoints').textContent = window.bigFootAuth.points;
+        document.getElementById('articlesRead').textContent = window.bigFootAuth.articlesRead;
+        document.getElementById('readingTime').textContent = Math.floor(window.bigFootAuth.totalReadingTime);
+        document.getElementById('points').textContent = window.bigFootAuth.points;
+        document.getElementById('userPoints').textContent = `${window.bigFootAuth.points} pontos`;
     }
 
     stopReadingSession() {
@@ -418,9 +433,29 @@ class NewsSystem {
             this.readingTimer = null;
         }
         this.currentReadingTime = 0;
+        
+        const readingDot = document.getElementById('readingDot');
+        const readingStatus = document.getElementById('readingStatus');
+        const readingTimer = document.getElementById('readingTimer');
+        
+        if (readingDot && readingStatus && readingTimer) {
+            readingDot.classList.remove('active');
+            readingStatus.textContent = 'Parado';
+            readingTimer.style.display = 'none';
+        }
     }
 
-    // Cleanup quando a instância for destruída
+    closeArticle() {
+        const modal = document.getElementById('modal');
+        if (modal) {
+            modal.classList.remove('show');
+            modal.style.display = 'none';
+        }
+        
+        this.stopReadingSession();
+        this.currentArticle = null;
+    }
+
     destroy() {
         if (this.authListener) {
             this.authListener();
@@ -432,9 +467,8 @@ class NewsSystem {
     }
 }
 
-// ===== INICIALIZAÇÃO =====
+// Inicialização
 document.addEventListener('DOMContentLoaded', () => {
-    // Aguarda um pouco para garantir que outros scripts foram carregados
     setTimeout(() => {
         if (!window.newsSystem) {
             console.log("NewsSystem: Inicializando...");
@@ -443,7 +477,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 200);
 });
 
-// Cleanup quando sair da página
+// Cleanup
 window.addEventListener('beforeunload', () => {
     if (window.newsSystem) {
         window.newsSystem.destroy();

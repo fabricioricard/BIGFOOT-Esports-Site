@@ -1,12 +1,12 @@
 // Configuração do Firebase
 const firebaseConfig = {
-  apiKey: "AIzaSyAV8x3oA2D3UO5niAmwo88U9Of3hj7VNaQ",
-  authDomain: "bigfoot-esports.firebaseapp.com",
-  projectId: "bigfoot-esports",
-  storageBucket: "bigfoot-esports.firebasestorage.app",
-  messagingSenderId: "868767435883",
-  appId: "1:868767435883:web:f90f8d3d5bfd66e933752e",
-  measurementId: "G-S26ZFJRD3M"
+    apiKey: "AIzaSyAV8x3oA2D3UO5niAmwo88U9Of3hj7VNaQ",
+    authDomain: "bigfoot-esports.firebaseapp.com",
+    projectId: "bigfoot-esports",
+    storageBucket: "bigfoot-esports.firebasestorage.app",
+    messagingSenderId: "868767435883",
+    appId: "1:868767435883:web:f90f8d3d5bfd66e933752e",
+    measurementId: "G-S26ZFJRD3M"
 };
 
 // Inicializar Firebase
@@ -24,22 +24,45 @@ const db = firebase.firestore();
 class BigFootAuth {
     constructor() {
         this.currentUser = null;
+        this.points = 0;
+        this.articlesRead = 0;
+        this.totalReadingTime = 0;
+        this.readArticles = [];
         this.isInitialized = false;
         this.listeners = [];
         this.initPromise = new Promise((resolve) => {
             this.initResolve = resolve;
         });
         
-        // Inicializa o listener de autenticação
         this.init();
     }
 
     init() {
-        // Monitorar estado de autenticação
         auth.onAuthStateChanged(user => {
             console.log("onAuthStateChanged disparado:", user ? "Usuário logado" : "Usuário não logado");
             
             this.currentUser = user;
+            
+            if (user) {
+                db.collection('users').doc(user.uid).get().then(doc => {
+                    if (doc.exists) {
+                        this.points = doc.data().points || 0;
+                        this.articlesRead = doc.data().articlesRead || 0;
+                        this.totalReadingTime = doc.data().totalReadingTime || 0;
+                        this.readArticles = doc.data().readArticles || [];
+                    }
+                    this.notifyListeners(user);
+                }).catch(error => {
+                    console.error('Erro ao carregar dados do usuário:', error);
+                    this.notifyListeners(user);
+                });
+            } else {
+                this.points = 0;
+                this.articlesRead = 0;
+                this.totalReadingTime = 0;
+                this.readArticles = [];
+                this.notifyListeners(user);
+            }
             
             if (!this.isInitialized) {
                 this.isInitialized = true;
@@ -47,57 +70,42 @@ class BigFootAuth {
                 console.log("Sistema de autenticação inicializado");
             }
             
-            // Atualizar UI principal
             this.updateMainUI(user);
-            
-            // Notificar todos os listeners
-            this.notifyListeners(user);
         });
     }
 
-    // Aguarda a inicialização do Firebase Auth
     async waitForInit() {
         return this.initPromise;
     }
 
-    // Verifica se o usuário está logado (sincrono)
     isLoggedIn() {
         return this.currentUser !== null;
     }
 
-    // Verifica se o usuário está logado (aguarda inicialização)
     async isLoggedInAsync() {
         await this.waitForInit();
         return this.isLoggedIn();
     }
 
-    // Obtém o usuário atual
     getCurrentUser() {
         return this.currentUser;
     }
 
-    // Obtém o usuário atual (aguarda inicialização)
     async getCurrentUserAsync() {
         await this.waitForInit();
         return this.getCurrentUser();
     }
 
-    // Adiciona listener para mudanças de autenticação
     addAuthListener(callback) {
         this.listeners.push(callback);
-        
-        // Se já inicializado, chama imediatamente
         if (this.isInitialized) {
             callback(this.currentUser);
         }
-        
-        // Retorna função para remover o listener
         return () => {
             this.listeners = this.listeners.filter(l => l !== callback);
         };
     }
 
-    // Notifica todos os listeners
     notifyListeners(user) {
         this.listeners.forEach(callback => {
             try {
@@ -108,7 +116,6 @@ class BigFootAuth {
         });
     }
 
-    // Atualiza a UI principal (navbar)
     updateMainUI(user) {
         const userSection = document.getElementById('user-section');
         const userInfo = document.getElementById('userInfo');
@@ -122,7 +129,6 @@ class BigFootAuth {
         }
 
         if (user) {
-            // Usuário logado
             console.log("Atualizando UI - Usuário logado:", user.email);
             userSection.classList.remove('loading');
             userSection.classList.add('logged-in');
@@ -131,7 +137,6 @@ class BigFootAuth {
             userAvatar.src = user.photoURL || 'https://via.placeholder.com/32';
             loginBtn.style.display = 'none';
         } else {
-            // Usuário não logado
             console.log("Atualizando UI - Usuário não logado");
             userSection.classList.remove('loading');
             userSection.classList.remove('logged-in');
@@ -142,7 +147,16 @@ class BigFootAuth {
         }
     }
 
-    // Login com email e senha
+    async updateUserData(data) {
+        if (this.currentUser) {
+            await db.collection('users').doc(this.currentUser.uid).set(data, { merge: true });
+            this.points = data.points || this.points;
+            this.articlesRead = data.articlesRead || this.articlesRead;
+            this.totalReadingTime = data.totalReadingTime || this.totalReadingTime;
+            this.readArticles = data.readArticles || this.readArticles;
+        }
+    }
+
     async loginWithEmail(email, password) {
         try {
             await auth.signInWithEmailAndPassword(email, password);
@@ -153,7 +167,6 @@ class BigFootAuth {
         }
     }
 
-    // Registro com email e senha
     async registerWithEmail(email, password) {
         try {
             await auth.createUserWithEmailAndPassword(email, password);
@@ -164,7 +177,6 @@ class BigFootAuth {
         }
     }
 
-    // Login com Google
     async loginWithGoogle() {
         try {
             const provider = new firebase.auth.GoogleAuthProvider();
@@ -176,7 +188,6 @@ class BigFootAuth {
         }
     }
 
-    // Logout
     async logout() {
         try {
             await auth.signOut();
@@ -190,6 +201,7 @@ class BigFootAuth {
 
 // Instância global do sistema de autenticação
 const bigFootAuth = new BigFootAuth();
+window.bigFootAuth = bigFootAuth;
 
 // Disponibiliza globalmente para outras páginas
 window.bigFootAuth = bigFootAuth;

@@ -5,9 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Doação - BIGFOOT Esports</title>
     <link rel="icon" href="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/favicon.ico" type="image/x-icon">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@600;800&family=Poppins:wght@400;600&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@600;800&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
     <style>
         * {
             box-sizing: border-box;
@@ -50,14 +52,8 @@
         }
 
         @keyframes fall {
-            0% {
-                transform: translateY(-100vh) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(100vh) rotate(360deg);
-                opacity: 0;
-            }
+            0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
         }
 
         /* Animações */
@@ -78,14 +74,8 @@
         }
 
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* Efeito de Hover */
@@ -141,32 +131,19 @@
             transform: translateY(-5px);
         }
 
-        /* Cabeçalho */
+        /* Cabeçalho (padronizado com index.html) */
         header {
             align-items: center;
-            background: linear-gradient(90deg, #d6e4f0, #e0e7ef);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
             display: flex;
             justify-content: space-between;
             padding: 20px;
             position: sticky;
             top: 0;
-            transition: background 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.3s ease;
             z-index: 1000;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .scrolled {
-            background: linear-gradient(90deg, #d6e4f0, #e0e7ef);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            transition: background 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .scrolled .nav-menu li a {
-            color: #1a73e8;
-        }
-
-        .scrolled .logo span {
-            color: #1a73e8;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .logo {
@@ -185,6 +162,7 @@
         .logo-jpg {
             height: 40px;
             width: 40px;
+            border-radius: 50%;
             transition: transform 0.5s ease, filter 0.3s ease;
         }
 
@@ -195,13 +173,15 @@
 
         .logo span {
             margin: 0;
-            color: #1a73e8;
             font-family: 'Montserrat', sans-serif;
-            font-size: 30px;
+            font-size: 28px;
             font-weight: 800;
             letter-spacing: 1px;
             line-height: 1;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         nav {
@@ -223,194 +203,219 @@
             align-items: center;
             gap: 6px;
             white-space: nowrap;
-            color: #444;
+            color: #4a5568;
             font-family: 'Poppins', sans-serif;
             font-size: 16px;
             font-weight: 600;
-            position: relative;
             text-decoration: none;
-            transition: color 0.3s ease, transform 0.3s ease;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 25px;
         }
 
-        .nav-menu li a::after {
-            background: #1a73e8;
-            bottom: -5px;
-            content: '';
-            height: 2px;
-            left: 0;
-            position: absolute;
-            transition: width 0.3s ease;
-            width: 0;
-        }
-
-        .nav-menu li a:hover::after {
-            width: 100%;
-        }
-
-        .nav-menu li a:hover {
-            color: #1a73e8;
+        .nav-menu li a:hover,
+        .nav-menu li a.active {
+            color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
             transform: translateY(-2px);
         }
 
-        .nav-menu li a.active {
-            color: #1a73e8;
+        /* User Section (padronizado com index.html) */
+        .user-section {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            position: relative;
         }
 
-        .nav-menu li a.active::after {
-            width: 100%;
+        .user-section.loading::after {
+            content: '';
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #667eea;
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-left: 8px;
         }
 
-        .login-bar {
-            margin-left: auto;
+        .user-section.logged-in #login-btn {
+            display: none !important;
         }
 
-        .login-bar button {
-            background: linear-gradient(45deg, #1a73e8, #34c0eb);
-            border: none;
-            border-radius: 50px;
-            color: #fff;
-            cursor: pointer;
+        .user-info {
+            display: none;
+            align-items: center;
+            gap: 8px;
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 25px;
+            padding: 6px 12px;
+            transition: all 0.3s ease;
+            max-width: 220px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(102, 126, 234, 0.2);
+        }
+
+        .user-info.logged-in {
+            display: flex !important;
+        }
+
+        .user-info:hover {
+            background: rgba(102, 126, 234, 0.15);
+            transform: translateY(-1px);
+        }
+
+        .user-name {
             font-family: 'Poppins', sans-serif;
-            font-weight: 600;
-            padding: 10px 20px;
+            font-size: 13px;
+            font-weight: 500;
+            color: #4a5568;
+            max-width: 150px;
+        }
+
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            background: linear-gradient(45deg, #667eea, #764ba2) border-box;
+            box-shadow: 0 0 12px rgba(102, 126, 234, 0.3);
+            object-fit: cover;
             transition: all 0.3s ease;
         }
 
-        .login-bar button:hover {
-            background: linear-gradient(45deg, #1557b0, #2a9fd6);
-            box-shadow: 0 5px 15px rgba(26, 115, 232, 0.3);
-            transform: translateY(-3px);
+        .user-avatar:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 16px rgba(102, 126, 234, 0.4);
         }
 
-        /* Modal de Login */
+        /* Modal System (padronizado com index.html) */
         .modal {
-            animation: fadeIn 0.5s ease;
-            background-color: rgba(0, 0, 0, 0.7);
-            display: none;
-            height: 100%;
-            left: 0;
             position: fixed;
             top: 0;
+            left: 0;
             width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(5px);
+            display: none;
             z-index: 1001;
+            animation: modalFadeIn 0.5s ease;
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .modal-content {
-            animation: slideInTop 0.5s ease;
-            background: #fff;
+            background: #ffffff;
             border-radius: 15px;
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-            margin: 10% auto;
-            max-width: 450px;
-            padding: 30px;
-            position: relative;
+            max-width: 480px;
             width: 90%;
+            padding: 32px;
+            position: relative;
+            animation: modalSlideIn 0.5s ease;
         }
 
-        @keyframes slideInTop {
-            from {
-                opacity: 0;
-                transform: translateY(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .close {
-            color: #666;
-            cursor: pointer;
-            font-size: 28px;
+        .modal-close {
             position: absolute;
-            right: 25px;
-            top: 15px;
-            transition: color 0.3s ease, transform 0.3s ease;
-        }
-
-        .close:hover {
-            color: #1a73e8;
-            transform: rotate(90deg);
-        }
-
-        .modal-content h2 {
-            color: #1a73e8;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 28px;
-            margin-bottom: 25px;
-            text-align: center;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-        }
-
-        .modal-content form {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .modal-content label {
-            color: #444;
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        .modal-content input {
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 14px;
-            margin-bottom: 20px;
-            outline: none;
-            padding: 12px;
-            transition: border 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .modal-content input:focus {
-            border-color: #1a73e8;
-            box-shadow: 0 0 8px rgba(26, 115, 232, 0.2);
-        }
-
-        .modal-content button {
-            background: linear-gradient(45deg, #1a73e8, #34c0eb);
+            top: 16px;
+            right: 16px;
+            background: none;
             border: none;
-            border-radius: 50px;
-            color: #fff;
+            font-size: 24px;
             cursor: pointer;
-            font-weight: 600;
-            padding: 12px;
-            transition: all 0.3s ease;
+            color: #718096;
+            transition: color 0.2s ease;
         }
 
-        .modal-content button:hover {
-            background: linear-gradient(45deg, #1557b0, #2a9fd6);
-            box-shadow: 0 5px 15px rgba(26, 115, 232, 0.3);
-            transform: translateY(-3px);
+        .modal-close:hover {
+            color: #2d3748;
         }
 
-        .modal-links {
-            margin-top: 15px;
-            text-align: center;
+        .modal-tabs {
             display: flex;
-            justify-content: center;
-            gap: 10px;
+            margin-bottom: 32px;
+            border-radius: 8px;
+            background: #f7fafc;
+            padding: 6px;
         }
 
-        .modal-link {
-            display: inline-block;
-            margin: 5px 10px;
-            color: #1a73e8;
-            font-family: 'Poppins', sans-serif;
-            font-size: 14px;
+        .modal-tab {
+            flex: 1;
+            padding: 16px;
             text-align: center;
-            text-decoration: none;
-            transition: color 0.3s ease;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            color: #4a5568;
         }
 
-        .modal-link:hover {
-            color: #1557b0;
-            text-decoration: underline;
+        .modal-tab.active {
+            background: #667eea;
+            color: #ffffff;
+            transform: translateY(-1px);
         }
 
-        /* Hero Section */
+        .tab-content {
+            display: none;
+            animation: tabFadeIn 0.3s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #2d3748;
+            font-size: 14px;
+        }
+
+        .form-group input {
+            width: 100%;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 14px;
+            font-family: 'Poppins', sans-serif;
+            outline: none;
+            padding: 14px 16px;
+            transition: all 0.3s ease;
+            background: #ffffff;
+        }
+
+        .form-group input:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .error-text {
+            color: #e53e3e;
+            font-size: 12px;
+            margin-top: 4px;
+            display: none;
+            font-weight: 500;
+        }
+
+        .error-text.show {
+            display: block;
+            animation: errorSlideIn 0.2s ease;
+        }
+
+        /* Hero Section (mantido do doacao.html) */
         .page-hero {
             background: linear-gradient(135deg, #1a73e8, #34c0eb);
             color: #fff;
@@ -453,7 +458,7 @@
             margin: 0 auto;
         }
 
-        /* Seção Doação */
+        /* Seção Doação (mantido do doacao.html) */
         .donation-section {
             padding: 40px 20px;
             max-width: 1200px;
@@ -564,7 +569,7 @@
             box-shadow: 0 0 8px rgba(26, 115, 232, 0.2);
         }
 
-        /* Rodapé */
+        /* Rodapé (padronizado com index.html) */
         footer {
             background: linear-gradient(90deg, #1a73e8, #34c0eb);
             color: #fff;
@@ -657,12 +662,24 @@
                 gap: 1rem;
             }
 
-            .login-bar {
-                margin-left: 0;
+            .user-section {
+                justify-content: center;
+                gap: 8px;
             }
 
-            .nav-menu li a {
-                font-size: 14px;
+            .user-info {
+                padding: 5px 10px;
+                max-width: 180px;
+            }
+
+            .user-name {
+                font-size: 12px;
+                max-width: 120px;
+            }
+
+            .user-avatar {
+                width: 32px;
+                height: 32px;
             }
 
             .donation-features {
@@ -678,47 +695,145 @@
                 font-size: 16px;
             }
         }
+
+        @media (max-width: 480px) {
+            .modal-content {
+                width: 100%;
+                height: 100vh;
+                border-radius: 0;
+                padding: 16px;
+            }
+
+            .modal-tabs {
+                margin-bottom: 24px;
+            }
+
+            .modal-tab {
+                padding: 8px;
+                font-size: 13px;
+            }
+
+            .form-group input {
+                padding: 12px 8px;
+            }
+
+            .user-info {
+                max-width: 140px;
+            }
+
+            .user-name {
+                max-width: 100px;
+            }
+        }
+
+        /* Animações (padronizado com index.html) */
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes modalSlideIn {
+            from { opacity: 0; transform: translateY(30px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        @keyframes tabFadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes errorSlideIn {
+            from { opacity: 0; transform: translateX(-10px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
     </style>
 </head>
 <body>
-    <!-- Cabeçalho -->
+    <!-- Cabeçalho (padronizado com index.html) -->
     <header id="header">
         <div class="logo">
             <a href="/">
-                <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/logo.jpg"
-                    alt="Logo BIGFOOT Esports" class="logo-jpg">
+                <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/logo.jpg" alt="Logo BIGFOOT Esports" class="logo-jpg">
                 <span>BIGFOOT Esports</span>
             </a>
         </div>
         <nav>
             <ul class="nav-menu">
-                <li><a href="/noticias-lol">📰 Notícias LoL</a></li>
-                <li><a href="/loja">🛒 Loja</a></li>
-                <li><a href="/lanhouse">🖥️ Lan House</a></li>
-                <li><a href="/doacao" class="active">💰 Doação</a></li>
-                <li><a href="/equipe-lol">👥 Equipe LoL</a></li>
+                <li><a href="noticias-lol.html">📰 Notícias LoL</a></li>
+                <li><a href="loja.html">🛒 Loja</a></li>
+                <li><a href="lan-house.html">🖥️ Lan House</a></li>
+                <li><a href="doacao.html" class="active">💰 Doação</a></li>
+                <li><a href="equipe-lol.html">👥 Equipe LoL</a></li>
             </ul>
-            <div class="login-bar">
-                <button id="login-btn" class="btn-primary">Login</button>
+            <div class="user-section loading" id="user-section">
+                <div class="user-info" id="userInfo">
+                    <img id="userAvatar" class="user-avatar" src="" alt="Avatar">
+                    <span id="userName" class="user-name"></span>
+                    <button id="logout-btn" class="btn-secondary">Sair</button>
+                </div>
+                <button id="login-btn" class="btn-primary">🔐 Login</button>
             </div>
         </nav>
     </header>
 
-    <!-- Modal de Login -->
+    <!-- Modal de Login/Registro (padronizado com index.html) -->
     <div id="login-modal" class="modal">
         <div class="modal-content">
-            <span id="close-modal" class="close">×</span>
-            <h2>Login</h2>
-            <form id="login-form">
-                <label for="username">Usuário</label>
-                <input type="text" id="username" name="username" placeholder="Usuário" required>
-                <label for="password">Senha</label>
-                <input type="password" id="password" name="password" placeholder="Senha" required>
-                <button type="submit" class="btn-primary">Entrar</button>
-            </form>
-            <div class="modal-links">
-                <a href="/registrar" class="modal-link">Registrar</a>
-                <a href="/recuperar-senha" class="modal-link">Recuperar Senha</a>
+            <span id="close-modal" class="modal-close">×</span>
+            <div class="modal-header">
+                <h2>🎮 Bem-vindo!</h2>
+                <p>Faça login para acessar as notícias e ganhar pontos</p>
+            </div>
+            <div class="modal-body">
+                <div class="modal-tabs">
+                    <div class="modal-tab active" data-tab="login">Login</div>
+                    <div class="modal-tab" data-tab="register">Registro</div>
+                </div>
+                <div id="login-tab" class="tab-content active">
+                    <form id="login-form">
+                        <div class="form-group">
+                            <label for="login-email">Email</label>
+                            <input type="email" id="login-email" name="email" placeholder="seu@email.com" required>
+                            <span id="login-email-error" class="error-text"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="login-password">Senha</label>
+                            <input type="password" id="login-password" name="password" placeholder="Sua senha" required>
+                            <span id="login-password-error" class="error-text"></span>
+                        </div>
+                        <a href="#" id="forgot-password-link" class="text-primary text-right d-block mb-3">Esqueci minha senha</a>
+                        <button type="submit" class="btn-primary w-100">🚀 Entrar</button>
+                    </form>
+                    <button id="google-login" class="btn-primary mt-3">
+                        <svg width="20" height="20" viewBox="0 0 24 24">
+                            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                        </svg>
+                        Continuar com Google
+                    </button>
+                </div>
+                <div id="register-tab" class="tab-content">
+                    <form id="register-form">
+                        <div class="form-group">
+                            <label for="register-email">Email</label>
+                            <input type="email" id="register-email" name="email" placeholder="seu@email.com" required>
+                            <span id="register-email-error" class="error-text"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="register-password">Senha</label>
+                            <input type="password" id="register-password" name="password" placeholder="Mínimo 6 caracteres" required>
+                            <span id="register-password-error" class="error-text"></span>
+                        </div>
+                        <button type="submit" class="btn-primary w-100">🎯 Criar Conta</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
@@ -730,12 +845,15 @@
             <div class="page-hero-content">
                 <h1>Faça Sua Doação para a BIGFOOT Esports</h1>
                 <p>Apoie nossa comunidade e ajude a fortalecer o cenário de esports com sua doação em Nano (XNO) ou outras formas!</p>
+                <a href="#donation-content" class="btn-primary hover-effect">Doar Agora</a>
             </div>
         </section>
 
         <!-- Seção Doação -->
-        <section class="donation-section reveal">
+        <section id="donation-content" class="donation-section reveal">
             <div class="donation-content">
+                <h2 class="donation-title">Apoie a BIGFOOT Esports</h2>
+                <p class="donation-description">Sua doação faz a diferença! Contribua para a manutenção de servidores, organização de torneios e apoio aos nossos atletas.</p>
                 <div class="donation-features">
                     <div class="feature-item hover-effect">
                         <h2>Por Que Doar?</h2>
@@ -774,7 +892,7 @@
         </section>
     </main>
 
-    <!-- Rodapé -->
+    <!-- Rodapé (padronizado com index.html) -->
     <footer class="reveal">
         <div class="footer-content">
             <div class="footer-left">
@@ -783,15 +901,9 @@
                 <p>Brasil</p>
             </div>
             <div class="footer-right">
-                <a href="https://discord.gg/3aHhvgzGSz" class="social-icon hover-effect"><img
-                        src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/dc.svg"
-                        alt="Discord"></a>
-                <a href="https://x.com/BFTesports" class="social-icon hover-effect"><img
-                        src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/x.svg"
-                        alt="X"></a>
-                <a href="https://youtube.com/@BIGFOOTEsports" class="social-icon hover-effect"><img
-                        src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/yt.svg"
-                        alt="YouTube"></a>
+                <a href="https://discord.gg/3aHhvgzGSz" class="social-icon hover-effect"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/dc.svg" alt="Discord"></a>
+                <a href="https://x.com/BFTesports" class="social-icon hover-effect"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/x.svg" alt="X"></a>
+                <a href="https://youtube.com/@BIGFOOTEsports" class="social-icon hover-effect"><img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/yt.svg" alt="YouTube"></a>
             </div>
         </div>
     </footer>
@@ -799,6 +911,9 @@
     <!-- Botão Voltar ao Topo -->
     <button id="back-to-top" class="back-to-top">⬆</button>
 
+    <!-- Scripts -->
+    <script src="js/auth.js"></script>
+    <script src="scripts.js"></script>
     <script>
         // Efeito de Neve
         function createSnowflake() {
@@ -809,12 +924,8 @@
             snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
             snowflake.style.opacity = Math.random();
             snowflake.style.fontSize = Math.random() * 10 + 10 + 'px';
-            
             document.body.appendChild(snowflake);
-            
-            setTimeout(() => {
-                snowflake.remove();
-            }, 5000);
+            setTimeout(() => snowflake.remove(), 5000);
         }
 
         setInterval(createSnowflake, 300);
@@ -823,74 +934,37 @@
         const loginBtn = document.getElementById('login-btn');
         const loginModal = document.getElementById('login-modal');
         const closeModal = document.getElementById('close-modal');
+        const loginTab = document.getElementById('login-tab');
+        const registerTab = document.getElementById('register-tab');
+        const tabs = document.querySelectorAll('.modal-tab');
 
         if (loginBtn && loginModal && closeModal) {
             loginBtn.addEventListener('click', () => {
-                loginModal.style.display = 'block';
+                loginModal.classList.add('show');
             });
 
             closeModal.addEventListener('click', () => {
-                loginModal.style.display = 'none';
+                loginModal.classList.remove('show');
             });
 
             window.addEventListener('click', (e) => {
                 if (e.target === loginModal) {
-                    loginModal.style.display = 'none';
-                }
-            });
-        }
-
-        const loginForm = document.getElementById('login-form');
-        if (loginForm) {
-            loginForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                alert('Login realizado com sucesso! (Funcionalidade de exemplo)');
-                loginModal.style.display = 'none';
-            });
-        }
-
-        // Scroll Reveal
-        const revealElements = document.querySelectorAll('.reveal');
-        const revealOnScroll = () => {
-            revealElements.forEach(element => {
-                const windowHeight = window.innerHeight;
-                const elementTop = element.getBoundingClientRect().top;
-                const revealPoint = 100;
-
-                if (elementTop < windowHeight - revealPoint && !element.classList.contains('visible')) {
-                    element.classList.add('visible');
-                }
-            });
-        };
-
-        window.addEventListener('scroll', revealOnScroll);
-        revealOnScroll();
-
-        // Efeito de Transparência no Cabeçalho ao Rolar
-        const header = document.getElementById('header');
-        if (header) {
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 50) {
-                    header.classList.add('scrolled');
-                } else {
-                    header.classList.remove('scrolled');
-                }
-            });
-        }
-
-        // Botão Voltar ao Topo
-        const backToTopBtn = document.getElementById('back-to-top');
-        if (backToTopBtn) {
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 300) {
-                    backToTopBtn.style.display = 'block';
-                } else {
-                    backToTopBtn.style.display = 'none';
+                    loginModal.classList.remove('show');
                 }
             });
 
-            backToTopBtn.addEventListener('click', () => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    loginTab.classList.remove('active');
+                    registerTab.classList.remove('active');
+                    if (tab.dataset.tab === 'login') {
+                        loginTab.classList.add('active');
+                    } else {
+                        registerTab.classList.add('active');
+                    }
+                });
             });
         }
 

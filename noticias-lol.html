@@ -240,118 +240,149 @@
             }
         }
 
-        /* ===== 4. HEADER & NAVIGATION ===== */
-        header {
-            position: sticky;
-            top: 0;
-            z-index: var(--z-sticky);
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: var(--shadow-light);
-            transition: all var(--transition-normal);
-        }
+/* ===== 4. HEADER & NAVIGATION ===== */
+header {
+    position: sticky;
+    top: 0;
+    z-index: var(--z-sticky);
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: var(--shadow-light);
+    transition: all var(--transition-normal);
+}
 
-        .header-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: var(--spacing-md) var(--spacing-xl);
-            width: 100%;
-            min-height: 80px;
-        }
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    width: 100%;
+    min-height: 60px;
+}
 
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-sm);
-            flex-shrink: 0;
-        }
+.logo {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    flex-shrink: 0;
+}
 
-        .logo a {
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-sm);
-            text-decoration: none;
-        }
+.logo a {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    text-decoration: none;
+}
 
-        .logo-jpg {
-            width: 40px;
-            height: 40px;
-            border-radius: var(--radius-full);
-            object-fit: cover;
-            transition: transform var(--transition-slow), filter var(--transition-normal);
-        }
+.logo-jpg {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-full);
+    object-fit: cover;
+    transition: transform var(--transition-slow), filter var(--transition-normal);
+}
 
-        .logo-jpg:hover {
-            transform: scale(1.1);
-            filter: brightness(1.2);
-        }
+.logo-jpg:hover {
+    transform: scale(1.1);
+    filter: brightness(1.2);
+}
 
-        .logo span {
-            font-family: var(--font-heading);
-            font-size: 24px;
-            font-weight: var(--weight-extrabold);
-            letter-spacing: 1px;
-            line-height: 1;
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
+.logo span {
+    font-family: var(--font-heading);
+    font-size: 24px;
+    font-weight: var(--weight-extrabold);
+    letter-spacing: 1px;
+    line-height: 1;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
 
-        .nav-center {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-        }
+.nav-center {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
 
-        .nav-menu {
-            display: flex;
-            align-items: center;
-            list-style: none;
-            gap: var(--spacing-md);
-        }
+.nav-menu {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    gap: var(--spacing-sm); /* Reduzido para 8px */
+}
 
-        .nav-menu li a {
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-xs);
-            padding: var(--spacing-sm) var(--spacing-md);
-            border-radius: var(--radius-xl);
-            font-family: var(--font-family);
-            font-size: var(--font-sm);
-            font-weight: var(--weight-semibold);
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: all var(--transition-normal);
-            position: relative;
-            overflow: hidden;
-            white-space: nowrap;
-        }
+.nav-menu li a {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-xs) var(--spacing-sm); /* Reduzido para 4px 8px */
+    border-radius: var(--radius-xl);
+    font-family: var(--font-family);
+    font-size: var(--font-sm);
+    font-weight: var(--weight-semibold);
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: all var(--transition-normal);
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+}
 
-        .nav-menu li a::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: var(--primary-gradient);
-            opacity: 0;
-            transition: opacity var(--transition-normal);
-            border-radius: inherit;
-        }
+.nav-menu li a::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--primary-gradient);
+    opacity: 0;
+    transition: opacity var(--transition-normal);
+    border-radius: inherit;
+}
 
-        .nav-menu li a:hover::before,
-        .nav-menu li a.active::before {
-            opacity: 0.1;
-        }
+.nav-menu li a:hover::before,
+.nav-menu li a.active::before {
+    opacity: 0.1;
+}
 
-        .nav-menu li a:hover,
-        .nav-menu li a.active {
-            color: var(--primary-color);
-            transform: translateY(-2px);
-        }
+.nav-menu li a:hover,
+.nav-menu li a.active {
+    color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+/* ... resto do CSS ... */
+
+/* Media Queries */
+@media (max-width: 768px) {
+    :root {
+        --spacing-xl: 24px;
+        --spacing-2xl: 32px;
+    }
+
+    .header-container {
+        flex-direction: column;
+        gap: var(--spacing-md);
+        padding: var(--spacing-md);
+    }
+
+    .nav-center {
+        order: 2;
+        width: 100%;
+    }
+
+    .nav-menu {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 6px; /* Espaçamento ainda menor para telas pequenas */
+    }
+
+    .nav-menu li a {
+        font-size: var(--font-xs);
+        padding: var(--spacing-xs) var(--spacing-sm);
+    }
 
         /* ===== 5. AUTHENTICATION SYSTEM ===== */
         .user-section {

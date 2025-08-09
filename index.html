@@ -34,17 +34,17 @@
     <header id="header">
         <div class="logo">
             <a href="/">
-                <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/logo.jpg" alt="Logo BIGFOOT Esports" class="logo-jpg">
+                <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/mainVOCÊSmain/images/logo.jpg" alt="Logo BIGFOOT Esports" class="logo-jpg">
                 <span>BIGFOOT Esports</span>
             </a>
         </div>
         <nav>
             <ul class="nav-menu">
                 <li><a href="noticias-lol.html">📰 Notícias LoL</a></li>
-                <li><a href="#loja">🛒 Loja</a></li>
-                <li><a href="#lanhouse">🖥️ Lan House</a></li>
-                <li><a href="#doacao">💰 Doação</a></li>
-                <li><a href="#equipe-lol">👥 Equipe LoL</a></li>
+                <li><a href="loja.html">🛒 Loja</a></li>
+                <li><a href="lanhouse.html">🖥️ Lan House</a></li>
+                <li><a href="doacao.html">💰 Doação</a></li>
+                <li><a href="equipe-lol.html">👥 Equipe LoL</a></li>
             </ul>
             <div class="user-section loading" id="user-section">
                 <div class="user-info" id="userInfo">
@@ -123,7 +123,7 @@
                 <h1>Bem-vindo ao BIGFOOT</h1>
                 <p>Junte-se a nós e faça parte da evolução do esporte eletrônico!</p>
                 <div class="hero-buttons">
-                    <a href="#lanhouse" class="btn-primary hover-effect">Conheça nossa Comunidade</a>
+                    <a href="lanhouse.html" class="btn-primary hover-effect">Conheça nossa Comunidade</a>
                 </div>
             </div>
         </section>
@@ -137,7 +137,7 @@
                 <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/qrcode-pix.jpg" alt="QR Code para doação" class="qr-code">
                 <p style="margin-top: 10px; word-break: break-all; font-size: 14px; color: #ccc;">Chave PIX: <span id="pix-key">773f51bf-d4d9-48bc-9b26-812ed63618a8</span></p>
                 <button onclick="copyPixKey()" class="btn-primary" style="margin-top: 10px; font-size: 14px; padding: 8px 16px;">Copiar chave PIX</button>
-                <a href="#doacao" class="btn-primary hover-effect" style="display: block; margin-top: 12px; font-size: 14px; padding: 8px 16px; text-align: center;">Outras formas de doar</a>
+                <a href="doacao.html" class="btn-primary hover-effect" style="display: block; margin-top: 12px; font-size: 14px; padding: 8px 16px; text-align: center;">Outras formas de doar</a>
             </div>
         </div>
 
@@ -149,7 +149,7 @@
                     <h3 class="stat-number" data-target="50">50</h3>
                     <p>Membros na Comunidade</p>
                 </div>
-                <div class="class="stat-item">
+                <div class="stat-item">
                     <h3 class="stat-number" data-target="6">6</h3>
                     <p>Anos de História</p>
                 </div>
@@ -182,7 +182,7 @@
                 </div>
             </div>
             <div class="shop-button-container">
-                <a href="#loja" class="btn-primary hover-effect">Ver Loja Completa</a>
+                <a href="loja.html" class="btn-primary hover-effect">Ver Loja Completa</a>
             </div>
         </section>
 
@@ -300,20 +300,20 @@
         window.addEventListener('scroll', animateOnScroll);
 
         // Smooth scroll para links âncora
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        const href = this.getAttribute('href');
-        if (href !== '#') { // Ignora links com href="#"
-            e.preventDefault();
-            const target = document.querySelector(href);
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth'
-                });
-            }
-        }
-    });
-});
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && href.startsWith('#')) { // Ignora links que não são âncoras
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
 
         // Auto-fechar doação após 10 segundos
         const donationBox = document.getElementById('donation-box');

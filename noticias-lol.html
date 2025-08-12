@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -1747,55 +1748,24 @@
             }
 
             function updateUIForLoggedIn(user) {
-    userSection.classList.add('logged-in');
-    userInfo.classList.add('logged-in');
-    loginBtn.classList.add('d-none');
-    document.getElementById('userName').textContent = user.email ? user.email.split('@')[0] : user.displayName || 'Usuário';
-    document.getElementById('userName').classList.add('gradient');
-    document.getElementById('userAvatar').src = user.photoURL || 'https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/default-avatar.png';
-    
-    // Ocultar mensagem de login necessário
-    const loginRequired = document.getElementById('loginRequired');
-    if (loginRequired) {
-        loginRequired.classList.add('hidden');
-    }
-    
-    // Mostrar painéis de recompensas e estatísticas
-    const rewardsPanel = document.getElementById('rewardsPanel');
-    const statsPanel = document.getElementById('statsPanel');
-    if (rewardsPanel) {
-        rewardsPanel.classList.add('logged-in');
-    }
-    if (statsPanel) {
-        statsPanel.classList.add('logged-in');
-    }
-}
+                userSection.classList.add('logged-in');
+                userInfo.classList.add('logged-in');
+                loginBtn.classList.add('d-none');
+                document.getElementById('userName').textContent = user.email ? user.email.split('@')[0] : user.displayName || 'Usuário';
+                document.getElementById('userName').classList.add('gradient');
+                document.getElementById('userAvatar').src = user.photoURL || 'https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/default-avatar.png';
+            }
 
-function updateUIForLoggedOut() {
-    userSection.classList.remove('logged-in');
-    userInfo.classList.remove('logged-in');
-    loginBtn.classList.remove('d-none');
-    document.getElementById('userName').textContent = 'Usuário';
-    document.getElementById('userAvatar').src = 'https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/default-avatar.png';
-    document.getElementById('login-form').reset();
-    document.getElementById('register-form').reset();
-    
-    // Mostrar mensagem de login necessário
-    const loginRequired = document.getElementById('loginRequired');
-    if (loginRequired) {
-        loginRequired.classList.remove('hidden');
-    }
-    
-    // Ocultar painéis de recompensas e estatísticas
-    const rewardsPanel = document.getElementById('rewardsPanel');
-    const statsPanel = document.getElementById('statsPanel');
-    if (rewardsPanel) {
-        rewardsPanel.classList.remove('logged-in');
-    }
-    if (statsPanel) {
-        statsPanel.classList.remove('logged-in');
-    }
-}
+            function updateUIForLoggedOut() {
+                userSection.classList.remove('logged-in');
+                userInfo.classList.remove('logged-in');
+                loginBtn.classList.remove('d-none');
+                document.getElementById('userName').textContent = 'Usuário';
+                document.getElementById('userAvatar').src = 'https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/default-avatar.png';
+                document.getElementById('login-form').reset();
+                document.getElementById('register-form').reset();
+            }
+        });
     </script>
 </body>
 </html>

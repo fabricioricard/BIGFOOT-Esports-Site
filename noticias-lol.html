@@ -1203,6 +1203,10 @@
             transform: translateY(0);
         }
 
+        .d-none {
+            display: none !important;
+        }
+
         /* Responsividade */
         @media (max-width: 768px) {
             .header-container {
@@ -1242,6 +1246,19 @@
                 flex-direction: column;
                 gap: var(--spacing-md);
             }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+
+            .footer-column a:hover {
+                transform: none;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1274,10 +1291,6 @@
         *:focus-visible {
             outline: 3px solid var(--lol-gold);
             outline-offset: 2px;
-        }
-
-        .d-none {
-            display: none !important;
         }
     </style>
 </head>
@@ -1599,6 +1612,22 @@
 
             backToTop.addEventListener('click', () => {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // Smooth scroll para links âncora
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const href = this.getAttribute('href');
+                    if (href !== '#' && href.startsWith('#')) {
+                        e.preventDefault();
+                        const target = document.querySelector(href);
+                        if (target) {
+                            target.scrollIntoView({
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                });
             });
 
             // Close article modal

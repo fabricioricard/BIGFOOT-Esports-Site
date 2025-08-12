@@ -1,29 +1,29 @@
 // ===== CONFIGURAÇÃO E INICIALIZAÇÃO DO FIREBASE =====
+import { initializeApp } from "firebase/app";
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signOut, setPersistence, browserLocalPersistence } from "firebase/auth";
+import { getFirestore, collection, doc, getDoc, setDoc } from "firebase/firestore";
+
 const firebaseConfig = {
     apiKey: "AIzaSyAV8x3oA2D3UO5niAmwo88U9Of3hj7VNaQ",
     authDomain: "bigfoot-esports.firebaseapp.com",
     projectId: "bigfoot-esports",
-    storageBucket: "bigfoot-esports.appspot.com", // corrigido
+    storageBucket: "bigfoot-esports.firebasestorage.app", // Corrigido
     messagingSenderId: "868767435883",
     appId: "1:868767435883:web:f90f8d3d5bfd66e933752e",
     measurementId: "G-S26ZFJRD3M"
 };
 
-// Inicializa Firebase apenas se ainda não estiver inicializado
-if (!firebase.apps.length) {
-    try {
-        firebase.initializeApp(firebaseConfig);
-        console.log("✅ Firebase inicializado com sucesso");
-    } catch (error) {
-        console.error("❌ Erro ao inicializar Firebase:", error);
-    }
-} else {
-    console.log("ℹ️ Firebase já estava inicializado");
-}
+// Inicializa Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
 
-const auth = firebase.auth();
-const db = firebase.firestore();
+// Configura persistência de autenticação
+setPersistence(auth, browserLocalPersistence)
+    .then(() => console.log("✅ Persistência configurada para local"))
+    .catch(error => console.error("❌ Erro ao configurar persistência:", error.code, error.message));
 
+console.log("✅ Firebase inicializado com sucesso");
 console.log("📂 auth.js carregado");
 
 // ===== SISTEMA DE AUTENTICAÇÃO GLOBAL =====
@@ -44,23 +44,24 @@ class BigFootAuth {
     }
 
     init() {
-        auth.onAuthStateChanged(async (user) => {
-            console.log("🔄 onAuthStateChanged:", user ? `Usuário logado: ${user.email}` : "Usuário não logado");
+        onAuthStateChanged(auth, async (user) => {
+            console.log("🔄 onAuthStateChanged:", user ? `Usuário logado: ${user.email}` : "Usuário não logado", { uid: user ? user.uid : null });
             this.currentUser = user;
 
             if (user) {
                 try {
                     console.log('📡 Buscando dados do usuário no Firestore:', user.uid);
-                    const doc = await db.collection('users').doc(user.uid).get();
-                    console.log('📁 Resposta do Firestore:', { exists: doc.exists, data: doc.data() });
-                    if (doc.exists) {
-                        this.points = doc.data().points || 0;
-                        this.articlesRead = doc.data().articlesRead || 0;
-                        this.totalReadingTime = doc.data().totalReadingTime || 0;
-                        this.readArticles = doc.data().readArticles || [];
+                    const docRef = doc(db, 'users', user.uid);
+                    const docSnap = await getDoc(docRef);
+                    console.log('📁 Resposta do Firestore:', { exists: docSnap.exists(), data: docSnap.data() });
+                    if (docSnap.exists()) {
+                        this.points = docSnap.data().points || 0;
+                        this.articlesRead = docSnap.data().articlesRead || 0;
+                        this.totalReadingTime = docSnap.data().totalReadingTime || 0;
+                        this.readArticles = docSnap.data().readArticles || [];
                     } else {
                         console.log('🆕 Criando novo documento para usuário:', user.uid);
-                        await db.collection('users').doc(user.uid).set({
+                        await setDoc(docRef, {
                             points: 0,
                             articlesRead: 0,
                             totalReadingTime: 0,
@@ -71,7 +72,7 @@ class BigFootAuth {
                     this.updateRewardsUI();
                     this.updateStatsUI();
                 } catch (error) {
-                    console.error('❌ Erro ao acessar Firestore:', error);
+                    console.error('❌ Erro ao acessar Firestore:', error.code, error.message);
                     this.notifyListeners(user);
                 }
             } else {
@@ -135,7 +136,7 @@ class BigFootAuth {
             try {
                 callback(user);
             } catch (error) {
-                console.error("❌ Erro no listener de autenticação:", error);
+                console.error("❌ Erro no listener de autenticação:", error.code, error.message);
             }
         });
     }
@@ -150,7 +151,15 @@ class BigFootAuth {
         const newsContainer = document.getElementById('news-container');
 
         if (!userSection || !userInfo || !userAvatar || !userName || !loginBtn || !loginRequired || !newsContainer) {
-            console.warn("⚠️ Elementos da UI principal não encontrados");
+            console.warn("⚠️ Elementos da UI principal não encontrados:", {
+                userSection: !!userSection,
+                userInfo: !!userInfo,
+                userAvatar: !!userAvatar,
+                userName: !!userName,
+                loginBtn: !!loginBtn,
+                loginRequired: !!loginRequired,
+                newsContainer: !!newsContainer
+            });
             return;
         }
 
@@ -219,59 +228,61 @@ class BigFootAuth {
             return;
         }
         try {
-            await db.collection('users').doc(this.currentUser.uid).set(data, { merge: true });
+            const docRef = doc(db, 'users', this.currentUser.uid);
+            await setDoc(docRef, data, { merge: true });
             this.points = data.points || this.points;
             this.articlesRead = data.articlesRead || this.articlesRead;
             this.totalReadingTime = data.totalReadingTime || this.totalReadingTime;
             this.readArticles = data.readArticles || this.readArticles;
             this.updateRewardsUI();
             this.updateStatsUI();
+            console.log("✅ Dados do usuário atualizados com sucesso");
         } catch (error) {
-            console.error("❌ Erro ao atualizar dados do usuário:", error);
+            console.error("❌ Erro ao atualizar dados do usuário:", error.code, error.message);
         }
     }
 
     async loginWithEmail(email, password) {
         try {
-            const result = await auth.signInWithEmailAndPassword(email, password);
+            const result = await signInWithEmailAndPassword(auth, email, password);
             console.log("✅ Login com email bem-sucedido:", result.user.email);
-            return { success: true };
+            return { success: true, user: result.user };
         } catch (error) {
-            console.error("❌ Erro no login com email:", error);
+            console.error("❌ Erro no login com email:", error.code, error.message);
             return { success: false, error };
         }
     }
 
     async registerWithEmail(email, password) {
         try {
-            const result = await auth.createUserWithEmailAndPassword(email, password);
+            const result = await createUserWithEmailAndPassword(auth, email, password);
             console.log("✅ Registro com email bem-sucedido:", result.user.email);
-            return { success: true };
+            return { success: true, user: result.user };
         } catch (error) {
-            console.error("❌ Erro no registro com email:", error);
+            console.error("❌ Erro no registro com email:", error.code, error.message);
             return { success: false, error };
         }
     }
 
     async loginWithGoogle() {
         try {
-            const provider = new firebase.auth.GoogleAuthProvider();
-            const result = await auth.signInWithPopup(provider);
+            const provider = new GoogleAuthProvider();
+            const result = await signInWithPopup(auth, provider);
             console.log("✅ Login com Google bem-sucedido:", result.user.email);
-            return { success: true };
+            return { success: true, user: result.user };
         } catch (error) {
-            console.error("❌ Erro no login com Google:", error);
+            console.error("❌ Erro no login com Google:", error.code, error.message);
             return { success: false, error };
         }
     }
 
     async logout() {
         try {
-            await auth.signOut();
+            await signOut(auth);
             console.log("✅ Logout bem-sucedido");
             return { success: true };
         } catch (error) {
-            console.error("❌ Erro ao fazer logout:", error);
+            console.error("❌ Erro ao fazer logout:", error.code, error.message);
             return { success: false, error };
         }
     }

@@ -151,8 +151,6 @@ class BigFootAuth {
         const userAvatar = document.getElementById('userAvatar');
         const userName = document.getElementById('userName');
         const loginBtn = document.getElementById('login-btn');
-        const loginRequired = document.getElementById('loginRequired');
-        const newsContainer = document.getElementById('news-container');
 
         if (!userSection || !userInfo || !userAvatar || !userName || !loginBtn) {
             console.warn("⚠️ Elementos da UI principal não encontrados:", {
@@ -160,9 +158,7 @@ class BigFootAuth {
                 userInfo: !!userInfo,
                 userAvatar: !!userAvatar,
                 userName: !!userName,
-                loginBtn: !!loginBtn,
-                loginRequired: !!loginRequired,
-                newsContainer: !!newsContainer
+                loginBtn: !!loginBtn
             });
             return;
         }
@@ -174,16 +170,12 @@ class BigFootAuth {
             userName.textContent = user.displayName || user.email.split('@')[0] || "Usuário";
             userAvatar.src = user.photoURL || 'https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/default-avatar.png';
             loginBtn.style.display = 'none';
-            if (loginRequired) loginRequired.classList.add('hidden');
-            if (newsContainer) newsContainer.classList.remove('hidden');
         } else {
             userSection.classList.remove('loading', 'logged-in');
             userInfo.classList.remove('logged-in');
             userName.textContent = '';
             userAvatar.src = 'https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/default-avatar.png';
             loginBtn.style.display = 'inline-flex';
-            if (loginRequired) loginRequired.classList.remove('hidden');
-            if (newsContainer) newsContainer.classList.add('hidden');
         }
     }
 

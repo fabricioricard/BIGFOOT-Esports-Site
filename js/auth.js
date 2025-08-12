@@ -1,29 +1,34 @@
 // ===== CONFIGURAÇÃO E INICIALIZAÇÃO DO FIREBASE =====
-import { initializeApp } from "firebase/app";
-import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signOut, setPersistence, browserLocalPersistence } from "firebase/auth";
-import { getFirestore, collection, doc, getDoc, setDoc } from "firebase/firestore";
-
 const firebaseConfig = {
     apiKey: "AIzaSyAV8x3oA2D3UO5niAmwo88U9Of3hj7VNaQ",
     authDomain: "bigfoot-esports.firebaseapp.com",
     projectId: "bigfoot-esports",
-    storageBucket: "bigfoot-esports.firebasestorage.app", // Corrigido
+    storageBucket: "bigfoot-esports.firebasestorage.app",
     messagingSenderId: "868767435883",
     appId: "1:868767435883:web:f90f8d3d5bfd66e933752e",
     measurementId: "G-S26ZFJRD3M"
 };
 
-// Inicializa Firebase
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
+// Inicializa Firebase apenas se ainda não estiver inicializado
+if (!firebase.apps.length) {
+    try {
+        firebase.initializeApp(firebaseConfig);
+        console.log("✅ Firebase inicializado com sucesso");
+    } catch (error) {
+        console.error("❌ Erro ao inicializar Firebase:", error.message);
+    }
+} else {
+    console.log("ℹ️ Firebase já estava inicializado");
+}
+
+const auth = firebase.auth();
+const db = firebase.firestore();
 
 // Configura persistência de autenticação
-setPersistence(auth, browserLocalPersistence)
+auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
     .then(() => console.log("✅ Persistência configurada para local"))
-    .catch(error => console.error("❌ Erro ao configurar persistência:", error.code, error.message));
+    .catch(error => console.error("❌ Erro ao configurar persistência:", error.message));
 
-console.log("✅ Firebase inicializado com sucesso");
 console.log("📂 auth.js carregado");
 
 // ===== SISTEMA DE AUTENTICAÇÃO GLOBAL =====
@@ -44,24 +49,23 @@ class BigFootAuth {
     }
 
     init() {
-        onAuthStateChanged(auth, async (user) => {
+        auth.onAuthStateChanged(async (user) => {
             console.log("🔄 onAuthStateChanged:", user ? `Usuário logado: ${user.email}` : "Usuário não logado", { uid: user ? user.uid : null });
             this.currentUser = user;
 
             if (user) {
                 try {
                     console.log('📡 Buscando dados do usuário no Firestore:', user.uid);
-                    const docRef = doc(db, 'users', user.uid);
-                    const docSnap = await getDoc(docRef);
-                    console.log('📁 Resposta do Firestore:', { exists: docSnap.exists(), data: docSnap.data() });
-                    if (docSnap.exists()) {
-                        this.points = docSnap.data().points || 0;
-                        this.articlesRead = docSnap.data().articlesRead || 0;
-                        this.totalReadingTime = docSnap.data().totalReadingTime || 0;
-                        this.readArticles = docSnap.data().readArticles || [];
+                    const doc = await db.collection('users').doc(user.uid).get();
+                    console.log('📁 Resposta do Firestore:', { exists: doc.exists, data: doc.data() });
+                    if (doc.exists) {
+                        this.points = doc.data().points || 0;
+                        this.articlesRead = doc.data().articlesRead || 0;
+                        this.totalReadingTime = doc.data().totalReadingTime || 0;
+                        this.readArticles = doc.data().readArticles || [];
                     } else {
                         console.log('🆕 Criando novo documento para usuário:', user.uid);
-                        await setDoc(docRef, {
+                        await db.collection('users').doc(user.uid).set({
                             points: 0,
                             articlesRead: 0,
                             totalReadingTime: 0,
@@ -72,7 +76,7 @@ class BigFootAuth {
                     this.updateRewardsUI();
                     this.updateStatsUI();
                 } catch (error) {
-                    console.error('❌ Erro ao acessar Firestore:', error.code, error.message);
+                    console.error('❌ Erro ao acessar Firestore:', error.message);
                     this.notifyListeners(user);
                 }
             } else {
@@ -136,7 +140,7 @@ class BigFootAuth {
             try {
                 callback(user);
             } catch (error) {
-                console.error("❌ Erro no listener de autenticação:", error.code, error.message);
+                console.error("❌ Erro no listener de autenticação:", error.message);
             }
         });
     }
@@ -150,7 +154,7 @@ class BigFootAuth {
         const loginRequired = document.getElementById('loginRequired');
         const newsContainer = document.getElementById('news-container');
 
-        if (!userSection || !userInfo || !userAvatar || !userName || !loginBtn || !loginRequired || !newsContainer) {
+        if (!userSection || !userInfo || !userAvatar || !userName || !loginBtn) {
             console.warn("⚠️ Elementos da UI principal não encontrados:", {
                 userSection: !!userSection,
                 userInfo: !!userInfo,
@@ -170,16 +174,16 @@ class BigFootAuth {
             userName.textContent = user.displayName || user.email.split('@')[0] || "Usuário";
             userAvatar.src = user.photoURL || 'https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/default-avatar.png';
             loginBtn.style.display = 'none';
-            loginRequired.classList.add('hidden');
-            newsContainer.classList.remove('hidden');
+            if (loginRequired) loginRequired.classList.add('hidden');
+            if (newsContainer) newsContainer.classList.remove('hidden');
         } else {
             userSection.classList.remove('loading', 'logged-in');
             userInfo.classList.remove('logged-in');
             userName.textContent = '';
             userAvatar.src = 'https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/default-avatar.png';
             loginBtn.style.display = 'inline-flex';
-            loginRequired.classList.remove('hidden');
-            newsContainer.classList.add('hidden');
+            if (loginRequired) loginRequired.classList.remove('hidden');
+            if (newsContainer) newsContainer.classList.add('hidden');
         }
     }
 
@@ -228,8 +232,7 @@ class BigFootAuth {
             return;
         }
         try {
-            const docRef = doc(db, 'users', this.currentUser.uid);
-            await setDoc(docRef, data, { merge: true });
+            await db.collection('users').doc(this.currentUser.uid).set(data, { merge: true });
             this.points = data.points || this.points;
             this.articlesRead = data.articlesRead || this.articlesRead;
             this.totalReadingTime = data.totalReadingTime || this.totalReadingTime;
@@ -238,13 +241,13 @@ class BigFootAuth {
             this.updateStatsUI();
             console.log("✅ Dados do usuário atualizados com sucesso");
         } catch (error) {
-            console.error("❌ Erro ao atualizar dados do usuário:", error.code, error.message);
+            console.error("❌ Erro ao atualizar dados do usuário:", error.message);
         }
     }
 
     async loginWithEmail(email, password) {
         try {
-            const result = await signInWithEmailAndPassword(auth, email, password);
+            const result = await auth.signInWithEmailAndPassword(email, password);
             console.log("✅ Login com email bem-sucedido:", result.user.email);
             return { success: true, user: result.user };
         } catch (error) {
@@ -255,7 +258,7 @@ class BigFootAuth {
 
     async registerWithEmail(email, password) {
         try {
-            const result = await createUserWithEmailAndPassword(auth, email, password);
+            const result = await auth.createUserWithEmailAndPassword(email, password);
             console.log("✅ Registro com email bem-sucedido:", result.user.email);
             return { success: true, user: result.user };
         } catch (error) {
@@ -266,8 +269,8 @@ class BigFootAuth {
 
     async loginWithGoogle() {
         try {
-            const provider = new GoogleAuthProvider();
-            const result = await signInWithPopup(auth, provider);
+            const provider = new firebase.auth.GoogleAuthProvider();
+            const result = await auth.signInWithPopup(provider);
             console.log("✅ Login com Google bem-sucedido:", result.user.email);
             return { success: true, user: result.user };
         } catch (error) {
@@ -278,7 +281,7 @@ class BigFootAuth {
 
     async logout() {
         try {
-            await signOut(auth);
+            await auth.signOut();
             console.log("✅ Logout bem-sucedido");
             return { success: true };
         } catch (error) {

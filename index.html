@@ -1501,265 +1501,217 @@
 
     <!-- Scripts -->
     <script src="js/auth.js"></script>
-    <script>
-        // Função para copiar a chave PIX
-        function copyPixKey() {
-            const key = document.getElementById('pix-key').textContent;
-            navigator.clipboard.writeText(key).then(() => {
-                alert('Chave PIX copiada com sucesso!');
-            }).catch(() => {
-                alert('Erro ao copiar chave PIX.');
+<script>
+    // Função para copiar a chave PIX
+    function copyPixKey() {
+        const key = document.getElementById('pix-key').textContent;
+        navigator.clipboard.writeText(key).then(() => {
+            alert('Chave PIX copiada com sucesso!');
+        }).catch(() => {
+            alert('Erro ao copiar chave PIX.');
+        });
+    }
+
+    // DOM Elements
+    const loginBtn = document.getElementById('login-btn');
+    const loginModal = document.getElementById('login-modal');
+    const closeModal = document.getElementById('close-modal');
+    const userSection = document.getElementById('user-section');
+    const userInfo = document.getElementById('userInfo');
+    const logoutBtn = document.getElementById('logout-btn');
+    const modalTabs = document.querySelectorAll('.modal-tab');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', async () => {
+        // Animações de scroll
+        function animateOnScroll() {
+            const reveals = document.querySelectorAll('.reveal');
+            reveals.forEach(reveal => {
+                const windowHeight = window.innerHeight;
+                const elementTop = reveal.getBoundingClientRect().top;
+                const elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveal.classList.add('visible');
+                }
             });
         }
 
-        // DOM Elements
-        const loginBtn = document.getElementById('login-btn');
-        const loginModal = document.getElementById('login-modal');
-        const closeModal = document.getElementById('close-modal');
-        const userSection = document.getElementById('user-section');
-        const userInfo = document.getElementById('userInfo');
-        const logoutBtn = document.getElementById('logout-btn');
-        const modalTabs = document.querySelectorAll('.modal-tab');
-        const tabContents = document.querySelectorAll('.tab-content');
+        window.addEventListener('scroll', animateOnScroll);
+        animateOnScroll();
 
-        // Initialize
-        document.addEventListener('DOMContentLoaded', async () => {
-            // Set up existing functionality
-            console.log('DOM carregado - Executando animações iniciais...');
-            animateOnScroll();
-
-            // Botão voltar ao topo
-            const backToTop = document.getElementById('back-to-top');
-            window.addEventListener('scroll', () => {
-                if (window.pageYOffset > 300) {
-                    backToTop.style.display = 'block';
-                } else {
-                    backToTop.style.display = 'none';
-                }
-            });
-
-            backToTop.addEventListener('click', () => {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            });
-
-            // Animações de scroll
-            function animateOnScroll() {
-                const reveals = document.querySelectorAll('.reveal');
-                reveals.forEach(reveal => {
-                    const windowHeight = window.innerHeight;
-                    const elementTop = reveal.getBoundingClientRect().top;
-                    const elementVisible = 150;
-                    if (elementTop < windowHeight - elementVisible) {
-                        reveal.classList.add('visible');
-                    }
-                });
-            }
-
-            window.addEventListener('scroll', animateOnScroll);
-
-            // Smooth scroll para links âncora
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    const href = this.getAttribute('href');
-                    if (href !== '#' && href.startsWith('#')) {
-                        e.preventDefault();
-                        const target = document.querySelector(href);
-                        if (target) {
-                            target.scrollIntoView({
-                                behavior: 'smooth'
-                            });
-                        }
-                    }
-                });
-            });
-
-            // Auto-fechar doação após 10 segundos
-            const donationBox = document.getElementById('donation-box');
-            const closeDonation = document.getElementById('close-donation');
-            if (closeDonation && donationBox) {
-                closeDonation.addEventListener('click', () => {
-                    donationBox.classList.add('hidden');
-                });
-            }
-            setTimeout(() => {
-                if (donationBox && !donationBox.classList.contains('hidden')) {
-                    donationBox.classList.add('hidden');
-                }
-            }, 10000);
-
-            // Autenticação com auth.js
-            if (window.bigFootAuth) {
-                await window.bigFootAuth.waitForInit();
-                const isLoggedIn = await window.bigFootAuth.isLoggedInAsync();
-                const user = await window.bigFootAuth.getCurrentUserAsync();
-                console.log('Inicialização da autenticação:', { isLoggedIn, user: user ? user.email : null });
-
-                // Adicionar listener para mudanças de autenticação
-                window.bigFootAuth.addAuthListener((user) => {
-                    console.log('Listener de autenticação disparado:', { user: user ? user.email : null });
-                    window.bigFootAuth.updateMainUI(user);
-                });
+        // Botão voltar ao topo
+        const backToTop = document.getElementById('back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTop.style.display = 'block';
             } else {
-                console.error('❌ window.bigFootAuth não está definido');
+                backToTop.style.display = 'none';
             }
+        });
 
-            // Event listeners para autenticação
-            loginBtn.addEventListener('click', openModal);
-            closeModal.addEventListener('click', closeLoginModal);
-            logoutBtn.addEventListener('click', handleLogout);
-            modalTabs.forEach(tab => {
-                tab.addEventListener('click', () => switchTab(tab.dataset.tab));
-            });
-            document.getElementById('login-form').addEventListener('submit', handleLogin);
-            document.getElementById('register-form').addEventListener('submit', handleRegister);
-            document.getElementById('google-login').addEventListener('click', handleGoogleLogin);
-            document.getElementById('forgot-password-link').addEventListener('click', (e) => {
-                e.preventDefault();
-                alert('Funcionalidade de redefinição de senha em desenvolvimento.');
-            });
-
-            // Fechar modal clicando fora
-            loginModal.addEventListener('click', (e) => {
-                if (e.target === loginModal) closeLoginModal();
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
             });
         });
 
-        // Funções de autenticação
-        function openModal() {
-            loginModal.classList.add('show');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeLoginModal() {
-            loginModal.classList.remove('show');
-            document.body.style.overflow = '';
-            document.getElementById('login-form').reset();
-            document.getElementById('register-form').reset();
-            document.getElementById('login-email-error').classList.remove('show');
-            document.getElementById('login-password-error').classList.remove('show');
-            document.getElementById('register-email-error').classList.remove('show');
-            document.getElementById('register-password-error').classList.remove('show');
-        }
-
-        function switchTab(tabName) {
-            modalTabs.forEach(tab => tab.classList.remove('active'));
-            tabContents.forEach(content => content.classList.remove('active'));
-            document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
-            document.getElementById(`${tabName}-tab`).classList.add('active');
-        }
-
-        async function handleLogin(e) {
-            e.preventDefault();
-            const email = document.getElementById('login-email').value;
-            const password = document.getElementById('login-password').value;
-            const emailError = document.getElementById('login-email-error');
-            const passwordError = document.getElementById('login-password-error');
-
-            emailError.textContent = '';
-            passwordError.textContent = '';
-            emailError.classList.remove('show');
-            passwordError.classList.remove('show');
-
-            if (!email) {
-                emailError.textContent = 'Por favor, insira um email.';
-                emailError.classList.add('show');
-                return;
-            }
-            if (!password) {
-                passwordError.textContent = 'Por favor, insira uma senha.';
-                passwordError.classList.add('show');
-                return;
-            }
-
-            try {
-                const result = await window.bigFootAuth.loginWithEmail(email, password);
-                if (result.success) {
-                    closeLoginModal();
-                } else {
-                    if (result.error.code === 'auth/invalid-credential') {
-                        passwordError.textContent = 'Email ou senha incorretos.';
-                        passwordError.classList.add('show');
-                    } else {
-                        alert('Erro ao fazer login: ' + result.error.message);
+        // Smooth scroll para links âncora
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && href.startsWith('#')) {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth'
+                        });
                     }
                 }
-            } catch (error) {
-                console.error('❌ Erro inesperado no login:', error.message);
-                alert('Erro inesperado ao fazer login: ' + error.message);
+            });
+        });
+
+        // Auto-fechar doação após 10 segundos
+        const donationBox = document.getElementById('donation-box');
+        const closeDonation = document.getElementById('close-donation');
+        if (closeDonation && donationBox) {
+            closeDonation.addEventListener('click', () => {
+                donationBox.classList.add('hidden');
+            });
+        }
+        setTimeout(() => {
+            if (donationBox && !donationBox.classList.contains('hidden')) {
+                donationBox.classList.add('hidden');
             }
+        }, 10000);
+
+        // Autenticação com auth.js
+        if (window.bigFootAuth) {
+            await window.bigFootAuth.waitForInit();
+            const isLoggedIn = await window.bigFootAuth.isLoggedInAsync();
+            const user = await window.bigFootAuth.getCurrentUserAsync();
+            if (isLoggedIn && user) {
+                updateUIForLoggedIn(user);
+            } else {
+                updateUIForLoggedOut();
+            }
+
+            // Adicionar listener para mudanças de autenticação
+            window.bigFootAuth.addAuthListener((user) => {
+                if (user) {
+                    updateUIForLoggedIn(user);
+                } else {
+                    updateUIForLoggedOut();
+                }
+            });
+        } else {
+            console.error('❌ window.bigFootAuth não está definido');
         }
 
-        async function handleRegister(e) {
+        // Event listeners para autenticação
+        loginBtn.addEventListener('click', openModal);
+        closeModal.addEventListener('click', closeLoginModal);
+        logoutBtn.addEventListener('click', logout);
+        modalTabs.forEach(tab => {
+            tab.addEventListener('click', () => switchTab(tab.dataset.tab));
+        });
+        document.getElementById('login-form').addEventListener('submit', handleLogin);
+        document.getElementById('register-form').addEventListener('submit', handleRegister);
+        document.getElementById('google-login').addEventListener('click', handleGoogleLogin);
+        document.getElementById('forgot-password-link').addEventListener('click', (e) => {
             e.preventDefault();
-            const email = document.getElementById('register-email').value;
-            const password = document.getElementById('register-password').value;
-            const emailError = document.getElementById('register-email-error');
-            const passwordError = document.getElementById('register-password-error');
+            alert('Funcionalidade de redefinição de senha em desenvolvimento.');
+        });
 
-            emailError.textContent = '';
-            passwordError.textContent = '';
-            emailError.classList.remove('show');
-            passwordError.classList.remove('show');
+        // Fechar modal clicando fora
+        loginModal.addEventListener('click', (e) => {
+            if (e.target === loginModal) closeLoginModal();
+        });
+    });
 
-            if (!email) {
-                emailError.textContent = 'Por favor, insira um email.';
-                emailError.classList.add('show');
-                return;
-            }
-            if (password.length < 6) {
-                passwordError.textContent = 'A senha deve ter pelo menos 6 caracteres.';
-                passwordError.classList.add('show');
-                return;
-            }
+    // Funções de autenticação
+    function openModal() {
+        loginModal.classList.add('show');
+        document.body.style.overflow = 'hidden';
+    }
 
-            try {
-                const result = await window.bigFootAuth.registerWithEmail(email, password);
-                if (result.success) {
-                    closeLoginModal();
-                } else {
-                    if (result.error.code === 'auth/email-already-in-use') {
-                        emailError.textContent = 'Este email já está em uso.';
-                        emailError.classList.add('show');
-                    } else {
-                        alert('Erro ao criar conta: ' + result.error.message);
-                    }
-                }
-            } catch (error) {
-                console.error('❌ Erro inesperado no registro:', error.message);
-                alert('Erro inesperado ao criar conta: ' + error.message);
-            }
+    function closeLoginModal() {
+        loginModal.classList.remove('show');
+        document.body.style.overflow = '';
+    }
+
+    function switchTab(tabName) {
+        modalTabs.forEach(tab => tab.classList.remove('active'));
+        tabContents.forEach(content => content.classList.remove('active'));
+        document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+        document.getElementById(`${tabName}-tab`).classList.add('active');
+    }
+
+    function handleLogin(e) {
+        e.preventDefault();
+        const email = document.getElementById('login-email').value;
+        const password = document.getElementById('login-password').value;
+        if (email && password) {
+            window.bigFootAuth.signIn(email, password).then(user => {
+                updateUIForLoggedIn(user);
+                closeLoginModal();
+            }).catch(error => {
+                alert('Erro ao fazer login: ' + error.message);
+            });
         }
+    }
 
-        async function handleGoogleLogin() {
-            try {
-                const result = await window.bigFootAuth.loginWithGoogle();
-                if (result.success) {
-                    closeLoginModal();
-                } else {
-                    alert('Erro ao fazer login com Google: ' + result.error.message);
-                }
-            } catch (error) {
-                console.error('❌ Erro inesperado no login com Google:', error.message);
-                alert('Erro inesperado ao fazer login com Google: ' + error.message);
-            }
+    function handleRegister(e) {
+        e.preventDefault();
+        const email = document.getElementById('register-email').value;
+        const password = document.getElementById('register-password').value;
+        if (email && password.length >= 6) {
+            window.bigFootAuth.signUp(email, password).then(user => {
+                updateUIForLoggedIn(user);
+                closeLoginModal();
+            }).catch(error => {
+                alert('Erro ao criar conta: ' + error.message);
+            });
         }
+    }
 
-        async function handleLogout() {
-            try {
-                const result = await window.bigFootAuth.logout();
-                if (result.success) {
-                    console.log('Logout bem-sucedido');
-                } else {
-                    alert('Erro ao fazer logout: ' + result.error.message);
-                }
-            } catch (error) {
-                console.error('❌ Erro inesperado no logout:', error.message);
-                alert('Erro inesperado ao fazer logout: ' + error.message);
-            }
-        }
-    </script>
+    function handleGoogleLogin() {
+        window.bigFootAuth.signInWithGoogle().then(user => {
+            updateUIForLoggedIn(user);
+            closeLoginModal();
+        }).catch(error => {
+            alert('Erro ao fazer login com Google: ' + error.message);
+        });
+    }
+
+    function logout() {
+        window.bigFootAuth.signOut().then(() => {
+            updateUIForLoggedOut();
+        }).catch(error => {
+            alert('Erro ao fazer logout: ' + error.message);
+        });
+    }
+
+    function updateUIForLoggedIn(user) {
+        userSection.classList.add('logged-in');
+        userInfo.classList.add('logged-in');
+        loginBtn.classList.add('d-none');
+        document.getElementById('userName').textContent = user.email ? user.email.split('@')[0] : user.displayName || 'Usuário';
+        document.getElementById('userName').classList.add('gradient');
+        document.getElementById('userAvatar').src = user.photoURL || 'https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/default-avatar.png';
+    }
+
+    function updateUIForLoggedOut() {
+        userSection.classList.remove('logged-in');
+        userInfo.classList.remove('logged-in');
+        loginBtn.classList.remove('d-none');
+        document.getElementById('userName').textContent = 'Usuário';
+        document.getElementById('userAvatar').src = 'https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/default-avatar.png';
+        document.getElementById('login-form').reset();
+        document.getElementById('register-form').reset();
+    }
+</script>
 </body>
 </html>

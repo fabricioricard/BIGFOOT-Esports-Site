@@ -477,36 +477,90 @@
 
         /* Footer Styles */
         footer {
-            background: var(--primary-gradient);
+            background: var(--lol-dark);
             color: white;
-            padding: var(--spacing-2xl);
-            text-align: center;
+            padding: var(--spacing-2xl) var(--spacing-md);
             margin-top: auto;
+            border-top: 3px solid transparent;
+            background-image: linear-gradient(var(--lol-dark), var(--lol-dark)), var(--primary-gradient);
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
         }
 
-        .footer-content {
-            max-width: 1200px;
+        .footer-container {
+            max-width: 1400px;
             margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-2xl);
+            align-items: start;
+        }
+
+        .footer-logo {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-            gap: var(--spacing-lg);
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
         }
 
-        .footer-left p {
-            margin: var(--spacing-xs) 0;
-            opacity: 0.9;
+        .footer-logo img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            background: var(--primary-gradient);
+            background-clip: padding-box;
+            transition: all var(--transition-normal);
         }
 
-        .footer-right {
+        .footer-logo img:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: var(--shadow-primary);
+        }
+
+        .footer-logo span {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-column h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: var(--spacing-md);
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-column p,
+        .footer-column a {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 14px;
+            margin-bottom: var(--spacing-sm);
+            text-decoration: none;
+            transition: all var(--transition-normal);
+        }
+
+        .footer-column a:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .social-links {
             display: flex;
-            gap: var(--spacing-lg);
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-md);
         }
 
         .social-icon {
             transition: all var(--transition-normal);
-            display: inline-block;
         }
 
         .social-icon:hover {
@@ -514,9 +568,18 @@
         }
 
         .social-icon img {
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             filter: brightness(1.2);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: var(--spacing-2xl);
+            padding-top: var(--spacing-md);
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
         }
 
         /* Botão Voltar ao Topo */
@@ -1212,6 +1275,10 @@
             outline: 3px solid var(--lol-gold);
             outline-offset: 2px;
         }
+
+        .d-none {
+            display: none !important;
+        }
     </style>
 </head>
 <body>
@@ -1226,6 +1293,7 @@
             </div>
             <nav>
                 <ul class="nav-menu">
+                    <li><a href="/">🏠 Home</a></li>
                     <li><a href="noticias-lol.html" class="active">📰 Notícias LoL</a></li>
                     <li><a href="loja.html">🛒 Loja</a></li>
                     <li><a href="lan-house.html">🖥️ Lan House</a></li>
@@ -1420,23 +1488,42 @@
 
     <!-- Footer -->
     <footer class="reveal">
-        <div class="footer-content">
-            <div class="footer-left">
-                <p><strong>BIGFOOT Esports</strong></p>
+        <div class="footer-container">
+            <div class="footer-column">
+                <div class="footer-logo">
+                    <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/logo.jpg" alt="Logo BIGFOOT Esports">
+                    <span>BIGFOOT Esports</span>
+                </div>
+                <p>Comunidade apaixonada por League of Legends e esportes eletrônicos.</p>
+                <div class="social-links">
+                    <a href="https://discord.gg/3aHhvgzGSz" class="social-icon">
+                        <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/dc.svg" alt="Discord">
+                    </a>
+                    <a href="https://x.com/BFTesports" class="social-icon">
+                        <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/x.svg" alt="X">
+                    </a>
+                    <a href="https://youtube.com/@BIGFOOTEsports" class="social-icon">
+                        <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/yt.svg" alt="YouTube">
+                    </a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Links Úteis</h3>
+                <p><a href="/">Home</a></p>
+                <p><a href="noticias-lol.html">Notícias LoL</a></p>
+                <p><a href="loja.html">Loja</a></p>
+                <p><a href="lan-house.html">Lan House</a></p>
+                <p><a href="doacao.html">Doação</a></p>
+                <p><a href="equipe-lol.html">Equipe LoL</a></p>
+            </div>
+            <div class="footer-column">
+                <h3>Contato</h3>
                 <p>📧 bigftesports@gmail.com</p>
-                <p>🇧🇷 Brasil • 2025</p>
+                <p>📍 Brasil</p>
             </div>
-            <div class="footer-right">
-                <a href="https://discord.gg/3aHhvgzGSz" class="social-icon">
-                    <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/dc.svg" alt="Discord">
-                </a>
-                <a href="https://x.com/BFTesports" class="social-icon">
-                    <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/x.svg" alt="X">
-                </a>
-                <a href="https://youtube.com/@BIGFOOTEsports" class="social-icon">
-                    <img src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/yt.svg" alt="YouTube">
-                </a>
-            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 BIGFOOT Esports. Todos os direitos reservados.</p>
         </div>
     </footer>
 
@@ -1464,15 +1551,16 @@
         const loginBtn = document.getElementById('login-btn');
         const loginModal = document.getElementById('login-modal');
         const closeModal = document.getElementById('close-modal');
+        const userSection = document.getElementById('user-section');
+        const userInfo = document.getElementById('userInfo');
+        const logoutBtn = document.getElementById('logout-btn');
         const modalTabs = document.querySelectorAll('.modal-tab');
         const tabContents = document.querySelectorAll('.tab-content');
-        const logoutBtn = document.getElementById('logout-btn');
-        const forgotPasswordLink = document.getElementById('forgot-password-link');
         const articleModal = document.getElementById('modal');
         const closeArticleBtn = document.getElementById('closeBtn');
 
         // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', async () => {
             // Set current date
             const today = new Date();
             const options = { 
@@ -1482,146 +1570,6 @@
                 day: 'numeric' 
             };
             document.getElementById('currentDate').textContent = today.toLocaleDateString('pt-BR', options);
-
-            // Event listeners
-            loginBtn.addEventListener('click', () => {
-                loginModal.classList.add('show');
-                document.body.style.overflow = 'hidden';
-            });
-
-            closeModal.addEventListener('click', () => {
-                loginModal.classList.remove('show');
-                document.body.style.overflow = '';
-            });
-
-            logoutBtn.addEventListener('click', async () => {
-                const result = await window.bigFootAuth.logout();
-                if (result.success) {
-                    showNotification('Logout realizado com sucesso!', 'success');
-                } else {
-                    showNotification('Erro ao fazer logout: ' + result.error.message, 'error');
-                }
-            });
-
-            modalTabs.forEach(tab => {
-                tab.addEventListener('click', () => {
-                    modalTabs.forEach(t => t.classList.remove('active'));
-                    tabContents.forEach(c => c.classList.remove('active'));
-                    tab.classList.add('active');
-                    document.getElementById(`${tab.dataset.tab}-tab`).classList.add('active');
-                });
-            });
-
-            document.getElementById('login-form').addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const email = document.getElementById('login-email').value;
-                const password = document.getElementById('login-password').value;
-                const emailError = document.getElementById('login-email-error');
-                const passwordError = document.getElementById('login-password-error');
-                emailError.classList.remove('show');
-                passwordError.classList.remove('show');
-
-                const result = await window.bigFootAuth.loginWithEmail(email, password);
-                if (result.success) {
-                    loginModal.classList.remove('show');
-                    document.body.style.overflow = '';
-                    showNotification('Login realizado com sucesso!', 'success');
-                } else {
-                    if (result.error.code === 'auth/invalid-email') {
-                        emailError.textContent = 'Email inválido.';
-                        emailError.classList.add('show');
-                    } else if (result.error.code === 'auth/wrong-password') {
-                        passwordError.textContent = 'Senha incorreta.';
-                        passwordError.classList.add('show');
-                    } else {
-                        showNotification('Erro ao fazer login: ' + result.error.message, 'error');
-                    }
-                }
-            });
-
-            document.getElementById('register-form').addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const email = document.getElementById('register-email').value;
-                const password = document.getElementById('register-password').value;
-                const emailError = document.getElementById('register-email-error');
-                const passwordError = document.getElementById('register-password-error');
-                emailError.classList.remove('show');
-                passwordError.classList.remove('show');
-
-                if (password.length < 6) {
-                    passwordError.textContent = 'A senha deve ter pelo menos 6 caracteres.';
-                    passwordError.classList.add('show');
-                    return;
-                }
-
-                const result = await window.bigFootAuth.registerWithEmail(email, password);
-                if (result.success) {
-                    loginModal.classList.remove('show');
-                    document.body.style.overflow = '';
-                    showNotification('Conta criada com sucesso!', 'success');
-                } else {
-                    if (result.error.code === 'auth/email-already-in-use') {
-                        emailError.textContent = 'Este email já está em uso.';
-                        emailError.classList.add('show');
-                    } else if (result.error.code === 'auth/invalid-email') {
-                        emailError.textContent = 'Email inválido.';
-                        emailError.classList.add('show');
-                    } else {
-                        showNotification('Erro ao criar conta: ' + result.error.message, 'error');
-                    }
-                }
-            });
-
-            document.getElementById('google-login').addEventListener('click', async () => {
-                const result = await window.bigFootAuth.loginWithGoogle();
-                if (result.success) {
-                    loginModal.classList.remove('show');
-                    document.body.style.overflow = '';
-                    showNotification('Login com Google realizado com sucesso!', 'success');
-                } else {
-                    showNotification('Erro ao fazer login com Google: ' + result.error.message, 'error');
-                }
-            });
-
-            forgotPasswordLink.addEventListener('click', (e) => {
-                e.preventDefault();
-                showNotification('Funcionalidade de redefinição de senha em desenvolvimento.', 'error');
-            });
-
-            // Close login modal on outside click
-            loginModal.addEventListener('click', (e) => {
-                if (e.target === loginModal) {
-                    loginModal.classList.remove('show');
-                    document.body.style.overflow = '';
-                }
-            });
-
-            // Close article modal
-            closeArticleBtn.addEventListener('click', () => {
-                articleModal.classList.remove('show');
-                document.body.style.overflow = '';
-            });
-
-            articleModal.addEventListener('click', (e) => {
-                if (e.target === articleModal) {
-                    articleModal.classList.remove('show');
-                    document.body.style.overflow = '';
-                }
-            });
-
-            // Back to top button
-            const backToTop = document.getElementById('back-to-top');
-            window.addEventListener('scroll', () => {
-                if (window.pageYOffset > 300) {
-                    backToTop.style.display = 'block';
-                } else {
-                    backToTop.style.display = 'none';
-                }
-            });
-
-            backToTop.addEventListener('click', () => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
 
             // Reveal animations
             function animateOnScroll() {
@@ -1638,6 +1586,166 @@
 
             window.addEventListener('scroll', animateOnScroll);
             animateOnScroll();
+
+            // Back to top button
+            const backToTop = document.getElementById('back-to-top');
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    backToTop.style.display = 'block';
+                } else {
+                    backToTop.style.display = 'none';
+                }
+            });
+
+            backToTop.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // Close article modal
+            closeArticleBtn.addEventListener('click', () => {
+                articleModal.classList.remove('show');
+                document.body.style.overflow = '';
+            });
+
+            articleModal.addEventListener('click', (e) => {
+                if (e.target === articleModal) {
+                    articleModal.classList.remove('show');
+                    document.body.style.overflow = '';
+                }
+            });
+
+            // Autenticação com auth.js
+            if (window.bigFootAuth) {
+                await window.bigFootAuth.waitForInit();
+                const isLoggedIn = await window.bigFootAuth.isLoggedInAsync();
+                const user = await window.bigFootAuth.getCurrentUserAsync();
+                if (isLoggedIn && user) {
+                    updateUIForLoggedIn(user);
+                } else {
+                    updateUIForLoggedOut();
+                }
+
+                // Adicionar listener para mudanças de autenticação
+                window.bigFootAuth.addAuthListener((user) => {
+                    if (user) {
+                        updateUIForLoggedIn(user);
+                    } else {
+                        updateUIForLoggedOut();
+                    }
+                });
+            } else {
+                console.error('❌ window.bigFootAuth não está definido');
+            }
+
+            // Event listeners para autenticação
+            loginBtn.addEventListener('click', openModal);
+            closeModal.addEventListener('click', closeLoginModal);
+            logoutBtn.addEventListener('click', logout);
+            modalTabs.forEach(tab => {
+                tab.addEventListener('click', () => switchTab(tab.dataset.tab));
+            });
+            document.getElementById('login-form').addEventListener('submit', handleLogin);
+            document.getElementById('register-form').addEventListener('submit', handleRegister);
+            document.getElementById('google-login').addEventListener('click', handleGoogleLogin);
+            document.getElementById('forgot-password-link').addEventListener('click', (e) => {
+                e.preventDefault();
+                showNotification('Funcionalidade de redefinição de senha em desenvolvimento.', 'error');
+            });
+
+            // Fechar modal clicando fora
+            loginModal.addEventListener('click', (e) => {
+                if (e.target === loginModal) {
+                    closeLoginModal();
+                }
+            });
+
+            // Funções de autenticação
+            function openModal() {
+                loginModal.classList.add('show');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeLoginModal() {
+                loginModal.classList.remove('show');
+                document.body.style.overflow = '';
+            }
+
+            function switchTab(tabName) {
+                modalTabs.forEach(tab => tab.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+                document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+                document.getElementById(`${tabName}-tab`).classList.add('active');
+            }
+
+            function handleLogin(e) {
+                e.preventDefault();
+                const email = document.getElementById('login-email').value;
+                const password = document.getElementById('login-password').value;
+                if (email && password) {
+                    window.bigFootAuth.signIn(email, password).then(user => {
+                        updateUIForLoggedIn(user);
+                        closeLoginModal();
+                        showNotification('Login realizado com sucesso!', 'success');
+                    }).catch(error => {
+                        showNotification('Erro ao fazer login: ' + error.message, 'error');
+                    });
+                }
+            }
+
+            function handleRegister(e) {
+                e.preventDefault();
+                const email = document.getElementById('register-email').value;
+                const password = document.getElementById('register-password').value;
+                if (email && password.length >= 6) {
+                    window.bigFootAuth.signUp(email, password).then(user => {
+                        updateUIForLoggedIn(user);
+                        closeLoginModal();
+                        showNotification('Conta criada com sucesso!', 'success');
+                    }).catch(error => {
+                        showNotification('Erro ao criar conta: ' + error.message, 'error');
+                    });
+                } else {
+                    showNotification('A senha deve ter pelo menos 6 caracteres.', 'error');
+                }
+            }
+
+            function handleGoogleLogin() {
+                window.bigFootAuth.signInWithGoogle().then(user => {
+                    updateUIForLoggedIn(user);
+                    closeLoginModal();
+                    showNotification('Login com Google realizado com sucesso!', 'success');
+                }).catch(error => {
+                    showNotification('Erro ao fazer login com Google: ' + error.message, 'error');
+                });
+            }
+
+            function logout() {
+                window.bigFootAuth.signOut().then(() => {
+                    updateUIForLoggedOut();
+                    showNotification('Logout realizado com sucesso!', 'success');
+                }).catch(error => {
+                    showNotification('Erro ao fazer logout: ' + error.message, 'error');
+                });
+            }
+
+            function updateUIForLoggedIn(user) {
+                userSection.classList.add('logged-in');
+                userInfo.classList.add('logged-in');
+                loginBtn.classList.add('d-none');
+                document.getElementById('userName').textContent = user.email ? user.email.split('@')[0] : user.displayName || 'Usuário';
+                document.getElementById('userName').classList.add('gradient');
+                document.getElementById('userAvatar').src = user.photoURL || 'https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/default-avatar.png';
+            }
+
+            function updateUIForLoggedOut() {
+                userSection.classList.remove('logged-in');
+                userInfo.classList.remove('logged-in');
+                loginBtn.classList.remove('d-none');
+                document.getElementById('userName').textContent = 'Usuário';
+                document.getElementById('userAvatar').src = 'https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/default-avatar.png';
+                document.getElementById('login-form').reset();
+                document.getElementById('register-form').reset();
+            }
         });
     </script>
 </body>

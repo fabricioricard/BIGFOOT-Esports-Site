@@ -275,19 +275,25 @@ if (typeof NewsSystem === 'undefined') {
         }
 
         render(posts = this.posts) {
-            this.hideError();
-            this.hideLoading();
+    this.hideError();
+    this.hideLoading();
 
-            if (posts.length === 0) {
-                console.warn('Nenhuma notícia para renderizar');
-                this.container.innerHTML = `
-                    <div class="news-empty">
-                        <p>Não há notícias disponíveis no momento. Tente novamente mais tarde.</p>
-                        <button onclick="window.newsSystem.loadNews()" class="btn btn-primary">Tentar novamente</button>
-                    </div>
-                `;
-                return;
-            }
+    if (!window.bigFootAuth?.isLoggedIn()) {
+        console.warn('Usuário não está logado, exibindo mensagem de login necessário');
+        this.container.innerHTML = ''; // Limpa o container de notícias
+        return;
+    }
+
+    if (posts.length === 0) {
+        console.warn('Nenhuma notícia para renderizar');
+        this.container.innerHTML = `
+            <div class="news-empty">
+                <p>Não há notícias disponíveis no momento. Tente novamente mais tarde.</p>
+                <button onclick="window.newsSystem.loadNews()" class="btn btn-primary">Tentar novamente</button>
+            </div>
+        `;
+        return;
+    }
 
             const newsHTML = posts.map(post => `
                 <article class="news-item" data-post-id="${post.id}" onclick="window.newsSystem.showArticleModal(${JSON.stringify(post)})">

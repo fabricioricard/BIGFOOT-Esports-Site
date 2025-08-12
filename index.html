@@ -1502,109 +1502,123 @@
     <!-- Scripts -->
     <script src="js/auth.js"></script>
     <script>
-        // Função para copiar a chave PIX
-        function copyPixKey() {
-            const key = document.getElementById('pix-key').textContent;
-            navigator.clipboard.writeText(key).then(() => {
-                alert('Chave PIX copiada com sucesso!');
-            }).catch(() => {
-                alert('Erro ao copiar chave PIX.');
+    // Função para copiar a chave PIX
+    function copyPixKey() {
+        const key = document.getElementById('pix-key').textContent;
+        navigator.clipboard.writeText(key).then(() => {
+            alert('Chave PIX copiada com sucesso!');
+        }).catch(() => {
+            alert('Erro ao copiar chave PIX.');
+        });
+    }
+
+    // DOM Elements
+    const loginBtn = document.getElementById('login-btn');
+    const loginModal = document.getElementById('login-modal');
+    const closeModal = document.getElementById('close-modal');
+    const userSection = document.getElementById('user-section');
+    const userInfo = document.getElementById('userInfo');
+    const logoutBtn = document.getElementById('logout-btn');
+    const modalTabs = document.querySelectorAll('.modal-tab');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    // Função para esperar o carregamento do auth.js
+    function waitForBigFootAuth() {
+        return new Promise((resolve, reject) => {
+            const checkInterval = setInterval(() => {
+                if (window.bigFootAuth) {
+                    clearInterval(checkInterval);
+                    resolve(window.bigFootAuth);
+                }
+            }, 100);
+            setTimeout(() => {
+                clearInterval(checkInterval);
+                reject(new Error('❌ window.bigFootAuth não foi definido após 5 segundos'));
+            }, 5000);
+        });
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', async () => {
+        // Set up existing functionality
+        console.log('DOM carregado - Executando animações iniciais...');
+        animateOnScroll();
+
+        // Botão voltar ao topo
+        const backToTop = document.getElementById('back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTop.style.display = 'block';
+            } else {
+                backToTop.style.display = 'none';
+            }
+        });
+
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Animações de scroll
+        function animateOnScroll() {
+            const reveals = document.querySelectorAll('.reveal');
+            reveals.forEach(reveal => {
+                const windowHeight = window.innerHeight;
+                const elementTop = reveal.getBoundingClientRect().top;
+                const elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveal.classList.add('visible');
+                }
             });
         }
 
-        // DOM Elements
-        const loginBtn = document.getElementById('login-btn');
-        const loginModal = document.getElementById('login-modal');
-        const closeModal = document.getElementById('close-modal');
-        const userSection = document.getElementById('user-section');
-        const userInfo = document.getElementById('userInfo');
-        const logoutBtn = document.getElementById('logout-btn');
-        const modalTabs = document.querySelectorAll('.modal-tab');
-        const tabContents = document.querySelectorAll('.tab-content');
+        window.addEventListener('scroll', animateOnScroll);
 
-        // Initialize
-        document.addEventListener('DOMContentLoaded', async () => {
-            // Set up existing functionality
-            console.log('DOM carregado - Executando animações iniciais...');
-            animateOnScroll();
-
-            // Botão voltar ao topo
-            const backToTop = document.getElementById('back-to-top');
-            window.addEventListener('scroll', () => {
-                if (window.pageYOffset > 300) {
-                    backToTop.style.display = 'block';
-                } else {
-                    backToTop.style.display = 'none';
+        // Smooth scroll para links âncora
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && href.startsWith('#')) {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
                 }
             });
+        });
 
-            backToTop.addEventListener('click', () => {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
+        // Auto-fechar doação após 10 segundos
+        const donationBox = document.getElementById('donation-box');
+        const closeDonation = document.getElementById('close-donation');
+        if (closeDonation && donationBox) {
+            closeDonation.addEventListener('click', () => {
+                donationBox.classList.add('hidden');
             });
-
-            // Animações de scroll
-            function animateOnScroll() {
-                const reveals = document.querySelectorAll('.reveal');
-                reveals.forEach(reveal => {
-                    const windowHeight = window.innerHeight;
-                    const elementTop = reveal.getBoundingClientRect().top;
-                    const elementVisible = 150;
-                    if (elementTop < windowHeight - elementVisible) {
-                        reveal.classList.add('visible');
-                    }
-                });
+        }
+        setTimeout(() => {
+            if (donationBox && !donationBox.classList.contains('hidden')) {
+                donationBox.classList.add('hidden');
             }
+        }, 10000);
 
-            window.addEventListener('scroll', animateOnScroll);
+        // Autenticação com auth.js
+        try {
+            const bigFootAuth = await waitForBigFootAuth();
+            await bigFootAuth.waitForInit();
+            const isLoggedIn = await bigFootAuth.isLoggedInAsync();
+            const user = await bigFootAuth.getCurrentUserAsync();
+            console.log('Inicialização da autenticação:', { isLoggedIn, user: user ? user.email : null });
 
-            // Smooth scroll para links âncora
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    const href = this.getAttribute('href');
-                    if (href !== '#' && href.startsWith('#')) {
-                        e.preventDefault();
-                        const target = document.querySelector(href);
-                        if (target) {
-                            target.scrollIntoView({
-                                behavior: 'smooth'
-                            });
-                        }
-                    }
-                });
+            // Adicionar listener para mudanças de autenticação
+            bigFootAuth.addAuthListener((user) => {
+                console.log('Listener de autenticação disparado:', { user: user ? user.email : null });
+                bigFootAuth.updateMainUI(user);
             });
-
-            // Auto-fechar doação após 10 segundos
-            const donationBox = document.getElementById('donation-box');
-            const closeDonation = document.getElementById('close-donation');
-            if (closeDonation && donationBox) {
-                closeDonation.addEventListener('click', () => {
-                    donationBox.classList.add('hidden');
-                });
-            }
-            setTimeout(() => {
-                if (donationBox && !donationBox.classList.contains('hidden')) {
-                    donationBox.classList.add('hidden');
-                }
-            }, 10000);
-
-            // Autenticação com auth.js
-            if (window.bigFootAuth) {
-                await window.bigFootAuth.waitForInit();
-                const isLoggedIn = await window.bigFootAuth.isLoggedInAsync();
-                const user = await window.bigFootAuth.getCurrentUserAsync();
-                console.log('Inicialização da autenticação:', { isLoggedIn, user: user ? user.email : null });
-
-                // Adicionar listener para mudanças de autenticação
-                window.bigFootAuth.addAuthListener((user) => {
-                    console.log('Listener de autenticação disparado:', { user: user ? user.email : null });
-                    window.bigFootAuth.updateMainUI(user);
-                });
-            } else {
-                console.error('❌ window.bigFootAuth não está definido');
-            }
 
             // Event listeners para autenticação
             loginBtn.addEventListener('click', openModal);
@@ -1625,7 +1639,9 @@
             loginModal.addEventListener('click', (e) => {
                 if (e.target === loginModal) closeLoginModal();
             });
-        });
+        } catch (error) {
+            console.error(error.message);
+        }
 
         // Funções de autenticação
         function openModal() {

@@ -1871,6 +1871,15 @@
         }, 4000);
     }
 
+// Configurar persistência do Firebase para manter usuário logado
+firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+    .then(() => {
+        console.log('Persistência configurada com sucesso');
+    })
+    .catch((error) => {
+        console.error('Erro ao configurar persistência:', error);
+    });
+    
     // Initialize
     document.addEventListener('DOMContentLoaded', () => {
         // Animações de scroll
@@ -1889,6 +1898,18 @@
         window.addEventListener('scroll', animateOnScroll);
         animateOnScroll();
 
+// Autenticação com Firebase - MELHORADA
+    firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+            // Aguardar um pouco para garantir que o DOM está pronto
+            setTimeout(() => {
+                updateUIForLoggedIn(user);
+            }, 100);
+        } else {
+            updateUIForLoggedOut();
+        }
+    });
+        
         // Botão voltar ao topo
         const backToTop = document.getElementById('back-to-top');
         window.addEventListener('scroll', () => {

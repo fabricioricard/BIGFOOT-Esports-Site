@@ -2119,8 +2119,6 @@
             });
     }
 
-// Substitua a função handleAvatarUpload completamente
-
 function handleAvatarUpload(e) {
     const file = e.target.files[0];
     if (!file) return;
@@ -2130,7 +2128,7 @@ function handleAvatarUpload(e) {
         return;
     }
 
-    if (file.size > 2 * 1024 * 1024) { // Limite de 2MB
+    if (file.size > 2 * 1024 * 1024) {
         showNotification('A imagem deve ter menos de 2MB', 'error');
         return;
     }
@@ -2141,37 +2139,75 @@ function handleAvatarUpload(e) {
         return;
     }
 
-    // Usar FileReader para converter para base64
-    const reader = new FileReader();
-    reader.onload = function(event) {
-        const imageDataUrl = event.target.result;
+    showNotification('Processando avatar...', 'info');
+
+    // Redimensionar imagem antes de salvar
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    const img = new Image();
+    
+    img.onload = function() {
+        // Definir tamanho máximo
+        const maxSize = 200;
+        let { width, height } = img;
         
-        // Salvar no localStorage (não no Firebase profile)
-        localStorage.setItem(`avatar_${user.uid}`, imageDataUrl);
-        
-        // Atualizar UI imediatamente
-        const avatarElement = document.getElementById('userAvatar');
-        avatarElement.src = imageDataUrl;
-        avatarElement.classList.remove('fallback');
-        
-        // Também atualizar no modal de perfil se estiver aberto
-        const profileAvatar = document.getElementById('profile-avatar');
-        if (profileAvatar) {
-            profileAvatar.src = imageDataUrl;
+        // Calcular novo tamanho mantendo proporção
+        if (width > height) {
+            if (width > maxSize) {
+                height = height * (maxSize / width);
+                width = maxSize;
+            }
+        } else {
+            if (height > maxSize) {
+                width = width * (maxSize / height);
+                height = maxSize;
+            }
         }
+        
+        canvas.width = width;
+        canvas.height = height;
+        
+        // Desenhar imagem redimensionada
+        ctx.drawImage(img, 0, 0, width, height);
+        
+        // Converter para base64 com qualidade reduzida
+        const resizedImageData = canvas.toDataURL('image/jpeg', 0.8);
+        
+        // Salvar no localStorage
+        localStorage.setItem(`avatar_${user.uid}`, resizedImageData);
+        
+        // Atualizar todas as instâncias do avatar
+        updateAllAvatars(resizedImageData);
         
         showNotification('Avatar atualizado com sucesso! 🎨', 'success');
     };
     
-    reader.onerror = function() {
+    img.onerror = function() {
         showNotification('Erro ao processar a imagem', 'error');
     };
     
-    showNotification('Processando avatar...', 'info');
+    // Ler arquivo
+    const reader = new FileReader();
+    reader.onload = function(event) {
+        img.src = event.target.result;
+    };
     reader.readAsDataURL(file);
 }
 
-// Também atualize a função updateUIForLoggedIn para usar o localStorage
+function updateAllAvatars(avatarUrl) {
+    // Atualizar avatar no header
+    const headerAvatar = document.getElementById('userAvatar');
+    if (headerAvatar) {
+        headerAvatar.src = avatarUrl;
+        headerAvatar.classList.remove('fallback');
+    }
+    
+    // Atualizar avatar no modal de perfil
+    const profileAvatar = document.getElementById('profile-avatar');
+    if (profileAvatar) {
+        profileAvatar.src = avatarUrl;
+    }
+}
 
 function updateUIForLoggedIn(user) {
     // Marcar seção como logada
@@ -2181,45 +2217,43 @@ function updateUIForLoggedIn(user) {
     document.getElementById('userName').textContent = username;
     document.getElementById('userName').classList.add('gradient');
     
-    // Configurar avatar
-    const avatarElement = document.getElementById('userAvatar');
-    
-    // Verificar se há avatar salvo no localStorage primeiro
-    const savedAvatar = localStorage.getItem(`avatar_${user.uid}`);
-    
-    if (savedAvatar) {
-        // Usar avatar personalizado salvo
-        avatarElement.src = savedAvatar;
-        avatarElement.classList.remove('fallback');
-    } else if (user.photoURL && user.photoURL.startsWith('http') && !user.photoURL.includes('dicebear')) {
-        // Usar photoURL do Firebase (como Google avatar)
-        avatarElement.src = user.photoURL;
-        avatarElement.classList.remove('fallback');
-    } else {
-        // Usar avatar gerado
-        const generatedAvatar = generateAvatar(user.email);
-        avatarElement.src = generatedAvatar;
-        avatarElement.classList.remove('fallback');
-    }
-    
-    // Simular nível e pontos do usuário
-    const userLevel = Math.floor(Math.random() * 10) + 1;
-    const userPoints = Math.floor(Math.random() * 1000);
-    document.getElementById('userLevel').textContent = `Nível ${userLevel} • ${userPoints} pts`;
-}
-
-// Atualizar também a função updateProfileModal para usar o avatar salvo
-
-function updateProfileModal(user) {
-    const username = user.displayName || user.email.split('@')[0];
-    
-    // Verificar avatar personalizado primeiro
+    // Configurar avatar com prioridade para avatar personalizado
     const savedAvatar = localStorage.getItem(`avatar_${user.uid}`);
     let avatarUrl;
     
     if (savedAvatar) {
         avatarUrl = savedAvatar;
-    } else if (user.photoURL && user.photoURL.startsWith('http') && !user.photoURL.includes('dicebear')) {
+    } else if (user.photoURL && user.photoURL.startsWith('http')) {
+        avatarUrl = user.photoURL;
+    } else {
+        avatarUrl = generateAvatar(user.email);
+    }
+    
+    updateAllAvatars(avatarUrl);
+    
+    // Simular nível e pontos do usuário (usar dados salvos ou gerar)
+    let userLevel = localStorage.getItem(`level_${user.uid}`) || Math.floor(Math.random() * 10) + 1;
+    let userPoints = localStorage.getItem(`points_${user.uid}`) || Math.floor(Math.random() * 1000);
+    
+    // Salvar se não existiam antes
+    if (!localStorage.getItem(`level_${user.uid}`)) {
+        localStorage.setItem(`level_${user.uid}`, userLevel);
+        localStorage.setItem(`points_${user.uid}`, userPoints);
+    }
+    
+    document.getElementById('userLevel').textContent = `Nível ${userLevel} • ${userPoints} pts`;
+}
+
+function updateProfileModal(user) {
+    const username = user.displayName || user.email.split('@')[0];
+    
+    // Usar avatar salvo
+    const savedAvatar = localStorage.getItem(`avatar_${user.uid}`);
+    let avatarUrl;
+    
+    if (savedAvatar) {
+        avatarUrl = savedAvatar;
+    } else if (user.photoURL && user.photoURL.startsWith('http')) {
         avatarUrl = user.photoURL;
     } else {
         avatarUrl = generateAvatar(user.email);
@@ -2237,10 +2271,10 @@ function updateProfileModal(user) {
     });
     document.getElementById('profile-member-since').textContent = formattedDate;
     
-    // Estatísticas simuladas
-    const userLevel = Math.floor(Math.random() * 10) + 1;
-    const userPoints = Math.floor(Math.random() * 1000);
-    const userVisits = Math.floor(Math.random() * 50) + 1;
+    // Estatísticas persistentes
+    const userLevel = localStorage.getItem(`level_${user.uid}`) || 1;
+    const userPoints = localStorage.getItem(`points_${user.uid}`) || 0;
+    const userVisits = localStorage.getItem(`visits_${user.uid}`) || 1;
     
     document.getElementById('profile-level').textContent = userLevel;
     document.getElementById('profile-points').textContent = userPoints;

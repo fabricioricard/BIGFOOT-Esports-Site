@@ -1963,13 +1963,6 @@
         });
 
         // Event listeners para avatar
-        avatarContainer.addEventListener('click', () => {
-            const user = firebase.auth().currentUser;
-            if (user) {
-                avatarFileInput.click();
-            }
-        });
-
         changeAvatarBtn.addEventListener('click', () => {
             avatarFileInput.click();
         });

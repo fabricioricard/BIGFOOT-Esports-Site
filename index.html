@@ -146,6 +146,28 @@
             transform: translateY(-1px);
         }
 
+        .btn-small {
+            padding: 6px 12px;
+            font-size: 12px;
+            border-radius: var(--radius-full);
+        }
+
+        .btn-logout {
+            background: #e53e3e;
+            color: white;
+            border: none;
+            padding: 4px 8px;
+            border-radius: var(--radius-sm);
+            font-size: 10px;
+            margin-left: 8px;
+            transition: all var(--transition-fast);
+        }
+
+        .btn-logout:hover {
+            background: #c53030;
+            transform: scale(1.05);
+        }
+
         .btn-google {
             background: #ffffff;
             color: var(--text-primary);
@@ -191,58 +213,52 @@
         }
 
         .user-info {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-md);
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(15px);
-    border: 2px solid rgba(102, 126, 234, 0.1);
-    border-radius: var(--radius-xl);
-    padding: var(--spacing-sm) var(--spacing-lg);
-    transition: all var(--transition-normal);
-    max-width: 320px;
-    cursor: pointer;
-    box-shadow: 0 8px 32px rgba(102, 126, 234, 0.15);
-    position: relative;
-    overflow: hidden;
-}
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(102, 126, 234, 0.1);
+            border-radius: var(--radius-xl);
+            padding: var(--spacing-sm) var(--spacing-lg);
+            transition: all var(--transition-normal);
+            max-width: 400px;
+            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
 
         .user-details {
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-    flex: 1;
-    gap: 2px;
-}
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            flex: 1;
+            gap: 2px;
+        }
 
-.user-name {
-    font-family: var(--font-family);
-    font-size: 15px;
-    font-weight: var(--font-weight-semibold);
-    color: var(--text-primary);
-    line-height: 1.2;
-    max-width: 150px;
-}
+        .user-name-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
 
-/* Estilos para o modal de configurações */
-#settings-modal .modal-content {
-    max-width: 400px;
-}
+        .user-name {
+            font-family: var(--font-family);
+            font-size: 15px;
+            font-weight: var(--font-weight-semibold);
+            color: var(--text-primary);
+            line-height: 1.2;
+            max-width: 150px;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            position: relative;
+        }
 
-#avatar-upload {
-    padding: 10px;
-    border: 2px solid var(--border-color);
-    border-radius: var(--radius-md);
-    background: var(--background-main);
-    font-family: var(--font-family);
-    font-size: 14px;
-}
+        .user-name:hover {
+            color: var(--primary-color);
+            transform: scale(1.02);
+        }
 
-#avatar-upload:focus {
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-}
-        
         .user-info::before {
             content: '';
             position: absolute;
@@ -273,6 +289,7 @@
         .user-avatar-container {
             position: relative;
             flex-shrink: 0;
+            cursor: pointer;
         }
 
         .user-avatar {
@@ -286,6 +303,7 @@
             object-fit: cover;
             transition: all var(--transition-normal);
             position: relative;
+            cursor: pointer;
         }
 
         /* Fallback Avatar with Initials */
@@ -303,6 +321,31 @@
         .user-avatar:hover {
             transform: scale(1.1) rotate(5deg);
             box-shadow: 0 0 25px rgba(102, 126, 234, 0.6);
+        }
+
+        /* Avatar Upload Overlay */
+        .avatar-upload-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity var(--transition-fast);
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .user-avatar-container:hover .avatar-upload-overlay {
+            opacity: 1;
         }
 
         /* Online Status Indicator */
@@ -331,24 +374,6 @@
             }
         }
 
-        .user-details {
-            display: flex;
-            flex-direction: column;
-            min-width: 0;
-            flex: 1;
-            gap: 2px;
-        }
-
-        .user-name {
-            font-family: var(--font-family);
-            font-size: 15px;
-            font-weight: var(--font-weight-semibold);
-            color: var(--text-primary);
-            line-height: 1.2;
-            max-width: 150px;
-            position: relative;
-        }
-
         .user-name.gradient {
             background: var(--primary-gradient);
             -webkit-background-clip: text;
@@ -368,64 +393,7 @@
             margin-top: 2px;
         }
 
-        /* Dropdown Menu for User */
-        .user-dropdown {
-            position: absolute;
-            top: 100%;
-            right: 0;
-            background: #ffffff;
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-heavy);
-            border: 1px solid var(--border-color);
-            min-width: 200px;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-10px);
-            transition: all var(--transition-normal);
-            z-index: 1000;
-        }
-
-        .user-info:hover .user-dropdown {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(5px);
-        }
-
-        .dropdown-item {
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-sm);
-            padding: var(--spacing-sm) var(--spacing-md);
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 14px;
-            transition: all var(--transition-fast);
-            cursor: pointer;
-            border: none;
-            background: none;
-            width: 100%;
-            text-align: left;
-        }
-
-        .dropdown-item:hover {
-            background: var(--background-light);
-            color: var(--text-primary);
-        }
-
-        .dropdown-item:first-child {
-            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-        }
-
-        .dropdown-item:last-child {
-            border-radius: 0 0 var(--radius-lg) var(--radius-lg);
-            border-top: 1px solid var(--border-color);
-            color: #e53e3e;
-        }
-
-        .dropdown-item:last-child:hover {
-            background: rgba(229, 62, 62, 0.1);
-        }
-
+        /* Modal Styles */
         .modal {
             position: fixed;
             top: 0;
@@ -574,6 +542,94 @@
             animation: errorSlideIn var(--transition-fast) ease;
         }
 
+        /* Profile Modal Specific Styles */
+        .profile-info {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-lg);
+        }
+
+        .profile-avatar-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--spacing-md);
+        }
+
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: var(--radius-full);
+            border: 4px solid var(--primary-color);
+            object-fit: cover;
+            box-shadow: var(--shadow-primary);
+            transition: all var(--transition-normal);
+        }
+
+        .profile-avatar:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(102, 126, 234, 0.5);
+        }
+
+        .profile-details {
+            display: grid;
+            gap: var(--spacing-md);
+        }
+
+        .profile-field {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--spacing-sm) var(--spacing-md);
+            background: var(--background-light);
+            border-radius: var(--radius-md);
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .profile-field-label {
+            font-weight: var(--font-weight-semibold);
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .profile-field-value {
+            color: var(--text-primary);
+            font-weight: var(--font-weight-medium);
+            font-size: 14px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-lg);
+        }
+
+        .stat-card {
+            background: var(--primary-gradient);
+            color: white;
+            padding: var(--spacing-md);
+            border-radius: var(--radius-md);
+            text-align: center;
+            box-shadow: var(--shadow-primary);
+        }
+
+        .stat-card h4 {
+            font-size: 24px;
+            font-weight: var(--font-weight-bold);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .stat-card p {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+
+        /* Hidden file input */
+        #avatar-file-input {
+            display: none;
+        }
+
         /* ===== 5. HEADER STYLES ===== */
         header {
             position: fixed;
@@ -677,7 +733,7 @@
         .user-section {
             justify-content: flex-end;
             min-width: 200px;
-            max-width: 350px;
+            max-width: 450px;
             flex-shrink: 0;
             position: relative;
         }
@@ -1259,7 +1315,7 @@
             }
 
             .user-info {
-                max-width: 280px;
+                max-width: 320px;
             }
 
             .user-name {
@@ -1313,6 +1369,17 @@
                 max-width: 90vw;
                 padding: var(--spacing-lg) var(--spacing-md);
             }
+
+            .user-name-container {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 4px;
+            }
+
+            .btn-logout {
+                margin-left: 0;
+                align-self: flex-start;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1337,11 +1404,11 @@
             }
 
             .user-info {
-                max-width: 240px;
+                max-width: 280px;
             }
 
             .user-name {
-                max-width: 100px;
+                max-width: 120px;
             }
 
             .logo span {
@@ -1356,6 +1423,15 @@
             .user-avatar {
                 width: 34px;
                 height: 34px;
+            }
+
+            .profile-avatar {
+                width: 100px;
+                height: 100px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
             }
         }
 
@@ -1474,25 +1550,20 @@
             <div class="user-section" id="user-section">
                 <button id="login-btn" class="btn btn-primary login-btn">🔐 Login</button>
                 <div class="user-info" id="userInfo">
-                    <div class="user-avatar-container">
+                    <div class="user-avatar-container" id="avatar-container">
                         <img id="userAvatar" class="user-avatar" src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/default-avatar.png" alt="Avatar">
+                        <div class="avatar-upload-overlay">
+                            📷<br>Alterar
+                        </div>
                         <div class="user-status" id="userStatus"></div>
                     </div>
                     <div class="user-details">
-                        <span id="userName" class="user-name gradient text-truncate">Username</span>
+                        <div class="user-name-container">
+                            <span id="userName" class="user-name gradient text-truncate">Username</span>
+                            <button id="logout-btn-mini" class="btn-logout">Sair</button>
+                        </div>
                         <span id="userLevel" class="user-level">Nível 1 • 0 pts</span>
                     </div>
-                    <div class="user-dropdown" id="userDropdown">
-    <button class="dropdown-item" id="profile-btn">
-        👤 Perfil
-    </button>
-    <button class="dropdown-item" id="settings-btn">
-        ⚙️ Configurações
-    </button>
-    <button class="dropdown-item" id="logout-btn">
-        🚪 Sair
-    </button>
-</div>
                 </div>
             </div>
         </div>
@@ -1555,26 +1626,61 @@
         </div>
     </div>
 
-    <!-- Modal de Configurações -->
-<div id="settings-modal" class="modal">
-    <div class="modal-content">
-        <span id="close-settings-modal" class="modal-close">×</span>
-        <div class="modal-header">
-            <h2>⚙️ Configurações</h2>
-            <p>Personalize seu perfil</p>
-        </div>
-        <div class="modal-body">
-            <form id="settings-form">
-                <div class="form-group">
-                    <label for="avatar-upload">Escolher Avatar</label>
-                    <input type="file" id="avatar-upload" name="avatar" accept="image/*">
-                    <span id="avatar-upload-error" class="error-text"></span>
+    <!-- Modal de Perfil -->
+    <div id="profile-modal" class="modal">
+        <div class="modal-content">
+            <span id="close-profile-modal" class="modal-close">×</span>
+            <div class="modal-header">
+                <h2>👤 Meu Perfil</h2>
+                <p>Informações da sua conta</p>
+            </div>
+            <div class="modal-body">
+                <div class="profile-info">
+                    <div class="profile-avatar-section">
+                        <img id="profile-avatar" class="profile-avatar" src="" alt="Avatar do perfil">
+                        <button id="change-avatar-btn" class="btn btn-secondary btn-small">📷 Alterar Avatar</button>
+                    </div>
+                    
+                    <div class="profile-details">
+                        <div class="profile-field">
+                            <span class="profile-field-label">Nome de usuário:</span>
+                            <span id="profile-username" class="profile-field-value">Username</span>
+                        </div>
+                        <div class="profile-field">
+                            <span class="profile-field-label">Email:</span>
+                            <span id="profile-email" class="profile-field-value">user@email.com</span>
+                        </div>
+                        <div class="profile-field">
+                            <span class="profile-field-label">Membro desde:</span>
+                            <span id="profile-member-since" class="profile-field-value">Janeiro 2024</span>
+                        </div>
+                        <div class="profile-field">
+                            <span class="profile-field-label">Status:</span>
+                            <span class="profile-field-value" style="color: #48bb78;">🟢 Online</span>
+                        </div>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <h4 id="profile-level">1</h4>
+                            <p>Nível</p>
+                        </div>
+                        <div class="stat-card">
+                            <h4 id="profile-points">0</h4>
+                            <p>Pontos</p>
+                        </div>
+                        <div class="stat-card">
+                            <h4 id="profile-visits">1</h4>
+                            <p>Visitas</p>
+                        </div>
+                    </div>
                 </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%;">Salvar Alterações</button>
-            </form>
+            </div>
         </div>
     </div>
-</div>
+
+    <!-- Input de arquivo oculto para upload de avatar -->
+    <input type="file" id="avatar-file-input" accept="image/*" style="display: none;">
 
     <!-- Conteúdo Principal -->
     <main>
@@ -1714,15 +1820,27 @@
     <button id="back-to-top" class="back-to-top">⬆</button>
 
     <!-- Scripts -->
-<script src="/js/auth.js"></script>
 <script>
+    // Configuração Firebase (Substitua pelas suas configurações)
+    const firebaseConfig = {
+        apiKey: "your-api-key",
+        authDomain: "your-auth-domain",
+        projectId: "your-project-id",
+        storageBucket: "your-storage-bucket",
+        messagingSenderId: "your-messaging-sender-id",
+        appId: "your-app-id"
+    };
+    
+    // Inicializar Firebase
+    firebase.initializeApp(firebaseConfig);
+
     // Função para copiar a chave PIX
     function copyPixKey() {
         const key = document.getElementById('pix-key').textContent;
         navigator.clipboard.writeText(key).then(() => {
-            alert('Chave PIX copiada com sucesso!');
+            showNotification('Chave PIX copiada com sucesso! 📋', 'success');
         }).catch(() => {
-            alert('Erro ao copiar chave PIX.');
+            showNotification('Erro ao copiar chave PIX.', 'error');
         });
     }
 
@@ -1730,18 +1848,55 @@
     const loginBtn = document.getElementById('login-btn');
     const loginModal = document.getElementById('login-modal');
     const closeModal = document.getElementById('close-modal');
-    const settingsModal = document.getElementById('settings-modal');
-    const closeSettingsModal = document.getElementById('close-settings-modal');
+    const profileModal = document.getElementById('profile-modal');
+    const closeProfileModal = document.getElementById('close-profile-modal');
     const userSection = document.getElementById('user-section');
     const userInfo = document.getElementById('userInfo');
-    const logoutBtn = document.getElementById('logout-btn');
+    const logoutBtnMini = document.getElementById('logout-btn-mini');
     const modalTabs = document.querySelectorAll('.modal-tab');
     const tabContents = document.querySelectorAll('.tab-content');
+    const avatarContainer = document.getElementById('avatar-container');
+    const avatarFileInput = document.getElementById('avatar-file-input');
+    const userName = document.getElementById('userName');
+    const changeAvatarBtn = document.getElementById('change-avatar-btn');
 
     // Função para validar e-mail
     function validateEmail(email) {
         const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return re.test(email);
+    }
+
+    // Função para mostrar notificações
+    function showNotification(message, type = 'info') {
+        const notification = document.createElement('div');
+        const colors = {
+            success: 'linear-gradient(45deg, #48bb78, #38a169)',
+            error: 'linear-gradient(45deg, #e53e3e, #c53030)',
+            info: 'linear-gradient(45deg, #667eea, #764ba2)'
+        };
+        
+        notification.style.cssText = `
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: ${colors[type] || colors.info};
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            z-index: 10000;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            animation: slideInRight 0.5s ease-out;
+            max-width: 300px;
+        `;
+        notification.textContent = message;
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            notification.style.animation = 'slideOutRight 0.5s ease-in';
+            setTimeout(() => notification.remove(), 500);
+        }, 4000);
     }
 
     // Initialize
@@ -1819,10 +1974,11 @@
         });
 
         // Event listeners para autenticação
-        loginBtn.addEventListener('click', openModal);
+        loginBtn.addEventListener('click', openLoginModal);
         closeModal.addEventListener('click', closeLoginModal);
-        closeSettingsModal.addEventListener('click', closeSettingsModalFn);
-        logoutBtn.addEventListener('click', logout);
+        closeProfileModal.addEventListener('click', closeProfileModalFn);
+        logoutBtnMini.addEventListener('click', logout);
+        userName.addEventListener('click', openProfileModal);
         modalTabs.forEach(tab => {
             tab.addEventListener('click', () => switchTab(tab.dataset.tab));
         });
@@ -1831,28 +1987,34 @@
         document.getElementById('google-login').addEventListener('click', handleGoogleLogin);
         document.getElementById('forgot-password-link').addEventListener('click', (e) => {
             e.preventDefault();
-            alert('Funcionalidade de redefinição de senha em desenvolvimento.');
+            showNotification('Funcionalidade de redefinição de senha em desenvolvimento.', 'info');
         });
 
-        // Event listeners para dropdown
-        document.getElementById('profile-btn').addEventListener('click', () => {
-            alert('Página de perfil em desenvolvimento!');
+        // Event listeners para avatar
+        avatarContainer.addEventListener('click', () => {
+            const user = firebase.auth().currentUser;
+            if (user) {
+                avatarFileInput.click();
+            }
         });
-        
-        document.getElementById('settings-btn').addEventListener('click', openSettingsModal);
-        document.getElementById('settings-form').addEventListener('submit', handleAvatarUpload);
+
+        changeAvatarBtn.addEventListener('click', () => {
+            avatarFileInput.click();
+        });
+
+        avatarFileInput.addEventListener('change', handleAvatarUpload);
 
         // Fechar modais clicando fora
         loginModal.addEventListener('click', (e) => {
             if (e.target === loginModal) closeLoginModal();
         });
-        settingsModal.addEventListener('click', (e) => {
-            if (e.target === settingsModal) closeSettingsModalFn();
+        profileModal.addEventListener('click', (e) => {
+            if (e.target === profileModal) closeProfileModalFn();
         });
     });
 
-    // Funções de autenticação
-    function openModal() {
+    // Funções de modal
+    function openLoginModal() {
         loginModal.classList.add('show');
         document.body.style.overflow = 'hidden';
     }
@@ -1860,24 +2022,23 @@
     function closeLoginModal() {
         loginModal.classList.remove('show');
         document.body.style.overflow = '';
-        document.getElementById('login-email-error').classList.remove('show');
-        document.getElementById('login-password-error').classList.remove('show');
-        document.getElementById('register-email-error').classList.remove('show');
-        document.getElementById('register-password-error').classList.remove('show');
+        clearLoginErrors();
         document.getElementById('login-form').reset();
         document.getElementById('register-form').reset();
     }
 
-    function openSettingsModal() {
-        settingsModal.classList.add('show');
-        document.body.style.overflow = 'hidden';
+    function openProfileModal() {
+        const user = firebase.auth().currentUser;
+        if (user) {
+            updateProfileModal(user);
+            profileModal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
     }
 
-    function closeSettingsModalFn() {
-        settingsModal.classList.remove('show');
+    function closeProfileModalFn() {
+        profileModal.classList.remove('show');
         document.body.style.overflow = '';
-        document.getElementById('avatar-upload-error').classList.remove('show');
-        document.getElementById('settings-form').reset();
     }
 
     function switchTab(tabName) {
@@ -1887,6 +2048,14 @@
         document.getElementById(`${tabName}-tab`).classList.add('active');
     }
 
+    function clearLoginErrors() {
+        document.getElementById('login-email-error').classList.remove('show');
+        document.getElementById('login-password-error').classList.remove('show');
+        document.getElementById('register-email-error').classList.remove('show');
+        document.getElementById('register-password-error').classList.remove('show');
+    }
+
+    // Funções de autenticação
     function handleLogin(e) {
         e.preventDefault();
         const email = document.getElementById('login-email').value;
@@ -1894,8 +2063,7 @@
         const emailError = document.getElementById('login-email-error');
         const passwordError = document.getElementById('login-password-error');
 
-        emailError.classList.remove('show');
-        passwordError.classList.remove('show');
+        clearLoginErrors();
 
         if (!validateEmail(email)) {
             emailError.textContent = 'Por favor, insira um e-mail válido';
@@ -1913,14 +2081,14 @@
                 const user = userCredential.user;
                 updateUIForLoggedIn(user);
                 closeLoginModal();
-                showWelcomeMessage(user);
+                showNotification(`👋 Bem-vindo de volta, ${user.displayName || user.email.split('@')[0]}!`, 'success');
             })
             .catch(error => {
                 if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
                     passwordError.textContent = 'E-mail ou senha incorretos';
                     passwordError.classList.add('show');
                 } else {
-                    alert('Erro ao fazer login: ' + error.message);
+                    showNotification('Erro ao fazer login: ' + error.message, 'error');
                 }
             });
     }
@@ -1932,8 +2100,7 @@
         const emailError = document.getElementById('register-email-error');
         const passwordError = document.getElementById('register-password-error');
 
-        emailError.classList.remove('show');
-        passwordError.classList.remove('show');
+        clearLoginErrors();
 
         if (!validateEmail(email)) {
             emailError.textContent = 'Por favor, insira um e-mail válido';
@@ -1949,12 +2116,11 @@
         firebase.auth().createUserWithEmailAndPassword(email, password)
             .then(userCredential => {
                 const user = userCredential.user;
-                // Definir avatar padrão (DiceBear) ao criar conta
                 const avatarUrl = generateAvatar(email);
                 user.updateProfile({ photoURL: avatarUrl }).then(() => {
                     updateUIForLoggedIn(user);
                     closeLoginModal();
-                    showWelcomeMessage(user, true);
+                    showNotification(`🎉 Bem-vindo à BIGFOOT Esports, ${user.email.split('@')[0]}! Sua conta foi criada com sucesso!`, 'success');
                 });
             })
             .catch(error => {
@@ -1962,7 +2128,7 @@
                     emailError.textContent = 'Este e-mail já está registrado';
                     emailError.classList.add('show');
                 } else {
-                    alert('Erro ao criar conta: ' + error.message);
+                    showNotification('Erro ao criar conta: ' + error.message, 'error');
                 }
             });
     }
@@ -1974,47 +2140,36 @@
                 const user = result.user;
                 updateUIForLoggedIn(user);
                 closeLoginModal();
-                showWelcomeMessage(user);
+                showNotification(`👋 Bem-vindo, ${user.displayName || user.email.split('@')[0]}!`, 'success');
             })
             .catch(error => {
-                alert('Erro ao fazer login com Google: ' + error.message);
+                showNotification('Erro ao fazer login com Google: ' + error.message, 'error');
             });
     }
 
     function handleAvatarUpload(e) {
-        e.preventDefault();
-        const avatarInput = document.getElementById('avatar-upload');
-        const avatarError = document.getElementById('avatar-upload-error');
-        const file = avatarInput.files[0];
-
-        avatarError.classList.remove('show');
-
-        if (!file) {
-            avatarError.textContent = 'Por favor, selecione uma imagem';
-            avatarError.classList.add('show');
-            return;
-        }
+        const file = e.target.files[0];
+        if (!file) return;
 
         if (!file.type.startsWith('image/')) {
-            avatarError.textContent = 'Por favor, selecione um arquivo de imagem';
-            avatarError.classList.add('show');
+            showNotification('Por favor, selecione um arquivo de imagem', 'error');
             return;
         }
 
         if (file.size > 2 * 1024 * 1024) { // Limite de 2MB
-            avatarError.textContent = 'A imagem deve ter menos de 2MB';
-            avatarError.classList.add('show');
+            showNotification('A imagem deve ter menos de 2MB', 'error');
             return;
         }
 
         const user = firebase.auth().currentUser;
         if (!user) {
-            alert('Usuário não autenticado. Faça login novamente.');
-            closeSettingsModalFn();
+            showNotification('Usuário não autenticado. Faça login novamente.', 'error');
             return;
         }
 
         const storageRef = firebase.storage().ref(`avatars/${user.uid}/${file.name}`);
+        showNotification('Enviando avatar...', 'info');
+        
         storageRef.put(file)
             .then(snapshot => snapshot.ref.getDownloadURL())
             .then(url => {
@@ -2022,33 +2177,32 @@
             })
             .then(() => {
                 updateUIForLoggedIn(user);
-                closeSettingsModalFn();
-                showWelcomeMessage(user);
-                alert('Avatar atualizado com sucesso!');
+                showNotification('Avatar atualizado com sucesso! 🎨', 'success');
             })
             .catch(error => {
-                alert('Erro ao fazer upload do avatar: ' + error.message);
+                showNotification('Erro ao fazer upload do avatar: ' + error.message, 'error');
             });
     }
 
     function logout() {
         firebase.auth().signOut()
             .then(() => {
-                updateUIForLoggedIn(user);
-                showLogoutMessage();
+                updateUIForLoggedOut();
+                showNotification('👋 Até logo! Você foi desconectado com sucesso.', 'info');
             })
             .catch(error => {
-                alert('Erro ao fazer logout: ' + error.message);
+                showNotification('Erro ao fazer logout: ' + error.message, 'error');
             });
     }
 
+    // Funções de UI
     function updateUIForLoggedIn(user) {
         userSection.classList.add('logged-in');
         userInfo.classList.add('logged-in');
         loginBtn.classList.add('d-none');
         
-        const userName = user.displayName || user.email.split('@')[0];
-        document.getElementById('userName').textContent = userName;
+        const username = user.displayName || user.email.split('@')[0];
+        document.getElementById('userName').textContent = username;
         document.getElementById('userName').classList.add('gradient');
         
         // Configurar avatar
@@ -2057,9 +2211,8 @@
             avatarElement.src = user.photoURL;
             avatarElement.classList.remove('fallback');
         } else {
-            // Criar avatar com iniciais se não houver foto
             avatarElement.classList.add('fallback');
-            avatarElement.textContent = getInitials(userName);
+            avatarElement.textContent = getInitials(username);
             avatarElement.src = generateAvatar(user.email);
         }
         
@@ -2082,6 +2235,33 @@
         document.getElementById('register-form').reset();
     }
 
+    function updateProfileModal(user) {
+        const username = user.displayName || user.email.split('@')[0];
+        const avatarUrl = user.photoURL || generateAvatar(user.email);
+        
+        document.getElementById('profile-avatar').src = avatarUrl;
+        document.getElementById('profile-username').textContent = username;
+        document.getElementById('profile-email').textContent = user.email;
+        
+        // Data de criação da conta
+        const creationDate = user.metadata.creationTime;
+        const formattedDate = new Date(creationDate).toLocaleDateString('pt-BR', {
+            year: 'numeric',
+            month: 'long'
+        });
+        document.getElementById('profile-member-since').textContent = formattedDate;
+        
+        // Estatísticas simuladas
+        const userLevel = Math.floor(Math.random() * 10) + 1;
+        const userPoints = Math.floor(Math.random() * 1000);
+        const userVisits = Math.floor(Math.random() * 50) + 1;
+        
+        document.getElementById('profile-level').textContent = userLevel;
+        document.getElementById('profile-points').textContent = userPoints;
+        document.getElementById('profile-visits').textContent = userVisits;
+    }
+
+    // Funções utilitárias
     function getInitials(name) {
         return name
             .split(' ')
@@ -2098,61 +2278,6 @@
         const colors = ['b6e3f4', 'c0aede', 'ffb3ba', 'ffdfba', 'ffffba', 'baffc9'];
         const bgColor = colors[Math.floor(Math.random() * colors.length)];
         return `https://api.dicebear.com/7.x/${style}/svg?seed=${seed}&backgroundColor=${bgColor}`;
-    }
-
-    function showWelcomeMessage(user, isNewUser = false) {
-        const name = user.displayName || user.email.split('@')[0];
-        const message = isNewUser 
-            ? `🎉 Bem-vindo à BIGFOOT Esports, ${name}! Sua conta foi criada com sucesso!` 
-            : `👋 Bem-vindo de volta, ${name}!`;
-        
-        const notification = document.createElement('div');
-        notification.style.cssText = `
-            position: fixed;
-            top: 100px;
-            right: 20px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            padding: 15px 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-            z-index: 10000;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 600;
-            animation: slideInRight 0.5s ease-out;
-        `;
-        notification.textContent = message;
-        document.body.appendChild(notification);
-        
-        setTimeout(() => {
-            notification.style.animation = 'slideOutRight 0.5s ease-in';
-            setTimeout(() => notification.remove(), 500);
-        }, 4000);
-    }
-
-    function showLogoutMessage() {
-        const notification = document.createElement('div');
-        notification.style.cssText = `
-            position: fixed;
-            top: 100px;
-            right: 20px;
-            background: #4a5568;
-            color: white;
-            padding: 15px 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-            z-index: 10000;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 600;
-            animation: slideInRight 0.5s ease-out;
-        `;
-        notification.textContent = '👋 Até logo! Você foi desconectado com sucesso.';
-        document.body.appendChild(notification);
-        
-        setTimeout(() => {
-            notification.style.animation = 'slideOutRight 0.5s ease-in';
-            setTimeout(() => notification.remove(), 500);
-        }, 3000);
     }
 
     // Adicionar animações CSS via JavaScript

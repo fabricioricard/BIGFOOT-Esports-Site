@@ -730,21 +730,29 @@
             transform: translateY(-2px);
         }
 
-        .user-section {
-            justify-content: flex-end;
-            min-width: 200px;
-            max-width: 450px;
-            flex-shrink: 0;
-            position: relative;
-        }
+.user-section {
+    justify-content: flex-end;
+    min-width: 200px;
+    max-width: 450px;
+    flex-shrink: 0;
+    position: relative;
+}
 
-        .login-btn {
-            display: none;
-        }
+.login-btn {
+    display: inline-flex; /* Mostra por padrão */
+}
 
-        .user-info:not(.logged-in) + .login-btn {
-            display: inline-flex;
-        }
+.user-section.logged-in .login-btn {
+    display: none; /* Esconde quando logado */
+}
+
+.user-info {
+    display: none; /* Esconde por padrão */
+}
+
+.user-section.logged-in .user-info {
+    display: flex; /* Mostra quando logado */
+}
 
         /* ===== 6. HERO SECTION ===== */
         .hero-section {
@@ -2135,42 +2143,56 @@
             });
     }
 
-    function handleAvatarUpload(e) {
-        const file = e.target.files[0];
-        if (!file) return;
+    // Substitua a função handleAvatarUpload (por volta da linha 380)
 
-        if (!file.type.startsWith('image/')) {
-            showNotification('Por favor, selecione um arquivo de imagem', 'error');
-            return;
-        }
+function handleAvatarUpload(e) {
+    const file = e.target.files[0];
+    if (!file) return;
 
-        if (file.size > 2 * 1024 * 1024) { // Limite de 2MB
-            showNotification('A imagem deve ter menos de 2MB', 'error');
-            return;
-        }
-
-        const user = firebase.auth().currentUser;
-        if (!user) {
-            showNotification('Usuário não autenticado. Faça login novamente.', 'error');
-            return;
-        }
-
-        const storageRef = firebase.storage().ref(`avatars/${user.uid}/${file.name}`);
-        showNotification('Enviando avatar...', 'info');
-        
-        storageRef.put(file)
-            .then(snapshot => snapshot.ref.getDownloadURL())
-            .then(url => {
-                return user.updateProfile({ photoURL: url });
-            })
-            .then(() => {
-                updateUIForLoggedIn(user);
-                showNotification('Avatar atualizado com sucesso! 🎨', 'success');
-            })
-            .catch(error => {
-                showNotification('Erro ao fazer upload do avatar: ' + error.message, 'error');
-            });
+    if (!file.type.startsWith('image/')) {
+        showNotification('Por favor, selecione um arquivo de imagem', 'error');
+        return;
     }
+
+    if (file.size > 2 * 1024 * 1024) { // Limite de 2MB
+        showNotification('A imagem deve ter menos de 2MB', 'error');
+        return;
+    }
+
+    const user = firebase.auth().currentUser;
+    if (!user) {
+        showNotification('Usuário não autenticado. Faça login novamente.', 'error');
+        return;
+    }
+
+    // Usar FileReader para converter para base64 (alternativa ao Storage)
+    const reader = new FileReader();
+    reader.onload = function(event) {
+        const imageDataUrl = event.target.result;
+        
+        // Atualizar o perfil do usuário com a imagem em base64
+        user.updateProfile({ 
+            photoURL: imageDataUrl 
+        }).then(() => {
+            // Atualizar UI imediatamente
+            updateUIForLoggedIn(user);
+            showNotification('Avatar atualizado com sucesso! 🎨', 'success');
+            
+            // Salvar no localStorage para persistir entre sessões
+            localStorage.setItem(`avatar_${user.uid}`, imageDataUrl);
+        }).catch(error => {
+            console.error('Erro ao atualizar perfil:', error);
+            showNotification('Erro ao atualizar avatar: ' + error.message, 'error');
+        });
+    };
+    
+    reader.onerror = function() {
+        showNotification('Erro ao processar a imagem', 'error');
+    };
+    
+    showNotification('Processando avatar...', 'info');
+    reader.readAsDataURL(file);
+}
 
     function logout() {
         firebase.auth().signOut()
@@ -2184,44 +2206,60 @@
     }
 
     // Funções de UI
-    function updateUIForLoggedIn(user) {
-        userSection.classList.add('logged-in');
-        userInfo.classList.add('logged-in');
-        loginBtn.classList.add('d-none');
-        
-        const username = user.displayName || user.email.split('@')[0];
-        document.getElementById('userName').textContent = username;
-        document.getElementById('userName').classList.add('gradient');
-        
-        // Configurar avatar
-        const avatarElement = document.getElementById('userAvatar');
-        if (user.photoURL) {
-            avatarElement.src = user.photoURL;
-            avatarElement.classList.remove('fallback');
-        } else {
-            avatarElement.classList.add('fallback');
-            avatarElement.textContent = getInitials(username);
-            avatarElement.src = generateAvatar(user.email);
-        }
-        
-        // Simular nível e pontos do usuário
-        const userLevel = Math.floor(Math.random() * 10) + 1;
-        const userPoints = Math.floor(Math.random() * 1000);
-        document.getElementById('userLevel').textContent = `Nível ${userLevel} • ${userPoints} pts`;
+function updateUIForLoggedIn(user) {
+    // Marcar seção como logada
+    userSection.classList.add('logged-in');
+    
+    const username = user.displayName || user.email.split('@')[0];
+    document.getElementById('userName').textContent = username;
+    document.getElementById('userName').classList.add('gradient');
+    
+    // Configurar avatar
+    const avatarElement = document.getElementById('userAvatar');
+    
+    // Verificar se há avatar salvo no localStorage primeiro
+    const savedAvatar = localStorage.getItem(`avatar_${user.uid}`);
+    
+    if (savedAvatar) {
+        avatarElement.src = savedAvatar;
+        avatarElement.classList.remove('fallback');
+    } else if (user.photoURL && !user.photoURL.includes('dicebear')) {
+        // Se há photoURL e não é um avatar gerado
+        avatarElement.src = user.photoURL;
+        avatarElement.classList.remove('fallback');
+    } else {
+        // Usar avatar gerado ou fallback com iniciais
+        const generatedAvatar = generateAvatar(user.email);
+        avatarElement.src = generatedAvatar;
+        avatarElement.classList.remove('fallback');
     }
+    
+    // Simular nível e pontos do usuário
+    const userLevel = Math.floor(Math.random() * 10) + 1;
+    const userPoints = Math.floor(Math.random() * 1000);
+    document.getElementById('userLevel').textContent = `Nível ${userLevel} • ${userPoints} pts`;
+}
 
-    function updateUIForLoggedOut() {
-        userSection.classList.remove('logged-in');
-        userInfo.classList.remove('logged-in');
-        loginBtn.classList.remove('d-none');
-        document.getElementById('userName').textContent = 'Usuário';
-        document.getElementById('userName').classList.remove('gradient');
-        document.getElementById('userAvatar').src = 'https://api.dicebear.com/7.x/avataaars/svg?seed=default&backgroundColor=e5e7eb';
-        document.getElementById('userAvatar').classList.remove('fallback');
-        document.getElementById('userLevel').textContent = 'Visitante';
-        document.getElementById('login-form').reset();
-        document.getElementById('register-form').reset();
-    }
+function updateUIForLoggedOut() {
+    // Remover marca de logado
+    userSection.classList.remove('logged-in');
+    
+    // Resetar informações do usuário
+    document.getElementById('userName').textContent = 'Usuário';
+    document.getElementById('userName').classList.remove('gradient');
+    document.getElementById('userAvatar').src = 'https://api.dicebear.com/7.x/avataaars/svg?seed=default&backgroundColor=e5e7eb';
+    document.getElementById('userAvatar').classList.remove('fallback');
+    document.getElementById('userLevel').textContent = 'Visitante';
+    
+    // Limpar formulários
+    const loginForm = document.getElementById('login-form');
+    const registerForm = document.getElementById('register-form');
+    if (loginForm) loginForm.reset();
+    if (registerForm) registerForm.reset();
+    
+    // Limpar erros
+    clearLoginErrors();
+}
 
     function updateProfileModal(user) {
         const username = user.displayName || user.email.split('@')[0];

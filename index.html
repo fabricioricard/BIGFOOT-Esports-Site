@@ -1820,20 +1820,8 @@
     <button id="back-to-top" class="back-to-top">⬆</button>
 
     <!-- Scripts -->
+<script src="/js/auth.js"></script>
 <script>
-    // Configuração Firebase (Substitua pelas suas configurações)
-    const firebaseConfig = {
-        apiKey: "your-api-key",
-        authDomain: "your-auth-domain",
-        projectId: "your-project-id",
-        storageBucket: "your-storage-bucket",
-        messagingSenderId: "your-messaging-sender-id",
-        appId: "your-app-id"
-    };
-    
-    // Inicializar Firebase
-    firebase.initializeApp(firebaseConfig);
-
     // Função para copiar a chave PIX
     function copyPixKey() {
         const key = document.getElementById('pix-key').textContent;

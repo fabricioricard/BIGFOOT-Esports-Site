@@ -2143,7 +2143,7 @@
             });
     }
 
-    // Substitua a função handleAvatarUpload (por volta da linha 380)
+// Substitua a função handleAvatarUpload completamente
 
 function handleAvatarUpload(e) {
     const file = e.target.files[0];
@@ -2165,25 +2165,26 @@ function handleAvatarUpload(e) {
         return;
     }
 
-    // Usar FileReader para converter para base64 (alternativa ao Storage)
+    // Usar FileReader para converter para base64
     const reader = new FileReader();
     reader.onload = function(event) {
         const imageDataUrl = event.target.result;
         
-        // Atualizar o perfil do usuário com a imagem em base64
-        user.updateProfile({ 
-            photoURL: imageDataUrl 
-        }).then(() => {
-            // Atualizar UI imediatamente
-            updateUIForLoggedIn(user);
-            showNotification('Avatar atualizado com sucesso! 🎨', 'success');
-            
-            // Salvar no localStorage para persistir entre sessões
-            localStorage.setItem(`avatar_${user.uid}`, imageDataUrl);
-        }).catch(error => {
-            console.error('Erro ao atualizar perfil:', error);
-            showNotification('Erro ao atualizar avatar: ' + error.message, 'error');
-        });
+        // Salvar no localStorage (não no Firebase profile)
+        localStorage.setItem(`avatar_${user.uid}`, imageDataUrl);
+        
+        // Atualizar UI imediatamente
+        const avatarElement = document.getElementById('userAvatar');
+        avatarElement.src = imageDataUrl;
+        avatarElement.classList.remove('fallback');
+        
+        // Também atualizar no modal de perfil se estiver aberto
+        const profileAvatar = document.getElementById('profile-avatar');
+        if (profileAvatar) {
+            profileAvatar.src = imageDataUrl;
+        }
+        
+        showNotification('Avatar atualizado com sucesso! 🎨', 'success');
     };
     
     reader.onerror = function() {
@@ -2192,6 +2193,82 @@ function handleAvatarUpload(e) {
     
     showNotification('Processando avatar...', 'info');
     reader.readAsDataURL(file);
+}
+
+// Também atualize a função updateUIForLoggedIn para usar o localStorage
+
+function updateUIForLoggedIn(user) {
+    // Marcar seção como logada
+    userSection.classList.add('logged-in');
+    
+    const username = user.displayName || user.email.split('@')[0];
+    document.getElementById('userName').textContent = username;
+    document.getElementById('userName').classList.add('gradient');
+    
+    // Configurar avatar
+    const avatarElement = document.getElementById('userAvatar');
+    
+    // Verificar se há avatar salvo no localStorage primeiro
+    const savedAvatar = localStorage.getItem(`avatar_${user.uid}`);
+    
+    if (savedAvatar) {
+        // Usar avatar personalizado salvo
+        avatarElement.src = savedAvatar;
+        avatarElement.classList.remove('fallback');
+    } else if (user.photoURL && user.photoURL.startsWith('http') && !user.photoURL.includes('dicebear')) {
+        // Usar photoURL do Firebase (como Google avatar)
+        avatarElement.src = user.photoURL;
+        avatarElement.classList.remove('fallback');
+    } else {
+        // Usar avatar gerado
+        const generatedAvatar = generateAvatar(user.email);
+        avatarElement.src = generatedAvatar;
+        avatarElement.classList.remove('fallback');
+    }
+    
+    // Simular nível e pontos do usuário
+    const userLevel = Math.floor(Math.random() * 10) + 1;
+    const userPoints = Math.floor(Math.random() * 1000);
+    document.getElementById('userLevel').textContent = `Nível ${userLevel} • ${userPoints} pts`;
+}
+
+// Atualizar também a função updateProfileModal para usar o avatar salvo
+
+function updateProfileModal(user) {
+    const username = user.displayName || user.email.split('@')[0];
+    
+    // Verificar avatar personalizado primeiro
+    const savedAvatar = localStorage.getItem(`avatar_${user.uid}`);
+    let avatarUrl;
+    
+    if (savedAvatar) {
+        avatarUrl = savedAvatar;
+    } else if (user.photoURL && user.photoURL.startsWith('http') && !user.photoURL.includes('dicebear')) {
+        avatarUrl = user.photoURL;
+    } else {
+        avatarUrl = generateAvatar(user.email);
+    }
+    
+    document.getElementById('profile-avatar').src = avatarUrl;
+    document.getElementById('profile-username').textContent = username;
+    document.getElementById('profile-email').textContent = user.email;
+    
+    // Data de criação da conta
+    const creationDate = user.metadata.creationTime;
+    const formattedDate = new Date(creationDate).toLocaleDateString('pt-BR', {
+        year: 'numeric',
+        month: 'long'
+    });
+    document.getElementById('profile-member-since').textContent = formattedDate;
+    
+    // Estatísticas simuladas
+    const userLevel = Math.floor(Math.random() * 10) + 1;
+    const userPoints = Math.floor(Math.random() * 1000);
+    const userVisits = Math.floor(Math.random() * 50) + 1;
+    
+    document.getElementById('profile-level').textContent = userLevel;
+    document.getElementById('profile-points').textContent = userPoints;
+    document.getElementById('profile-visits').textContent = userVisits;
 }
 
     function logout() {

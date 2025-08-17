@@ -181,7 +181,7 @@
             animation: spin 1s linear infinite;
         }
 
-        /* ===== 4. AUTHENTICATION SYSTEM ===== */
+        /* ===== 4. IMPROVED AVATAR SYSTEM ===== */
         .user-section {
             display: flex;
             align-items: center;
@@ -192,15 +192,33 @@
         .user-info {
             display: none;
             align-items: center;
-            gap: var(--spacing-sm);
-            background: rgba(102, 126, 234, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(102, 126, 234, 0.2);
+            gap: var(--spacing-md);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(102, 126, 234, 0.1);
             border-radius: var(--radius-xl);
-            padding: var(--spacing-sm) var(--spacing-md);
+            padding: var(--spacing-sm) var(--spacing-lg);
             transition: all var(--transition-normal);
-            max-width: 300px;
+            max-width: 320px;
             cursor: pointer;
+            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .user-info::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .user-info:hover::before {
+            left: 100%;
         }
 
         .user-info.logged-in {
@@ -208,26 +226,72 @@
         }
 
         .user-info:hover {
-            background: rgba(102, 126, 234, 0.15);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-medium);
+            background: rgba(102, 126, 234, 0.05);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(102, 126, 234, 0.25);
+            border-color: rgba(102, 126, 234, 0.3);
         }
 
-        .user-avatar {
-            width: 36px;
-            height: 36px;
-            border-radius: var(--radius-full);
-            border: 2px solid transparent;
-            background: var(--primary-gradient);
-            box-shadow: 0 0 12px rgba(102, 126, 234, 0.3);
-            object-fit: cover;
-            transition: all var(--transition-normal);
+        /* Avatar Container with Status */
+        .user-avatar-container {
+            position: relative;
             flex-shrink: 0;
         }
 
+        .user-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-full);
+            border: 3px solid transparent;
+            background: var(--primary-gradient);
+            background-clip: padding-box;
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.4);
+            object-fit: cover;
+            transition: all var(--transition-normal);
+            position: relative;
+        }
+
+        /* Fallback Avatar with Initials */
+        .user-avatar.fallback {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: var(--font-weight-bold);
+            font-size: 16px;
+            color: #ffffff;
+            background: var(--primary-gradient);
+            text-transform: uppercase;
+        }
+
         .user-avatar:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 16px rgba(102, 126, 234, 0.4);
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 0 25px rgba(102, 126, 234, 0.6);
+        }
+
+        /* Online Status Indicator */
+        .user-status {
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+            width: 14px;
+            height: 14px;
+            background: #48bb78;
+            border: 3px solid #ffffff;
+            border-radius: var(--radius-full);
+            box-shadow: 0 0 10px rgba(72, 187, 120, 0.5);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(72, 187, 120, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(72, 187, 120, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(72, 187, 120, 0);
+            }
         }
 
         .user-details {
@@ -235,15 +299,17 @@
             flex-direction: column;
             min-width: 0;
             flex: 1;
+            gap: 2px;
         }
 
         .user-name {
             font-family: var(--font-family);
-            font-size: var(--font-sm);
-            font-weight: var(--font-weight-medium);
-            color: var(--text-secondary);
+            font-size: 15px;
+            font-weight: var(--font-weight-semibold);
+            color: var(--text-primary);
             line-height: 1.2;
             max-width: 150px;
+            position: relative;
         }
 
         .user-name.gradient {
@@ -251,6 +317,76 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+        }
+
+        /* User Level/Points Badge */
+        .user-level {
+            font-size: 11px;
+            color: var(--text-muted);
+            font-weight: var(--font-weight-medium);
+            background: rgba(102, 126, 234, 0.1);
+            padding: 2px 8px;
+            border-radius: 10px;
+            display: inline-block;
+            margin-top: 2px;
+        }
+
+        /* Dropdown Menu for User */
+        .user-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: #ffffff;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-heavy);
+            border: 1px solid var(--border-color);
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all var(--transition-normal);
+            z-index: 1000;
+        }
+
+        .user-info:hover .user-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(5px);
+        }
+
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-sm) var(--spacing-md);
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            transition: all var(--transition-fast);
+            cursor: pointer;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+        }
+
+        .dropdown-item:hover {
+            background: var(--background-light);
+            color: var(--text-primary);
+        }
+
+        .dropdown-item:first-child {
+            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+        }
+
+        .dropdown-item:last-child {
+            border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+            border-top: 1px solid var(--border-color);
+            color: #e53e3e;
+        }
+
+        .dropdown-item:last-child:hover {
+            background: rgba(229, 62, 62, 0.1);
         }
 
         .modal {
@@ -506,6 +642,7 @@
             min-width: 200px;
             max-width: 350px;
             flex-shrink: 0;
+            position: relative;
         }
 
         .login-btn {
@@ -1085,17 +1222,17 @@
             }
 
             .user-info {
-                max-width: 250px;
+                max-width: 280px;
             }
 
             .user-name {
-                font-size: 12px;
-                max-width: 120px;
+                font-size: 13px;
+                max-width: 140px;
             }
 
             .user-avatar {
-                width: 32px;
-                height: 32px;
+                width: 38px;
+                height: 38px;
             }
 
             .hero-section {
@@ -1163,7 +1300,7 @@
             }
 
             .user-info {
-                max-width: 200px;
+                max-width: 240px;
             }
 
             .user-name {
@@ -1177,6 +1314,11 @@
             .logo-jpg {
                 width: 40px;
                 height: 40px;
+            }
+
+            .user-avatar {
+                width: 34px;
+                height: 34px;
             }
         }
 
@@ -1295,11 +1437,25 @@
             <div class="user-section" id="user-section">
                 <button id="login-btn" class="btn btn-primary login-btn">🔐 Login</button>
                 <div class="user-info" id="userInfo">
-                    <img id="userAvatar" class="user-avatar" src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/default-avatar.png" alt="Avatar">
+                    <div class="user-avatar-container">
+                        <img id="userAvatar" class="user-avatar" src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/default-avatar.png" alt="Avatar">
+                        <div class="user-status" id="userStatus"></div>
+                    </div>
                     <div class="user-details">
                         <span id="userName" class="user-name gradient text-truncate">Username</span>
+                        <span id="userLevel" class="user-level">Nível 1 • 0 pts</span>
                     </div>
-                    <button id="logout-btn" class="btn btn-secondary">Sair</button>
+                    <div class="user-dropdown" id="userDropdown">
+                        <button class="dropdown-item" id="profile-btn">
+                            👤 Perfil
+                        </button>
+                        <button class="dropdown-item" id="settings-btn">
+                            ⚙️ Configurações
+                        </button>
+                        <button class="dropdown-item" id="logout-btn">
+                            🚪 Sair
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1500,218 +1656,410 @@
     <button id="back-to-top" class="back-to-top">⬆</button>
 
     <!-- Scripts -->
-    <script src="js/auth.js"></script>
-<script>
-    // Função para copiar a chave PIX
-    function copyPixKey() {
-        const key = document.getElementById('pix-key').textContent;
-        navigator.clipboard.writeText(key).then(() => {
-            alert('Chave PIX copiada com sucesso!');
-        }).catch(() => {
-            alert('Erro ao copiar chave PIX.');
-        });
-    }
+    <script>
+        // Mock Auth System (Simulação para demonstração)
+        const mockAuth = {
+            currentUser: null,
+            listeners: [],
+            
+            async waitForInit() {
+                return new Promise(resolve => setTimeout(resolve, 100));
+            },
+            
+            async isLoggedInAsync() {
+                return this.currentUser !== null;
+            },
+            
+            async getCurrentUserAsync() {
+                return this.currentUser;
+            },
+            
+            async signIn(email, password) {
+                // Simular login
+                this.currentUser = {
+                    email: email,
+                    displayName: email.split('@')[0],
+                    photoURL: this.generateAvatar(email),
+                    uid: Date.now().toString()
+                };
+                this.notifyListeners(this.currentUser);
+                return this.currentUser;
+            },
+            
+            async signUp(email, password) {
+                // Simular registro
+                this.currentUser = {
+                    email: email,
+                    displayName: email.split('@')[0],
+                    photoURL: this.generateAvatar(email),
+                    uid: Date.now().toString()
+                };
+                this.notifyListeners(this.currentUser);
+                return this.currentUser;
+            },
+            
+            async signInWithGoogle() {
+                // Simular login com Google
+                const mockGoogleUser = {
+                    email: 'usuario@gmail.com',
+                    displayName: 'Usuário Gamer',
+                    photoURL: 'https://api.dicebear.com/7.x/avataaars/svg?seed=google&backgroundColor=b6e3f4',
+                    uid: 'google_' + Date.now().toString()
+                };
+                this.currentUser = mockGoogleUser;
+                this.notifyListeners(this.currentUser);
+                return this.currentUser;
+            },
+            
+            async signOut() {
+                this.currentUser = null;
+                this.notifyListeners(null);
+            },
+            
+            addAuthListener(callback) {
+                this.listeners.push(callback);
+            },
+            
+            notifyListeners(user) {
+                this.listeners.forEach(callback => callback(user));
+            },
+            
+            generateAvatar(email) {
+                // Gerar avatar usando DiceBear API
+                const seed = email.split('@')[0];
+                const styles = ['avataaars', 'micah', 'adventurer', 'big-smile'];
+                const style = styles[Math.floor(Math.random() * styles.length)];
+                const colors = ['b6e3f4', 'c0aede', 'ffb3ba', 'ffdfba', 'ffffba', 'baffc9'];
+                const bgColor = colors[Math.floor(Math.random() * colors.length)];
+                return `https://api.dicebear.com/7.x/${style}/svg?seed=${seed}&backgroundColor=${bgColor}`;
+            }
+        };
 
-    // DOM Elements
-    const loginBtn = document.getElementById('login-btn');
-    const loginModal = document.getElementById('login-modal');
-    const closeModal = document.getElementById('close-modal');
-    const userSection = document.getElementById('user-section');
-    const userInfo = document.getElementById('userInfo');
-    const logoutBtn = document.getElementById('logout-btn');
-    const modalTabs = document.querySelectorAll('.modal-tab');
-    const tabContents = document.querySelectorAll('.tab-content');
+        // Disponibilizar globalmente para compatibilidade
+        window.bigFootAuth = mockAuth;
 
-    // Initialize
-    document.addEventListener('DOMContentLoaded', async () => {
-        // Animações de scroll
-        function animateOnScroll() {
-            const reveals = document.querySelectorAll('.reveal');
-            reveals.forEach(reveal => {
-                const windowHeight = window.innerHeight;
-                const elementTop = reveal.getBoundingClientRect().top;
-                const elementVisible = 150;
-                if (elementTop < windowHeight - elementVisible) {
-                    reveal.classList.add('visible');
-                }
+        // Função para copiar a chave PIX
+        function copyPixKey() {
+            const key = document.getElementById('pix-key').textContent;
+            navigator.clipboard.writeText(key).then(() => {
+                alert('Chave PIX copiada com sucesso!');
+            }).catch(() => {
+                alert('Erro ao copiar chave PIX.');
             });
         }
 
-        window.addEventListener('scroll', animateOnScroll);
-        animateOnScroll();
+        // DOM Elements
+        const loginBtn = document.getElementById('login-btn');
+        const loginModal = document.getElementById('login-modal');
+        const closeModal = document.getElementById('close-modal');
+        const userSection = document.getElementById('user-section');
+        const userInfo = document.getElementById('userInfo');
+        const logoutBtn = document.getElementById('logout-btn');
+        const modalTabs = document.querySelectorAll('.modal-tab');
+        const tabContents = document.querySelectorAll('.tab-content');
 
-        // Botão voltar ao topo
-        const backToTop = document.getElementById('back-to-top');
-        window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 300) {
-                backToTop.style.display = 'block';
-            } else {
-                backToTop.style.display = 'none';
-            }
-        });
-
-        backToTop.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-
-        // Smooth scroll para links âncora
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                const href = this.getAttribute('href');
-                if (href !== '#' && href.startsWith('#')) {
-                    e.preventDefault();
-                    const target = document.querySelector(href);
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth'
-                        });
+        // Initialize
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Animações de scroll
+            function animateOnScroll() {
+                const reveals = document.querySelectorAll('.reveal');
+                reveals.forEach(reveal => {
+                    const windowHeight = window.innerHeight;
+                    const elementTop = reveal.getBoundingClientRect().top;
+                    const elementVisible = 150;
+                    if (elementTop < windowHeight - elementVisible) {
+                        reveal.classList.add('visible');
                     }
+                });
+            }
+
+            window.addEventListener('scroll', animateOnScroll);
+            animateOnScroll();
+
+            // Botão voltar ao topo
+            const backToTop = document.getElementById('back-to-top');
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    backToTop.style.display = 'block';
+                } else {
+                    backToTop.style.display = 'none';
                 }
             });
-        });
 
-        // Auto-fechar doação após 10 segundos
-        const donationBox = document.getElementById('donation-box');
-        const closeDonation = document.getElementById('close-donation');
-        if (closeDonation && donationBox) {
-            closeDonation.addEventListener('click', () => {
-                donationBox.classList.add('hidden');
+            backToTop.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
             });
-        }
-        setTimeout(() => {
-            if (donationBox && !donationBox.classList.contains('hidden')) {
-                donationBox.classList.add('hidden');
-            }
-        }, 10000);
 
-        // Autenticação com auth.js
-        if (window.bigFootAuth) {
-            await window.bigFootAuth.waitForInit();
-            const isLoggedIn = await window.bigFootAuth.isLoggedInAsync();
-            const user = await window.bigFootAuth.getCurrentUserAsync();
-            if (isLoggedIn && user) {
-                updateUIForLoggedIn(user);
-            } else {
-                updateUIForLoggedOut();
-            }
+            // Smooth scroll para links âncora
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const href = this.getAttribute('href');
+                    if (href !== '#' && href.startsWith('#')) {
+                        e.preventDefault();
+                        const target = document.querySelector(href);
+                        if (target) {
+                            target.scrollIntoView({
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                });
+            });
 
-            // Adicionar listener para mudanças de autenticação
-            window.bigFootAuth.addAuthListener((user) => {
-                if (user) {
+            // Auto-fechar doação após 10 segundos
+            const donationBox = document.getElementById('donation-box');
+            const closeDonation = document.getElementById('close-donation');
+            if (closeDonation && donationBox) {
+                closeDonation.addEventListener('click', () => {
+                    donationBox.classList.add('hidden');
+                });
+            }
+            setTimeout(() => {
+                if (donationBox && !donationBox.classList.contains('hidden')) {
+                    donationBox.classList.add('hidden');
+                }
+            }, 10000);
+
+            // Autenticação com auth.js
+            if (window.bigFootAuth) {
+                await window.bigFootAuth.waitForInit();
+                const isLoggedIn = await window.bigFootAuth.isLoggedInAsync();
+                const user = await window.bigFootAuth.getCurrentUserAsync();
+                if (isLoggedIn && user) {
                     updateUIForLoggedIn(user);
                 } else {
                     updateUIForLoggedOut();
                 }
+
+                // Adicionar listener para mudanças de autenticação
+                window.bigFootAuth.addAuthListener((user) => {
+                    if (user) {
+                        updateUIForLoggedIn(user);
+                    } else {
+                        updateUIForLoggedOut();
+                    }
+                });
+            } else {
+                console.error('❌ window.bigFootAuth não está definido');
+            }
+
+            // Event listeners para autenticação
+            loginBtn.addEventListener('click', openModal);
+            closeModal.addEventListener('click', closeLoginModal);
+            logoutBtn.addEventListener('click', logout);
+            modalTabs.forEach(tab => {
+                tab.addEventListener('click', () => switchTab(tab.dataset.tab));
             });
-        } else {
-            console.error('❌ window.bigFootAuth não está definido');
+            document.getElementById('login-form').addEventListener('submit', handleLogin);
+            document.getElementById('register-form').addEventListener('submit', handleRegister);
+            document.getElementById('google-login').addEventListener('click', handleGoogleLogin);
+            document.getElementById('forgot-password-link').addEventListener('click', (e) => {
+                e.preventDefault();
+                alert('Funcionalidade de redefinição de senha em desenvolvimento.');
+            });
+
+            // Event listeners para dropdown
+            document.getElementById('profile-btn').addEventListener('click', () => {
+                alert('Página de perfil em desenvolvimento!');
+            });
+            
+            document.getElementById('settings-btn').addEventListener('click', () => {
+                alert('Configurações em desenvolvimento!');
+            });
+
+            // Fechar modal clicando fora
+            loginModal.addEventListener('click', (e) => {
+                if (e.target === loginModal) closeLoginModal();
+            });
+        });
+
+        // Funções de autenticação
+        function openModal() {
+            loginModal.classList.add('show');
+            document.body.style.overflow = 'hidden';
         }
 
-        // Event listeners para autenticação
-        loginBtn.addEventListener('click', openModal);
-        closeModal.addEventListener('click', closeLoginModal);
-        logoutBtn.addEventListener('click', logout);
-        modalTabs.forEach(tab => {
-            tab.addEventListener('click', () => switchTab(tab.dataset.tab));
-        });
-        document.getElementById('login-form').addEventListener('submit', handleLogin);
-        document.getElementById('register-form').addEventListener('submit', handleRegister);
-        document.getElementById('google-login').addEventListener('click', handleGoogleLogin);
-        document.getElementById('forgot-password-link').addEventListener('click', (e) => {
+        function closeLoginModal() {
+            loginModal.classList.remove('show');
+            document.body.style.overflow = '';
+        }
+
+        function switchTab(tabName) {
+            modalTabs.forEach(tab => tab.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+            document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+            document.getElementById(`${tabName}-tab`).classList.add('active');
+        }
+
+        function handleLogin(e) {
             e.preventDefault();
-            alert('Funcionalidade de redefinição de senha em desenvolvimento.');
-        });
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            if (email && password) {
+                window.bigFootAuth.signIn(email, password).then(user => {
+                    updateUIForLoggedIn(user);
+                    closeLoginModal();
+                    showWelcomeMessage(user);
+                }).catch(error => {
+                    alert('Erro ao fazer login: ' + error.message);
+                });
+            }
+        }
 
-        // Fechar modal clicando fora
-        loginModal.addEventListener('click', (e) => {
-            if (e.target === loginModal) closeLoginModal();
-        });
-    });
+        function handleRegister(e) {
+            e.preventDefault();
+            const email = document.getElementById('register-email').value;
+            const password = document.getElementById('register-password').value;
+            if (email && password.length >= 6) {
+                window.bigFootAuth.signUp(email, password).then(user => {
+                    updateUIForLoggedIn(user);
+                    closeLoginModal();
+                    showWelcomeMessage(user, true);
+                }).catch(error => {
+                    alert('Erro ao criar conta: ' + error.message);
+                });
+            }
+        }
 
-    // Funções de autenticação
-    function openModal() {
-        loginModal.classList.add('show');
-        document.body.style.overflow = 'hidden';
-    }
-
-    function closeLoginModal() {
-        loginModal.classList.remove('show');
-        document.body.style.overflow = '';
-    }
-
-    function switchTab(tabName) {
-        modalTabs.forEach(tab => tab.classList.remove('active'));
-        tabContents.forEach(content => content.classList.remove('active'));
-        document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
-        document.getElementById(`${tabName}-tab`).classList.add('active');
-    }
-
-    function handleLogin(e) {
-        e.preventDefault();
-        const email = document.getElementById('login-email').value;
-        const password = document.getElementById('login-password').value;
-        if (email && password) {
-            window.bigFootAuth.signIn(email, password).then(user => {
+        function handleGoogleLogin() {
+            window.bigFootAuth.signInWithGoogle().then(user => {
                 updateUIForLoggedIn(user);
                 closeLoginModal();
+                showWelcomeMessage(user);
             }).catch(error => {
-                alert('Erro ao fazer login: ' + error.message);
+                alert('Erro ao fazer login com Google: ' + error.message);
             });
         }
-    }
 
-    function handleRegister(e) {
-        e.preventDefault();
-        const email = document.getElementById('register-email').value;
-        const password = document.getElementById('register-password').value;
-        if (email && password.length >= 6) {
-            window.bigFootAuth.signUp(email, password).then(user => {
-                updateUIForLoggedIn(user);
-                closeLoginModal();
+        function logout() {
+            window.bigFootAuth.signOut().then(() => {
+                updateUIForLoggedOut();
+                showLogoutMessage();
             }).catch(error => {
-                alert('Erro ao criar conta: ' + error.message);
+                alert('Erro ao fazer logout: ' + error.message);
             });
         }
-    }
 
-    function handleGoogleLogin() {
-        window.bigFootAuth.signInWithGoogle().then(user => {
-            updateUIForLoggedIn(user);
-            closeLoginModal();
-        }).catch(error => {
-            alert('Erro ao fazer login com Google: ' + error.message);
-        });
-    }
+        function updateUIForLoggedIn(user) {
+            userSection.classList.add('logged-in');
+            userInfo.classList.add('logged-in');
+            loginBtn.classList.add('d-none');
+            
+            const userName = user.displayName || user.email.split('@')[0];
+            document.getElementById('userName').textContent = userName;
+            document.getElementById('userName').classList.add('gradient');
+            
+            // Configurar avatar
+            const avatarElement = document.getElementById('userAvatar');
+            if (user.photoURL) {
+                avatarElement.src = user.photoURL;
+                avatarElement.classList.remove('fallback');
+            } else {
+                // Criar avatar com iniciais se não houver foto
+                avatarElement.classList.add('fallback');
+                avatarElement.textContent = getInitials(userName);
+            }
+            
+            // Simular nível e pontos do usuário
+            const userLevel = Math.floor(Math.random() * 10) + 1;
+            const userPoints = Math.floor(Math.random() * 1000);
+            document.getElementById('userLevel').textContent = `Nível ${userLevel} • ${userPoints} pts`;
+        }
 
-    function logout() {
-        window.bigFootAuth.signOut().then(() => {
-            updateUIForLoggedOut();
-        }).catch(error => {
-            alert('Erro ao fazer logout: ' + error.message);
-        });
-    }
+        function updateUIForLoggedOut() {
+            userSection.classList.remove('logged-in');
+            userInfo.classList.remove('logged-in');
+            loginBtn.classList.remove('d-none');
+            document.getElementById('userName').textContent = 'Usuário';
+            document.getElementById('userName').classList.remove('gradient');
+            document.getElementById('userAvatar').src = 'https://api.dicebear.com/7.x/avataaars/svg?seed=default&backgroundColor=e5e7eb';
+            document.getElementById('userAvatar').classList.remove('fallback');
+            document.getElementById('userLevel').textContent = 'Visitante';
+            document.getElementById('login-form').reset();
+            document.getElementById('register-form').reset();
+        }
 
-    function updateUIForLoggedIn(user) {
-        userSection.classList.add('logged-in');
-        userInfo.classList.add('logged-in');
-        loginBtn.classList.add('d-none');
-        document.getElementById('userName').textContent = user.email ? user.email.split('@')[0] : user.displayName || 'Usuário';
-        document.getElementById('userName').classList.add('gradient');
-        document.getElementById('userAvatar').src = user.photoURL || 'https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/default-avatar.png';
-    }
+        function getInitials(name) {
+            return name
+                .split(' ')
+                .map(word => word.charAt(0))
+                .join('')
+                .substring(0, 2)
+                .toUpperCase();
+        }
 
-    function updateUIForLoggedOut() {
-        userSection.classList.remove('logged-in');
-        userInfo.classList.remove('logged-in');
-        loginBtn.classList.remove('d-none');
-        document.getElementById('userName').textContent = 'Usuário';
-        document.getElementById('userAvatar').src = 'https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/default-avatar.png';
-        document.getElementById('login-form').reset();
-        document.getElementById('register-form').reset();
-    }
-</script>
+        function showWelcomeMessage(user, isNewUser = false) {
+            const name = user.displayName || user.email.split('@')[0];
+            const message = isNewUser 
+                ? `🎉 Bem-vindo à BIGFOOT Esports, ${name}! Sua conta foi criada com sucesso!` 
+                : `👋 Bem-vindo de volta, ${name}!`;
+            
+            // Criar notificação temporária
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                background: linear-gradient(45deg, #667eea, #764ba2);
+                color: white;
+                padding: 15px 20px;
+                border-radius: 10px;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+                z-index: 10000;
+                font-family: 'Poppins', sans-serif;
+                font-weight: 600;
+                animation: slideInRight 0.5s ease-out;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOutRight 0.5s ease-in';
+                setTimeout(() => notification.remove(), 500);
+            }, 4000);
+        }
+
+        function showLogoutMessage() {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                background: #4a5568;
+                color: white;
+                padding: 15px 20px;
+                border-radius: 10px;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+                z-index: 10000;
+                font-family: 'Poppins', sans-serif;
+                font-weight: 600;
+                animation: slideInRight 0.5s ease-out;
+            `;
+            notification.textContent = '👋 Até logo! Você foi desconectado com sucesso.';
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOutRight 0.5s ease-in';
+                setTimeout(() => notification.remove(), 500);
+            }, 3000);
+        }
+
+        // Adicionar animações CSS via JavaScript
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInRight {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes slideOutRight {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
 </body>
 </html>

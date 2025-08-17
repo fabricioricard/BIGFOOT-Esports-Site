@@ -191,22 +191,58 @@
         }
 
         .user-info {
-            display: none;
-            align-items: center;
-            gap: var(--spacing-md);
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(15px);
-            border: 2px solid rgba(102, 126, 234, 0.1);
-            border-radius: var(--radius-xl);
-            padding: var(--spacing-sm) var(--spacing-lg);
-            transition: all var(--transition-normal);
-            max-width: 320px;
-            cursor: pointer;
-            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.15);
-            position: relative;
-            overflow: hidden;
-        }
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(15px);
+    border: 2px solid rgba(102, 126, 234, 0.1);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-sm) var(--spacing-lg);
+    transition: all var(--transition-normal);
+    max-width: 320px;
+    cursor: pointer;
+    box-shadow: 0 8px 32px rgba(102, 126, 234, 0.15);
+    position: relative;
+    overflow: hidden;
+}
 
+        .user-details {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    flex: 1;
+    gap: 2px;
+}
+
+.user-name {
+    font-family: var(--font-family);
+    font-size: 15px;
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    line-height: 1.2;
+    max-width: 150px;
+}
+
+/* Estilos para o modal de configurações */
+#settings-modal .modal-content {
+    max-width: 400px;
+}
+
+#avatar-upload {
+    padding: 10px;
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-md);
+    background: var(--background-main);
+    font-family: var(--font-family);
+    font-size: 14px;
+}
+
+#avatar-upload:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+        
         .user-info::before {
             content: '';
             position: absolute;
@@ -1447,16 +1483,16 @@
                         <span id="userLevel" class="user-level">Nível 1 • 0 pts</span>
                     </div>
                     <div class="user-dropdown" id="userDropdown">
-                        <button class="dropdown-item" id="profile-btn">
-                            👤 Perfil
-                        </button>
-                        <button class="dropdown-item" id="settings-btn">
-                            ⚙️ Configurações
-                        </button>
-                        <button class="dropdown-item" id="logout-btn">
-                            🚪 Sair
-                        </button>
-                    </div>
+    <button class="dropdown-item" id="profile-btn">
+        👤 Perfil
+    </button>
+    <button class="dropdown-item" id="settings-btn">
+        ⚙️ Configurações
+    </button>
+    <button class="dropdown-item" id="logout-btn">
+        🚪 Sair
+    </button>
+</div>
                 </div>
             </div>
         </div>
@@ -1518,6 +1554,27 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal de Configurações -->
+<div id="settings-modal" class="modal">
+    <div class="modal-content">
+        <span id="close-settings-modal" class="modal-close">×</span>
+        <div class="modal-header">
+            <h2>⚙️ Configurações</h2>
+            <p>Personalize seu perfil</p>
+        </div>
+        <div class="modal-body">
+            <form id="settings-form">
+                <div class="form-group">
+                    <label for="avatar-upload">Escolher Avatar</label>
+                    <input type="file" id="avatar-upload" name="avatar" accept="image/*">
+                    <span id="avatar-upload-error" class="error-text"></span>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Salvar Alterações</button>
+            </form>
+        </div>
+    </div>
+</div>
 
     <!-- Conteúdo Principal -->
     <main>
@@ -1673,6 +1730,8 @@
     const loginBtn = document.getElementById('login-btn');
     const loginModal = document.getElementById('login-modal');
     const closeModal = document.getElementById('close-modal');
+    const settingsModal = document.getElementById('settings-modal');
+    const closeSettingsModal = document.getElementById('close-settings-modal');
     const userSection = document.getElementById('user-section');
     const userInfo = document.getElementById('userInfo');
     const logoutBtn = document.getElementById('logout-btn');
@@ -1762,6 +1821,7 @@
         // Event listeners para autenticação
         loginBtn.addEventListener('click', openModal);
         closeModal.addEventListener('click', closeLoginModal);
+        closeSettingsModal.addEventListener('click', closeSettingsModalFn);
         logoutBtn.addEventListener('click', logout);
         modalTabs.forEach(tab => {
             tab.addEventListener('click', () => switchTab(tab.dataset.tab));
@@ -1779,13 +1839,15 @@
             alert('Página de perfil em desenvolvimento!');
         });
         
-        document.getElementById('settings-btn').addEventListener('click', () => {
-            alert('Configurações em desenvolvimento!');
-        });
+        document.getElementById('settings-btn').addEventListener('click', openSettingsModal);
+        document.getElementById('settings-form').addEventListener('submit', handleAvatarUpload);
 
-        // Fechar modal clicando fora
+        // Fechar modais clicando fora
         loginModal.addEventListener('click', (e) => {
             if (e.target === loginModal) closeLoginModal();
+        });
+        settingsModal.addEventListener('click', (e) => {
+            if (e.target === settingsModal) closeSettingsModalFn();
         });
     });
 
@@ -1798,13 +1860,24 @@
     function closeLoginModal() {
         loginModal.classList.remove('show');
         document.body.style.overflow = '';
-        // Limpar erros e formulários
         document.getElementById('login-email-error').classList.remove('show');
         document.getElementById('login-password-error').classList.remove('show');
         document.getElementById('register-email-error').classList.remove('show');
         document.getElementById('register-password-error').classList.remove('show');
         document.getElementById('login-form').reset();
         document.getElementById('register-form').reset();
+    }
+
+    function openSettingsModal() {
+        settingsModal.classList.add('show');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeSettingsModalFn() {
+        settingsModal.classList.remove('show');
+        document.body.style.overflow = '';
+        document.getElementById('avatar-upload-error').classList.remove('show');
+        document.getElementById('settings-form').reset();
     }
 
     function switchTab(tabName) {
@@ -1876,9 +1949,13 @@
         firebase.auth().createUserWithEmailAndPassword(email, password)
             .then(userCredential => {
                 const user = userCredential.user;
-                updateUIForLoggedIn(user);
-                closeLoginModal();
-                showWelcomeMessage(user, true);
+                // Definir avatar padrão (DiceBear) ao criar conta
+                const avatarUrl = generateAvatar(email);
+                user.updateProfile({ photoURL: avatarUrl }).then(() => {
+                    updateUIForLoggedIn(user);
+                    closeLoginModal();
+                    showWelcomeMessage(user, true);
+                });
             })
             .catch(error => {
                 if (error.code === 'auth/email-already-in-use') {
@@ -1904,10 +1981,60 @@
             });
     }
 
+    function handleAvatarUpload(e) {
+        e.preventDefault();
+        const avatarInput = document.getElementById('avatar-upload');
+        const avatarError = document.getElementById('avatar-upload-error');
+        const file = avatarInput.files[0];
+
+        avatarError.classList.remove('show');
+
+        if (!file) {
+            avatarError.textContent = 'Por favor, selecione uma imagem';
+            avatarError.classList.add('show');
+            return;
+        }
+
+        if (!file.type.startsWith('image/')) {
+            avatarError.textContent = 'Por favor, selecione um arquivo de imagem';
+            avatarError.classList.add('show');
+            return;
+        }
+
+        if (file.size > 2 * 1024 * 1024) { // Limite de 2MB
+            avatarError.textContent = 'A imagem deve ter menos de 2MB';
+            avatarError.classList.add('show');
+            return;
+        }
+
+        const user = firebase.auth().currentUser;
+        if (!user) {
+            alert('Usuário não autenticado. Faça login novamente.');
+            closeSettingsModalFn();
+            return;
+        }
+
+        const storageRef = firebase.storage().ref(`avatars/${user.uid}/${file.name}`);
+        storageRef.put(file)
+            .then(snapshot => snapshot.ref.getDownloadURL())
+            .then(url => {
+                return user.updateProfile({ photoURL: url });
+            })
+            .then(() => {
+                updateUIForLoggedIn(user);
+                closeSettingsModalFn();
+                showWelcomeMessage(user);
+                alert('Avatar atualizado com sucesso!');
+            })
+            .catch(error => {
+                alert('Erro ao fazer upload do avatar: ' + error.message);
+            });
+    }
+
     function logout() {
         firebase.auth().signOut()
             .then(() => {
-                updateUIForLoggedOut();
+                updateUIForLoggedIn(user);
                 showLogoutMessage();
             })
             .catch(error => {
@@ -1933,10 +2060,10 @@
             // Criar avatar com iniciais se não houver foto
             avatarElement.classList.add('fallback');
             avatarElement.textContent = getInitials(userName);
-            avatarElement.src = ''; // Limpar src para avatares de fallback
+            avatarElement.src = generateAvatar(user.email);
         }
         
-        // Simular nível e pontos do usuário (pode ser integrado com Firestore no futuro)
+        // Simular nível e pontos do usuário
         const userLevel = Math.floor(Math.random() * 10) + 1;
         const userPoints = Math.floor(Math.random() * 1000);
         document.getElementById('userLevel').textContent = `Nível ${userLevel} • ${userPoints} pts`;
@@ -1964,13 +2091,21 @@
             .toUpperCase();
     }
 
+    function generateAvatar(email) {
+        const seed = email.split('@')[0];
+        const styles = ['avataaars', 'micah', 'adventurer', 'big-smile'];
+        const style = styles[Math.floor(Math.random() * styles.length)];
+        const colors = ['b6e3f4', 'c0aede', 'ffb3ba', 'ffdfba', 'ffffba', 'baffc9'];
+        const bgColor = colors[Math.floor(Math.random() * colors.length)];
+        return `https://api.dicebear.com/7.x/${style}/svg?seed=${seed}&backgroundColor=${bgColor}`;
+    }
+
     function showWelcomeMessage(user, isNewUser = false) {
         const name = user.displayName || user.email.split('@')[0];
         const message = isNewUser 
             ? `🎉 Bem-vindo à BIGFOOT Esports, ${name}! Sua conta foi criada com sucesso!` 
             : `👋 Bem-vindo de volta, ${name}!`;
         
-        // Criar notificação temporária
         const notification = document.createElement('div');
         notification.style.cssText = `
             position: fixed;

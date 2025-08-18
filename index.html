@@ -2011,13 +2011,16 @@ firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
     }
 
     function openProfileModal() {
-        const user = firebase.auth().currentUser;
-        if (user) {
+    const user = firebase.auth().currentUser;
+    if (user) {
+        // AGUARDAR UM MOMENTO PARA GARANTIR SINCRONIA
+        setTimeout(() => {
             updateProfileModal(user);
             profileModal.classList.add('show');
             document.body.style.overflow = 'hidden';
-        }
+        }, 50);
     }
+}
 
     function closeProfileModalFn() {
         profileModal.classList.remove('show');
@@ -2152,17 +2155,14 @@ function handleAvatarUpload(e) {
 
     showNotification('Processando avatar...', 'info');
 
-    // Redimensionar imagem antes de salvar
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
     const img = new Image();
     
     img.onload = function() {
-        // Definir tamanho máximo
         const maxSize = 200;
         let { width, height } = img;
         
-        // Calcular novo tamanho mantendo proporção
         if (width > height) {
             if (width > maxSize) {
                 height = height * (maxSize / width);
@@ -2177,27 +2177,36 @@ function handleAvatarUpload(e) {
         
         canvas.width = width;
         canvas.height = height;
-        
-        // Desenhar imagem redimensionada
         ctx.drawImage(img, 0, 0, width, height);
         
-        // Converter para base64 com qualidade reduzida
         const resizedImageData = canvas.toDataURL('image/jpeg', 0.8);
         
-        // Salvar no localStorage
-        localStorage.setItem(`avatar_${user.uid}`, resizedImageData);
+        // SALVAR E VERIFICAR SE FOI SALVO
+        const storageKey = `avatar_${user.uid}`;
+        localStorage.setItem(storageKey, resizedImageData);
         
-        // Atualizar todas as instâncias do avatar
-        updateAllAvatars(resizedImageData);
-        
-        showNotification('Avatar atualizado com sucesso! 🎨', 'success');
+        // VERIFICAR SE SALVOU
+        const savedCheck = localStorage.getItem(storageKey);
+        if (savedCheck === resizedImageData) {
+            console.log('Avatar salvo com sucesso!');
+            updateAllAvatars(resizedImageData);
+            showNotification('Avatar atualizado com sucesso! 🎨', 'success');
+            
+            // FORÇAR ATUALIZAÇÃO DO MODAL SE ESTIVER ABERTO
+            const profileModal = document.getElementById('profile-modal');
+            if (profileModal && profileModal.classList.contains('show')) {
+                setTimeout(() => updateProfileModal(user), 100);
+            }
+        } else {
+            console.error('Falha ao salvar avatar no localStorage');
+            showNotification('Erro ao salvar avatar. Tente novamente.', 'error');
+        }
     };
     
     img.onerror = function() {
         showNotification('Erro ao processar a imagem', 'error');
     };
     
-    // Ler arquivo
     const reader = new FileReader();
     reader.onload = function(event) {
         img.src = event.target.result;
@@ -2258,19 +2267,27 @@ function updateUIForLoggedIn(user) {
 function updateProfileModal(user) {
     const username = user.displayName || user.email.split('@')[0];
     
-    // Usar avatar salvo
+    // PRIORIZAR AVATAR SALVO - mesma lógica da updateUIForLoggedIn
     const savedAvatar = localStorage.getItem(`avatar_${user.uid}`);
     let avatarUrl;
     
     if (savedAvatar) {
         avatarUrl = savedAvatar;
+        console.log('Usando avatar salvo no modal:', avatarUrl.substring(0, 50) + '...');
     } else if (user.photoURL && user.photoURL.startsWith('http')) {
         avatarUrl = user.photoURL;
+        console.log('Usando photoURL no modal:', avatarUrl);
     } else {
         avatarUrl = generateAvatar(user.email);
+        console.log('Gerando novo avatar no modal:', avatarUrl);
     }
     
-    document.getElementById('profile-avatar').src = avatarUrl;
+    // Aplicar avatar
+    const profileAvatarElement = document.getElementById('profile-avatar');
+    if (profileAvatarElement) {
+        profileAvatarElement.src = avatarUrl;
+    }
+    
     document.getElementById('profile-username').textContent = username;
     document.getElementById('profile-email').textContent = user.email;
     

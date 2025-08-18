@@ -2181,21 +2181,28 @@ function handleAvatarUpload(e) {
         
         const resizedImageData = canvas.toDataURL('image/jpeg', 0.8);
         
-        // SALVAR E VERIFICAR SE FOI SALVO
+        // Save avatar to localStorage
         const storageKey = `avatar_${user.uid}`;
         localStorage.setItem(storageKey, resizedImageData);
         
-        // VERIFICAR SE SALVOU
+        // Verify save
         const savedCheck = localStorage.getItem(storageKey);
         if (savedCheck === resizedImageData) {
             console.log('Avatar salvo com sucesso!');
+            // Update avatars in both header and profile modal
             updateAllAvatars(resizedImageData);
             showNotification('Avatar atualizado com sucesso! 🎨', 'success');
             
-            // FORÇAR ATUALIZAÇÃO DO MODAL SE ESTIVER ABERTO
+            // Explicitly update profile modal if open
             const profileModal = document.getElementById('profile-modal');
             if (profileModal && profileModal.classList.contains('show')) {
-                setTimeout(() => updateProfileModal(user), 100);
+                const profileAvatar = document.getElementById('profile-avatar');
+                if (profileAvatar) {
+                    profileAvatar.src = resizedImageData;
+                    profileAvatar.classList.remove('fallback');
+                }
+                // Update other profile modal fields
+                updateProfileModal(user);
             }
         } else {
             console.error('Falha ao salvar avatar no localStorage');

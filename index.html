@@ -2156,7 +2156,7 @@ function handleAvatarUpload(e) {
         return;
     }
 
-    showNotification('Processando avatar...', 'info');
+    showNotification('Processando avatar personalizado...', 'info');
 
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
@@ -2187,33 +2187,16 @@ function handleAvatarUpload(e) {
         // Save avatar to localStorage
         const storageKey = `avatar_${user.uid}`;
         localStorage.setItem(storageKey, resizedImageData);
+        console.log('Avatar personalizado salvo com sucesso!');
         
-        // Verify save
-        const savedCheck = localStorage.getItem(storageKey);
-        if (savedCheck === resizedImageData) {
-            console.log('Avatar salvo com sucesso:', resizedImageData.substring(0, 50) + '...');
-            // Update avatars in header
-            updateAllAvatars(resizedImageData);
-            showNotification('Avatar atualizado com sucesso! 🎨', 'success');
-            
-            // Immediately update profile modal
-            const profileModal = document.getElementById('profile-modal');
-            const profileAvatar = document.getElementById('profile-avatar');
-            if (profileModal && profileAvatar) {
-                profileAvatar.src = resizedImageData;
-                profileAvatar.classList.remove('fallback');
-                console.log('Avatar do modal atualizado diretamente:', resizedImageData.substring(0, 50) + '...');
-                // Update other profile modal fields
-                updateProfileModal(user);
-            } else {
-                console.error('Erro: profile-modal ou profile-avatar não encontrado no DOM');
-                // Fallback: update modal data anyway to ensure consistency
-                updateProfileModal(user);
-            }
-        } else {
-            console.error('Falha ao salvar avatar no localStorage');
-            showNotification('Erro ao salvar avatar. Tente novamente.', 'error');
-        }
+        // Update all avatars immediately
+        updateAllAvatars(resizedImageData);
+        showNotification('Avatar personalizado salvo! 🎨 Os avatars aleatórios não aparecerão mais.', 'success');
+        
+        // Force update profile modal
+        setTimeout(() => {
+            updateProfileModal(user);
+        }, 100);
     };
     
     img.onerror = function() {
@@ -2256,11 +2239,17 @@ function updateUIForLoggedIn(user) {
     let avatarUrl;
     
     if (savedAvatar) {
+        // Se há avatar salvo, usar ele
         avatarUrl = savedAvatar;
-    } else if (user.photoURL && user.photoURL.startsWith('http')) {
+        console.log('Usando avatar personalizado salvo');
+    } else if (user.photoURL && user.photoURL.startsWith('http') && !user.photoURL.includes('dicebear')) {
+        // Se há photoURL válido do Google/provedor (não DiceBear), usar ele
         avatarUrl = user.photoURL;
+        console.log('Usando avatar do provedor (Google)');
     } else {
+        // Caso contrário, gerar avatar aleatório apenas se não houver avatar salvo
         avatarUrl = generateAvatar(user.email);
+        console.log('Gerando avatar aleatório inicial');
     }
     
     updateAllAvatars(avatarUrl);
@@ -2289,14 +2278,19 @@ function updateProfileModal(user) {
     const savedAvatar = localStorage.getItem(storageKey);
     let avatarUrl;
 
-    // Prioritize saved avatar from localStorage
+    // CORREÇÃO PRINCIPAL: Priorizar avatar salvo
     if (savedAvatar) {
+        // Se há avatar personalizado salvo, SEMPRE usar ele
         avatarUrl = savedAvatar;
-        console.log('Usando avatar salvo no modal:', avatarUrl.substring(0, 50) + '...');
+        console.log('Modal: Usando avatar personalizado salvo:', avatarUrl.substring(0, 50) + '...');
+    } else if (user.photoURL && user.photoURL.startsWith('http') && !user.photoURL.includes('dicebear')) {
+        // Se há photoURL válido do provedor (não DiceBear), usar ele
+        avatarUrl = user.photoURL;
+        console.log('Modal: Usando avatar do provedor (Google)');
     } else {
-        // Only use DiceBear if no saved avatar or valid photoURL exists
+        // Apenas gerar avatar aleatório se não houver avatar personalizado OU do provedor
         avatarUrl = generateAvatar(user.email);
-        console.log('Nenhum avatar salvo, usando DiceBear:', avatarUrl);
+        console.log('Modal: Gerando avatar aleatório inicial');
     }
 
     // Apply avatar to profile modal

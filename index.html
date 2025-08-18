@@ -2013,7 +2013,14 @@ firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
     function openProfileModal() {
     const user = firebase.auth().currentUser;
     if (user) {
-        // AGUARDAR UM MOMENTO PARA GARANTIR SINCRONIA
+        // FORÇAR verificação do avatar salvo
+        const savedAvatar = localStorage.getItem(`avatar_${user.uid}`);
+        console.log('Abrindo modal - Avatar salvo existe:', !!savedAvatar);
+        if (savedAvatar) {
+            console.log('Tipo do avatar salvo:', savedAvatar.substring(0, 20));
+        }
+        
+        // Aguardar um momento e atualizar
         setTimeout(() => {
             updateProfileModal(user);
             profileModal.classList.add('show');
@@ -2156,7 +2163,7 @@ function handleAvatarUpload(e) {
         return;
     }
 
-    showNotification('Processando avatar personalizado...', 'info');
+    showNotification('Processando seu avatar personalizado...', 'info');
 
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
@@ -2184,19 +2191,29 @@ function handleAvatarUpload(e) {
         
         const resizedImageData = canvas.toDataURL('image/jpeg', 0.8);
         
-        // Save avatar to localStorage
+        // SALVAR COM MARCAÇÃO ESPECIAL
         const storageKey = `avatar_${user.uid}`;
         localStorage.setItem(storageKey, resizedImageData);
-        console.log('Avatar personalizado salvo com sucesso!');
         
-        // Update all avatars immediately
-        updateAllAvatars(resizedImageData);
-        showNotification('Avatar personalizado salvo! 🎨 Os avatars aleatórios não aparecerão mais.', 'success');
-        
-        // Force update profile modal
-        setTimeout(() => {
-            updateProfileModal(user);
-        }, 100);
+        // VERIFICAR SE SALVOU
+        const verification = localStorage.getItem(storageKey);
+        if (verification === resizedImageData) {
+            console.log('✅ Avatar personalizado CONFIRMADAMENTE salvo!');
+            
+            // Atualizar TODOS os avatares imediatamente
+            updateAllAvatars(resizedImageData);
+            
+            // FORÇAR atualização completa da UI
+            setTimeout(() => {
+                updateUIForLoggedIn(user);
+                updateProfileModal(user);
+            }, 100);
+            
+            showNotification('✅ Avatar personalizado salvo! Avatares aleatórios desabilitados para sempre.', 'success');
+        } else {
+            console.error('❌ Falha ao salvar avatar');
+            showNotification('Erro ao salvar avatar. Tente novamente.', 'error');
+        }
     };
     
     img.onerror = function() {
@@ -2209,6 +2226,19 @@ function handleAvatarUpload(e) {
         img.src = event.target.result;
     };
     reader.readAsDataURL(file);
+}
+
+// Função para debug - você pode executar isso no console para verificar
+function debugAvatar() {
+    const user = firebase.auth().currentUser;
+    if (user) {
+        const saved = localStorage.getItem(`avatar_${user.uid}`);
+        console.log('Avatar salvo existe:', !!saved);
+        if (saved) {
+            console.log('Tipo:', saved.substring(0, 30));
+            console.log('Tamanho:', saved.length);
+        }
+    }
 }
 
 function updateAllAvatars(avatarUrl) {
@@ -2278,19 +2308,19 @@ function updateProfileModal(user) {
     const savedAvatar = localStorage.getItem(storageKey);
     let avatarUrl;
 
-    // CORREÇÃO PRINCIPAL: Priorizar avatar salvo
-    if (savedAvatar) {
-        // Se há avatar personalizado salvo, SEMPRE usar ele
+    // VERIFICAÇÃO DEFINITIVA: Se há avatar salvo, NUNCA usar outro
+    if (savedAvatar && savedAvatar.startsWith('data:image/')) {
         avatarUrl = savedAvatar;
-        console.log('Modal: Usando avatar personalizado salvo:', avatarUrl.substring(0, 50) + '...');
-    } else if (user.photoURL && user.photoURL.startsWith('http') && !user.photoURL.includes('dicebear')) {
-        // Se há photoURL válido do provedor (não DiceBear), usar ele
-        avatarUrl = user.photoURL;
-        console.log('Modal: Usando avatar do provedor (Google)');
+        console.log('Modal: Usando EXCLUSIVAMENTE avatar personalizado salvo');
     } else {
-        // Apenas gerar avatar aleatório se não houver avatar personalizado OU do provedor
-        avatarUrl = generateAvatar(user.email);
-        console.log('Modal: Gerando avatar aleatório inicial');
+        // Só usar outros avatares se NÃO houver avatar personalizado
+        if (user.photoURL && user.photoURL.startsWith('http') && !user.photoURL.includes('dicebear')) {
+            avatarUrl = user.photoURL;
+            console.log('Modal: Usando avatar do provedor (Google)');
+        } else {
+            avatarUrl = generateAvatar(user.email);
+            console.log('Modal: Gerando avatar aleatório inicial (sem avatar personalizado)');
+        }
     }
 
     // Apply avatar to profile modal
@@ -2298,9 +2328,7 @@ function updateProfileModal(user) {
     if (profileAvatarElement) {
         profileAvatarElement.src = avatarUrl;
         profileAvatarElement.classList.remove('fallback');
-        console.log('Avatar aplicado no modal:', avatarUrl.substring(0, 50) + '...');
-    } else {
-        console.error('Elemento #profile-avatar não encontrado no DOM');
+        console.log('Avatar aplicado no modal:', savedAvatar ? 'PERSONALIZADO' : 'PADRÃO');
     }
 
     // Update other profile fields
@@ -2343,36 +2371,40 @@ function updateProfileModal(user) {
 
     // Funções de UI
 function updateUIForLoggedIn(user) {
-    // Marcar seção como logada
     userSection.classList.add('logged-in');
     
     const username = user.displayName || user.email.split('@')[0];
     document.getElementById('userName').textContent = username;
     document.getElementById('userName').classList.add('gradient');
     
-    // Configurar avatar
-    const avatarElement = document.getElementById('userAvatar');
-    
-    // Verificar se há avatar salvo no localStorage primeiro
+    // MESMA LÓGICA: Avatar personalizado tem prioridade ABSOLUTA
     const savedAvatar = localStorage.getItem(`avatar_${user.uid}`);
+    let avatarUrl;
     
-    if (savedAvatar) {
-        avatarElement.src = savedAvatar;
-        avatarElement.classList.remove('fallback');
-    } else if (user.photoURL && !user.photoURL.includes('dicebear')) {
-        // Se há photoURL e não é um avatar gerado
-        avatarElement.src = user.photoURL;
-        avatarElement.classList.remove('fallback');
+    if (savedAvatar && savedAvatar.startsWith('data:image/')) {
+        avatarUrl = savedAvatar;
+        console.log('Header: Usando EXCLUSIVAMENTE avatar personalizado salvo');
     } else {
-        // Usar avatar gerado ou fallback com iniciais
-        const generatedAvatar = generateAvatar(user.email);
-        avatarElement.src = generatedAvatar;
-        avatarElement.classList.remove('fallback');
+        if (user.photoURL && user.photoURL.startsWith('http') && !user.photoURL.includes('dicebear')) {
+            avatarUrl = user.photoURL;
+            console.log('Header: Usando avatar do provedor (Google)');
+        } else {
+            avatarUrl = generateAvatar(user.email);
+            console.log('Header: Gerando avatar aleatório inicial (sem avatar personalizado)');
+        }
     }
     
-    // Simular nível e pontos do usuário
-    const userLevel = Math.floor(Math.random() * 10) + 1;
-    const userPoints = Math.floor(Math.random() * 1000);
+    updateAllAvatars(avatarUrl);
+    
+    // Stats do usuário
+    let userLevel = localStorage.getItem(`level_${user.uid}`) || Math.floor(Math.random() * 10) + 1;
+    let userPoints = localStorage.getItem(`points_${user.uid}`) || Math.floor(Math.random() * 1000);
+    
+    if (!localStorage.getItem(`level_${user.uid}`)) {
+        localStorage.setItem(`level_${user.uid}`, userLevel);
+        localStorage.setItem(`points_${user.uid}`, userPoints);
+    }
+    
     document.getElementById('userLevel').textContent = `Nível ${userLevel} • ${userPoints} pts`;
 }
 

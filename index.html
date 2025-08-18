@@ -323,6 +323,13 @@
             box-shadow: 0 0 25px rgba(102, 126, 234, 0.6);
         }
 
+/* Avatar Upload Overlay */
+.user-avatar-container {
+    position: relative;
+    flex-shrink: 0;
+    cursor: pointer;
+}
+        
         /* Online Status Indicator */
         .user-status {
             position: absolute;
@@ -1529,9 +1536,6 @@
                 <div class="user-info" id="userInfo">
                     <div class="user-avatar-container" id="avatar-container">
                         <img id="userAvatar" class="user-avatar" src="https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/default-avatar.png" alt="Avatar">
-                        <div class="avatar-upload-overlay">
-                            📷<br>Alterar
-                        </div>
                         <div class="user-status" id="userStatus"></div>
                     </div>
                     <div class="user-details">

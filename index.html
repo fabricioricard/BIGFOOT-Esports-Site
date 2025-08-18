@@ -2293,18 +2293,16 @@ function updateProfileModal(user) {
     if (savedAvatar) {
         avatarUrl = savedAvatar;
         console.log('Usando avatar salvo no modal:', avatarUrl.substring(0, 50) + '...');
-    } else if (user.photoURL && user.photoURL.startsWith('http') && !user.photoURL.includes('dicebear')) {
-        avatarUrl = user.photoURL;
-        console.log('Usando photoURL no modal:', avatarUrl);
     } else {
+        // Only use DiceBear if no saved avatar or valid photoURL exists
         avatarUrl = generateAvatar(user.email);
-        console.log('Gerando novo avatar no modal:', avatarUrl);
+        console.log('Nenhum avatar salvo, usando DiceBear:', avatarUrl);
     }
 
     // Apply avatar to profile modal
     const profileAvatarElement = document.getElementById('profile-avatar');
     if (profileAvatarElement) {
-        profileAvatarElement.src = avatarUrl || 'https://raw.githubusercontent.com/fabricioricard/BIGFOOT-Esports-Site/main/images/default-avatar.png';
+        profileAvatarElement.src = avatarUrl;
         profileAvatarElement.classList.remove('fallback');
         console.log('Avatar aplicado no modal:', avatarUrl.substring(0, 50) + '...');
     } else {

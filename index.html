@@ -2267,7 +2267,7 @@ function updateUIForLoggedIn(user) {
 function updateProfileModal(user) {
     const username = user.displayName || user.email.split('@')[0];
     
-    // PRIORIZAR AVATAR SALVO - mesma lógica da updateUIForLoggedIn
+    // Priorizar avatar salvo - mesma lógica da updateUIForLoggedIn
     const savedAvatar = localStorage.getItem(`avatar_${user.uid}`);
     let avatarUrl;
     
@@ -2286,6 +2286,7 @@ function updateProfileModal(user) {
     const profileAvatarElement = document.getElementById('profile-avatar');
     if (profileAvatarElement) {
         profileAvatarElement.src = avatarUrl;
+        profileAvatarElement.classList.remove('fallback');
     }
     
     document.getElementById('profile-username').textContent = username;

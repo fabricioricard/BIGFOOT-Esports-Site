@@ -2188,18 +2188,19 @@ function handleAvatarUpload(e) {
         // Verify save
         const savedCheck = localStorage.getItem(storageKey);
         if (savedCheck === resizedImageData) {
-            console.log('Avatar salvo com sucesso!');
-            // Update avatars in both header and profile modal
+            console.log('Avatar salvo com sucesso:', resizedImageData.substring(0, 50) + '...');
+            // Update avatars in header
             updateAllAvatars(resizedImageData);
             showNotification('Avatar atualizado com sucesso! 🎨', 'success');
             
-            // Explicitly update profile modal if open
+            // Immediately update profile modal if open
             const profileModal = document.getElementById('profile-modal');
             if (profileModal && profileModal.classList.contains('show')) {
                 const profileAvatar = document.getElementById('profile-avatar');
                 if (profileAvatar) {
                     profileAvatar.src = resizedImageData;
                     profileAvatar.classList.remove('fallback');
+                    console.log('Avatar do modal atualizado diretamente:', resizedImageData.substring(0, 50) + '...');
                 }
                 // Update other profile modal fields
                 updateProfileModal(user);
@@ -2274,14 +2275,15 @@ function updateUIForLoggedIn(user) {
 function updateProfileModal(user) {
     const username = user.displayName || user.email.split('@')[0];
     
-    // Priorizar avatar salvo - mesma lógica da updateUIForLoggedIn
-    const savedAvatar = localStorage.getItem(`avatar_${user.uid}`);
+    // Prioritize saved avatar from localStorage
+    const storageKey = `avatar_${user.uid}`;
+    const savedAvatar = localStorage.getItem(storageKey);
     let avatarUrl;
     
     if (savedAvatar) {
         avatarUrl = savedAvatar;
         console.log('Usando avatar salvo no modal:', avatarUrl.substring(0, 50) + '...');
-    } else if (user.photoURL && user.photoURL.startsWith('http')) {
+    } else if (user.photoURL && user.photoURL.startsWith('http') && !user.photoURL.includes('dicebear')) {
         avatarUrl = user.photoURL;
         console.log('Usando photoURL no modal:', avatarUrl);
     } else {
@@ -2289,13 +2291,17 @@ function updateProfileModal(user) {
         console.log('Gerando novo avatar no modal:', avatarUrl);
     }
     
-    // Aplicar avatar
+    // Apply avatar to profile modal
     const profileAvatarElement = document.getElementById('profile-avatar');
     if (profileAvatarElement) {
         profileAvatarElement.src = avatarUrl;
         profileAvatarElement.classList.remove('fallback');
+        console.log('Avatar aplicado no modal:', avatarUrl.substring(0, 50) + '...');
+    } else {
+        console.error('Elemento #profile-avatar não encontrado no DOM');
     }
     
+    // Update other profile fields
     document.getElementById('profile-username').textContent = username;
     document.getElementById('profile-email').textContent = user.email;
     
@@ -2307,7 +2313,7 @@ function updateProfileModal(user) {
     });
     document.getElementById('profile-member-since').textContent = formattedDate;
     
-    // Estatísticas persistentes
+    // Persistent stats
     const userLevel = localStorage.getItem(`level_${user.uid}`) || 1;
     const userPoints = localStorage.getItem(`points_${user.uid}`) || 0;
     const userVisits = localStorage.getItem(`visits_${user.uid}`) || 1;

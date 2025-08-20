@@ -1513,22 +1513,6 @@
     </style>
 </head>
 <body>
-    <!-- Firebase Config -->
-    <script>
-        // Configuração do Firebase
-        const firebaseConfig = {
-            apiKey: "AIzaSyDJhPsatYVFT8UMx6GOmBzKjXvb4Kz2qVQ",
-            authDomain: "bigfoot-esports.firebaseapp.com",
-            projectId: "bigfoot-esports",
-            storageBucket: "bigfoot-esports.appspot.com",
-            messagingSenderId: "649814357920",
-            appId: "1:649814357920:web:8b6f9cb4b4f9c4d4b4f9c4"
-        };
-
-        // Inicializar Firebase
-        firebase.initializeApp(firebaseConfig);
-    </script>
-
     <!-- Cabeçalho -->
     <header>
         <div class="header-container">
@@ -1817,6 +1801,7 @@
     <button id="back-to-top" class="back-to-top">⬆</button>
 
     <!-- Scripts -->
+    <script src="/js/auth.js"></script>
     <script>
         // Função para copiar a chave PIX
         function copyPixKey() {

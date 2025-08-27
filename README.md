@@ -24,8 +24,8 @@ Vamos construir algo épico juntos!
 
 ### 📞 Contato  
 Fique conectado com a gente:  
-- **X:** [@BFTesports](https://x.com/BIGFOOT_Esports) - Siga-nos para updates em tempo real!  
-- **YouTube:** [BIGFOOT Esports](https://youtube.com/@BIGFOOTEsports) - Assista nossos vídeos!  
+- **X:** [@BIGFOOT_Esports](https://x.com/BIGFOOT_Esports) - Siga-nos para updates em tempo real!  
+- **YouTube:** [BIGFOOTEsports](https://youtube.com/@BIGFOOTEsports) - Assista nossos vídeos!  
 
 ---
 

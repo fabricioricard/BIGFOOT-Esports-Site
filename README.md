@@ -10,8 +10,7 @@ Prepare-se para explorar um site **dinâmico e cheio de energia**, criado para l
 - **Notícias quentes** do universo esports;  
 - **Perfis irados** dos nossos jogadores;  
 - **Loja de produtos** com itens exclusivos;  
-- **Detalhes do time** que você ama;  
-- **Integração total** com X e Twitch para você não perder nada!  
+- **Detalhes do time** que você ama;   
 
 ---
 
@@ -25,8 +24,8 @@ Vamos construir algo épico juntos!
 
 ### 📞 Contato  
 Fique conectado com a gente:  
-- **X:** [@BFTesports](https://x.com/BFTesports) - Siga-nos para updates em tempo real!  
-- **Twitch:** [BIGFOOT Esports](https://twitch.tv/bigfootesports) - Assista nossas jogadas ao vivo!  
+- **X:** [@BFTesports](https://x.com/BIGFOOT_Esports) - Siga-nos para updates em tempo real!  
+- **YouTube:** [BIGFOOT Esports](https://youtube.com/@BIGFOOTEsports) - Assista nossos vídeos!  
 
 ---
 
